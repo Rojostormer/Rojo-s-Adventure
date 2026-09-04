@@ -3,112 +3,1167 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>The Adventurers Guild — Reimagined Prototype</title>
+<title>The Adventurers Guild — Enhanced Reimagined</title>
 <style>
-:root{--bg:#0d1117;--panel:#151c26;--panel2:#1c2633;--gold:#d8ad55;--text:#edf1f5;--muted:#9ca8b5;--good:#68c78a;--bad:#e26b6b;--blue:#67a7e8}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(#0b1016,#111a24);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:root{
+  --bg:#0d1117;--panel:#151c26;--panel2:#1c2633;--gold:#d8ad55;--text:#edf1f5;--muted:#9ca8b5;
+  --good:#68c78a;--bad:#e26b6b;--blue:#67a7e8;--purple:#a371d7;--orange:#ff8c42;--red:#e26b6b;
+  --cyan:#4dd0e1;--dark-gold:#6b5d38
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(#0b1016,#111a24);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;overflow-x:hidden}
 button,input{font:inherit}button{cursor:pointer}
-.app{max-width:760px;margin:auto;min-height:100vh;padding-bottom:78px}.top{position:sticky;top:0;z-index:5;background:#0d131bfa;border-bottom:1px solid #2b3744;padding:14px 16px;backdrop-filter:blur(10px)}
-.title{font-weight:800;letter-spacing:.04em}.subtitle{color:var(--muted);font-size:12px;margin-top:3px}
-.content{padding:14px}.tabs{position:fixed;bottom:0;left:0;right:0;background:#101720f5;border-top:1px solid #2b3744;display:flex;justify-content:center;z-index:10;backdrop-filter:blur(12px)}
-.tabs button{max-width:150px;flex:1;background:none;border:0;color:var(--muted);padding:10px 5px 12px;font-size:11px}.tabs button.active{color:var(--gold)}
+.app{max-width:760px;margin:auto;min-height:100vh;padding-bottom:78px}
+.top{position:sticky;top:0;z-index:5;background:#0d131bfa;border-bottom:1px solid #2b3744;padding:14px 16px;backdrop-filter:blur(10px)}
+.title{font-weight:800;letter-spacing:.04em;font-size:18px}
+.subtitle{color:var(--muted);font-size:12px;margin-top:3px}
+.content{padding:14px}
+.tabs{position:fixed;bottom:0;left:0;right:0;background:#101720f5;border-top:1px solid #2b3744;display:flex;justify-content:center;z-index:10;backdrop-filter:blur(12px)}
+.tabs button{max-width:150px;flex:1;background:none;border:0;color:var(--muted);padding:10px 5px 12px;font-size:11px}
+.tabs button.active{color:var(--gold)}
 .card{background:var(--panel);border:1px solid #2a3542;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 8px 24px #0003}
+.card.featured{background:linear-gradient(135deg,#2d3d4b,#1a252f);border-color:#3d5566}
 .hero{background:radial-gradient(circle at 80% 10%,#30435b,#17202b 50%,#121923);border-color:#3d4b5b}
-.row{display:flex;gap:10px;align-items:center}.between{justify-content:space-between}.grow{flex:1}
-h2,h3{margin:0 0 8px}h2{font-size:19px}h3{font-size:15px}.muted{color:var(--muted)}.gold{color:var(--gold)}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.stat{background:var(--panel2);padding:10px;border-radius:10px}.stat b{display:block;font-size:18px}.stat span{font-size:11px;color:var(--muted)}
-.bar{height:8px;background:#0a0e13;border-radius:99px;overflow:hidden}.fill{height:100%;background:var(--gold);border-radius:99px}
-button.primary{width:100%;border:1px solid #8b6d32;background:#8a692c;color:#fff;padding:12px;border-radius:10px;font-weight:800}
-button.secondary{border:1px solid #394958;background:#202c39;color:#fff;padding:9px 11px;border-radius:9px}
-button:disabled{opacity:.45;cursor:not-allowed}.quest{border:1px solid #2c3947;border-radius:12px;padding:12px;margin:8px 0;background:#17202a}
-.tag{display:inline-block;font-size:10px;border:1px solid #536172;border-radius:99px;padding:3px 7px;color:#c7d0da;margin-right:5px}
-.log{max-height:310px;overflow:auto;font-size:12px;background:#0b1016;border-radius:10px;padding:9px}.log div{padding:5px 0;border-bottom:1px solid #202a34}.good{color:var(--good)}.bad{color:var(--bad)}
-.modal{position:fixed;inset:0;background:#0009;z-index:20;display:flex;align-items:flex-end;justify-content:center}.modalbox{width:min(760px,100%);background:#131b24;border:1px solid #354252;border-radius:18px 18px 0 0;padding:18px;max-height:88vh;overflow:auto}
-.item{padding:10px;background:#18232e;border-radius:10px;border:1px solid #2d3b49;margin:7px 0}.small{font-size:12px}.right{text-align:right}
+.row{display:flex;gap:10px;align-items:center}
+.between{justify-content:space-between}
+.grow{flex:1}
+h2,h3,h4{margin:0 0 8px}
+h2{font-size:19px}h3{font-size:15px}h4{font-size:13px}
+.muted{color:var(--muted)}
+.gold{color:var(--gold)}
+.blue{color:var(--blue)}
+.purple{color:var(--purple)}
+.good{color:var(--good)}
+.bad{color:var(--bad)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{background:var(--panel2);padding:10px;border-radius:10px}
+.stat b{display:block;font-size:18px}
+.stat span{font-size:11px;color:var(--muted)}
+.bar{height:8px;background:#0a0e13;border-radius:99px;overflow:hidden}
+.fill{height:100%;background:var(--gold);border-radius:99px}
+.bar.blue .fill{background:var(--blue)}
+.bar.purple .fill{background:var(--purple)}
+.bar.good .fill{background:var(--good)}
+button.primary{width:100%;border:1px solid #8b6d32;background:#8a692c;color:#fff;padding:12px;border-radius:10px;font-weight:800;transition:all .2s}
+button.primary:hover{background:#9a7a3c}
+button.secondary{border:1px solid #394958;background:#202c39;color:#fff;padding:9px 11px;border-radius:9px;transition:all .2s;font-size:12px}
+button.secondary:hover{background:#2a3a49}
+button:disabled{opacity:.45;cursor:not-allowed}
+.quest{border:1px solid #2c3947;border-radius:12px;padding:12px;margin:8px 0;background:#17202a;cursor:pointer;transition:all .2s}
+.quest:hover{background:#1a2633;border-color:#3d5566}
+.quest.boss{border-color:#c86b1b;background:#2d1f0a}
+.tag{display:inline-block;font-size:10px;border:1px solid #536172;border-radius:99px;padding:3px 7px;color:#c7d0da;margin-right:5px;margin-bottom:3px}
+.tag.epic{border-color:#a371d7;color:#d9b3ff;background:#3d2554}
+.tag.rare{border-color:#4dd0e1;color:#81f7f7;background:#1a4046}
+.tag.magic{border-color:#67a7e8;color:#b5d7ff;background:#1a3a52}
+.tag.boss{border-color:#ff8c42;color:#ffe8cc;background:#4d2a0a}
+.log{max-height:310px;overflow:auto;font-size:12px;background:#0b1016;border-radius:10px;padding:9px}
+.log div{padding:5px 0;border-bottom:1px solid #202a34}
+.log div:last-child{border:0}
+.modal{position:fixed;inset:0;background:#0009;z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.modalbox{width:min(760px,100%);background:#131b24;border:1px solid #354252;border-radius:18px 18px 0 0;padding:18px;max-height:88vh;overflow:auto}
+.item{padding:10px;background:#18232e;border-radius:10px;border:1px solid #2d3b49;margin:7px 0}
+.item:hover{background:#1f2a38}
+.small{font-size:12px}
+.right{text-align:right}
 input{width:100%;background:#0e151d;border:1px solid #344352;color:#fff;padding:11px;border-radius:9px;margin:8px 0}
+.avatar-selector{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:15px 0}
+.avatar-option{padding:15px;border:2px solid #344352;border-radius:12px;text-align:center;cursor:pointer;transition:all .2s;background:#0e151d}
+.avatar-option:hover{border-color:#536172;background:#151d2a}
+.avatar-option.selected{border-color:var(--gold);background:#2d2a1a}
+.avatar-emoji{font-size:48px;margin:10px 0}
+.world-visual{background:linear-gradient(135deg,#1a2f3b,#0f1a25);border:1px solid #2a3f4a;border-radius:12px;padding:15px;margin:10px 0;text-align:center;min-height:120px;display:flex;flex-direction:column;justify-content:center}
+.worldmap{font-size:24px;letter-spacing:8px;margin:10px 0;font-family:monospace}
+.location-badge{display:inline-block;padding:6px 12px;background:rgba(103,167,232,.1);border:1px solid var(--blue);border-radius:8px;color:var(--blue);font-size:11px;margin:4px 4px 4px 0}
+.equipment-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.equipment-slot{background:var(--panel2);padding:12px;border-radius:10px;border:1px solid #2a3542}
+.equipment-slot b{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:5px}
+.equipment-slot .item-name{color:var(--gold);font-size:13px;font-weight:600}
+.ability-list{display:grid;gap:8px}
+.ability-item{background:var(--panel2);padding:10px;border-radius:8px;border-left:3px solid var(--blue)}
+.requirement-check{display:flex;gap:8px;align-items:center;font-size:12px;margin:5px 0}
+.requirement-check.met{color:var(--good)}
+.requirement-check.unmet{color:var(--muted)}
+.unlock-badge{display:inline-block;padding:3px 8px;background:rgba(232,167,103,.1);border:1px solid var(--orange);border-radius:6px;color:var(--orange);font-size:10px;margin-left:5px}
+.story-text{background:var(--panel2);padding:12px;border-radius:10px;border-left:3px solid var(--blue);line-height:1.6;margin:10px 0;font-size:13px}
+.achievement-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.achievement{background:var(--panel2);padding:12px;border-radius:10px;text-align:center;opacity:.6}
+.achievement.unlocked{opacity:1;background:rgba(104,199,138,.1);border:1px solid var(--good)}
+.achievement-icon{font-size:32px;margin:5px 0}
+.damage-number{color:var(--bad);font-weight:bold}
+.heal-number{color:var(--good);font-weight:bold}
+.crit-hit{animation:pulse 0.3s;color:var(--orange);font-weight:bold}
+@keyframes pulse{0%{scale:1}50%{scale:1.2}100%{scale:1}}
+.skill-point-display{background:rgba(163,113,215,.15);border:1px solid var(--purple);border-radius:8px;padding:8px 12px;display:inline-block;color:var(--purple);font-weight:600;font-size:12px;margin:8px 0}
+.danger-stars{color:var(--orange);letter-spacing:2px}
+.reward-box{background:rgba(216,173,85,.1);border:1px solid var(--gold);border-radius:8px;padding:10px;margin:8px 0}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="top"><div class="title">THE ADVENTURERS GUILD</div><div class="subtitle" id="topSub"></div></div>
+<div class="top"><div class="title">⚔️ THE ADVENTURERS GUILD</div><div class="subtitle" id="topSub"></div></div>
 <div class="content" id="view"></div>
 <div class="tabs" id="tabs"></div>
 </div>
 <div id="modal"></div>
+
 <script>
-const RANKS=["F","E","D","C","B","A","S"];
-const CLASSES={
-Adventurer:{desc:"Balanced beginner profession.",hp:105,atk:12,def:8,spd:10,mag:5,crit:5},
-Caster:{desc:"Magic-focused; strong damage and utility.",hp:80,atk:6,def:5,spd:9,mag:16,crit:8},
-Defender:{desc:"Heavy armor and high damage resistance.",hp:145,atk:10,def:16,spd:6,mag:3,crit:3},
-Fighter:{desc:"High physical damage.",hp:110,atk:17,def:8,spd:9,mag:3,crit:7},
-Rogue:{desc:"Fast, evasive and critical-hit focused.",hp:85,atk:14,def:6,spd:15,mag:4,crit:15}
+// ===== CORE DATA =====
+const STORY_CHAPTERS = {
+  intro: {
+    title: "The Call to Adventure",
+    text: "The kingdom trembles under the rise of shadowy forces. Ancient seals are breaking, creatures of legend walk the earth, and the world's great civilizations face collapse. The Adventurers Guild stands as humanity's last hope. Will you answer the call?"
+  },
+  chapter1: {
+    title: "The Forgotten Ruins",
+    text: "Your investigation leads to forgotten ruins beneath the kingdom. Something ancient stirs—an evil older than memory itself. The first seal weakens."
+  },
+  chapter2: {
+    title: "The Shadow Spreads",
+    text: "Dark influence creeps across the land. Settlements fall silent. You must rally allies and strengthen your resolve. The next seal awaits in dangerous territory."
+  },
+  chapter3: {
+    title: "The Final Stand",
+    text: "All threads converge. The source of the corruption reveals itself—an entity of pure void. This is the moment that will define your legend."
+  }
 };
-const ENEMIES=[
-{name:"Giant Rat",hp:38,atk:7,def:2,spd:8,xp:18,gold:10},
-{name:"Goblin Scout",hp:48,atk:9,def:3,spd:9,xp:24,gold:15},
-{name:"Forest Wolf",hp:62,atk:11,def:4,spd:12,xp:31,gold:22},
-{name:"Bandit",hp:72,atk:13,def:6,spd:10,xp:42,gold:32},
-{name:"Cave Troll",hp:145,atk:19,def:10,spd:6,xp:95,gold:85,boss:true}
+
+const WORLDS = {
+  safe: {
+    name: "Guildtown",
+    emoji: "🏛️",
+    desc: "The safe haven. Guild halls, markets, and training grounds.",
+    danger: 0,
+    quests: ["F", "E"]
+  },
+  forest: {
+    name: "Whisperwood Forest",
+    emoji: "🌲",
+    desc: "Ancient woods haunted by spirits and beasts. Fog rolls thick.",
+    danger: 2,
+    quests: ["E", "D"]
+  },
+  ruins: {
+    name: "Forgotten Catacombs",
+    emoji: "🏚️",
+    desc: "Crumbling ruins from a lost civilization. Echoes of power remain.",
+    danger: 4,
+    quests: ["D", "C"]
+  },
+  volcanic: {
+    name: "Scorched Crater",
+    emoji: "🌋",
+    desc: "A volcanic wasteland where elemental forces clash.",
+    danger: 5,
+    quests: ["C", "B"]
+  },
+  void: {
+    name: "The Void's Edge",
+    emoji: "🌀",
+    desc: "Reality fractures here. An overwhelming darkness looms.",
+    danger: 7,
+    quests: ["A", "S"]
+  }
+};
+
+const AVATARS = [
+  {emoji: "🧑", name: "Human Scout", class: "Adventurer"},
+  {emoji: "🧙", name: "Wise Mage", class: "Caster"},
+  {emoji: "⚔️", name: "Knight Warrior", class: "Fighter"},
+  {emoji: "🛡️", name: "Iron Guardian", class: "Defender"},
+  {emoji: "👹", name: "Fierce Hunter", class: "Rogue"},
+  {emoji: "✨", name: "Mystic Ascetic", class: "Caster"},
+  {emoji: "🐉", name: "Draconic Force", class: "Fighter"},
+  {emoji: "🌙", name: "Shadow Walker", class: "Rogue"}
 ];
-const QUESTS=[
-{name:"Patrol: Guildtown Road",rank:"F",danger:1,desc:"A routine patrol outside town.",reward:35,xp:35,turns:7},
-{name:"Gather Mooncap",rank:"F",danger:1,desc:"Collect rare herbs from the northern trail.",reward:48,xp:45,turns:8},
-{name:"Goblin Trouble",rank:"F",danger:2,desc:"Clear a goblin camp threatening travellers.",reward:72,xp:65,turns:9},
-{name:"Escort the Merchant",rank:"E",danger:2,desc:"Protect a merchant caravan through wolf country.",reward:105,xp:90,turns:10},
-{name:"Bandit Hideout",rank:"E",danger:3,desc:"Investigate reports of bandits near the old mine.",reward:145,xp:125,turns:11},
-{name:"The Cave Troll",rank:"D",danger:5,desc:"A dangerous named threat. Boss rewards are better.",reward:260,xp:240,turns:14,boss:true}
+
+const GUILDS = {
+  Vanguard: {
+    desc: "Soldiers of light. Master of defense and tactical combat.",
+    icon: "🛡️",
+    req: {level: 5, class: "Defender", rp: 50},
+    bonus: {def: 3, maxHp: 15}
+  },
+  Inferno: {
+    desc: "Masters of raw power. Unleash devastating physical attacks.",
+    icon: "🔥",
+    req: {level: 8, class: "Fighter", rp: 100},
+    bonus: {atk: 5, crit: 4}
+  },
+  Arcane: {
+    desc: "Keepers of magic. Control the forces of mysticism.",
+    icon: "✨",
+    req: {level: 8, class: "Caster", rp: 100},
+    bonus: {mag: 6, spd: 2}
+  },
+  Shadow: {
+    desc: "Masters of cunning. Strike unseen, move unstopped.",
+    icon: "🌑",
+    req: {level: 10, class: "Rogue", rp: 150},
+    bonus: {crit: 7, spd: 3}
+  },
+  Balanced: {
+    desc: "Generalists who excel in all disciplines.",
+    icon: "⚖️",
+    req: {level: 3, class: "Adventurer", rp: 0},
+    bonus: {atk: 1, def: 1, mag: 1}
+  }
+};
+
+const RANKS = ["F", "E", "D", "C", "B", "A", "S"];
+
+const CLASSES = {
+  Adventurer: {
+    desc: "Balanced beginner profession.",
+    hp: 105, atk: 12, def: 8, spd: 10, mag: 5, crit: 5
+  },
+  Caster: {
+    desc: "Magic-focused; strong damage and utility.",
+    hp: 80, atk: 6, def: 5, spd: 9, mag: 16, crit: 8
+  },
+  Defender: {
+    desc: "Heavy armor and high damage resistance.",
+    hp: 145, atk: 10, def: 16, spd: 6, mag: 3, crit: 3
+  },
+  Fighter: {
+    desc: "High physical damage and determination.",
+    hp: 110, atk: 17, def: 8, spd: 9, mag: 3, crit: 7
+  },
+  Rogue: {
+    desc: "Speed and precision. Strike critical weak points.",
+    hp: 90, atk: 14, def: 6, spd: 14, mag: 4, crit: 12
+  }
+};
+
+const ITEM_DATABASE = {
+  // WEAPONS
+  "Rusty Blade": {slot: "weapon", atk: 2, rarity: "Common", world: "safe", desc: "A weathered blade from a fallen adventurer."},
+  "Iron Longsword": {slot: "weapon", atk: 6, rarity: "Magic", world: "forest", desc: "Well-crafted iron steel, reliable and true."},
+  "Flameburst Sword": {slot: "weapon", atk: 11, rarity: "Rare", world: "forest", desc: "Engulfed in ethereal flames. Radiates heat."},
+  "Rune-Carved Blade": {slot: "weapon", atk: 15, rarity: "Epic", world: "ruins", desc: "Ancient runes pulse with arcane energy."},
+  "Twilight Edge": {slot: "weapon", atk: 18, rarity: "Epic", world: "volcanic", desc: "Forged in shadow and starlight. Cuts through dimensions."},
+  "Void Reaper": {slot: "weapon", atk: 25, rarity: "Epic", world: "void", desc: "An impossible weapon from beyond. Existence bends near it."},
+  
+  // ARMOR
+  "Cloth Garb": {slot: "armor", def: 2, rarity: "Common", world: "safe", desc: "Simple traveler's clothing for protection."},
+  "Leather Armor": {slot: "armor", def: 5, rarity: "Magic", world: "forest", desc: "Supple leather, flexible and protective."},
+  "Steel Plate": {slot: "armor", def: 10, rarity: "Rare", world: "forest", desc: "Heavy steel plating. Leaves room for mobility."},
+  "Dragon Scale Mail": {slot: "armor", def: 14, rarity: "Epic", world: "ruins", desc: "Scales shed by ancient dragons. Incredibly resilient."},
+  "Magus Vestment": {slot: "armor", def: 7, mag: 4, rarity: "Epic", world: "volcanic", desc: "Reinforced with magical wards. Amplifies spellcasting."},
+  "Void Plate": {slot: "armor", def: 18, rarity: "Epic", world: "void", desc: "Absorbs damage from other dimensions."},
+  
+  // ACCESSORIES
+  "Copper Ring": {slot: "accessory", crit: 2, rarity: "Common", world: "safe", desc: "A simple ring for minor luck."},
+  "Emerald Pendant": {slot: "accessory", crit: 5, rarity: "Magic", world: "forest", desc: "A green gem that catches the light."},
+  "Rings of Power": {slot: "accessory", crit: 8, atk: 2, rarity: "Rare", world: "forest", desc: "Three interlocked rings of augmented strength."},
+  "Crown of Authority": {slot: "accessory", crit: 12, def: 3, rarity: "Epic", world: "ruins", desc: "Ancient crown of a forgotten king. Commands respect."},
+  "Starlight Talisman": {slot: "accessory", crit: 10, mag: 3, rarity: "Epic", world: "volcanic", desc: "Trapped starlight. Guides your aim perfectly."},
+  "Void Sigil": {slot: "accessory", crit: 15, rarity: "Epic", world: "void", desc: "A seal of impossible geometry. Guarantees precision."}
+};
+
+const ABILITIES = {
+  Adventurer: [
+    {name: "Quick Strike", level: 1, desc: "A fast, precise attack. Gain +15% damage."},
+    {name: "Rally", level: 3, desc: "Boost morale. Restore 20 HP to self."},
+    {name: "Second Wind", level: 5, desc: "Push past limits. Gain +2 all stats next turn."}
+  ],
+  Caster: [
+    {name: "Arcane Missile", level: 1, desc: "Launch magical projectiles. +20% magic damage."},
+    {name: "Mana Shield", level: 3, desc: "Create magical barrier. Reduce damage by 25%."},
+    {name: "Spell Surge", level: 5, desc: "Unleash magical power. Double magic damage next turn."}
+  ],
+  Defender: [
+    {name: "Shield Bash", level: 1, desc: "Defend and counter. Reduce damage by 30%."},
+    {name: "Fortify", level: 3, desc: "Harden your resolve. +3 DEF this turn."},
+    {name: "Last Stand", level: 5, desc: "Immovable object. Take 50% less damage while alive."}
+  ],
+  Fighter: [
+    {name: "Power Attack", level: 1, desc: "Channel pure strength. +30% damage."},
+    {name: "Whirlwind", level: 3, desc: "Spin and strike. Hit twice in one turn."},
+    {name: "Berserk", level: 5, desc: "Lose yourself. +4 ATK but -2 DEF."}
+  ],
+  Rogue: [
+    {name: "Backstab", level: 1, desc: "Strike vital spots. +50% crit chance."},
+    {name: "Shadow Clone", level: 3, desc: "Create illusion. Enemy misses next turn."},
+    {name: "Death Mark", level: 5, desc: "Curse foe. Next hit deals 50% more damage."}
+  ]
+};
+
+const ENEMIES = [
+  {name: "Forest Goblin", hp: 18, atk: 6, def: 2, spd: 8, emoji: "👹"},
+  {name: "Shadow Sprite", hp: 15, atk: 8, def: 1, spd: 12, emoji: "👻"},
+  {name: "Stone Golem", hp: 40, atk: 10, def: 12, spd: 3, emoji: "🗿"},
+  {name: "Fire Elemental", hp: 35, atk: 14, def: 5, spd: 9, emoji: "🔥"},
+  {name: "Corrupted Knight", hp: 50, atk: 16, def: 10, spd: 7, emoji: "⚔️"},
+  {name: "Void Shade", hp: 60, atk: 18, def: 8, spd: 11, emoji: "🌑"},
+  {name: "Ancient Dragon", hp: 80, atk: 22, def: 14, spd: 10, emoji: "🐉"}
 ];
-let S=JSON.parse(localStorage.getItem("tag_reimagined"))||null;
-function fresh(){return {name:"Rook",level:1,xp:0,gold:100,rank:0,rp:0,profession:"Adventurer",profLevel:1,profXp:0,energy:100,craft:0,mastery:0,equipment:{weapon:0,armor:0,accessory:0},materials:{Iron:5,Leather:3,Essence:1},gear:[{name:"Training Sword",slot:"weapon",atk:4,rarity:"Common"},{name:"Travel Clothes",slot:"armor",def:2,rarity:"Common"}],stats:{str:5,dex:5,vit:5,int:5,luck:5},quests:0, wins:0, losses:0, log:["You arrive in Guildtown with 100 gold and a battered training sword."],started:Date.now()}}
-if(!S)S=fresh();
-function save(){localStorage.setItem("tag_reimagined",JSON.stringify(S))}
-function xpNeed(){return 50+S.level*35}
-function power(){let c=CLASSES[S.profession],e=S.equipment;return Math.round((c.hp+S.level*8+(e.armor||0)*8+(e.weapon||0)*4)*.15+(c.atk+S.level*1.7+(e.weapon||0)*2)*2+(c.def+(e.armor||0)*2)*2+c.spd)}
-function addLog(x){S.log.unshift(x);S.log=S.log.slice(0,80);save()}
-function gainXP(n){S.xp+=n;while(S.xp>=xpNeed()){S.xp-=xpNeed();S.level++;S.stats.str++;S.stats.dex++;S.stats.vit++;S.stats.int++;S.stats.luck++;addLog(`<span class="good">Level up! You reached level ${S.level}.</span>`);if(S.level===3)addLog("Your first Profession slot is unlocked.");}}
-function rankUp(){while(S.rp>=100){S.rp-=100;if(S.rank<RANKS.length-1){S.rank++;addLog(`<span class="gold">Guild promotion! You are now ${RANKS[S.rank]}-Rank.</span>`)}else{addLog(`<span class="gold">Your guild standing is legendary.</span>`);break}}}
-function gearFor(rarity){let mult={Common:1,Magic:1.5,Rare:2.2,Epic:3.3}[rarity]||1;let slot=["weapon","armor","accessory"][Math.floor(Math.random()*3)];let n=slot==="weapon"?"Forged Blade":slot==="armor"?"Reinforced Mail":"Lucky Charm";let g={name:n,slot,atk:slot==="weapon"?Math.round(5*mult):0,def:slot==="armor"?Math.round(4*mult):0,crit:slot==="accessory"?Math.round(3*mult):0,rarity};return g}
-function addMaterial(name,n){S.materials=S.materials||{};S.materials[name]=(S.materials[name]||0)+n}
-function craftGear(kind){
-  S.materials=S.materials||{Iron:0,Leather:0,Essence:0};
-  const recipes={
-    weapon:{name:"Guild-Forged Blade",cost:{Iron:4,Essence:1},atk:10,def:0,crit:0,rarity:"Forged"},
-    armor:{name:"Guild-Reinforced Mail",cost:{Iron:3,Leather:4},atk:0,def:9,crit:0,rarity:"Forged"},
-    accessory:{name:"Guild Lucky Charm",cost:{Essence:4,Leather:2},atk:0,def:0,crit:7,rarity:"Forged"}
+
+let S = {
+  name: "Adventurer",
+  level: 1,
+  xp: 0,
+  hp: 100,
+  energy: 100,
+  gold: 50,
+  rp: 0,
+  rank: 0,
+  profession: "Adventurer",
+  guild: "Balanced",
+  avatar: AVATARS[0],
+  stats: {str: 8, dex: 8, vit: 8, int: 8, luck: 8},
+  equipment: {weapon: 0, armor: 0, accessory: 0},
+  gear: [],
+  inventory: [],
+  profLevel: 1,
+  profXp: 0,
+  mastery: 0,
+  skillPoints: 0,
+  unlockedAbilities: {},
+  log: [],
+  quests: 0,
+  wins: 0,
+  losses: 0,
+  worldUnlocked: ["safe"],
+  storyProgress: 0,
+  achievements: [],
+  chapter: 0
+};
+
+function fresh(){
+  return {
+    name: "Adventurer",
+    level: 1,
+    xp: 0,
+    hp: 100,
+    energy: 100,
+    gold: 50,
+    rp: 0,
+    rank: 0,
+    profession: "Adventurer",
+    guild: "Balanced",
+    avatar: AVATARS[0],
+    stats: {str: 8, dex: 8, vit: 8, int: 8, luck: 8},
+    equipment: {weapon: 0, armor: 0, accessory: 0},
+    gear: [],
+    inventory: [],
+    profLevel: 1,
+    profXp: 0,
+    mastery: 0,
+    skillPoints: 0,
+    unlockedAbilities: {},
+    log: [],
+    quests: 0,
+    wins: 0,
+    losses: 0,
+    worldUnlocked: ["safe"],
+    storyProgress: 0,
+    achievements: [],
+    chapter: 0
   };
-  const r=recipes[kind];
-  for(const [m,n] of Object.entries(r.cost)) if((S.materials[m]||0)<n){addLog(`Not enough ${m} to craft ${r.name}.`);render();return}
-  for(const [m,n] of Object.entries(r.cost))S.materials[m]-=n;
-  S.gear.push({name:r.name,slot:kind,atk:r.atk,def:r.def,crit:r.crit,rarity:r.rarity});
-  addLog(`Crafted ${r.name}. It is permanently stored in your character inventory.`);
-  save();render();
 }
-function buyGear(){let price=70+S.rank*90;if(S.gold<price)return addLog("Not enough gold.");let rarity=S.rank>=3?"Rare":S.rank>=1?"Magic":"Common";S.gold-=price;S.gear.push(gearFor(rarity));addLog(`Purchased ${rarity} equipment for ${price} gold.`);save();render()}
-function equip(i){let g=S.gear[i];S.equipment[g.slot]=g.slot==="weapon"?g.atk:g.slot==="armor"?g.def:g.crit;S.gear.splice(i,1);addLog(`Equipped ${g.name}.`);save();render()}
-function chooseQuest(q){if(RANKS.indexOf(q.rank)>S.rank+1)return addLog("Your guild rank is too low for this contract.");if(S.energy<20)return addLog("You are exhausted. Recover energy first.");S.energy-=20;modal(`<h2>${q.name}</h2><p class="muted">${q.desc}</p><div class="grid"><div class="stat"><span>Danger</span><b>${"★".repeat(q.danger)}</b></div><div class="stat"><span>Reward</span><b>${q.reward}g</b></div></div><button class="primary" onclick="startQuest(${QUESTS.indexOf(q)})">Accept Contract</button><br><br><button class="secondary" onclick="closeModal()">Cancel</button>`)}
-function startQuest(idx){closeModal();let q=QUESTS[idx], c=CLASSES[S.profession], p={hp:c.hp+S.level*8+(S.equipment.armor||0)*8,atk:c.atk+S.level*1.7+(S.equipment.weapon||0)*2,def:c.def+(S.equipment.armor||0)*2,spd:c.spd,mag:c.mag+S.level,crit:c.crit+(S.equipment.accessory||0)};let e=ENEMIES[Math.min(ENEMIES.length-1,Math.max(0,q.danger-1))];let enemy={...e,hp:e.hp+S.rank*12+(q.boss?20:0),atk:e.atk+S.rank*2};let log=[];let turn=0;while(p.hp>0&&enemy.hp>0&&turn<q.turns*2){turn++;let playerFirst=p.spd>=enemy.spd;if((turn%2===1&&playerFirst)||(turn%2===0&&!playerFirst)){let crit=Math.random()*100<p.crit;let dmg=Math.max(1,Math.round(p.atk-enemy.def*.55)*(crit?1.5:1));enemy.hp-=dmg;log.push(`You ${crit?"critically ":""}hit ${enemy.name} for ${dmg}.`)}else{let dodge=Math.random()*100<(S.profession==="Rogue"?12:4);if(dodge)log.push(`You dodge ${enemy.name}'s attack.`);else{let dmg=Math.max(1,Math.round(enemy.atk-p.def*.45));p.hp-=dmg;log.push(`${enemy.name} hits you for ${dmg}.`)}}}
-let win=p.hp>0&&enemy.hp<=0;if(win){let bonus=q.boss?Math.round(q.reward*1.8):q.reward;S.gold+=bonus;addMaterial("Iron",q.boss?3:1);if(Math.random()<.7)addMaterial("Leather",q.boss?2:1);if(q.boss||Math.random()<.25)addMaterial("Essence",1);gainXP(q.xp);S.rp+=q.boss?28:12;S.quests++;S.wins++;S.profXp+=Math.round(q.xp*.7);if(S.profXp>=S.profLevel*100&&S.profLevel<10){S.profXp=0;S.profLevel++;if(S.profLevel===10){S.mastery++;addLog(`<span class="gold">${S.profession} mastery achieved.</span>`)}else addLog(`${S.profession} advanced to profession level ${S.profLevel}.`)}rankUp();let g=gearFor(q.boss?"Epic":S.rank>=3?"Rare":S.rank>=1?"Magic":"Common");if(Math.random()<(q.boss?.75:.38)){S.gear.push(g);log.push(`Loot found: ${g.rarity} ${g.name}.`)}addLog(`<span class="good">${q.name} completed. +${bonus}g, +${q.xp} XP, +${q.boss?28:12} rank points.</span>`)}else{S.losses++;addLog(`<span class="bad">${q.name} failed. The contract pays nothing.</span>`)}save();combatModal(q,log,win)}
-function combatModal(q,logs,win){modal(`<h2>${win?"Contract Complete":"Defeat"}</h2><p>${win?"The guild records your success.":"You barely escape with your life."}</p><div class="log">${logs.map(x=>`<div>${x}</div>`).join("")}</div><br><button class="primary" onclick="closeModal();render()">Return to Guild</button>`)}
-function modal(x){document.getElementById("modal").innerHTML=`<div class="modal"><div class="modalbox">${x}</div></div>`}
-function closeModal(){document.getElementById("modal").innerHTML=""}
-function rest(){S.energy=Math.min(100,S.energy+45);S.gold=Math.max(0,S.gold-10);addLog("You rest at the guild inn. Energy restored.");render()}
-function setProf(p){if(S.level<3)return addLog("Professions unlock at level 3.");S.profession=p;S.profLevel=1;S.profXp=0;addLog(`Profession changed to ${p}. (24-hour cooldown in the original design.)`);render()}
-function reset(){if(confirm("Reset this prototype save?")){S=fresh();save();render()}}
-function profile(){return `<div class="card hero"><div class="row between"><div><h2>${S.name}</h2><div class="muted">${RANKS[S.rank]}-Rank • Level ${S.level} • ${S.profession}</div></div><div class="gold" style="font-size:24px">✦</div></div><br><div class="bar"><div class="fill" style="width:${S.xp/xpNeed()*100}%"></div></div><div class="small muted">${S.xp}/${xpNeed()} XP</div></div>
-<div class="grid3"><div class="stat"><span>Gold</span><b>${S.gold}</b></div><div class="stat"><span>Rank Points</span><b>${S.rp}/100</b></div><div class="stat"><span>Energy</span><b>${S.energy}/100</b></div></div>
-<div class="card"><h3>Equipped</h3><div class="grid3"><div class="stat"><span>Weapon</span><b>+${S.equipment.weapon||0}</b></div><div class="stat"><span>Armor</span><b>+${S.equipment.armor||0}</b></div><div class="stat"><span>Accessory</span><b>+${S.equipment.accessory||0}</b></div></div></div><div class="card"><h3>Character</h3><div class="grid">${Object.entries(S.stats).map(([k,v])=>`<div class="stat"><span>${k.toUpperCase()}</span><b>${v}</b></div>`).join("")}</div></div>`}
-function guild(){return profile()+`<div class="card"><div class="row between"><h3>Guild Standing</h3><span class="tag">${RANKS[S.rank]}-RANK</span></div><p class="muted small">Complete contracts to earn Rank Points. Higher standing opens more dangerous work and better equipment.</p><button class="secondary" onclick="rest()">Rest & recover (10g)</button></div><div class="card"><h3>Recent Activity</h3><div class="log">${S.log.map(x=>`<div>${x}</div>`).join("")}</div></div>`}
-function quests(){let max=S.rank+1;return `<div class="card"><h2>Quest Board</h2><p class="muted small">Available contracts up to one rank above your current guild standing.</p></div>`+QUESTS.filter(q=>RANKS.indexOf(q.rank)<=max).map((q,i)=>`<div class="quest"><div class="row between"><div><span class="tag">${q.rank}-Rank</span>${q.boss?'<span class="tag">BOSS</span>':''}<h3>${q.name}</h3></div><b class="gold">${q.reward}g</b></div><div class="muted small">${q.desc}</div><br><button class="primary" onclick="chooseQuest(QUESTS[${i}])">View Contract</button></div>`).join("")}
-function party(){return `<div class="card"><h2>Profession</h2><p class="muted small">Professions unlock at Level 3 and have their own progression. Changing profession is limited by a 24-hour cooldown in the original game design.</p>${Object.entries(CLASSES).map(([n,c])=>`<div class="item"><div class="row between"><div><b>${n}</b><div class="muted small">${c.desc}</div></div><button class="secondary" onclick="setProf('${n}')">${S.profession===n?"Active":"Choose"}</button></div></div>`).join("")}</div>
-<div class="card"><h3>${S.profession} Progress</h3><div class="bar"><div class="fill" style="width:${S.profXp/(S.profLevel*100)*100}%"></div></div><div class="small muted">Profession Lv ${S.profLevel}/10 • ${S.profXp}/${S.profLevel*100} XP • Mastery ${S.mastery}</div></div>`}
-function shop(){S.materials=S.materials||{Iron:0,Leather:0,Essence:0};return `<div class="card"><h2>Guild Armory & Workshop</h2><p class="muted small">All currency, materials and equipment belong to this character. Nothing is traded outside the game.</p><div class="grid3"><div class="stat"><span>Gold</span><b>${S.gold}</b></div><div class="stat"><span>Iron</span><b>${S.materials.Iron||0}</b></div><div class="stat"><span>Leather</span><b>${S.materials.Leather||0}</b></div></div><div class="stat" style="margin-top:8px"><span>Essence</span><b>${S.materials.Essence||0}</b></div></div>
-<div class="card"><h3>Crafting</h3><div class="item"><div class="row between"><div><b>Guild-Forged Blade</b><div class="muted small">4 Iron + 1 Essence • ATK +10</div></div><button class="secondary" onclick="craftGear('weapon')">Craft</button></div></div><div class="item"><div class="row between"><div><b>Guild-Reinforced Mail</b><div class="muted small">3 Iron + 4 Leather • DEF +9</div></div><button class="secondary" onclick="craftGear('armor')">Craft</button></div></div><div class="item"><div class="row between"><div><b>Guild Lucky Charm</b><div class="muted small">4 Essence + 2 Leather • CRIT +7</div></div><button class="secondary" onclick="craftGear('accessory')">Craft</button></div></div></div>
-<div class="card"><h3>Inventory</h3>${S.gear.length?S.gear.map((g,i)=>`<div class="item"><div class="row between"><div><b>${g.name}</b><div class="muted small">${g.rarity} • ${g.slot} • ATK +${g.atk||0} DEF +${g.def||0} CRIT +${g.crit||0}</div></div><button class="secondary" onclick="equip(${i})">Equip</button></div></div>`).join(""):"<div class='muted'>No spare equipment.</div>"}</div>`}
-function settings(){return `<div class="card"><h2>Prototype</h2><p class="muted small">This is a fan-made, offline browser recreation inspired by surviving TAG documentation. It does not use the original servers, blockchain, NFTs, artwork, or proprietary backend.</p><button class="secondary" onclick="exportSave()">Export Save</button> <button class="secondary" onclick="reset()">Reset Save</button></div><div class="card"><h3>Research notes</h3><div class="small muted">The prototype keeps the RPG structure and progression inside one persistent character sheet: guild rank, stats, professions, equipment, inventory, gold, crafting materials, rewards and progression. External wallets, marketplaces and tradable assets are not used.</div></div>`}
-function exportSave(){let a=document.createElement("a");a.href="data:application/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(S));a.download="tag-reimagined-save.json";a.click()}
-let tab="guild";function render(){let names={guild:"Guild",quests:"Quests",party:"Character",shop:"Shop",settings:"More"};document.getElementById("topSub").textContent=`${RANKS[S.rank]}-Rank • ${S.gold}g • ${S.energy} Energy`;let views={guild:guild,quests:quests,party:party,shop:shop,settings:settings};document.getElementById("view").innerHTML=views[tab]();document.getElementById("tabs").innerHTML=Object.keys(names).map(k=>`<button class="${tab===k?"active":""}" onclick="tab='${k}';render()">${names[k]}</button>`).join("")}
-render();
+
+function save(){localStorage.setItem("tag-save",JSON.stringify(S))}
+function load(){const x=localStorage.getItem("tag-save");if(x)S=JSON.parse(x)}
+load();
+
+function addLog(t){S.log.unshift(t);S.log=S.log.slice(0,20)}
+function xpNeed(){return 100+S.level*50}
+
+function gainXP(n){
+  S.xp += n;
+  while(S.xp >= xpNeed()){
+    S.xp -= xpNeed();
+    S.level++;
+    S.stats.str += 1;
+    S.stats.dex += 1;
+    S.stats.vit += 1;
+    S.stats.int += 1;
+    S.stats.luck += 1;
+    S.skillPoints += 1;
+    addLog(`<span class="good">⭐ LEVEL UP! You are now Level ${S.level}!</span>`);
+    checkAbilityUnlocks();
+  }
+}
+
+function checkAbilityUnlocks(){
+  const prof = S.profession;
+  if(ABILITIES[prof]){
+    ABILITIES[prof].forEach(a => {
+      if(S.level >= a.level && !S.unlockedAbilities[a.name]){
+        S.unlockedAbilities[a.name] = true;
+        addLog(`<span class="purple">✨ New Ability Unlocked: ${a.name}</span>`);
+      }
+    });
+  }
+}
+
+function rankUp(){
+  while(S.rp >= 100){
+    S.rp -= 100;
+    if(S.rank < RANKS.length-1){
+      S.rank++;
+      addLog(`<span class="gold">🏅 Guild Promotion! You are now ${RANKS[S.rank]}-Rank.</span>`);
+      if(S.rank >= 2 && !S.worldUnlocked.includes("forest")){
+        S.worldUnlocked.push("forest");
+        addLog(`<span class="blue">🗺️ New World Unlocked: Whisperwood Forest</span>`);
+      }
+      if(S.rank >= 4 && !S.worldUnlocked.includes("ruins")){
+        S.worldUnlocked.push("ruins");
+        addLog(`<span class="blue">🗺️ New World Unlocked: Forgotten Catacombs</span>`);
+      }
+      if(S.rank >= 5 && !S.worldUnlocked.includes("volcanic")){
+        S.worldUnlocked.push("volcanic");
+        addLog(`<span class="blue">🗺️ New World Unlocked: Scorched Crater</span>`);
+      }
+      if(S.rank >= 6 && !S.worldUnlocked.includes("void")){
+        S.worldUnlocked.push("void");
+        addLog(`<span class="blue">🗺️ The Void's Edge has opened...</span>`);
+      }
+    } else {
+      addLog(`<span class="gold">👑 You have reached legendary status!</span>`);
+      break;
+    }
+  }
+}
+
+function generateQuestsForWorld(world){
+  const w = WORLDS[world];
+  const questTypes = ["Patrol", "Beast Hunt", "Salvage", "Purge", "Expedition"];
+  const questCount = Math.floor(Math.random()*2) + 3;
+  const quests = [];
+  
+  for(let i = 0; i < questCount; i++){
+    const type = questTypes[Math.floor(Math.random()*questTypes.length)];
+    const rankIdx = w.quests[Math.floor(Math.random()*w.quests.length)];
+    const isBoss = Math.random() < 0.2;
+    const danger = RANKS.indexOf(rankIdx) + 1;
+    
+    quests.push({
+      id: `${world}-${i}`,
+      name: `[${rankIdx}] ${type}: ${w.name}`,
+      desc: `Venture into ${w.name}. ${isBoss?"Battle a legendary foe!":"Seek what lies within."}`,
+      world: world,
+      rank: rankIdx,
+      danger: danger + (isBoss?2:0),
+      reward: (50 + RANKS.indexOf(rankIdx)*60) * (isBoss?2:1),
+      xp: (30 + RANKS.indexOf(rankIdx)*40) * (isBoss?1.5:1),
+      turns: 8 + RANKS.indexOf(rankIdx)*2,
+      boss: isBoss,
+      loot: generateLootPool(world, rankIdx, isBoss)
+    });
+  }
+  return quests;
+}
+
+function generateLootPool(world, rank, isBoss){
+  const pool = [];
+  const rarities = isBoss ? ["Rare", "Epic", "Epic"] : ["Common", "Magic", "Rare"];
+  const rarity = rarities[Math.floor(Math.random()*rarities.length)];
+  
+  Object.entries(ITEM_DATABASE).forEach(([name, item]) => {
+    if(item.world === world && item.rarity === rarity){
+      pool.push(name);
+    }
+  });
+  
+  return pool.length > 0 ? pool : Object.keys(ITEM_DATABASE).slice(0, 3);
+}
+
+function chooseQuest(quest){
+  const maxRank = S.rank + 1;
+  if(RANKS.indexOf(quest.rank) > maxRank){
+    return addLog("Your guild rank is too low for this contract.");
+  }
+  if(S.energy < 20){
+    return addLog("You are exhausted. Rest first.");
+  }
+  
+  modal(`
+    <h2>${quest.name}</h2>
+    <p class="muted">${quest.desc}</p>
+    <div class="world-visual">
+      <div style="font-size:32px">${WORLDS[quest.world].emoji}</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:5px">${WORLDS[quest.world].name}</div>
+    </div>
+    <div class="reward-box">
+      <div style="display:flex;justify-content:space-around">
+        <div><span class="muted small">Reward</span><br><b class="gold">${Math.round(quest.reward)}g</b></div>
+        <div><span class="muted small">Experience</span><br><b class="blue">${Math.round(quest.xp)} XP</b></div>
+        <div><span class="muted small">Danger</span><br><b class="danger-stars">${"⭐".repeat(quest.danger)}</b></div>
+      </div>
+    </div>
+    <button class="primary" onclick="startQuest('${quest.id}')">Accept Contract</button><br><br>
+    <button class="secondary" onclick="closeModal()">Cancel</button>
+  `);
+}
+
+function startQuest(questId){
+  closeModal();
+  let quest = null;
+  
+  for(let world of S.worldUnlocked){
+    const quests = generateQuestsForWorld(world);
+    quest = quests.find(q => q.id === questId);
+    if(quest) break;
+  }
+  
+  if(!quest) return;
+  
+  S.energy -= 20;
+  
+  const c = CLASSES[S.profession];
+  const guildBonus = GUILDS[S.guild].bonus;
+  
+  let p = {
+    hp: c.hp + S.level*8 + (S.equipment.armor||0)*8 + guildBonus.maxHp||0,
+    atk: c.atk + S.level*1.7 + (S.equipment.weapon||0)*2 + (guildBonus.atk||0),
+    def: c.def + (S.equipment.armor||0)*2 + (guildBonus.def||0),
+    spd: c.spd + S.stats.dex/5,
+    mag: c.mag + S.level + (guildBonus.mag||0),
+    crit: c.crit + (S.equipment.accessory||0) + S.stats.luck/10
+  };
+  
+  let enemy = {...ENEMIES[Math.min(ENEMIES.length-1, Math.max(0, quest.danger-1))]};
+  enemy.hp = enemy.hp + S.rank*12 + (quest.boss?30:0);
+  enemy.atk = enemy.atk + S.rank*2;
+  
+  let log = [];
+  let turn = 0;
+  let playerHp = p.hp;
+  let enemyHp = enemy.hp;
+  
+  log.push(`<b>Battle Start: ${enemy.name} ${enemy.emoji}</b>`);
+  
+  while(playerHp > 0 && enemyHp > 0 && turn < quest.turns*2){
+    turn++;
+    let playerFirst = p.spd >= enemy.spd;
+    
+    if((turn%2===1 && playerFirst) || (turn%2===0 && !playerFirst)){
+      let crit = Math.random()*100 < p.crit;
+      let dmg = Math.max(1, Math.round(p.atk - enemy.def*0.55) * (crit?1.5:1));
+      enemyHp -= dmg;
+      
+      if(crit){
+        log.push(`<span class="crit-hit">💥 CRITICAL HIT!</span> You deal <span class="damage-number">${dmg}</span> damage!`);
+      } else {
+        log.push(`You hit ${enemy.name} for <span class="damage-number">${dmg}</span>.`);
+      }
+    } else {
+      let dodge = Math.random()*100 < (S.profession==="Rogue"?18:6);
+      if(dodge){
+        log.push(`🛡️ You dodge ${enemy.name}'s attack!`);
+      } else {
+        let dmg = Math.max(1, Math.round(enemy.atk - p.def*0.45));
+        playerHp -= dmg;
+        log.push(`${enemy.name} strikes you for <span class="damage-number">${dmg}</span> damage.`);
+      }
+    }
+  }
+  
+  let win = playerHp > 0 && enemyHp <= 0;
+  
+  if(win){
+    let bonus = quest.boss ? Math.round(quest.reward*1.8) : quest.reward;
+    S.gold += bonus;
+    gainXP(quest.xp);
+    S.rp += quest.boss ? 28 : 12;
+    S.quests++;
+    S.wins++;
+    S.profXp += Math.round(quest.xp*0.7);
+    S.storyProgress += quest.boss ? 3 : 1;
+    
+    if(S.profXp >= S.profLevel*100 && S.profLevel < 10){
+      S.profXp = 0;
+      S.profLevel++;
+      if(S.profLevel === 10){
+        S.mastery++;
+        addLog(`<span class="gold">🎖️ ${S.profession} MASTERY ACHIEVED!</span>`);
+      } else {
+        addLog(`${S.profession} advanced to profession level ${S.profLevel}.`);
+      }
+    }
+    
+    rankUp();
+    
+    // Loot!
+    if(quest.loot && quest.loot.length > 0){
+      const lootChance = quest.boss ? 0.95 : 0.50;
+      if(Math.random() < lootChance){
+        const lootItem = quest.loot[Math.floor(Math.random()*quest.loot.length)];
+        S.gear.push({...ITEM_DATABASE[lootItem], name: lootItem});
+        log.push(`<span class="good">💎 LOOT FOUND: ${lootItem}</span>`);
+      }
+    }
+    
+    log.push(`<span class="good">✅ Contract Complete!</span> Earned <span class="gold">${Math.round(bonus)}g</span>, <span class="blue">${Math.round(quest.xp)} XP</span>`);
+    addLog(`<span class="good">Contract: ${quest.name} completed!</span>`);
+  } else {
+    S.losses++;
+    log.push(`<span class="bad">❌ You were defeated.</span>`);
+    addLog(`<span class="bad">Contract failed...</span>`);
+  }
+  
+  save();
+  combatModal(quest, log, win);
+}
+
+function combatModal(quest, logs, win){
+  modal(`
+    <h2>${win?"⚔️ Victory!":"💀 Defeat"}</h2>
+    <div class="log">${logs.map(x=>`<div>${x}</div>`).join("")}</div>
+    <br>
+    <button class="primary" onclick="closeModal();render()">Return</button>
+  `);
+}
+
+function equipGear(i){
+  if(!S.gear[i]) return;
+  let g = S.gear[i];
+  if(g.slot === "weapon") S.equipment.weapon = g.atk;
+  else if(g.slot === "armor") S.equipment.armor = g.def;
+  else if(g.slot === "accessory") S.equipment.accessory = g.crit;
+  
+  S.gear.splice(i, 1);
+  addLog(`Equipped: ${g.name}`);
+  save();
+  render();
+}
+
+function setProf(p){
+  if(S.level < 3){
+    addLog("Professions unlock at Level 3.");
+    return;
+  }
+  S.profession = p;
+  S.profLevel = 1;
+  S.profXp = 0;
+  S.unlockedAbilities = {};
+  checkAbilityUnlocks();
+  addLog(`Profession changed to ${p}.`);
+  save();
+  render();
+}
+
+function checkGuildRequirements(guildName){
+  const req = GUILDS[guildName].req;
+  return S.level >= req.level && S.rp >= req.rp && S.profession === req.class;
+}
+
+function joinGuild(guildName){
+  if(!checkGuildRequirements(guildName)){
+    const req = GUILDS[guildName].req;
+    let unmet = [];
+    if(S.level < req.level) unmet.push(`Level ${req.level}`);
+    if(S.profession !== req.class) unmet.push(`${req.class} class`);
+    if(S.rp < req.rp) unmet.push(`${req.rp} Rank Points`);
+    
+    addLog(`Cannot join ${guildName}. Requires: ${unmet.join(", ")}`);
+    return;
+  }
+  
+  S.guild = guildName;
+  addLog(`<span class="purple">🎖️ Joined the ${guildName} guild!</span>`);
+  save();
+  render();
+}
+
+function modal(x){
+  document.getElementById("modal").innerHTML = `<div class="modal"><div class="modalbox">${x}</div></div>`;
+}
+
+function closeModal(){
+  document.getElementById("modal").innerHTML = "";
+}
+
+function rest(){
+  S.energy = Math.min(100, S.energy + 45);
+  S.gold = Math.max(0, S.gold - 10);
+  addLog("Rested at the guild. Energy restored.");
+  save();
+  render();
+}
+
+function reset(){
+  if(confirm("Reset this save? This cannot be undone.")){
+    S = fresh();
+    save();
+    render();
+  }
+}
+
+function exportSave(){
+  let a = document.createElement("a");
+  a.href = "data:application/json;charset=utf-8," + encodeURIComponent(JSON.stringify(S));
+  a.download = "tag-enhanced-save.json";
+  a.click();
+}
+
+function createCharacter(){
+  modal(`
+    <h2>Create Your Legend</h2>
+    <p class="muted">Choose your avatar and begin your journey.</p>
+    
+    <h4>Select Your Avatar</h4>
+    <div class="avatar-selector">
+      ${AVATARS.map((a, i) => `
+        <div class="avatar-option" onclick="selectAvatar(${i})">
+          <div class="avatar-emoji">${a.emoji}</div>
+          <div><b>${a.name}</b></div>
+          <div class="muted small">${a.class}</div>
+        </div>
+      `).join("")}
+    </div>
+    
+    <label>Your Name:</label>
+    <input type="text" id="nameInput" placeholder="Enter your name" value="${S.name}">
+    
+    <button class="primary" onclick="startGame()">Begin Adventure</button>
+  `);
+  document.querySelector(".avatar-option:first-child").classList.add("selected");
+}
+
+function selectAvatar(idx){
+  S.avatar = AVATARS[idx];
+  document.querySelectorAll(".avatar-option").forEach((el, i) => {
+    if(i === idx) el.classList.add("selected");
+    else el.classList.remove("selected");
+  });
+}
+
+function startGame(){
+  const name = document.getElementById("nameInput").value || "Adventurer";
+  S.name = name;
+  closeModal();
+  addLog(`<span class="good">Welcome, ${S.name}! The Guild awaits.</span>`);
+  save();
+  render();
+}
+
+// ===== RENDER FUNCTIONS =====
+
+function profile(){
+  const maxHp = CLASSES[S.profession].hp + S.level*8;
+  return `
+    <div class="card hero">
+      <div class="row between">
+        <div>
+          <div style="font-size:32px;margin-bottom:8px">${S.avatar.emoji}</div>
+          <h2>${S.name}</h2>
+          <div class="muted">${RANKS[S.rank]}-Rank • Level ${S.level} • ${S.profession}</div>
+          <div class="location-badge">${WORLDS[S.worldUnlocked[S.worldUnlocked.length-1]].emoji} ${WORLDS[S.worldUnlocked[S.worldUnlocked.length-1]].name}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="gold" style="font-size:32px">⚔️</div>
+          <div class="muted small">Guild: ${S.guild}</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3>Experience Progress</h3>
+      <div class="bar blue"><div class="fill" style="width:${S.xp/xpNeed()*100}%"></div></div>
+      <div class="small muted">${S.xp}/${xpNeed()} XP</div>
+    </div>
+    
+    <div class="grid">
+      <div class="stat">
+        <span>Gold</span>
+        <b class="gold">${S.gold}g</b>
+      </div>
+      <div class="stat">
+        <span>Rank Points</span>
+        <b>${S.rp}/100</b>
+      </div>
+      <div class="stat">
+        <span>Energy</span>
+        <b>${S.energy}/100</b>
+      </div>
+      <div class="stat">
+        <span>Battles Won</span>
+        <b class="good">${S.wins}</b>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3>⚙️ Equipment</h3>
+      <div class="equipment-grid">
+        <div class="equipment-slot">
+          <b>Weapon</b>
+          <div class="item-name">${S.equipment.weapon ? "+"+S.equipment.weapon+" ATK" : "Unarmed"}</div>
+          <div class="muted small">Physical Damage</div>
+        </div>
+        <div class="equipment-slot">
+          <b>Armor</b>
+          <div class="item-name">${S.equipment.armor ? "+"+S.equipment.armor+" DEF" : "No Armor"}</div>
+          <div class="muted small">Physical Defense</div>
+        </div>
+        <div class="equipment-slot">
+          <b>Accessory</b>
+          <div class="item-name">${S.equipment.accessory ? "+"+S.equipment.accessory+" CRIT" : "None"}</div>
+          <div class="muted small">Critical Chance</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3>📊 Core Attributes</h3>
+      <div class="grid">
+        <div class="stat"><span>STR (Power)</span><b>${S.stats.str}</b></div>
+        <div class="stat"><span>DEX (Speed)</span><b>${S.stats.dex}</b></div>
+        <div class="stat"><span>VIT (Endurance)</span><b>${S.stats.vit}</b></div>
+        <div class="stat"><span>INT (Magic)</span><b>${S.stats.int}</b></div>
+      </div>
+    </div>
+  `;
+}
+
+function guild(){
+  return profile() + `
+    <div class="card featured">
+      <div class="row between">
+        <div>
+          <h3>Guild Standing</h3>
+          <p class="muted small">Complete contracts to earn Rank Points and advance through the ranks.</p>
+        </div>
+        <span class="tag gold">${RANKS[S.rank]}-RANK</span>
+      </div>
+      <button class="secondary" onclick="rest()" style="width:100%;margin-top:10px">Rest at Inn (10g)</button>
+    </div>
+    
+    <div class="card">
+      <h3>📜 Recent Log</h3>
+      <div class="log">${S.log.map(x => `<div>${x}</div>`).join("")}</div>
+    </div>
+  `;
+}
+
+function quests(){
+  let allQuests = [];
+  for(let world of S.worldUnlocked){
+    allQuests = allQuests.concat(generateQuestsForWorld(world));
+  }
+  
+  return `
+    <div class="card featured">
+      <h2>⚔️ Quest Board</h2>
+      <p class="muted small">Contracts span from Guildtown to the edge of the void. Choose wisely.</p>
+    </div>
+    
+    <div class="card">
+      <h3>🗺️ Available Worlds</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        ${S.worldUnlocked.map(w => {
+          const world = WORLDS[w];
+          return `<div class="location-badge" style="border-color:var(--blue);color:var(--blue);background:rgba(103,167,232,.05)">${world.emoji} ${world.name}</div>`;
+        }).join("")}
+      </div>
+    </div>
+    
+    ${allQuests.map((q, i) => `
+      <div class="quest ${q.boss ? 'boss' : ''}">
+        <div class="row between">
+          <div style="flex:1">
+            <div>
+              <span class="tag">${q.rank}-RANK</span>
+              ${q.boss ? '<span class="tag boss">⭐ BOSS</span>' : ''}
+            </div>
+            <h3>${q.name}</h3>
+          </div>
+          <div style="text-align:right">
+            <div class="gold" style="font-weight:bold;font-size:14px">${Math.round(q.reward)}g</div>
+            <div class="muted small">Reward</div>
+          </div>
+        </div>
+        <div class="muted small" style="margin:8px 0">${q.desc}</div>
+        <div style="display:flex;gap:15px;margin:10px 0;font-size:12px">
+          <div><span class="danger-stars">${"⭐".repeat(Math.min(5, q.danger))}</span></div>
+          <div><span class="blue">${Math.round(q.xp)} XP</span></div>
+        </div>
+        <button class="primary" onclick="chooseQuest({...window.curQuest, id:'${q.id}'})">View Contract</button>
+      </div>
+    `).join("")}
+  `;
+}
+
+// Store quest data globally for access
+window.curQuest = {};
+
+function party(){
+  return `
+    <div class="card featured">
+      <h2>⚗️ Professions & Abilities</h2>
+      <p class="muted small">Master different classes to unlock unique abilities and combat styles.</p>
+    </div>
+    
+    <div class="card">
+      <h3>Current Profession: ${S.profession}</h3>
+      <div class="bar purple"><div class="fill" style="width:${S.profXp/(S.profLevel*100)*100}%"></div></div>
+      <div class="small muted">Level ${S.profLevel}/10 • Mastery ${S.mastery}</div>
+      <div class="skill-point-display" style="margin-top:10px">💡 ${S.skillPoints} Skill Points Available</div>
+    </div>
+    
+    <div class="card">
+      <h3>Available Professions</h3>
+      ${Object.entries(CLASSES).map(([name, cls]) => `
+        <div class="item">
+          <div class="row between">
+            <div style="flex:1">
+              <b>${name}</b>
+              <div class="muted small">${cls.desc}</div>
+            </div>
+            ${S.profession === name 
+              ? '<span class="tag gold">ACTIVE</span>' 
+              : `<button class="secondary" onclick="setProf('${name}')">Choose</button>`}
+          </div>
+        </div>
+      `).join("")}
+    </div>
+    
+    <div class="card">
+      <h3>✨ Unlocked Abilities</h3>
+      <div class="ability-list">
+        ${ABILITIES[S.profession] ? ABILITIES[S.profession].map(a => {
+          const unlocked = S.unlockedAbilities[a.name];
+          return `
+            <div class="ability-item" style="opacity:${unlocked ? '1' : '0.5'}">
+              <div style="display:flex;justify-content:space-between;align-items:start">
+                <div>
+                  <b>${a.name}</b>
+                  <div class="muted small" style="margin-top:4px">${a.desc}</div>
+                </div>
+                ${unlocked ? '' : `<span class="unlock-badge">Lv ${a.level}</span>`}
+              </div>
+            </div>
+          `;
+        }).join("") : "<div class='muted small'>Choose a profession first.</div>"}
+      </div>
+    </div>
+  `;
+}
+
+function guilds(){
+  return `
+    <div class="card featured">
+      <h2>🎖️ Guilds & Factions</h2>
+      <p class="muted small">Join specialized guilds to gain unique bonuses. Meet the requirements to unlock higher tiers.</p>
+    </div>
+    
+    <div class="card">
+      <h3>Your Guild: <span class="purple">${S.guild}</span></h3>
+      <div class="story-text">${GUILDS[S.guild].desc}</div>
+      <div style="background:rgba(163,113,215,.1);padding:10px;border-radius:8px;margin-top:10px">
+        <b style="color:var(--purple)">Guild Bonuses:</b>
+        <div class="muted small" style="margin-top:5px">
+          ${Object.entries(GUILDS[S.guild].bonus).map(([k,v]) => `+${v} ${k.toUpperCase()}`).join(" • ")}
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3>Available Guilds</h3>
+      ${Object.entries(GUILDS).map(([name, guild]) => {
+        const canJoin = checkGuildRequirements(name);
+        const req = guild.req;
+        return `
+          <div class="item" style="border-left:3px solid ${canJoin ? 'var(--gold)' : '#536172'}">
+            <div style="display:flex;justify-content:space-between;align-items:start">
+              <div style="flex:1">
+                <b>${guild.icon} ${name}</b>
+                <div class="muted small">${guild.desc}</div>
+                <div style="margin-top:8px;font-size:11px">
+                  <div class="requirement-check ${S.level >= req.level ? 'met' : 'unmet'}">
+                    ${S.level >= req.level ? '✓' : '✗'} Level ${req.level}
+                  </div>
+                  <div class="requirement-check ${S.profession === req.class ? 'met' : 'unmet'}">
+                    ${S.profession === req.class ? '✓' : '✗'} ${req.class} Class
+                  </div>
+                  <div class="requirement-check ${S.rp >= req.rp ? 'met' : 'unmet'}">
+                    ${S.rp >= req.rp ? '✓' : '✗'} ${req.rp} Rank Points
+                  </div>
+                </div>
+              </div>
+              ${S.guild === name 
+                ? '<span class="tag gold">MEMBER</span>' 
+                : `<button class="secondary" onclick="joinGuild('${name}')" ${canJoin ? '' : 'disabled'}>Join</button>`}
+            </div>
+          </div>
+        `;
+      }).join("")}
+    </div>
+  `;
+}
+
+function inventory(){
+  return `
+    <div class="card featured">
+      <h2>🎒 Inventory & Equipment</h2>
+      <p class="muted small">Items are found during quests. Equip powerful gear to enhance your stats.</p>
+    </div>
+    
+    <div class="grid3">
+      <div class="stat">
+        <span>Total Items</span>
+        <b>${S.gear.length}</b>
+      </div>
+      <div class="stat">
+        <span>Weapons</span>
+        <b>${S.gear.filter(g => g.slot === "weapon").length}</b>
+      </div>
+      <div class="stat">
+        <span>Armor</span>
+        <b>${S.gear.filter(g => g.slot === "armor").length}</b>
+      </div>
+    </div>
+    
+    ${S.gear.length === 0 
+      ? `<div class="card"><p class="muted">No items yet. Complete quests to find equipment!</p></div>`
+      : `<div class="card">
+          <h3>📦 Your Gear</h3>
+          ${S.gear.map((g, i) => `
+            <div class="item">
+              <div class="row between">
+                <div style="flex:1">
+                  <b style="color:${
+                    g.rarity === 'Epic' ? '#a371d7' : 
+                    g.rarity === 'Rare' ? '#4dd0e1' : 
+                    g.rarity === 'Magic' ? '#67a7e8' : '#fff'
+                  }">${g.name}</b>
+                  <div class="muted small">${g.rarity} ${g.slot}</div>
+                  <div class="muted small" style="margin-top:4px">
+                    ${g.atk ? '+'+g.atk+' ATK ' : ''}${g.def ? '+'+g.def+' DEF ' : ''}${g.crit ? '+'+g.crit+' CRIT' : ''}
+                  </div>
+                </div>
+                <button class="secondary" onclick="equipGear(${i})">Equip</button>
+              </div>
+            </div>
+          `).join("")}
+        </div>`
+    }
+  `;
+}
+
+function story(){
+  return `
+    <div class="card featured">
+      <h2>📖 The Story Unfolds</h2>
+      <p class="muted small">Your actions shape the fate of the realm. Progress through the narrative with each victory.</p>
+    </div>
+    
+    <div class="card">
+      <h3>Story Progress: ${Math.round(S.storyProgress/10)}%</h3>
+      <div class="bar blue"><div class="fill" style="width:${Math.min(100, S.storyProgress/10)}%"></div></div>
+    </div>
+    
+    <div class="card">
+      <h3>Prologue: ${STORY_CHAPTERS.intro.title}</h3>
+      <div class="story-text">${STORY_CHAPTERS.intro.text}</div>
+    </div>
+    
+    ${S.storyProgress >= 20 ? `
+      <div class="card">
+        <h3>Chapter I: ${STORY_CHAPTERS.chapter1.title}</h3>
+        <div class="story-text">${STORY_CHAPTERS.chapter1.text}</div>
+      </div>
+    ` : `<div class="card"><p class="muted">Locked: ${20 - S.storyProgress} progress points remaining</p></div>`}
+    
+    ${S.storyProgress >= 50 ? `
+      <div class="card">
+        <h3>Chapter II: ${STORY_CHAPTERS.chapter2.title}</h3>
+        <div class="story-text">${STORY_CHAPTERS.chapter2.text}</div>
+      </div>
+    ` : `<div class="card"><p class="muted">Locked: ${Math.max(0, 50 - S.storyProgress)} progress points remaining</p></div>`}
+    
+    ${S.storyProgress >= 80 ? `
+      <div class="card">
+        <h3>Chapter III: ${STORY_CHAPTERS.chapter3.title}</h3>
+        <div class="story-text">${STORY_CHAPTERS.chapter3.text}</div>
+        <div style="text-align:center;margin-top:15px">
+          <div style="font-size:48px;margin:10px 0">🌀</div>
+          <p class="muted">The final battle approaches...</p>
+        </div>
+      </div>
+    ` : `<div class="card"><p class="muted">Locked: ${Math.max(0, 80 - S.storyProgress)} progress points remaining</p></div>`}
+  `;
+}
+
+function settings(){
+  return `
+    <div class="card featured">
+      <h2>⚙️ Settings & Info</h2>
+      <p class="muted small">Manage your game data and progress.</p>
+    </div>
+    
+    <div class="card">
+      <h3>Save Management</h3>
+      <button class="secondary" onclick="exportSave()" style="width:100%">📥 Export Save</button>
+      <p class="muted small" style="margin-top:10px">Your progress is automatically saved to your browser.</p>
+    </div>
+    
+    <div class="card">
+      <h3>Statistics</h3>
+      <div class="grid">
+        <div class="stat"><span>Total Levels</span><b>${S.level}</b></div>
+        <div class="stat"><span>Battles Won</span><b class="good">${S.wins}</b></div>
+        <div class="stat"><span>Battles Lost</span><b class="bad">${S.losses}</b></div>
+        <div class="stat"><span>Professions Mastered</span><b>${S.mastery}</b></div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3>About</h3>
+      <p class="muted small">The Adventurers Guild — Enhanced Reimagined is a fan-made browser RPG with an expanded story, richer progression, and meaningful choices.</p>
+      <p class="muted small">Completely offline. No blockchain. No NFTs. Just pure adventure.</p>
+    </div>
+    
+    <div class="card">
+      <button class="secondary" onclick="reset()" style="width:100%;color:var(--bad)">🔄 Reset Save</button>
+      <p class="muted small" style="margin-top:10px">This will delete all progress. This cannot be undone.</p>
+    </div>
+  `;
+}
+
+let tab = "guild";
+
+function render(){
+  const names = {
+    guild: "🏛️ Guild",
+    quests: "⚔️ Quests",
+    party: "⚗️ Classes",
+    guilds: "🎖️ Guilds",
+    inventory: "🎒 Items",
+    story: "📖 Story",
+    settings: "⚙️ Settings"
+  };
+  
+  document.getElementById("topSub").textContent = `${RANKS[S.rank]}-Rank • ${S.gold}g • 💪 ${S.level}`;
+  
+  const views = {
+    guild: guild,
+    quests: quests,
+    party: party,
+    guilds: guilds,
+    inventory: inventory,
+    story: story,
+    settings: settings
+  };
+  
+  document.getElementById("view").innerHTML = views[tab]();
+  
+  document.getElementById("tabs").innerHTML = Object.keys(names).map(k => 
+    `<button class="${tab===k?"active":""}" onclick="tab='${k}';render()">${names[k]}</button>`
+  ).join("");
+}
+
+// Initialize game
+if(!localStorage.getItem("tag-enhanced-started")){
+  createCharacter();
+  localStorage.setItem("tag-enhanced-started", "true");
+} else {
+  render();
+}
 </script>
-</body></html>
+</body>
+</html>
+
