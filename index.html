@@ -2,837 +2,96 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#08232b">
-<title>Canadian Waters — Safari Prototype</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Adventurers Guild — Reimagined Prototype</title>
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
-html,body{margin:0;background:#06151b;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;min-height:100%;touch-action:pan-y;overscroll-behavior:none}
-body{padding:env(safe-area-inset-top) 10px env(safe-area-inset-bottom)}
-.app{max-width:720px;margin:auto;padding:10px 0 20px}
-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-h1{font-size:21px;margin:0;font-weight:900;letter-spacing:.5px}
-.sub{font-size:11px;color:#9eb6bd;margin-top:2px}
-.stats{text-align:right;font-weight:800;font-size:13px}
-.card{background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:12px;margin:8px 0;box-shadow:0 8px 30px rgba(0,0,0,.18)}
-
-/* ---- lake / canvas ---- */
-.lakeWrap{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.25);background:#04232c}
-#scene{display:block;width:100%;height:auto;touch-action:none}
-.hud{position:absolute;inset:0;pointer-events:none}
-.hud>*{pointer-events:auto}
-.badge{position:absolute;top:10px;left:10px;background:rgba(4,20,26,.55);backdrop-filter:blur(3px);border-radius:10px;padding:5px 9px;font-size:11px;font-weight:800;letter-spacing:.3px}
-.badge.right{left:auto;right:10px}
-.spot-flag{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:rgba(255,193,7,.92);color:#2b1c00;border-radius:99px;padding:5px 12px;font-size:11px;font-weight:900;opacity:0;transition:opacity .25s}
-.spot-flag.show{opacity:1}
-
-/* joystick */
-.stick{position:absolute;left:16px;bottom:16px;width:104px;height:104px;border-radius:50%;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.22);touch-action:none}
-.stick .knob{position:absolute;width:46px;height:46px;left:29px;top:29px;border-radius:50%;background:rgba(255,255,255,.5);border:2px solid rgba(255,255,255,.7)}
-.throttle-label{position:absolute;left:16px;bottom:124px;font-size:10px;color:#dff;background:rgba(4,20,26,.5);padding:3px 7px;border-radius:8px;font-weight:700;letter-spacing:.3px}
-
-/* cast button + aim */
-.castBtn{position:absolute;right:16px;bottom:16px;width:78px;height:78px;border-radius:50%;background:#e0651c;color:#fff;font-weight:900;font-size:12px;border:3px solid rgba(255,255,255,.35);box-shadow:0 6px 18px rgba(0,0,0,.35)}
-.castBtn:disabled{opacity:.35}
-.aimHint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(4,20,26,.6);padding:7px 14px;border-radius:99px;font-size:12px;font-weight:800;text-align:center;white-space:nowrap}
-.cancelAim{position:absolute;right:16px;bottom:16px;width:64px;height:64px;border-radius:50%;background:#a83b3b;color:#fff;font-weight:900;font-size:11px;border:3px solid rgba(255,255,255,.3)}
-
-/* fight controls */
-.fightWrap{position:absolute;left:0;right:0;bottom:0;padding:10px 12px;background:linear-gradient(transparent,rgba(4,18,24,.82) 35%)}
-.meterRow{display:flex;gap:10px;margin-bottom:8px}
-.meterRow .m{flex:1}
-.meterRow label{font-size:9px;color:#cfe6ec;font-weight:800;letter-spacing:.4px}
-.bar{height:10px;background:rgba(0,0,0,.4);border-radius:99px;overflow:hidden;margin-top:3px;border:1px solid rgba(255,255,255,.15)}
-.fill{height:100%;width:20%;background:#4cc9f0;transition:width .12s}
-.fill.red{background:#ef5350}
-.fightBtns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.fightBtns button{min-height:52px;border:0;border-radius:13px;font-weight:900;font-size:14px;color:#fff}
-#reelBtn{background:#1976d2}
-#runBtn{background:#2c5b45}
-.hookPrompt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;background:rgba(2,10,14,.35)}
-.hookPrompt button{min-height:64px;min-width:170px;border:0;border-radius:99px;background:#ffca28;color:#2b1c00;font-weight:900;font-size:16px;letter-spacing:.4px;box-shadow:0 6px 20px rgba(0,0,0,.4)}
-.strikeTimer{width:170px;height:6px;border-radius:99px;background:rgba(255,255,255,.2);overflow:hidden}
-.strikeTimer i{display:block;height:100%;background:#ffca28;width:100%}
-
-.message{font-size:15px;font-weight:800;min-height:20px;display:flex;align-items:center;justify-content:center;text-align:center}
-
-/* lower panel controls */
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-button,select{width:100%;min-height:48px;border:0;border-radius:13px;font-size:14px;font-weight:900;color:#fff;background:#1976d2}
-button.secondary{background:#29424a}
-button.wide{grid-column:1/-1}
-select{padding:0 10px;background:#29424a}
-.row{display:flex;gap:10px;align-items:center}
-.row>*{flex:1}
-.label{font-size:11px;color:#9eb6bd;margin-bottom:4px}
-.trophy{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:13px}
-.trophy:last-child{border-bottom:0}
-.hidden{display:none!important}
-.result{text-align:center}
-.bigfish{font-size:50px}
-.small{font-size:11px;color:#9eb6bd;line-height:1.4}
+:root{--bg:#0d1117;--panel:#151c26;--panel2:#1c2633;--gold:#d8ad55;--text:#edf1f5;--muted:#9ca8b5;--good:#68c78a;--bad:#e26b6b;--blue:#67a7e8}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(#0b1016,#111a24);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input{font:inherit}button{cursor:pointer}
+.app{max-width:760px;margin:auto;min-height:100vh;padding-bottom:78px}.top{position:sticky;top:0;z-index:5;background:#0d131bfa;border-bottom:1px solid #2b3744;padding:14px 16px;backdrop-filter:blur(10px)}
+.title{font-weight:800;letter-spacing:.04em}.subtitle{color:var(--muted);font-size:12px;margin-top:3px}
+.content{padding:14px}.tabs{position:fixed;bottom:0;left:0;right:0;background:#101720f5;border-top:1px solid #2b3744;display:flex;justify-content:center;z-index:10;backdrop-filter:blur(12px)}
+.tabs button{max-width:150px;flex:1;background:none;border:0;color:var(--muted);padding:10px 5px 12px;font-size:11px}.tabs button.active{color:var(--gold)}
+.card{background:var(--panel);border:1px solid #2a3542;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 8px 24px #0003}
+.hero{background:radial-gradient(circle at 80% 10%,#30435b,#17202b 50%,#121923);border-color:#3d4b5b}
+.row{display:flex;gap:10px;align-items:center}.between{justify-content:space-between}.grow{flex:1}
+h2,h3{margin:0 0 8px}h2{font-size:19px}h3{font-size:15px}.muted{color:var(--muted)}.gold{color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{background:var(--panel2);padding:10px;border-radius:10px}.stat b{display:block;font-size:18px}.stat span{font-size:11px;color:var(--muted)}
+.bar{height:8px;background:#0a0e13;border-radius:99px;overflow:hidden}.fill{height:100%;background:var(--gold);border-radius:99px}
+button.primary{width:100%;border:1px solid #8b6d32;background:#8a692c;color:#fff;padding:12px;border-radius:10px;font-weight:800}
+button.secondary{border:1px solid #394958;background:#202c39;color:#fff;padding:9px 11px;border-radius:9px}
+button:disabled{opacity:.45;cursor:not-allowed}.quest{border:1px solid #2c3947;border-radius:12px;padding:12px;margin:8px 0;background:#17202a}
+.tag{display:inline-block;font-size:10px;border:1px solid #536172;border-radius:99px;padding:3px 7px;color:#c7d0da;margin-right:5px}
+.log{max-height:310px;overflow:auto;font-size:12px;background:#0b1016;border-radius:10px;padding:9px}.log div{padding:5px 0;border-bottom:1px solid #202a34}.good{color:var(--good)}.bad{color:var(--bad)}
+.modal{position:fixed;inset:0;background:#0009;z-index:20;display:flex;align-items:flex-end;justify-content:center}.modalbox{width:min(760px,100%);background:#131b24;border:1px solid #354252;border-radius:18px 18px 0 0;padding:18px;max-height:88vh;overflow:auto}
+.item{padding:10px;background:#18232e;border-radius:10px;border:1px solid #2d3b49;margin:7px 0}.small{font-size:12px}.right{text-align:right}
+input{width:100%;background:#0e151d;border:1px solid #344352;color:#fff;padding:11px;border-radius:9px;margin:8px 0}
 </style>
 </head>
 <body>
 <div class="app">
-<header>
-  <div><h1>CANADIAN WATERS</h1><div class="sub">Safari Prototype • Northern Ontario</div></div>
-  <div class="stats">$<span id="money">100</span><br><span id="xp">0</span> XP</div>
-</header>
-
-<div class="card" style="padding:0">
-  <div class="lakeWrap">
-    <canvas id="scene" width="900" height="620"></canvas>
-    <div class="hud" id="hud">
-      <div class="badge" id="timeBadge">06:40 AM</div>
-      <div class="badge right" id="depthBadge">— FT</div>
-      <div class="spot-flag" id="spotFlag">WEED EDGE</div>
-
-      <!-- driving controls -->
-      <div id="driveControls">
-        <div class="throttle-label" id="throttleLabel">DRIVE</div>
-        <div class="stick" id="stick"><div class="knob" id="knob"></div></div>
-        <button class="castBtn" id="castBtn">CAST</button>
-      </div>
-
-      <!-- aiming controls -->
-      <div id="aimControls" class="hidden">
-        <div class="aimHint" id="aimHint">Drag on the water to aim, release to cast</div>
-        <button class="cancelAim" id="cancelAimBtn">CANCEL</button>
-      </div>
-
-      <!-- waiting / hooked message -->
-      <div id="waitOverlay" class="hidden" style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%)">
-        <div class="message" id="waitMsg" style="background:rgba(4,20,26,.6);padding:8px 16px;border-radius:99px"></div>
-      </div>
-
-      <!-- set the hook prompt -->
-      <div id="hookPrompt" class="hookPrompt hidden">
-        <div class="message" id="hookMsg">STRIKE!</div>
-        <div class="strikeTimer"><i id="strikeBar"></i></div>
-        <button id="hookBtn">SET THE HOOK</button>
-      </div>
-
-      <!-- fight controls -->
-      <div id="fightWrap" class="fightWrap hidden">
-        <div class="message" id="fightMsg" style="margin-bottom:6px"></div>
-        <div class="meterRow">
-          <div class="m"><label>LINE TENSION</label><div class="bar"><div id="tension" class="fill"></div></div></div>
-          <div class="m"><label>FISH STAMINA</label><div class="bar"><div id="stamina" class="fill"></div></div></div>
-        </div>
-        <div class="fightBtns">
-          <button id="runBtn">LET IT RUN</button>
-          <button id="reelBtn">REEL IN</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="top"><div class="title">THE ADVENTURERS GUILD</div><div class="subtitle" id="topSub"></div></div>
+<div class="content" id="view"></div>
+<div class="tabs" id="tabs"></div>
 </div>
-
-<section class="card">
-  <div class="row">
-    <div style="flex:1">
-      <div class="label">LURE</div>
-      <select id="lure">
-        <option value="spoon">Silver Spoon</option>
-        <option value="jig">Green Pumpkin Jig</option>
-        <option value="crank">Minnow Crankbait</option>
-      </select>
-    </div>
-  </div>
-</section>
-
-<section id="result" class="card result hidden">
-  <div id="fishIcon" class="bigfish">🐟</div>
-  <h2 id="fishName" style="margin:4px 0">Fish</h2>
-  <div id="fishStats"></div>
-  <div style="height:10px"></div>
-  <div class="actions">
-    <button id="castAgainBtn">CAST AGAIN</button>
-    <button id="backToBoatBtn" class="secondary">DRIVE BOAT</button>
-  </div>
-</section>
-
-<section class="card">
-  <h3 style="margin:0 0 8px;font-size:14px">Trophy Book</h3>
-  <div class="trophy"><span>Smallmouth Bass</span><strong id="bestBass">No record</strong></div>
-  <div class="trophy"><span>Northern Pike</span><strong id="bestPike">No record</strong></div>
-  <div class="trophy"><span>Walleye</span><strong id="bestWalleye">No record</strong></div>
-  <div class="small" style="margin-top:8px">Fish caught: <span id="caught">0</span></div>
-</section>
-
-<section class="card small">
-<strong>Prototype controls:</strong> Use the stick to drive the boat around the lake — steer near weed edges, rocky points and drop-offs for better bites. Tap CAST, then drag on the water to aim and set power. When a fish strikes, tap SET THE HOOK in time, then balance REEL IN and LET IT RUN to land it.
-</section>
-</div>
-
+<div id="modal"></div>
 <script>
-/* ============================================================
-   CANADIAN WATERS — prototype v2
-   world/lake generation, boat driving, live casting aim,
-   on-screen fish fight
-   ============================================================ */
-const $=id=>document.getElementById(id);
-
-/* ---------- world setup ---------- */
-const WORLD_W=2200, WORLD_H=1600;
-const CENTER={x:WORLD_W/2,y:WORLD_H/2};
-
-function mulberry32(seed){
-  return function(){
-    seed|=0;seed=seed+0x6D2B79F5|0;
-    let t=Math.imul(seed^seed>>>15,1|seed);
-    t=t+Math.imul(t^t>>>7,61|t)^t;
-    return ((t^t>>>14)>>>0)/4294967296;
-  };
-}
-const rand=mulberry32(20260820);
-
-// lake outline via angle -> radius with layered harmonics for bays/points
-const baseR=560;
-const harmonics=[
-  {n:2,amp:70,ph:rand()*7},
-  {n:3,amp:95,ph:rand()*7},
-  {n:5,amp:55,ph:rand()*7},
-  {n:7,amp:34,ph:rand()*7},
-  {n:11,amp:18,ph:rand()*7}
-];
-function lakeRadius(a){
-  let r=baseR;
-  for(const h of harmonics) r+=h.amp*Math.sin(h.n*a+h.ph);
-  return r;
-}
-const LAKE_STEPS=220;
-const lakePts=[];
-for(let i=0;i<LAKE_STEPS;i++){
-  const a=(i/LAKE_STEPS)*Math.PI*2;
-  const r=lakeRadius(a);
-  lakePts.push({x:CENTER.x+Math.cos(a)*r,y:CENTER.y+Math.sin(a)*r*0.82});
-}
-
-// islands
-const islands=[
-  {cx:CENTER.x-230,cy:CENTER.y-90,r:80,ph:rand()*7},
-  {cx:CENTER.x+260,cy:CENTER.y+150,r:58,ph:rand()*7}
-];
-function islandPts(isl){
-  const pts=[];
-  for(let i=0;i<40;i++){
-    const a=(i/40)*Math.PI*2;
-    const r=isl.r*(1+0.25*Math.sin(3*a+isl.ph)+0.15*Math.sin(5*a+isl.ph*1.7));
-    pts.push({x:isl.cx+Math.cos(a)*r,y:isl.cy+Math.sin(a)*r});
-  }
-  return pts;
-}
-const islandPolys=islands.map(islandPts);
-
-// fishing hotspots (weed edge, drop-off, rocky point)
-const hotspots=[
-  {x:CENTER.x-330,y:CENTER.y+260,r:150,name:"WEED EDGE",bonus:"bass"},
-  {x:CENTER.x+380,y:CENTER.y-260,r:140,name:"ROCKY POINT",bonus:"pike"},
-  {x:CENTER.x+120,y:CENTER.y+330,r:130,name:"DEEP DROP-OFF",bonus:"walleye"},
-  {x:CENTER.x-390,y:CENTER.y-190,r:120,name:"SUNKEN TIMBER",bonus:"pike"}
-];
-
-/* ---------- offscreen render of world + collision mask ---------- */
-const worldCanvas=document.createElement('canvas');
-worldCanvas.width=WORLD_W;worldCanvas.height=WORLD_H;
-const wctx=worldCanvas.getContext('2d');
-
-const maskCanvas=document.createElement('canvas');
-maskCanvas.width=WORLD_W;maskCanvas.height=WORLD_H;
-const mctx=maskCanvas.getContext('2d');
-
-function pathFor(ctx,pts){
-  ctx.beginPath();
-  ctx.moveTo(pts[0].x,pts[0].y);
-  for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x,pts[i].y);
-  ctx.closePath();
-}
-
-function buildWorld(){
-  // land background
-  const g=wctx.createLinearGradient(0,0,0,WORLD_H);
-  g.addColorStop(0,'#1c3b2e');
-  g.addColorStop(1,'#142c22');
-  wctx.fillStyle=g;
-  wctx.fillRect(0,0,WORLD_W,WORLD_H);
-
-  // scattered forest texture
-  for(let i=0;i<900;i++){
-    const x=rand()*WORLD_W, y=rand()*WORLD_H;
-    wctx.fillStyle=rand()<.5?'rgba(20,60,40,.5)':'rgba(10,40,28,.4)';
-    wctx.beginPath();wctx.arc(x,y,4+rand()*7,0,7);wctx.fill();
-  }
-
-  // water
-  const wg=wctx.createLinearGradient(0,CENTER.y-baseR,0,CENTER.y+baseR);
-  wg.addColorStop(0,'#4a9db0');
-  wg.addColorStop(.4,'#1f7f96');
-  wg.addColorStop(1,'#0a4457');
-  pathFor(wctx,lakePts);
-  wctx.fillStyle=wg;
-  wctx.fill();
-
-  // water ripple texture
-  wctx.save();
-  pathFor(wctx,lakePts);
-  wctx.clip();
-  wctx.strokeStyle='rgba(255,255,255,.06)';
-  wctx.lineWidth=2;
-  for(let y=CENTER.y-baseR;y<CENTER.y+baseR;y+=14){
-    wctx.beginPath();
-    for(let x=CENTER.x-baseR;x<CENTER.x+baseR;x+=6){
-      const yy=y+Math.sin((x+y)*0.02)*4;
-      x===CENTER.x-baseR?wctx.moveTo(x,yy):wctx.lineTo(x,yy);
-    }
-    wctx.stroke();
-  }
-  wctx.restore();
-
-  // shoreline stroke
-  pathFor(wctx,lakePts);
-  wctx.lineWidth=10;
-  wctx.strokeStyle='rgba(224,197,140,.55)';
-  wctx.stroke();
-
-  // trees along the outside of the shoreline
-  for(let i=0;i<lakePts.length;i+=2){
-    const p=lakePts[i];
-    const ang=Math.atan2(p.y-CENTER.y,p.x-CENTER.x);
-    for(let k=0;k<2;k++){
-      const dist=18+k*22+rand()*14;
-      const tx=p.x+Math.cos(ang)*dist;
-      const ty=p.y+Math.sin(ang)*dist;
-      drawTree(wctx,tx,ty,10+rand()*8);
-    }
-  }
-
-  // hotspot visual cues (weed patches / reeds / rock clusters)
-  hotspots.forEach(h=>{
-    wctx.save();
-    wctx.globalAlpha=.35;
-    wctx.fillStyle=h.name==='ROCKY POINT'||h.name==='SUNKEN TIMBER'?'#3a4a4d':'#2f6b3f';
-    for(let i=0;i<26;i++){
-      const a=rand()*7,r=rand()*h.r*0.8;
-      wctx.beginPath();
-      wctx.arc(h.x+Math.cos(a)*r,h.y+Math.sin(a)*r*0.6,4+rand()*5,0,7);
-      wctx.fill();
-    }
-    wctx.restore();
-  });
-
-  // islands
-  islandPolys.forEach(poly=>{
-    pathFor(wctx,poly);
-    wctx.fillStyle='#213d2c';
-    wctx.fill();
-    wctx.lineWidth=6;
-    wctx.strokeStyle='rgba(224,197,140,.5)';
-    wctx.stroke();
-    const cx=poly.reduce((s,p)=>s+p.x,0)/poly.length;
-    const cy=poly.reduce((s,p)=>s+p.y,0)/poly.length;
-    for(let i=0;i<10;i++){
-      drawTree(wctx,cx+(rand()-.5)*70,cy+(rand()-.5)*50,9+rand()*7);
-    }
-  });
-
-  /* ---- mask: white = drivable water ---- */
-  mctx.fillStyle='#000';
-  mctx.fillRect(0,0,WORLD_W,WORLD_H);
-  pathFor(mctx,lakePts);
-  mctx.fillStyle='#fff';
-  mctx.fill();
-  islandPolys.forEach(poly=>{
-    pathFor(mctx,poly);
-    mctx.fillStyle='#000';
-    mctx.fill();
-  });
-}
-function drawTree(ctx,x,y,s){
-  ctx.fillStyle='#2b1a10';
-  ctx.fillRect(x-s*0.06,y,s*0.12,s*0.5);
-  ctx.fillStyle=['#1f4d33','#194023','#255a3b'][Math.floor(rand()*3)];
-  ctx.beginPath();
-  ctx.moveTo(x,y-s*1.3);
-  ctx.lineTo(x+s*0.6,y+s*0.1);
-  ctx.lineTo(x-s*0.6,y+s*0.1);
-  ctx.closePath();
-  ctx.fill();
-}
-buildWorld();
-
-const maskData=mctx.getImageData(0,0,WORLD_W,WORLD_H).data;
-function isWater(x,y){
-  if(x<0||y<0||x>=WORLD_W||y>=WORLD_H) return false;
-  const idx=((y|0)*WORLD_W+(x|0))*4;
-  return maskData[idx]>128;
-}
-function nearestWaterAlong(fromX,fromY,toX,toY){
-  const steps=40;
-  let lastGood={x:fromX,y:fromY};
-  for(let i=1;i<=steps;i++){
-    const t=i/steps;
-    const x=fromX+(toX-fromX)*t, y=fromY+(toY-fromY)*t;
-    if(isWater(x,y)) lastGood={x,y}; else break;
-  }
-  return lastGood;
-}
-function randomWaterPointNear(x,y,minR,maxR){
-  for(let tries=0;tries<40;tries++){
-    const a=rand()*Math.PI*2, r=minR+rand()*(maxR-minR);
-    const px=x+Math.cos(a)*r, py=y+Math.sin(a)*r;
-    if(isWater(px,py)) return {x:px,y:py};
-  }
-  return {x,y};
-}
-function hotspotNear(x,y){
-  for(const h of hotspots){
-    if(Math.hypot(h.x-x,h.y-y)<h.r) return h;
-  }
-  return null;
-}
-
-/* ---------- canvas / viewport ---------- */
-const canvas=$('scene');
-const ctx=canvas.getContext('2d');
-let VIEW_W=900,VIEW_H=620;
-function fitCanvas(){
-  const w=canvas.clientWidth||900;
-  const h=Math.round(w*(620/900));
-  canvas.width=w; canvas.height=h;
-  VIEW_W=w;VIEW_H=h;
-}
-window.addEventListener('resize',fitCanvas);
-
-/* ---------- boat state ---------- */
-const boat={x:CENTER.x,y:CENTER.y-baseR*0.55,heading:Math.PI/2,speed:0,visible:true};
-// place boat guaranteed on water
-if(!isWater(boat.x,boat.y)){
-  const p=randomWaterPointNear(CENTER.x,CENTER.y,0,50);
-  boat.x=p.x;boat.y=p.y;
-}
-let joy={active:false,dx:0,dy:0,id:null};
-
-/* ---------- game / fishing state ---------- */
-const state={
-  phase:'driving', // driving | aiming | casting | waiting | strike | fighting | landed
-  money:100,xp:0,caught:0,bass:0,pike:0,walleye:0,
-  fish:null,weight:0,length:0,
-  tension:.2,stamina:1,
-  lurePos:null, castStart:null, castFrom:null, castT:0,
-  fishSwimPhase:0, fishJumpT:0,
-  aim:{active:false,dx:0,dy:0},
-  strikeDeadline:0,
-  timeMinutes:6*60+40
+const RANKS=["F","E","D","C","B","A","S"];
+const CLASSES={
+Adventurer:{desc:"Balanced beginner profession.",hp:105,atk:12,def:8,spd:10,mag:5,crit:5},
+Caster:{desc:"Magic-focused; strong damage and utility.",hp:80,atk:6,def:5,spd:9,mag:16,crit:8},
+Defender:{desc:"Heavy armor and high damage resistance.",hp:145,atk:10,def:16,spd:6,mag:3,crit:3},
+Fighter:{desc:"High physical damage.",hp:110,atk:17,def:8,spd:9,mag:3,crit:7},
+Rogue:{desc:"Fast, evasive and critical-hit focused.",hp:85,atk:14,def:6,spd:15,mag:4,crit:15}
 };
-const MAX_CAST=270;
-
-const lureBonus={
- spoon:{bass:.90,pike:1.35,walleye:1.05},
- jig:{bass:1.45,pike:.65,walleye:1.20},
- crank:{bass:1.15,pike:1.20,walleye:.85}
-};
-const speciesMeta={
-  bass:{label:'Smallmouth Bass',icon:'🐟',min:.7,max:7,lenBase:13,lenMul:3},
-  pike:{label:'Northern Pike',icon:'🐊',min:2,max:30,lenBase:24,lenMul:1.5},
-  walleye:{label:'Walleye',icon:'🐠',min:1,max:12,lenBase:17,lenMul:2.1}
-};
-
-function msg(sel,t){$(sel).textContent=t}
-
-function render(){
-  $('money').textContent=state.money;
-  $('xp').textContent=state.xp;
-  $('caught').textContent=state.caught;
-  $('bestBass').textContent=state.bass?state.bass.toFixed(2)+' lb':'No record';
-  $('bestPike').textContent=state.pike?state.pike.toFixed(2)+' lb':'No record';
-  $('bestWalleye').textContent=state.walleye?state.walleye.toFixed(2)+' lb':'No record';
-  $('tension').style.width=(state.tension*100)+'%';
-  $('tension').className='fill '+(state.tension>.8?'red':'');
-  $('stamina').style.width=(state.stamina*100)+'%';
-
-  const mins=Math.floor(state.timeMinutes)%1440;
-  const hh=Math.floor(mins/60), mm=mins%60;
-  const ampm=hh<12?'AM':'PM';
-  const hh12=((hh+11)%12)+1;
-  $('timeBadge').textContent=`${String(hh12).padStart(2,'0')}:${String(mm).padStart(2,'0')} ${ampm}`;
-
-  const hs=hotspotNear(boat.x,boat.y);
-  $('depthBadge').textContent=hs?hs.name:(Math.round(6+((boat.x+boat.y)%14))+' FT');
-  $('spotFlag').classList.toggle('show',!!hs && state.phase==='driving');
-  if(hs) $('spotFlag').textContent=hs.name;
-}
-
-/* ---------- phase / UI switching ---------- */
-function setPhase(p){
-  state.phase=p;
-  $('driveControls').classList.toggle('hidden',p!=='driving');
-  $('aimControls').classList.toggle('hidden',p!=='aiming');
-  $('waitOverlay').classList.toggle('hidden',!(p==='casting'||p==='waiting'));
-  $('hookPrompt').classList.toggle('hidden',p!=='strike');
-  $('fightWrap').classList.toggle('hidden',p!=='fighting');
-  $('result').classList.toggle('hidden',p!=='landed');
-  $('castBtn').disabled = false;
-}
-
-/* ---------- input: joystick ---------- */
-const stickEl=$('stick'), knobEl=$('knob');
-function stickCenter(){
-  const r=stickEl.getBoundingClientRect();
-  return {x:r.left+r.width/2,y:r.top+r.height/2,radius:r.width/2};
-}
-function setKnob(dx,dy){
-  knobEl.style.left=(29+dx)+'px';
-  knobEl.style.top=(29+dy)+'px';
-}
-stickEl.addEventListener('pointerdown',e=>{
-  if(state.phase!=='driving') return;
-  joy.active=true;joy.id=e.pointerId;
-  stickEl.setPointerCapture(e.pointerId);
-  updateStick(e);
-});
-stickEl.addEventListener('pointermove',e=>{ if(joy.active&&e.pointerId===joy.id) updateStick(e); });
-function endStick(e){
-  if(joy.active&&(!e||e.pointerId===joy.id)){
-    joy.active=false;joy.dx=0;joy.dy=0;setKnob(0,0);
-    $('throttleLabel').textContent='DRIVE';
-  }
-}
-stickEl.addEventListener('pointerup',endStick);
-stickEl.addEventListener('pointercancel',endStick);
-function updateStick(e){
-  const c=stickCenter();
-  let dx=e.clientX-c.x, dy=e.clientY-c.y;
-  const max=c.radius-6;
-  const d=Math.hypot(dx,dy);
-  if(d>max){dx=dx/d*max;dy=dy/d*max;}
-  joy.dx=dx/max; joy.dy=dy/max;
-  setKnob(dx,dy);
-  $('throttleLabel').textContent=Math.hypot(joy.dx,joy.dy)>.15?'UNDERWAY':'DRIVE';
-}
-
-/* ---------- input: aiming (drag on canvas) ---------- */
-let aimPointerId=null;
-canvas.addEventListener('pointerdown',e=>{
-  if(state.phase!=='aiming') return;
-  aimPointerId=e.pointerId;
-  canvas.setPointerCapture(e.pointerId);
-  updateAim(e);
-});
-canvas.addEventListener('pointermove',e=>{
-  if(state.phase!=='aiming'||e.pointerId!==aimPointerId) return;
-  updateAim(e);
-});
-function endAim(e){
-  if(state.phase!=='aiming'||(e&&e.pointerId!==aimPointerId)) return;
-  aimPointerId=null;
-  if(state.aim.active) launchCast();
-}
-canvas.addEventListener('pointerup',endAim);
-canvas.addEventListener('pointercancel',endAim);
-function updateAim(e){
-  const r=canvas.getBoundingClientRect();
-  const scale=VIEW_W/r.width;
-  const px=(e.clientX-r.left)*scale, py=(e.clientY-r.top)*scale;
-  const bx=VIEW_W/2, by=VIEW_H/2; // boat is always drawn centered
-  state.aim.active=true;
-  state.aim.dx=px-bx; state.aim.dy=py-by;
-  $('aimHint').textContent='Release to cast';
-}
-
-/* ---------- buttons ---------- */
-$('castBtn').addEventListener('click',()=>{
-  if(state.phase!=='driving') return;
-  state.aim.active=false;
-  setPhase('aiming');
-  $('aimHint').textContent='Drag on the water to aim, release to cast';
-});
-$('cancelAimBtn').addEventListener('click',()=>{
-  state.aim.active=false;
-  setPhase('driving');
-});
-$('hookBtn').addEventListener('click',setHook);
-$('reelBtn').addEventListener('click',reel);
-$('runBtn').addEventListener('click',runLine);
-$('castAgainBtn').addEventListener('click',()=>{ setPhase('driving'); startAimFromResult(); });
-$('backToBoatBtn').addEventListener('click',()=>{ setPhase('driving'); });
-function startAimFromResult(){
-  state.aim.active=false;
-  setPhase('aiming');
-  $('aimHint').textContent='Drag on the water to aim, release to cast';
-}
-
-/* ---------- casting sequence ---------- */
-function launchCast(){
-  const bx=boat.x,by=boat.y;
-  const rawDist=Math.min(MAX_CAST,Math.hypot(state.aim.dx,state.aim.dy)*1.15);
-  if(rawDist<24){ setPhase('driving'); return; }
-  const ang=Math.atan2(state.aim.dy,state.aim.dx);
-  let tx=bx+Math.cos(ang)*rawDist, ty=by+Math.sin(ang)*rawDist;
-  const land=nearestWaterAlong(bx,by,tx,ty);
-  state.castFrom={x:bx,y:by};
-  state.lurePos={x:land.x,y:land.y};
-  state.castT=0;
-  setPhase('casting');
-  msg('#waitMsg','Casting...');
-}
-
-/* ---------- main update loop ---------- */
-let lastT=performance.now();
-function loop(now){
-  const dt=Math.min(.05,(now-lastT)/1000);
-  lastT=now;
-  update(dt);
-  draw();
-  requestAnimationFrame(loop);
-}
-function update(dt){
-  state.timeMinutes+=dt*1.4;
-
-  if(state.phase==='driving'){
-    const mag=Math.min(1,Math.hypot(joy.dx,joy.dy));
-    if(mag>.12){
-      const desiredHeading=Math.atan2(joy.dy,joy.dx);
-      let diff=desiredHeading-boat.heading;
-      while(diff>Math.PI) diff-=2*Math.PI;
-      while(diff<-Math.PI) diff+=2*Math.PI;
-      boat.heading+=diff*Math.min(1,dt*4);
-      boat.speed=lerp(boat.speed,mag*150,dt*2.2);
-    } else {
-      boat.speed=lerp(boat.speed,0,dt*3);
-    }
-    const nx=boat.x+Math.cos(boat.heading)*boat.speed*dt;
-    const ny=boat.y+Math.sin(boat.heading)*boat.speed*dt;
-    if(isWater(nx,ny)){ boat.x=nx;boat.y=ny; } else { boat.speed*=0.4; }
-  }
-
-  if(state.phase==='casting'){
-    state.castT+=dt/0.55;
-    if(state.castT>=1){
-      state.castT=1;
-      spawnSplash(state.lurePos.x,state.lurePos.y,1);
-      setPhase('waiting');
-      state.waitTimer=1.1+rand()*2.6;
-      const hs=hotspotNear(state.lurePos.x,state.lurePos.y);
-      if(hs) state.waitTimer*=0.55;
-      msg('#waitMsg','Lure is working. Watch for a strike.');
-    }
-  } else if(state.phase==='waiting'){
-    state.waitTimer-=dt;
-    if(state.waitTimer<=0) triggerStrike();
-  } else if(state.phase==='strike'){
-    state.strikeDeadline-=dt;
-    $('strikeBar').style.width=Math.max(0,(state.strikeDeadline/1.3)*100)+'%';
-    if(state.strikeDeadline<=0){
-      spawnSplash(state.lurePos.x,state.lurePos.y,0.6);
-      setPhase('driving');
-      state.fish=null;
-    }
-  } else if(state.phase==='fighting'){
-    state.fishSwimPhase+=dt*3.4;
-    state.fishJumpT-=dt;
-  }
-
-  updateSplashes(dt);
-}
-function lerp(a,b,t){return a+(b-a)*Math.min(1,Math.max(0,t));}
-
-function triggerStrike(){
-  const l=lureBonus[$('lure').value];
-  const hs=hotspotNear(state.lurePos.x,state.lurePos.y);
-  const weights={bass:l.bass,pike:l.pike,walleye:l.walleye};
-  if(hs&&hs.bonus) weights[hs.bonus]*=1.6;
-  const total=weights.bass+weights.pike+weights.walleye;
-  let r=rand()*total, pick='bass';
-  if(r<weights.bass) pick='bass'; else if(r<weights.bass+weights.pike) pick='pike'; else pick='walleye';
-  const meta=speciesMeta[pick];
-  state.fish=pick;
-  state.weight=+(meta.min+Math.pow(rand(),1.7)*(meta.max-meta.min)).toFixed(2);
-  state.length=Math.round(meta.lenBase+state.weight*meta.lenMul+(rand()*5-2));
-  state.strikeDeadline=1.3;
-  setPhase('strike');
-  msg('#hookMsg','STRIKE! '+meta.icon);
-  spawnSplash(state.lurePos.x,state.lurePos.y,1.4);
-}
-function setHook(){
-  if(state.phase!=='strike') return;
-  state.tension=.45;state.stamina=1;
-  state.hookDistance=Math.hypot(state.lurePos.x-boat.x,state.lurePos.y-boat.y);
-  setPhase('fighting');
-  msg('#fightMsg','Fish on! Manage the line tension.');
-}
-function reel(){
-  if(state.phase!=='fighting') return;
-  state.tension=Math.min(1,state.tension+.03+rand()*.10);
-  if(rand()<.35) state.stamina-=.06+rand()*.08;
-  if(state.tension>=1){ breakLine(); return; }
-  if(state.stamina<=0){ land(); return; }
-  msg('#fightMsg',state.tension>.8?'Too much tension! Let it run.':'Reeling... keep the pressure steady.');
-}
-function runLine(){
-  if(state.phase!=='fighting') return;
-  state.tension=Math.max(.18,state.tension-(.15+rand()*.13));
-  state.stamina=Math.max(0,state.stamina-(.02+rand()*.05));
-  state.fishJumpT=0.01; // trigger a little dart
-  msg('#fightMsg','Fish is running. Tension is dropping.');
-}
-function breakLine(){
-  msg('#fightMsg','The fish broke the line.');
-  spawnSplash(currentFishPos().x,currentFishPos().y,1.2);
-  state.fish=null;
-  setTimeout(()=>setPhase('driving'),400);
-}
-function land(){
-  state.caught++;
-  const reward=Math.floor(state.weight*8), gain=Math.floor(state.weight*12);
-  state.money+=reward; state.xp+=gain;
-  state[state.fish]=Math.max(state[state.fish],state.weight);
-  const meta=speciesMeta[state.fish];
-  $('fishIcon').textContent=meta.icon;
-  $('fishName').textContent=meta.label;
-  $('fishStats').innerHTML=`<strong>${state.weight.toFixed(2)} lb</strong> • ${state.length} in<br><span class="small">+$${reward} credits • +${gain} XP</span>`;
-  spawnSplash(boat.x,boat.y,1.2);
-  setPhase('landed');
-}
-
-/* current on-screen fish position: interpolate between hookDistance and boat as stamina drops */
-function currentFishPos(){
-  if(!state.lurePos) return {x:boat.x,y:boat.y};
-  const t=1-state.stamina; // 0 = far, 1 = at boat
-  const baseX=lerpN(state.lurePos.x,boat.x,t*0.9);
-  const baseY=lerpN(state.lurePos.y,boat.y,t*0.9);
-  const jitter=Math.sin(state.fishSwimPhase)*10*(1-t*0.6);
-  const jumpScale=state.fishJumpT>0?1:0;
-  return {x:baseX+jitter,y:baseY+Math.cos(state.fishSwimPhase*1.3)*6,jump:jumpScale};
-}
-function lerpN(a,b,t){return a+(b-a)*t;}
-
-/* ---------- splash particles ---------- */
-let splashes=[];
-function spawnSplash(x,y,scale){
-  splashes.push({x,y,t:0,scale:scale||1});
-}
-function updateSplashes(dt){
-  splashes.forEach(s=>s.t+=dt);
-  splashes=splashes.filter(s=>s.t<0.9);
-}
-
-/* ---------- drawing ---------- */
-function draw(){
-  ctx.clearRect(0,0,VIEW_W,VIEW_H);
-  // camera centers on boat, we draw a VIEW_W x VIEW_H window of the world scaled to fit
-  const zoom=1.0;
-  const viewWorldW=VIEW_W/zoom*0.62, viewWorldH=VIEW_H/zoom*0.62;
-  let sx=boat.x-viewWorldW/2, sy=boat.y-viewWorldH/2;
-  ctx.save();
-  ctx.imageSmoothingEnabled=true;
-  ctx.drawImage(worldCanvas,sx,sy,viewWorldW,viewWorldH,0,0,VIEW_W,VIEW_H);
-
-  const worldToScreen=(wx,wy)=>({x:(wx-sx)/viewWorldW*VIEW_W,y:(wy-sy)/viewWorldH*VIEW_H});
-
-  // sun glare
-  const gg=ctx.createLinearGradient(0,0,0,VIEW_H*0.4);
-  gg.addColorStop(0,'rgba(255,255,255,.18)');
-  gg.addColorStop(1,'rgba(255,255,255,0)');
-  ctx.fillStyle=gg;
-  ctx.fillRect(0,0,VIEW_W,VIEW_H*0.4);
-
-  // cast line / aim indicator
-  const boatScreen=worldToScreen(boat.x,boat.y);
-  if(state.phase==='aiming'&&state.aim.active){
-    const dist=Math.min(MAX_CAST,Math.hypot(state.aim.dx,state.aim.dy)*1.15);
-    const ang=Math.atan2(state.aim.dy,state.aim.dx);
-    const tx=boat.x+Math.cos(ang)*dist, ty=boat.y+Math.sin(ang)*dist;
-    const land=nearestWaterAlong(boat.x,boat.y,tx,ty);
-    const p1=worldToScreen(boat.x,boat.y), p2=worldToScreen(land.x,land.y);
-    ctx.strokeStyle='rgba(255,255,255,.85)';
-    ctx.setLineDash([6,6]);
-    ctx.lineWidth=2;
-    ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.fillStyle='#ffca28';
-    ctx.beginPath();ctx.arc(p2.x,p2.y,7,0,7);ctx.fill();
-    const power=Math.min(1,dist/MAX_CAST);
-    ctx.fillStyle='rgba(0,0,0,.4)';
-    ctx.fillRect(p1.x-30,p1.y-46,60,7);
-    ctx.fillStyle='#4cc9f0';
-    ctx.fillRect(p1.x-30,p1.y-46,60*power,7);
-  }
-
-  // lure / line to boat during casting-onward
-  if((state.phase==='casting'||state.phase==='waiting'||state.phase==='strike') && state.lurePos){
-    let lx,ly;
-    if(state.phase==='casting'){
-      const t=easeOutQuad(state.castT);
-      lx=lerpN(state.castFrom.x,state.lurePos.x,t);
-      ly=lerpN(state.castFrom.y,state.lurePos.y,t)-Math.sin(t*Math.PI)*40;
-    } else { lx=state.lurePos.x; ly=state.lurePos.y; }
-    const p1=worldToScreen(boat.x,boat.y), p2=worldToScreen(lx,ly);
-    ctx.strokeStyle='rgba(255,255,255,.7)';
-    ctx.lineWidth=1.5;
-    ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();
-    ctx.fillStyle='#ffca28';
-    ctx.beginPath();ctx.arc(p2.x,p2.y,5,0,7);ctx.fill();
-    if(state.phase==='waiting'){
-      const ripple=(Math.sin(performance.now()/300)+1)/2;
-      ctx.strokeStyle='rgba(255,255,255,'+(0.5-ripple*0.4)+')';
-      ctx.beginPath();ctx.arc(p2.x,p2.y,6+ripple*10,0,7);ctx.stroke();
-    }
-  }
-
-  // fish while fighting
-  if(state.phase==='fighting'&&state.fish){
-    const fp=currentFishPos();
-    const p1=worldToScreen(boat.x,boat.y), p2=worldToScreen(fp.x,fp.y);
-    ctx.strokeStyle='rgba(255,255,255,.75)';
-    ctx.lineWidth=1.5;
-    ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();
-    const meta=speciesMeta[state.fish];
-    const jump=fp.jump>0?-18*Math.sin(Math.min(1,(0.01-state.fishJumpT)/0.01)*Math.PI):0;
-    ctx.save();
-    ctx.translate(p2.x,p2.y+jump);
-    ctx.font='30px sans-serif';
-    ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.fillText(meta.icon,0,0);
-    ctx.restore();
-    // splash ring under fish
-    const ripple=(Math.sin(performance.now()/220)+1)/2;
-    ctx.strokeStyle='rgba(255,255,255,'+(0.5-ripple*0.35)+')';
-    ctx.beginPath();ctx.arc(p2.x,p2.y+6,10+ripple*8,0,7);ctx.stroke();
-  }
-
-  // splashes
-  splashes.forEach(s=>{
-    const p=worldToScreen(s.x,s.y);
-    const t=s.t/0.9;
-    ctx.strokeStyle='rgba(255,255,255,'+(0.75*(1-t))+')';
-    ctx.lineWidth=2;
-    ctx.beginPath();ctx.arc(p.x,p.y,(10+t*40)*s.scale,0,7);ctx.stroke();
-  });
-
-  // boat (drawn at screen center always, since camera follows it)
-  ctx.save();
-  ctx.translate(boatScreen.x,boatScreen.y);
-  ctx.rotate(boat.heading+Math.PI/2);
-  ctx.font='36px sans-serif';
-  ctx.textAlign='center';ctx.textBaseline='middle';
-  ctx.shadowColor='rgba(0,0,0,.35)';
-  ctx.shadowBlur=6;ctx.shadowOffsetY=3;
-  ctx.fillText('🛶',0,0);
-  ctx.restore();
-
-  ctx.restore();
-}
-function easeOutQuad(t){return t*(2-t);}
-
-/* ---------- boot ---------- */
-fitCanvas();
-setPhase('driving');
+const ENEMIES=[
+{name:"Giant Rat",hp:38,atk:7,def:2,spd:8,xp:18,gold:10},
+{name:"Goblin Scout",hp:48,atk:9,def:3,spd:9,xp:24,gold:15},
+{name:"Forest Wolf",hp:62,atk:11,def:4,spd:12,xp:31,gold:22},
+{name:"Bandit",hp:72,atk:13,def:6,spd:10,xp:42,gold:32},
+{name:"Cave Troll",hp:145,atk:19,def:10,spd:6,xp:95,gold:85,boss:true}
+];
+const QUESTS=[
+{name:"Patrol: Guildtown Road",rank:"F",danger:1,desc:"A routine patrol outside town.",reward:35,xp:35,turns:7},
+{name:"Gather Mooncap",rank:"F",danger:1,desc:"Collect rare herbs from the northern trail.",reward:48,xp:45,turns:8},
+{name:"Goblin Trouble",rank:"F",danger:2,desc:"Clear a goblin camp threatening travellers.",reward:72,xp:65,turns:9},
+{name:"Escort the Merchant",rank:"E",danger:2,desc:"Protect a merchant caravan through wolf country.",reward:105,xp:90,turns:10},
+{name:"Bandit Hideout",rank:"E",danger:3,desc:"Investigate reports of bandits near the old mine.",reward:145,xp:125,turns:11},
+{name:"The Cave Troll",rank:"D",danger:5,desc:"A dangerous named threat. Boss rewards are better.",reward:260,xp:240,turns:14,boss:true}
+];
+let S=JSON.parse(localStorage.getItem("tag_reimagined"))||null;
+function fresh(){return {name:"Rook",level:1,xp:0,gold:100,rank:0,rp:0,profession:"Adventurer",profLevel:1,profXp:0,energy:100,craft:0,mastery:0,equipment:{weapon:0,armor:0,accessory:0},gear:[{name:"Training Sword",slot:"weapon",atk:4,rarity:"Common"},{name:"Travel Clothes",slot:"armor",def:2,rarity:"Common"}],stats:{str:5,dex:5,vit:5,int:5,luck:5},quests:0, wins:0, losses:0, log:["You arrive in Guildtown with 100 gold and a battered training sword."],started:Date.now()}}
+if(!S)S=fresh();
+function save(){localStorage.setItem("tag_reimagined",JSON.stringify(S))}
+function xpNeed(){return 50+S.level*35}
+function power(){let c=CLASSES[S.profession],e=S.equipment;return Math.round((c.hp+S.level*8+(e.armor||0)*8+(e.weapon||0)*4)*.15+(c.atk+S.level*1.7+(e.weapon||0)*2)*2+(c.def+(e.armor||0)*2)*2+c.spd)}
+function addLog(x){S.log.unshift(x);S.log=S.log.slice(0,80);save()}
+function gainXP(n){S.xp+=n;while(S.xp>=xpNeed()){S.xp-=xpNeed();S.level++;S.stats.str++;S.stats.dex++;S.stats.vit++;S.stats.int++;S.stats.luck++;addLog(`<span class="good">Level up! You reached level ${S.level}.</span>`);if(S.level===3)addLog("Your first Profession slot is unlocked.");}}
+function rankUp(){while(S.rp>=100){S.rp-=100;if(S.rank<RANKS.length-1){S.rank++;addLog(`<span class="gold">Guild promotion! You are now ${RANKS[S.rank]}-Rank.</span>`)}else{addLog(`<span class="gold">Your guild standing is legendary.</span>`);break}}}
+function gearFor(rarity){let mult={Common:1,Magic:1.5,Rare:2.2,Epic:3.3}[rarity]||1;let slot=["weapon","armor","accessory"][Math.floor(Math.random()*3)];let n=slot==="weapon"?"Forged Blade":slot==="armor"?"Reinforced Mail":"Lucky Charm";let g={name:n,slot,atk:slot==="weapon"?Math.round(5*mult):0,def:slot==="armor"?Math.round(4*mult):0,crit:slot==="accessory"?Math.round(3*mult):0,rarity};return g}
+function buyGear(){let price=70+S.rank*90;if(S.gold<price)return addLog("Not enough gold.");let rarity=S.rank>=3?"Rare":S.rank>=1?"Magic":"Common";S.gold-=price;S.gear.push(gearFor(rarity));addLog(`Purchased ${rarity} equipment for ${price} gold.`);save();render()}
+function equip(i){let g=S.gear[i];S.equipment[g.slot]=g.slot==="weapon"?g.atk:g.slot==="armor"?g.def:g.crit;S.gear.splice(i,1);addLog(`Equipped ${g.name}.`);save();render()}
+function chooseQuest(q){if(RANKS.indexOf(q.rank)>S.rank+1)return addLog("Your guild rank is too low for this contract.");if(S.energy<20)return addLog("You are exhausted. Recover energy first.");S.energy-=20;modal(`<h2>${q.name}</h2><p class="muted">${q.desc}</p><div class="grid"><div class="stat"><span>Danger</span><b>${"★".repeat(q.danger)}</b></div><div class="stat"><span>Reward</span><b>${q.reward}g</b></div></div><button class="primary" onclick="startQuest(${QUESTS.indexOf(q)})">Accept Contract</button><br><br><button class="secondary" onclick="closeModal()">Cancel</button>`)}
+function startQuest(idx){closeModal();let q=QUESTS[idx], c=CLASSES[S.profession], p={hp:c.hp+S.level*8+(S.equipment.armor||0)*8,atk:c.atk+S.level*1.7+(S.equipment.weapon||0)*2,def:c.def+(S.equipment.armor||0)*2,spd:c.spd,mag:c.mag+S.level,crit:c.crit+(S.equipment.accessory||0)};let e=ENEMIES[Math.min(ENEMIES.length-1,Math.max(0,q.danger-1))];let enemy={...e,hp:e.hp+S.rank*12+(q.boss?20:0),atk:e.atk+S.rank*2};let log=[];let turn=0;while(p.hp>0&&enemy.hp>0&&turn<q.turns*2){turn++;let playerFirst=p.spd>=enemy.spd;if((turn%2===1&&playerFirst)||(turn%2===0&&!playerFirst)){let crit=Math.random()*100<p.crit;let dmg=Math.max(1,Math.round(p.atk-enemy.def*.55)*(crit?1.5:1));enemy.hp-=dmg;log.push(`You ${crit?"critically ":""}hit ${enemy.name} for ${dmg}.`)}else{let dodge=Math.random()*100<(S.profession==="Rogue"?12:4);if(dodge)log.push(`You dodge ${enemy.name}'s attack.`);else{let dmg=Math.max(1,Math.round(enemy.atk-p.def*.45));p.hp-=dmg;log.push(`${enemy.name} hits you for ${dmg}.`)}}}
+let win=p.hp>0&&enemy.hp<=0;if(win){let bonus=q.boss?Math.round(q.reward*1.8):q.reward;S.gold+=bonus;gainXP(q.xp);S.rp+=q.boss?28:12;S.quests++;S.wins++;S.profXp+=Math.round(q.xp*.7);if(S.profXp>=S.profLevel*100&&S.profLevel<10){S.profXp=0;S.profLevel++;if(S.profLevel===10){S.mastery++;addLog(`<span class="gold">${S.profession} mastery achieved.</span>`)}else addLog(`${S.profession} advanced to profession level ${S.profLevel}.`)}rankUp();let g=gearFor(q.boss?"Epic":S.rank>=3?"Rare":S.rank>=1?"Magic":"Common");if(Math.random()<(q.boss?.75:.38)){S.gear.push(g);log.push(`Loot found: ${g.rarity} ${g.name}.`)}addLog(`<span class="good">${q.name} completed. +${bonus}g, +${q.xp} XP, +${q.boss?28:12} rank points.</span>`)}else{S.losses++;addLog(`<span class="bad">${q.name} failed. The contract pays nothing.</span>`)}save();combatModal(q,log,win)}
+function combatModal(q,logs,win){modal(`<h2>${win?"Contract Complete":"Defeat"}</h2><p>${win?"The guild records your success.":"You barely escape with your life."}</p><div class="log">${logs.map(x=>`<div>${x}</div>`).join("")}</div><br><button class="primary" onclick="closeModal();render()">Return to Guild</button>`)}
+function modal(x){document.getElementById("modal").innerHTML=`<div class="modal"><div class="modalbox">${x}</div></div>`}
+function closeModal(){document.getElementById("modal").innerHTML=""}
+function rest(){S.energy=Math.min(100,S.energy+45);S.gold=Math.max(0,S.gold-10);addLog("You rest at the guild inn. Energy restored.");render()}
+function setProf(p){if(S.level<3)return addLog("Professions unlock at level 3.");S.profession=p;S.profLevel=1;S.profXp=0;addLog(`Profession changed to ${p}. (24-hour cooldown in the original design.)`);render()}
+function reset(){if(confirm("Reset this prototype save?")){S=fresh();save();render()}}
+function profile(){return `<div class="card hero"><div class="row between"><div><h2>${S.name}</h2><div class="muted">${RANKS[S.rank]}-Rank • Level ${S.level} • ${S.profession}</div></div><div class="gold" style="font-size:24px">✦</div></div><br><div class="bar"><div class="fill" style="width:${S.xp/xpNeed()*100}%"></div></div><div class="small muted">${S.xp}/${xpNeed()} XP</div></div>
+<div class="grid3"><div class="stat"><span>Gold</span><b>${S.gold}</b></div><div class="stat"><span>Rank Points</span><b>${S.rp}/100</b></div><div class="stat"><span>Energy</span><b>${S.energy}/100</b></div></div>
+<div class="card"><h3>Character</h3><div class="grid">${Object.entries(S.stats).map(([k,v])=>`<div class="stat"><span>${k.toUpperCase()}</span><b>${v}</b></div>`).join("")}</div></div>`}
+function guild(){return profile()+`<div class="card"><div class="row between"><h3>Guild Standing</h3><span class="tag">${RANKS[S.rank]}-RANK</span></div><p class="muted small">Complete contracts to earn Rank Points. Higher standing opens more dangerous work and better equipment.</p><button class="secondary" onclick="rest()">Rest & recover (10g)</button></div><div class="card"><h3>Recent Activity</h3><div class="log">${S.log.map(x=>`<div>${x}</div>`).join("")}</div></div>`}
+function quests(){let max=S.rank+1;return `<div class="card"><h2>Quest Board</h2><p class="muted small">Available contracts up to one rank above your current guild standing.</p></div>`+QUESTS.filter(q=>RANKS.indexOf(q.rank)<=max).map((q,i)=>`<div class="quest"><div class="row between"><div><span class="tag">${q.rank}-Rank</span>${q.boss?'<span class="tag">BOSS</span>':''}<h3>${q.name}</h3></div><b class="gold">${q.reward}g</b></div><div class="muted small">${q.desc}</div><br><button class="primary" onclick="chooseQuest(QUESTS[${i}])">View Contract</button></div>`).join("")}
+function party(){return `<div class="card"><h2>Profession</h2><p class="muted small">Professions unlock at Level 3 and have their own progression. Changing profession is limited by a 24-hour cooldown in the original game design.</p>${Object.entries(CLASSES).map(([n,c])=>`<div class="item"><div class="row between"><div><b>${n}</b><div class="muted small">${c.desc}</div></div><button class="secondary" onclick="setProf('${n}')">${S.profession===n?"Active":"Choose"}</button></div></div>`).join("")}</div>
+<div class="card"><h3>${S.profession} Progress</h3><div class="bar"><div class="fill" style="width:${S.profXp/(S.profLevel*100)*100}%"></div></div><div class="small muted">Profession Lv ${S.profLevel}/10 • ${S.profXp}/${S.profLevel*100} XP • Mastery ${S.mastery}</div></div>`}
+function shop(){return `<div class="card"><h2>Guild Quartermaster</h2><p class="muted small">Equipment is the main early-game power curve. The original game also tied equipment and crafting into its WAX/NFT economy; this recreation uses a local, non-blockchain economy.</p><button class="primary" onclick="buyGear()">Buy random gear — ${70+S.rank*90}g</button></div><div class="card"><h3>Inventory</h3>${S.gear.length?S.gear.map((g,i)=>`<div class="item"><div class="row between"><div><b>${g.name}</b><div class="muted small">${g.rarity} • ${g.slot} • ATK +${g.atk||0} DEF +${g.def||0} CRIT +${g.crit||0}</div></div><button class="secondary" onclick="equip(${i})">Equip</button></div></div>`).join(""):"<div class='muted'>No spare equipment.</div>"}</div>`}
+function settings(){return `<div class="card"><h2>Prototype</h2><p class="muted small">This is a fan-made, offline browser recreation inspired by surviving TAG documentation. It does not use the original servers, blockchain, NFTs, artwork, or proprietary backend.</p><button class="secondary" onclick="exportSave()">Export Save</button> <button class="secondary" onclick="reset()">Reset Save</button></div><div class="card"><h3>Research notes</h3><div class="small muted">Recovered mechanics currently represented: Discord/text RPG structure, Guildtown, profile/inventory/pets/adventures, Patrols, Random Quest and Quest Journal, five professions (Adventurer/Caster/Defender/Fighter/Rogue), profession XP and level 1–10 mastery, level-based stats, equipment, crafting materials, GUILD rewards, Mystery Chests and anti-bot checks. Blockchain/NFT elements are intentionally replaced with offline systems.</div></div>`}
+function exportSave(){let a=document.createElement("a");a.href="data:application/json;charset=utf-8,"+encodeURIComponent(JSON.stringify(S));a.download="tag-reimagined-save.json";a.click()}
+let tab="guild";function render(){let names={guild:"Guild",quests:"Quests",party:"Character",shop:"Shop",settings:"More"};document.getElementById("topSub").textContent=`${RANKS[S.rank]}-Rank • ${S.gold}g • ${S.energy} Energy`;let views={guild:guild,quests:quests,party:party,shop:shop,settings:settings};document.getElementById("view").innerHTML=views[tab]();document.getElementById("tabs").innerHTML=Object.keys(names).map(k=>`<button class="${tab===k?"active":""}" onclick="tab='${k}';render()">${names[k]}</button>`).join("")}
 render();
-setInterval(render,150);
-requestAnimationFrame(loop);
 </script>
-</body>
-</html>
+</body></html>
