@@ -17,7 +17,6 @@
 html{image-rendering:pixelated}
 body{margin:0;background:var(--bg);color:var(--text);font-family:'VT323',ui-monospace,Consolas,monospace;font-size:18px;overflow-x:hidden;letter-spacing:.02em;position:relative}
 
-/* NEO-GEO CRT & CAB BEZEL EFFECTS */
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
   background:repeating-linear-gradient(0deg,rgba(0,0,0,.25) 0px,rgba(0,0,0,.25) 1px,transparent 1px,transparent 3px);
   mix-blend-mode:multiply}
@@ -30,7 +29,6 @@ button,input{font-family:'VT323',ui-monospace,Consolas,monospace;font-size:17px}
 button{cursor:pointer}
 .app{max-width:780px;margin:auto;min-height:100vh;padding-bottom:90px;position:relative;z-index:1;background:#0d0d14;border-left:4px solid #1a1a26;border-right:4px solid #1a1a26}
 
-/* NEO-GEO MARQUEE TOP HEADER */
 .top{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#1e1e2e 0%,#0c0c14 100%);border-bottom:4px solid var(--gold);border-top:3px solid var(--neored);padding:10px 16px;box-shadow:0 6px 0 #000,0 10px 20px #000d;display:flex;flex-direction:column;gap:2px}
 .neogeo-badge{display:flex;justify-content:space-between;align-items:center;font-family:'Press Start 2P',monospace;font-size:7px;color:#fff;letter-spacing:1px;background:#ff0033;padding:2px 6px;border-radius:2px;font-weight:bold;text-shadow:1px 1px 0 #000}
 .neogeo-badge span{color:var(--gold)}
@@ -40,13 +38,11 @@ button{cursor:pointer}
 
 .content{padding:14px}
 
-/* NEO-GEO SYSTEM TABS */
 .tabs{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(0deg,#181824 0%,#09090e 100%);border-top:4px solid var(--gold);display:flex;justify-content:center;z-index:10;box-shadow:0 -6px 20px #000e}
-.tabs button{max-width:110px;flex:1;background:#10101a;border:0;border-right:2px solid #000;color:var(--muted);padding:12px 2px 14px;font-family:'Press Start 2P',monospace;font-size:7px;letter-spacing:0;text-transform:uppercase;transition:all .1s}
+.tabs button{max-width:95px;flex:1;background:#10101a;border:0;border-right:2px solid #000;color:var(--muted);padding:12px 2px 14px;font-family:'Press Start 2P',monospace;font-size:6.5px;letter-spacing:0;text-transform:uppercase;transition:all .1s}
 .tabs button:hover{background:#1a1a2a;color:#fff}
 .tabs button.active{color:var(--gold);background:linear-gradient(180deg,#2a1f0a 0%,#120e05 100%);border-top:3px solid var(--neored);text-shadow:0 0 6px #ffcc00aa}
 
-/* NEO-GEO ARCADE PANELS & CARDS */
 .card{background:var(--panel);border:3px solid var(--gold);padding:14px;margin-bottom:14px;box-shadow:5px 5px 0 #000,inset 0 0 10px rgba(0,0,0,.8);position:relative;outline:2px solid #000}
 .card::before{content:"";position:absolute;top:2px;left:2px;right:2px;height:2px;background:rgba(255,255,255,.15);pointer-events:none}
 .card.featured{background:linear-gradient(135deg,#28141a 0%,#12121c 100%);border-color:var(--neored);box-shadow:5px 5px 0 #000,0 0 15px #ff003333}
@@ -67,29 +63,26 @@ h2{font-size:13px;color:var(--gold)}h3{font-size:10px;color:var(--neoblue)}h4{fo
 
 .stat{background:var(--panel2);padding:10px;border:2px solid #3a3a58;box-shadow:3px 3px 0 #000;outline:1px solid #000}
 .stat b{display:block;font-size:22px;font-family:'VT323',monospace;color:var(--text);text-shadow:1px 1px 0 #000}
-.stat span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-family:'Press Start 2P',monospace}
+.stat span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-family:'Press Start 2P',monospace}
 
-/* ARCADE HUD HEALTH & EXP BARS */
 .bar{height:16px;background:#050508;border:2px solid #000;outline:1px solid var(--panel-border2);position:relative;overflow:hidden;background-image:repeating-linear-gradient(90deg,#000 0,#000 4px,#111 4px,#111 6px)}
-.fill{height:100%;background:linear-gradient(180deg,#ffe680 0%,#ffcc00 50%,#b38f00 100%);box-shadow:inset 0 2px 0 rgba(255,255,255,.5)}
+.fill{height:100%;background:linear-gradient(180deg,#ffe680 0%,#ffcc00 50%,#b38f00 100%);box-shadow:inset 0 2px 0 rgba(255,255,255,.5);transition:width 0.2s}
 .bar.blue .fill{background:linear-gradient(180deg,#80ebff 0%,#00d9ff 50%,#0088cc 100%)}
 .bar.purple .fill{background:linear-gradient(180deg,#f080ff 0%,#d000ff 50%,#8800cc 100%)}
 .bar.good .fill{background:linear-gradient(180deg,#80ffaa 0%,#00ff66 50%,#009933 100%)}
 
-/* NEO-GEO CHUNKY PUSH BUTTONS */
 button.primary{width:100%;border:3px solid #000;background:linear-gradient(180deg,#ffee66 0%,#ffcc00 50%,#cc9900 100%);color:#000;padding:12px;
-  font-family:'Press Start 2P',monospace;font-size:10px;letter-spacing:0;text-transform:uppercase;font-weight:bold;
+  font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:0;text-transform:uppercase;font-weight:bold;
   box-shadow:0 4px 0 #886600,0 6px 0 #000;transition:all .05s;text-shadow:0 1px 0 #ffff99}
 button.primary:hover{background:linear-gradient(180deg,#ffff80 0%,#ffd633 50%,#e6ab00 100%)}
 button.primary:active{transform:translateY(4px);box-shadow:0 0 0 #000}
 
-button.secondary{border:3px solid #000;background:linear-gradient(180deg,#ff4d4d 0%,#cc0000 100%);color:#fff;padding:9px 12px;font-size:14px;
-  font-family:'Press Start 2P',monospace;font-size:8px;box-shadow:0 3px 0 #660000,0 5px 0 #000;transition:all .05s;text-transform:uppercase;letter-spacing:.03em;text-shadow:1px 1px 0 #000}
+button.secondary{border:3px solid #000;background:linear-gradient(180deg,#ff4d4d 0%,#cc0000 100%);color:#fff;padding:8px 10px;
+  font-family:'Press Start 2P',monospace;font-size:7.5px;box-shadow:0 3px 0 #660000,0 5px 0 #000;transition:all .05s;text-transform:uppercase;letter-spacing:.03em;text-shadow:1px 1px 0 #000}
 button.secondary:hover{background:linear-gradient(180deg,#ff6666 0%,#e60000 100%)}
 button.secondary:active{transform:translateY(3px);box-shadow:0 0 0 #000}
 button:disabled{opacity:.4;cursor:not-allowed;filter:grayscale(1)}
 
-/* QUEST BOARD CARDS */
 .quest{border:3px solid #3d3d5c;padding:12px;margin:10px 0;background:#10101a;cursor:pointer;transition:all .15s;box-shadow:4px 4px 0 #000;outline:1px solid #000}
 .quest:hover{background:#1a1a2b;border-color:var(--gold)}
 .quest.boss{border-color:var(--neored);background:linear-gradient(135deg,#33000d 0%,#150006 100%);box-shadow:0 0 15px #ff003344,4px 4px 0 #000}
@@ -100,18 +93,16 @@ button:disabled{opacity:.4;cursor:not-allowed;filter:grayscale(1)}
 .tag.magic{border-color:var(--neogreen);color:#a0ffa0;background:#003810}
 .tag.boss{border-color:var(--neoorange);color:#ffda00;background:#4a1f00}
 
-.log{max-height:300px;overflow:auto;font-size:16px;background:#050508;border:3px solid #000;outline:2px solid #2a2a3d;padding:10px;line-height:1.4}
+.log{max-height:220px;overflow-y:auto;font-size:16px;background:#050508;border:3px solid #000;outline:2px solid #2a2a3d;padding:10px;line-height:1.4}
 .log div{padding:4px 0;border-bottom:1px solid #1a1a28}
 .log div:last-child{border:0}
 
-/* ARCADE MODAL OVERLAY */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:60;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(2px)}
 .modalbox{width:min(780px,100%);background:#101018;border-top:5px solid var(--gold);border-left:2px solid #222;border-right:2px solid #222;padding:20px;max-height:88vh;overflow:auto;box-shadow:0 -10px 30px #000e,inset 0 1px 0 rgba(255,255,255,.2)}
 
 .item{padding:10px;background:#181824;border:2px solid #3a3a58;margin:8px 0;box-shadow:3px 3px 0 #000}
 .item:hover{background:#222234}
 .small{font-size:13px}
-.right{text-align:right}
 input{width:100%;background:#08080d;border:3px solid #3a3a58;color:#fff;padding:11px;margin:8px 0;font-size:18px;outline:none}
 input:focus{border-color:var(--gold)}
 
@@ -121,32 +112,20 @@ input:focus{border-color:var(--gold)}
 .avatar-option.selected{border-color:var(--gold);background:#261d08;box-shadow:0 0 15px #ffcc0055,inset 0 0 10px #ffcc0022}
 .avatar-emoji{font-size:40px;margin:6px 0;filter:drop-shadow(3px 3px 0 #000)}
 
-.world-visual{background:linear-gradient(135deg,#20141a 0%,#0a0a12 100%);border:3px solid var(--panel-border2);padding:15px;margin:10px 0;text-align:center;min-height:120px;display:flex;flex-direction:column;justify-content:center;box-shadow:inset 0 0 15px #000}
-.location-badge{display:inline-block;padding:6px 10px;background:rgba(0,217,255,.1);border:2px solid var(--neoblue);color:var(--neoblue);font-size:11px;margin:4px 4px 4px 0;text-transform:uppercase;letter-spacing:.05em;font-family:'Press Start 2P',monospace}
+.world-visual{background:linear-gradient(135deg,#20141a 0%,#0a0a12 100%);border:3px solid var(--panel-border2);padding:15px;margin:10px 0;text-align:center;min-height:110px;display:flex;flex-direction:column;justify-content:center;box-shadow:inset 0 0 15px #000}
+.location-badge{display:inline-block;padding:5px 8px;background:rgba(0,217,255,.1);border:2px solid var(--neoblue);color:var(--neoblue);font-size:9px;margin:4px 4px 4px 0;text-transform:uppercase;letter-spacing:.05em;font-family:'Press Start 2P',monospace}
 
-.equipment-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.equipment-slot{background:var(--panel2);padding:12px;border:2px solid #3a3a58;box-shadow:3px 3px 0 #000}
-.equipment-slot b{display:block;font-size:9px;color:var(--muted);text-transform:uppercase;margin-bottom:6px;font-family:'Press Start 2P',monospace}
-.equipment-slot .item-name{color:var(--gold);font-size:16px;font-weight:600}
-
-.ability-list{display:grid;gap:8px}
-.ability-item{background:var(--panel2);padding:10px;border-left:4px solid var(--neoblue);border-top:2px solid #3a3a58;border-bottom:2px solid #3a3a58;border-right:2px solid #3a3a58}
-.requirement-check{display:flex;gap:8px;align-items:center;font-size:13px;margin:5px 0}
-.requirement-check.met{color:var(--neogreen)}
-.requirement-check.unmet{color:var(--muted)}
-.unlock-badge{display:inline-block;padding:3px 8px;background:rgba(255,102,0,.2);border:2px solid var(--neoorange);color:var(--neoorange);font-size:8px;margin-left:5px;font-family:'Press Start 2P',monospace}
-
-.story-text{background:var(--panel2);padding:14px;border-left:5px solid var(--neoblue);border-top:2px solid #3a3a58;border-bottom:2px solid #3a3a58;border-right:2px solid #3a3a58;line-height:1.5;margin:10px 0;font-size:17px;box-shadow:inset 0 0 10px #000}
+.equipment-grid{display:grid;grid-template-columns:1fr;gap:10px}
+.equipment-slot{background:var(--panel2);padding:12px;border:2px solid #3a3a58;box-shadow:3px 3px 0 #000;display:flex;justify-content:space-between;align-items:center}
+.equipment-slot b{display:block;font-size:9px;color:var(--muted);text-transform:uppercase;margin-bottom:4px;font-family:'Press Start 2P',monospace}
+.equipment-slot .item-name{color:var(--gold);font-size:17px;font-weight:600}
 
 .damage-number{color:var(--neored);font-weight:bold;text-shadow:2px 2px 0 #000}
-.heal-number{color:var(--neogreen);font-weight:bold;text-shadow:2px 2px 0 #000}
 .crit-hit{animation:pulse 0.3s;color:var(--neoorange);font-weight:bold;text-shadow:2px 2px 0 #000}
 @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
 
-.skill-point-display{background:rgba(208,0,255,.15);border:2px solid var(--neopurple);padding:8px 12px;display:inline-block;color:var(--neopurple);font-weight:600;font-size:12px;margin:8px 0;text-transform:uppercase;font-family:'Press Start 2P',monospace}
 .danger-stars{color:var(--neoorange);letter-spacing:2px}
 .reward-box{background:rgba(255,204,0,.08);border:2px solid var(--gold);padding:12px;margin:10px 0;box-shadow:inset 0 0 10px #000}
-
 .arcade-flicker{animation:flicker 2.4s infinite}
 @keyframes flicker{0%,96%,100%{opacity:1}97%{opacity:.6}98%{opacity:1}99%{opacity:.7}}
 .insert-coin{font-family:'Press Start 2P',monospace;font-size:11px;color:var(--gold);text-align:center;letter-spacing:.08em;text-shadow:2px 2px 0 #880000}
@@ -155,7 +134,7 @@ input:focus{border-color:var(--gold)}
 <body>
 <div class="app">
 <div class="top">
-  <div class="neogeo-badge"><span>NEO-GEO MVS</span> <span>MAX 330 MEGA • PRO-GEAR SPEC</span></div>
+  <div class="neogeo-badge"><span>NEO-GEO MVS</span> <span>PRO-GEAR SPEC • BALANCED 2.0</span></div>
   <div class="title arcade-flicker">🔴 ROJO'S ADVENTURE</div>
   <div class="subtitle" id="topSub"></div>
 </div>
@@ -165,62 +144,13 @@ input:focus{border-color:var(--gold)}
 <div id="modal"></div>
 
 <script>
-// ===== CORE DATA =====
-const STORY_CHAPTERS = {
-  intro: {
-    title: "The Call to Adventure",
-    text: "The kingdom trembles under the rise of shadowy forces. Ancient seals are breaking, creatures of legend walk the earth, and the world's great civilizations face collapse. Rojo, a nobody from a quiet village, answers a call posted at the Adventurers Guild — and steps toward a destiny far larger than one adventurer alone."
-  },
-  chapter1: {
-    title: "The Forgotten Ruins",
-    text: "Your investigation leads to forgotten ruins beneath the kingdom. Something ancient stirs—an evil older than memory itself. The first seal weakens."
-  },
-  chapter2: {
-    title: "The Shadow Spreads",
-    text: "Dark influence creeps across the land. Settlements fall silent. You must rally allies and strengthen your resolve. The next seal awaits in dangerous territory."
-  },
-  chapter3: {
-    title: "The Final Stand",
-    text: "All threads converge. The source of the corruption reveals itself—an entity of pure void. This is the moment that will define your legend."
-  }
-};
-
+// ===== GAME DATA =====
 const WORLDS = {
-  safe: {
-    name: "Guildtown",
-    emoji: "🏛️",
-    desc: "The safe haven. Guild halls, markets, and training grounds.",
-    danger: 0,
-    quests: ["F", "E"]
-  },
-  forest: {
-    name: "Whisperwood Forest",
-    emoji: "🌲",
-    desc: "Ancient woods haunted by spirits and beasts. Fog rolls thick.",
-    danger: 2,
-    quests: ["E", "D"]
-  },
-  ruins: {
-    name: "Forgotten Catacombs",
-    emoji: "🏚️",
-    desc: "Crumbling ruins from a lost civilization. Echoes of power remain.",
-    danger: 4,
-    quests: ["D", "C"]
-  },
-  volcanic: {
-    name: "Scorched Crater",
-    emoji: "🌋",
-    desc: "A volcanic wasteland where elemental forces clash.",
-    danger: 5,
-    quests: ["C", "B"]
-  },
-  void: {
-    name: "The Void's Edge",
-    emoji: "🌀",
-    desc: "Reality fractures here. An overwhelming darkness looms.",
-    danger: 7,
-    quests: ["A", "S"]
-  }
+  safe: { name: "Guildtown Outskirts", emoji: "🏛️", danger: 1, quests: ["F", "E"] },
+  forest: { name: "Whisperwood Forest", emoji: "🌲", danger: 2, quests: ["E", "D"] },
+  ruins: { name: "Forgotten Catacombs", emoji: "🏚️", danger: 4, quests: ["D", "C"] },
+  volcanic: { name: "Scorched Crater", emoji: "🌋", danger: 6, quests: ["C", "B"] },
+  void: { name: "The Void's Edge", emoji: "🌀", danger: 8, quests: ["A", "S"] }
 };
 
 const AVATARS = [
@@ -234,1280 +164,836 @@ const AVATARS = [
   {emoji: "🌙", name: "Shadow Walker", class: "Rogue"}
 ];
 
+// Guilds: Removed strict classification limits
 const GUILDS = {
   Vanguard: {
-    desc: "Soldiers of light. Master of defense and tactical combat.",
+    desc: "Order of the Shield. Focuses on defensive resilience and steady tactics.",
     icon: "🛡️",
-    req: {level: 5, class: "Defender", rp: 50},
-    bonus: {def: 3, maxHp: 15}
+    req: {level: 4, rp: 30},
+    bonus: {def: 6, maxHp: 35}
   },
   Inferno: {
-    desc: "Masters of raw power. Unleash devastating physical attacks.",
+    desc: "Frontline shock troops. Focuses on raw physical combat impact.",
     icon: "🔥",
-    req: {level: 8, class: "Fighter", rp: 100},
-    bonus: {atk: 5, crit: 4}
+    req: {level: 6, rp: 60},
+    bonus: {atk: 8, crit: 5}
   },
   Arcane: {
-    desc: "Keepers of magic. Control the forces of mysticism.",
+    desc: "Keepers of elemental magic and mystic power.",
     icon: "✨",
-    req: {level: 8, class: "Caster", rp: 100},
-    bonus: {mag: 6, spd: 2}
+    req: {level: 6, rp: 60},
+    bonus: {mag: 10, spd: 3}
   },
   Shadow: {
-    desc: "Masters of cunning. Strike unseen, move unstopped.",
+    desc: "Assassins and scouts who strike critical vulnerabilities.",
     icon: "🌑",
-    req: {level: 10, class: "Rogue", rp: 150},
-    bonus: {crit: 7, spd: 3}
+    req: {level: 8, rp: 100},
+    bonus: {crit: 12, spd: 5}
   },
   Balanced: {
-    desc: "Generalists who excel in all disciplines.",
+    desc: "Universal guild open to all recruits.",
     icon: "⚖️",
-    req: {level: 3, class: "Adventurer", rp: 0},
-    bonus: {atk: 1, def: 1, mag: 1}
+    req: {level: 1, rp: 0},
+    bonus: {atk: 2, def: 2, mag: 2}
   }
 };
 
 const RANKS = ["F", "E", "D", "C", "B", "A", "S"];
 
 const CLASSES = {
-  Adventurer: {
-    desc: "Balanced beginner profession.",
-    hp: 105, atk: 12, def: 8, spd: 10, mag: 5, crit: 5
-  },
-  Caster: {
-    desc: "Magic-focused; strong damage and utility.",
-    hp: 80, atk: 6, def: 5, spd: 9, mag: 16, crit: 8
-  },
-  Defender: {
-    desc: "Heavy armor and high damage resistance.",
-    hp: 145, atk: 10, def: 16, spd: 6, mag: 3, crit: 3
-  },
-  Fighter: {
-    desc: "High physical damage and determination.",
-    hp: 110, atk: 17, def: 8, spd: 9, mag: 3, crit: 7
-  },
-  Rogue: {
-    desc: "Speed and precision. Strike critical weak points.",
-    hp: 90, atk: 14, def: 6, spd: 14, mag: 4, crit: 12
-  }
+  Adventurer: { desc: "Versatile rounded combatant.", hp: 110, atk: 12, def: 8, spd: 10, mag: 6, crit: 5 },
+  Caster:     { desc: "High magical attack power.", hp: 85,  atk: 6,  def: 5, spd: 9, mag: 18, crit: 8 },
+  Defender:   { desc: "Heavy armor specialist.",   hp: 160, atk: 10, def: 18, spd: 5, mag: 3, crit: 3 },
+  Fighter:    { desc: "High physical damage.",     hp: 125, atk: 18, def: 9, spd: 8, mag: 3, crit: 7 },
+  Rogue:      { desc: "Speed & critical hits.",    hp: 95,  atk: 15, def: 6, spd: 15, mag: 4, crit: 15 }
 };
 
 const ITEM_DATABASE = {
   // WEAPONS
-  "Rusty Blade": {slot: "weapon", atk: 2, rarity: "Common", world: "safe", desc: "A weathered blade from a fallen adventurer."},
-  "Iron Longsword": {slot: "weapon", atk: 6, rarity: "Magic", world: "forest", desc: "Well-crafted iron steel, reliable and true."},
-  "Flameburst Sword": {slot: "weapon", atk: 11, rarity: "Rare", world: "forest", desc: "Engulfed in ethereal flames. Radiates heat."},
-  "Rune-Carved Blade": {slot: "weapon", atk: 15, rarity: "Epic", world: "ruins", desc: "Ancient runes pulse with arcane energy."},
-  "Twilight Edge": {slot: "weapon", atk: 18, rarity: "Epic", world: "volcanic", desc: "Forged in shadow and starlight. Cuts through dimensions."},
-  "Void Reaper": {slot: "weapon", atk: 25, rarity: "Epic", world: "void", desc: "An impossible weapon from beyond. Existence bends near it."},
-  
+  "Bronze Shortsword": { id: "w1", slot: "weapon", atk: 5, rarity: "Common", price: 60, desc: "A sturdy starter blade." },
+  "Steel Claymore":    { id: "w2", slot: "weapon", atk: 12, rarity: "Magic", price: 180, desc: "Heavy blade that slices through heavy armor." },
+  "Flameburst Edge":   { id: "w3", slot: "weapon", atk: 22, rarity: "Rare", price: 420, desc: "Imbued with searing fire. Deals massive damage." },
+  "Rune Voidbreaker":  { id: "w4", slot: "weapon", atk: 35, rarity: "Epic", price: 900, desc: "Legendary weapon forged from stellar alloy." },
+
   // ARMOR
-  "Cloth Garb": {slot: "armor", def: 2, rarity: "Common", world: "safe", desc: "Simple traveler's clothing for protection."},
-  "Leather Armor": {slot: "armor", def: 5, rarity: "Magic", world: "forest", desc: "Supple leather, flexible and protective."},
-  "Steel Plate": {slot: "armor", def: 10, rarity: "Rare", world: "forest", desc: "Heavy steel plating. Leaves room for mobility."},
-  "Dragon Scale Mail": {slot: "armor", def: 14, rarity: "Epic", world: "ruins", desc: "Scales shed by ancient dragons. Incredibly resilient."},
-  "Magus Vestment": {slot: "armor", def: 7, mag: 4, rarity: "Epic", world: "volcanic", desc: "Reinforced with magical wards. Amplifies spellcasting."},
-  "Void Plate": {slot: "armor", def: 18, rarity: "Epic", world: "void", desc: "Absorbs damage from other dimensions."},
-  
+  "Padded Leather":    { id: "a1", slot: "armor", def: 4, rarity: "Common", price: 50, desc: "Basic protective gear against simple blows." },
+  "Chainmail Cuirass": { id: "a2", slot: "armor", def: 10, rarity: "Magic", price: 160, desc: "Interlocking steel rings. Solid defense." },
+  "Dragonscale Mail":  { id: "a3", slot: "armor", def: 20, rarity: "Rare", price: 400, desc: "Forged from hardened dragon scales." },
+  "Aegis Plate":       { id: "a4", slot: "armor", def: 32, rarity: "Epic", price: 850, desc: "Impenetrable sacred armor." },
+
   // ACCESSORIES
-  "Copper Ring": {slot: "accessory", crit: 2, rarity: "Common", world: "safe", desc: "A simple ring for minor luck."},
-  "Emerald Pendant": {slot: "accessory", crit: 5, rarity: "Magic", world: "forest", desc: "A green gem that catches the light."},
-  "Rings of Power": {slot: "accessory", crit: 8, atk: 2, rarity: "Rare", world: "forest", desc: "Three interlocked rings of augmented strength."},
-  "Crown of Authority": {slot: "accessory", crit: 12, def: 3, rarity: "Epic", world: "ruins", desc: "Ancient crown of a forgotten king. Commands respect."},
-  "Starlight Talisman": {slot: "accessory", crit: 10, mag: 3, rarity: "Epic", world: "volcanic", desc: "Trapped starlight. Guides your aim perfectly."},
-  "Void Sigil": {slot: "accessory", crit: 15, rarity: "Epic", world: "void", desc: "A seal of impossible geometry. Guarantees precision."}
+  "Iron Ring":         { id: "acc1", slot: "accessory", crit: 4, rarity: "Common", price: 40, desc: "+4% Critical Chance." },
+  "Amulet of Might":   { id: "acc2", slot: "accessory", crit: 8, atk: 4, rarity: "Magic", price: 150, desc: "+8% Crit & +4 ATK." },
+  "Shadow Cloak":      { id: "acc3", slot: "accessory", crit: 14, def: 5, rarity: "Rare", price: 380, desc: "+14% Crit & +5 DEF." },
+  "Relic of the Void": { id: "acc4", slot: "accessory", crit: 20, atk: 10, rarity: "Epic", price: 800, desc: "+20% Crit & +10 ATK." }
 };
 
-const ABILITIES = {
-  Adventurer: [
-    {name: "Quick Strike", level: 1, desc: "A fast, precise attack. Gain +15% damage."},
-    {name: "Rally", level: 3, desc: "Boost morale. Restore 20 HP to self."},
-    {name: "Second Wind", level: 5, desc: "Push past limits. Gain +2 all stats next turn."}
-  ],
-  Caster: [
-    {name: "Arcane Missile", level: 1, desc: "Launch magical projectiles. +20% magic damage."},
-    {name: "Mana Shield", level: 3, desc: "Create magical barrier. Reduce damage by 25%."},
-    {name: "Spell Surge", level: 5, desc: "Unleash magical power. Double magic damage next turn."}
-  ],
-  Defender: [
-    {name: "Shield Bash", level: 1, desc: "Defend and counter. Reduce damage by 30%."},
-    {name: "Fortify", level: 3, desc: "Harden your resolve. +3 DEF this turn."},
-    {name: "Last Stand", level: 5, desc: "Immovable object. Take 50% less damage while alive."}
-  ],
-  Fighter: [
-    {name: "Power Attack", level: 1, desc: "Channel pure strength. +30% damage."},
-    {name: "Whirlwind", level: 3, desc: "Spin and strike. Hit twice in one turn."},
-    {name: "Berserk", level: 5, desc: "Lose yourself. +4 ATK but -2 DEF."}
-  ],
-  Rogue: [
-    {name: "Backstab", level: 1, desc: "Strike vital spots. +50% crit chance."},
-    {name: "Shadow Clone", level: 3, desc: "Create illusion. Enemy misses next turn."},
-    {name: "Death Mark", level: 5, desc: "Curse foe. Next hit deals 50% more damage."}
-  ]
+const STORE_CONSUMABLES = {
+  "Health Potion":   { id: "pot_hp", type: "heal", value: 60, price: 35, emoji: "🧪", desc: "Instantly restores 60 HP during quest battles." },
+  "Greater Potion":  { id: "pot_ghp", type: "heal", value: 140, price: 80, emoji: "🍷", desc: "Instantly restores 140 HP in battle." },
+  "Energy Elixir":   { id: "pot_eng", type: "energy", value: 50, price: 40, emoji: "⚡", desc: "Restores 50 Stamina Energy instantly." },
+  "War Tonic":       { id: "pot_buff", type: "buff", value: 10, price: 60, emoji: "🔥", desc: "Increases Attack by +10 for an entire battle." }
 };
 
 const BESTIARY = {
   safe: [
-    {name: "Bandit Scout", hp: 14, atk: 5, def: 2, spd: 9, emoji: "🗡️"},
-    {name: "Rabid Cur", hp: 16, atk: 6, def: 1, spd: 11, emoji: "🐺"},
-    {name: "Rogue Apprentice", hp: 20, atk: 7, def: 3, spd: 8, emoji: "🧙"},
-    {name: "Highway Thug", hp: 22, atk: 8, def: 4, spd: 7, emoji: "👊"}
+    { name: "Slinking Goblin", hp: 35, atk: 10, def: 3, spd: 8, emoji: "👺" },
+    { name: "Feral Hound", hp: 42, atk: 12, def: 2, spd: 11, emoji: "🐕" },
+    { name: "Outlaw Highwayman", hp: 55, atk: 14, def: 5, spd: 9, emoji: "🗡️" }
   ],
   forest: [
-    {name: "Forest Goblin", hp: 18, atk: 6, def: 2, spd: 8, emoji: "👹"},
-    {name: "Shadow Sprite", hp: 15, atk: 8, def: 1, spd: 12, emoji: "👻"},
-    {name: "Thornback Boar", hp: 28, atk: 9, def: 5, spd: 7, emoji: "🐗"},
-    {name: "Whispering Wraith", hp: 24, atk: 11, def: 3, spd: 10, emoji: "🌫️"},
-    {name: "Bog Witch", hp: 26, atk: 12, def: 4, spd: 9, emoji: "🧙‍♀️"}
+    { name: "Vinesplitter Treant", hp: 75, atk: 18, def: 8, spd: 6, emoji: "🪵" },
+    { name: "Shadow Lurker", hp: 65, atk: 22, def: 5, spd: 14, emoji: "🕷️" },
+    { name: "Dire Timberwolf", hp: 85, atk: 20, def: 9, spd: 11, emoji: "🐺" }
   ],
   ruins: [
-    {name: "Stone Golem", hp: 40, atk: 10, def: 12, spd: 3, emoji: "🗿"},
-    {name: "Crypt Lurker", hp: 34, atk: 12, def: 8, spd: 6, emoji: "💀"},
-    {name: "Rune Sentinel", hp: 38, atk: 13, def: 10, spd: 5, emoji: "🛡️"},
-    {name: "Hollow Priest", hp: 32, atk: 14, def: 6, spd: 8, emoji: "🕯️"},
-    {name: "Tomb Wight", hp: 36, atk: 13, def: 9, spd: 6, emoji: "☠️"}
+    { name: "Rune Guardian", hp: 120, atk: 26, def: 16, spd: 6, emoji: "🗿" },
+    { name: "Crypt Phantom", hp: 100, atk: 30, def: 10, spd: 12, emoji: "👻" },
+    { name: "Skeletal Dreadknight", hp: 140, atk: 28, def: 18, spd: 8, emoji: "💀" }
   ],
   volcanic: [
-    {name: "Fire Elemental", hp: 35, atk: 14, def: 5, spd: 9, emoji: "🔥"},
-    {name: "Magma Hound", hp: 42, atk: 15, def: 7, spd: 10, emoji: "🌋"},
-    {name: "Corrupted Knight", hp: 50, atk: 16, def: 10, spd: 7, emoji: "⚔️"},
-    {name: "Cinder Drake", hp: 48, atk: 17, def: 8, spd: 11, emoji: "🐲"},
-    {name: "Ashborn Colossus", hp: 55, atk: 15, def: 13, spd: 4, emoji: "🗻"}
+    { name: "Magma Drake", hp: 180, atk: 36, def: 18, spd: 10, emoji: "🌋" },
+    { name: "Flame Behemoth", hp: 220, atk: 38, def: 22, spd: 6, emoji: "👹" },
+    { name: "Obsidian Golem", hp: 250, atk: 32, def: 28, spd: 5, emoji: "🧱" }
   ],
   void: [
-    {name: "Void Shade", hp: 60, atk: 18, def: 8, spd: 11, emoji: "🌑"},
-    {name: "Reality Render", hp: 65, atk: 19, def: 9, spd: 12, emoji: "🌀"},
-    {name: "Ancient Dragon", hp: 80, atk: 22, def: 14, spd: 10, emoji: "🐉"},
-    {name: "Nullborn Wraith", hp: 62, atk: 20, def: 7, spd: 13, emoji: "👁️"}
+    { name: "Void Stalker", hp: 280, atk: 45, def: 22, spd: 15, emoji: "🌀" },
+    { name: "Eldritch Fiend", hp: 320, atk: 50, def: 25, spd: 12, emoji: "👁️" },
+    { name: "Abyssal Horror", hp: 380, atk: 55, def: 30, spd: 10, emoji: "👾" }
   ]
 };
 
 const BOSSES = {
-  safe: {name: "Grimjaw the Bandit King", hp: 45, atk: 12, def: 6, spd: 8, emoji: "👑"},
-  forest: {name: "The Hollow Stag", hp: 70, atk: 15, def: 8, spd: 9, emoji: "🦌"},
-  ruins: {name: "Karrak, the Bound King", hp: 95, atk: 17, def: 13, spd: 6, emoji: "👑"},
-  volcanic: {name: "Ignivax the Cinder Lord", hp: 120, atk: 20, def: 12, spd: 8, emoji: "🐲"},
-  void: {name: "The Nameless One", hp: 160, atk: 24, def: 14, spd: 11, emoji: "🌌"}
+  safe: { name: "Gorgar the Marauder", hp: 110, atk: 20, def: 8, emoji: "🧌" },
+  forest: { name: "Ancient Moss-Beast", hp: 180, atk: 28, def: 14, emoji: "🦣" },
+  ruins: { name: "Arch-Lich Varek", hp: 270, atk: 38, def: 20, emoji: "👑" },
+  volcanic: { name: "Ignis Dragon Lord", hp: 380, atk: 48, def: 28, emoji: "🐲" },
+  void: { name: "Xal'Kroth, Void Sovereign", hp: 550, atk: 65, def: 35, emoji: "🌌" }
 };
 
+// QUEST NARRATIVE EVENTS
+const QUEST_STORIES = [
+  {
+    title: "Ambush at the Broken Bridge",
+    desc: "While marching along the supply road, hostile scouts drop from the tree line! Arrow fire echoes through the ravine.",
+    event: "You hear rustling in the dense foliage. A trap is sprung!"
+  },
+  {
+    title: "Distress Signal from the Outpost",
+    desc: "A wounded scout warns of hostile reinforcements gathering ahead. You must push through enemy lines before they consolidate.",
+    event: "The forward camp is under siege. Multi-wave hostiles spotted!"
+  },
+  {
+    title: "Relic Hunt in the Catacombs",
+    desc: "Ancient inscriptions warn: 'He who enters shall face the gauntlet of guardians.' Steel yourself for continuous combat.",
+    event: "An ominous horn blows! Multiple waves of enemies approach!"
+  }
+];
+
+// STATE MANAGEMENT
 let S = {
   name: "Rojo",
   level: 1,
   xp: 0,
-  hp: 100,
+  hp: 110,
   energy: 100,
-  gold: 50,
+  gold: 80,
   rp: 0,
   rank: 0,
   profession: "Adventurer",
   guild: "Balanced",
   avatar: AVATARS[0],
-  stats: {str: 8, dex: 8, vit: 8, int: 8, luck: 8},
-  equipment: {weapon: 0, armor: 0, accessory: 0},
-  gear: [],
-  inventory: [],
-  profLevel: 1,
-  profXp: 0,
-  mastery: 0,
-  skillPoints: 0,
-  unlockedAbilities: {},
+  stats: { str: 10, dex: 10, vit: 10, int: 10 },
+  equipment: { weapon: null, armor: null, accessory: null },
+  gear: [], // Storage array for weapons/armor/accessories
+  consumables: { pot_hp: 2, pot_eng: 1 }, // Impactful usable items
   log: [],
-  quests: 0,
   wins: 0,
   losses: 0,
-  worldUnlocked: ["safe"],
-  storyProgress: 0,
-  achievements: [],
-  chapter: 0
+  worldUnlocked: ["safe"]
 };
 
-function fresh(){
+function freshState(){
   return {
     name: "Rojo",
     level: 1,
     xp: 0,
-    hp: 100,
+    hp: 110,
     energy: 100,
-    gold: 50,
+    gold: 80,
     rp: 0,
     rank: 0,
     profession: "Adventurer",
     guild: "Balanced",
     avatar: AVATARS[0],
-    stats: {str: 8, dex: 8, vit: 8, int: 8, luck: 8},
-    equipment: {weapon: 0, armor: 0, accessory: 0},
+    stats: { str: 10, dex: 10, vit: 10, int: 10 },
+    equipment: { weapon: null, armor: null, accessory: null },
     gear: [],
-    inventory: [],
-    profLevel: 1,
-    profXp: 0,
-    mastery: 0,
-    skillPoints: 0,
-    unlockedAbilities: {},
+    consumables: { pot_hp: 2, pot_eng: 1 },
     log: [],
-    quests: 0,
     wins: 0,
     losses: 0,
-    worldUnlocked: ["safe"],
-    storyProgress: 0,
-    achievements: [],
-    chapter: 0
+    worldUnlocked: ["safe"]
   };
 }
 
-function save(){localStorage.setItem("tag-save",JSON.stringify(S))}
-function load(){const x=localStorage.getItem("tag-save");if(x)S=JSON.parse(x)}
+function save(){ localStorage.setItem("rojo_mvs_save", JSON.stringify(S)); }
+function load(){
+  const x = localStorage.getItem("rojo_mvs_save");
+  if(x){
+    try {
+      S = JSON.parse(x);
+      if(!S.consumables) S.consumables = { pot_hp: 1 };
+      if(!S.equipment) S.equipment = { weapon: null, armor: null, accessory: null };
+    } catch(e){}
+  }
+}
 load();
 
-function addLog(t){S.log.unshift(t);S.log=S.log.slice(0,20)}
-function xpNeed(){return 100+S.level*50}
+function addLog(t){ S.log.unshift(t); S.log = S.log.slice(0, 20); }
+function xpNeed(){ return 120 + S.level * 60; }
 
 function gainXP(n){
   S.xp += n;
   while(S.xp >= xpNeed()){
     S.xp -= xpNeed();
     S.level++;
-    S.stats.str += 1;
-    S.stats.dex += 1;
-    S.stats.vit += 1;
-    S.stats.int += 1;
-    S.stats.luck += 1;
-    S.skillPoints += 1;
-    addLog(`<span class="good">⭐ LEVEL UP! You are now Level ${S.level}!</span>`);
-    checkAbilityUnlocks();
-  }
-}
-
-function checkAbilityUnlocks(){
-  const prof = S.profession;
-  if(ABILITIES[prof]){
-    ABILITIES[prof].forEach(a => {
-      if(S.level >= a.level && !S.unlockedAbilities[a.name]){
-        S.unlockedAbilities[a.name] = true;
-        addLog(`<span class="purple">✨ New Ability Unlocked: ${a.name}</span>`);
-      }
-    });
+    S.stats.str += 2;
+    S.stats.dex += 2;
+    S.stats.vit += 2;
+    S.stats.int += 2;
+    addLog(`<span class="good">⭐ LEVEL UP! Reached Level ${S.level}! Attributes increased.</span>`);
   }
 }
 
 function rankUp(){
   while(S.rp >= 100){
     S.rp -= 100;
-    if(S.rank < RANKS.length-1){
+    if(S.rank < RANKS.length - 1){
       S.rank++;
-      addLog(`<span class="gold">🏅 Guild Promotion! You are now ${RANKS[S.rank]}-Rank.</span>`);
-      if(S.rank >= 2 && !S.worldUnlocked.includes("forest")){
-        S.worldUnlocked.push("forest");
-        addLog(`<span class="blue">🗺️ New World Unlocked: Whisperwood Forest</span>`);
+      addLog(`<span class="gold">🏅 Guild Rank Promotion! Promoted to ${RANKS[S.rank]}-Rank!</span>`);
+      const rankWorlds = ["safe", "forest", "ruins", "volcanic", "void"];
+      if(S.rank < rankWorlds.length && !S.worldUnlocked.includes(rankWorlds[S.rank])){
+        S.worldUnlocked.push(rankWorlds[S.rank]);
+        addLog(`<span class="blue">🗺️ New Map Unlocked: ${WORLDS[rankWorlds[S.rank]].name}</span>`);
       }
-      if(S.rank >= 4 && !S.worldUnlocked.includes("ruins")){
-        S.worldUnlocked.push("ruins");
-        addLog(`<span class="blue">🗺️ New World Unlocked: Forgotten Catacombs</span>`);
-      }
-      if(S.rank >= 5 && !S.worldUnlocked.includes("volcanic")){
-        S.worldUnlocked.push("volcanic");
-        addLog(`<span class="blue">🗺️ New World Unlocked: Scorched Crater</span>`);
-      }
-      if(S.rank >= 6 && !S.worldUnlocked.includes("void")){
-        S.worldUnlocked.push("void");
-        addLog(`<span class="blue">🗺️ The Void's Edge has opened...</span>`);
-      }
-    } else {
-      addLog(`<span class="gold">👑 You have reached legendary status!</span>`);
-      break;
-    }
+    } else { break; }
   }
 }
 
+// ===== EQUIPMENT MANAGEMENT =====
+function equipItemFromGear(gearIndex){
+  const item = S.gear[gearIndex];
+  if(!item) return;
+
+  const slot = item.slot;
+  // If slot is occupied, unequip existing item first
+  if(S.equipment[slot]){
+    unequipSlot(slot, false);
+  }
+
+  S.equipment[slot] = item;
+  S.gear.splice(gearIndex, 1);
+  addLog(`<span class="good">Equipped ${item.name} (${slot.toUpperCase()}).</span>`);
+  save();
+  render();
+}
+
+function unequipSlot(slot, triggerRender = true){
+  const item = S.equipment[slot];
+  if(!item) return;
+
+  S.gear.push(item);
+  S.equipment[slot] = null;
+  addLog(`<span class="muted">Unequipped ${item.name}. Returned to Inventory.</span>`);
+  save();
+  if(triggerRender) render();
+}
+
+// ===== STORE & PURCHASING =====
+function buyStoreItem(itemKey, isConsumable = false){
+  if(isConsumable){
+    const item = STORE_CONSUMABLES[itemKey];
+    if(!item) return;
+    if(S.gold < item.price){
+      addLog(`<span class="bad">❌ Not enough Gold! Costs ${item.price}g.</span>`);
+      render();
+      return;
+    }
+    S.gold -= item.price;
+    S.consumables[item.id] = (S.consumables[item.id] || 0) + 1;
+    addLog(`<span class="good">🛒 Purchased ${item.emoji} ${itemKey}. Saved to Inventory.</span>`);
+  } else {
+    const item = ITEM_DATABASE[itemKey];
+    if(!item) return;
+    if(S.gold < item.price){
+      addLog(`<span class="bad">❌ Not enough Gold! Costs ${item.price}g.</span>`);
+      render();
+      return;
+    }
+    S.gold -= item.price;
+    S.gear.push({ ...item, name: itemKey });
+    addLog(`<span class="good">🛒 Purchased ${itemKey}. Saved to Character Sheet!</span>`);
+  }
+  save();
+  render();
+}
+
+// ===== QUEST GENERATION =====
 let globalQuests = [];
 
-const QUEST_EVENTS = [
-  {
-    trigger: "safe",
-    title: "A Beggar's Warning",
-    desc: "An old beggar near the guild gate grabs your sleeve. \"The roads aren't safe anymore,\" he mutters.",
-    choices: [
-      {text: "Give him a coin", effect: "defense", desc: "+15% defense — his blessing lingers"},
-      {text: "Ask what he's seen", effect: "power", desc: "+15% damage — his warning sharpens your focus"},
-      {text: "Brush past him", effect: "evasion", desc: "Improved dodge chance"}
-    ]
-  },
-  {
-    trigger: "safe",
-    title: "Guild Board Rumor",
-    desc: "A notice pinned to the board mentions strange lights near your destination.",
-    choices: [
-      {text: "Investigate the rumor", effect: "mana", desc: "+20% magic damage this battle"},
-      {text: "Ignore it and move on", effect: "none", desc: "No effect, but no risk either"},
-      {text: "Prepare defensively", effect: "defense", desc: "+15% defense next battle"}
-    ]
-  },
-  {
-    trigger: "forest",
-    title: "Mysterious Stranger",
-    desc: "A cloaked figure blocks your path and offers cryptic advice.",
-    choices: [
-      {text: "Attack them", effect: "power", desc: "+15% damage next battle"},
-      {text: "Listen carefully", effect: "defense", desc: "+15% defense next battle"},
-      {text: "Try to sneak past", effect: "evasion", desc: "Improved dodge chance"}
-    ]
-  },
-  {
-    trigger: "forest",
-    title: "The Weeping Tree",
-    desc: "You find a massive tree, its bark carved with old runes and wet with sap that glows faintly.",
-    choices: [
-      {text: "Touch the runes", effect: "mana", desc: "+20% magic damage this battle"},
-      {text: "Harvest the sap", effect: "power", desc: "+15% damage next battle"},
-      {text: "Leave it undisturbed", effect: "defense", desc: "+15% defense next battle"}
-    ]
-  },
-  {
-    trigger: "forest",
-    title: "Snared Traveler",
-    desc: "A fellow adventurer is caught in a beast trap, pleading for help.",
-    choices: [
-      {text: "Free them quickly", effect: "evasion", desc: "Improved dodge chance — they cover your escape"},
-      {text: "Study the trap first", effect: "defense", desc: "+15% defense next battle"},
-      {text: "Offer a healing herb", effect: "power", desc: "+15% damage — their gratitude fuels you"}
-    ]
-  },
-  {
-    trigger: "ruins",
-    title: "Ancient Seal",
-    desc: "An ancient magical seal pulses with energy. Disturb it?",
-    choices: [
-      {text: "Activate it", effect: "power", desc: "Receive magical blessing: +20% spell power"},
-      {text: "Leave it alone", effect: "none", desc: "No effect"},
-      {text: "Try to absorb it", effect: "mana", desc: "+50% magic damage this battle"}
-    ]
-  },
-  {
-    trigger: "ruins",
-    title: "The Sealed Sarcophagus",
-    desc: "A stone coffin sits undisturbed for centuries. Something within still hums with power.",
-    choices: [
-      {text: "Pry it open", effect: "power", desc: "+15% damage — risk versus reward"},
-      {text: "Seal it further", effect: "defense", desc: "+15% defense next battle"},
-      {text: "Study the inscriptions", effect: "mana", desc: "+20% magic damage this battle"}
-    ]
-  },
-  {
-    trigger: "ruins",
-    title: "Echoes in the Dark",
-    desc: "Voices of the long-dead whisper directions through the crumbling halls.",
-    choices: [
-      {text: "Follow the whispers", effect: "evasion", desc: "Improved dodge chance"},
-      {text: "Cover your ears and push on", effect: "defense", desc: "+15% defense next battle"},
-      {text: "Answer them", effect: "mana", desc: "+20% magic damage this battle"}
-    ]
-  },
-  {
-    trigger: "volcanic",
-    title: "Lava Crossing",
-    desc: "Your path is blocked by molten lava. How do you cross?",
-    choices: [
-      {text: "Sprint across", effect: "evasion", desc: "+25% dodge next turn"},
-      {text: "Find another route", effect: "none", desc: "Safe but time consuming"},
-      {text: "Phase through", effect: "defense", desc: "+10% defense for this battle"}
-    ]
-  },
-  {
-    trigger: "volcanic",
-    title: "The Cinder Forge",
-    desc: "An abandoned forge still burns with unnatural fire, tools scattered around it.",
-    choices: [
-      {text: "Reforge your weapon", effect: "power", desc: "+15% damage next battle"},
-      {text: "Temper your armor", effect: "defense", desc: "+15% defense next battle"},
-      {text: "Draw on the flame's power", effect: "mana", desc: "+20% magic damage this battle"}
-    ]
-  },
-  {
-    trigger: "void",
-    title: "Reality Fracture",
-    desc: "The fabric of reality tears before you.",
-    choices: [
-      {text: "Embrace the void", effect: "power", desc: "+50% critical damage"},
-      {text: "Resist it", effect: "defense", desc: "+20% defense"},
-      {text: "Become one with it", effect: "mana", desc: "Double magic damage"}
-    ]
-  },
-  {
-    trigger: "void",
-    title: "A Familiar Voice",
-    desc: "Something in the void speaks with a voice you almost recognize, urging you forward.",
-    choices: [
-      {text: "Trust the voice", effect: "power", desc: "+20% damage this battle"},
-      {text: "Doubt it and stay guarded", effect: "defense", desc: "+20% defense this battle"},
-      {text: "Let it guide your magic", effect: "mana", desc: "Double magic damage"}
-    ]
-  }
-];
-
-function pickQuestEvent(world){
-  const matches = QUEST_EVENTS.filter(e => e.trigger === world);
-  if(matches.length === 0) return null;
-  return matches[Math.floor(Math.random() * matches.length)];
-}
-
-function generateQuestsForWorld(world){
-  const w = WORLDS[world];
-  const questTypes = ["Patrol", "Beast Hunt", "Salvage", "Purge", "Expedition"];
-  const questCount = Math.floor(Math.random()*2) + 3;
-  const quests = [];
+function generateQuestsForWorld(worldKey){
+  const w = WORLDS[worldKey];
+  const list = [];
+  const count = 3;
   
-  for(let i = 0; i < questCount; i++){
-    const type = questTypes[Math.floor(Math.random()*questTypes.length)];
-    const rankIdx = w.quests[Math.floor(Math.random()*w.quests.length)];
-    const isBoss = Math.random() < 0.2;
-    const danger = RANKS.indexOf(rankIdx) + 1;
-    
-    const questEvent = (isBoss || Math.random() < 0.65) ? pickQuestEvent(world) : null;
-    
-    quests.push({
-      id: `${world}-${i}-${Date.now()}-${Math.floor(Math.random()*99999)}`,
-      name: `[${rankIdx}] ${type}: ${w.name}`,
-      desc: `Venture into ${w.name}. ${isBoss?"Battle a legendary foe!":"Seek what lies within."}`,
-      world: world,
-      rank: rankIdx,
-      danger: danger + (isBoss?2:0),
-      reward: (50 + RANKS.indexOf(rankIdx)*60) * (isBoss?2:1),
-      xp: (30 + RANKS.indexOf(rankIdx)*40) * (isBoss?1.5:1),
-      turns: 8 + RANKS.indexOf(rankIdx)*2,
-      boss: isBoss,
-      loot: generateLootPool(world, rankIdx, isBoss),
-      event: questEvent,
-      eventChoice: null
+  for(let i = 0; i < count; i++){
+    const isBoss = (i === count - 1);
+    const storyTemplate = QUEST_STORIES[Math.floor(Math.random() * QUEST_STORIES.length)];
+    const energyCost = 15 + w.danger * 3;
+
+    list.push({
+      id: `q-${worldKey}-${i}-${Date.now()}`,
+      name: isBoss ? `[BOSS] ${w.name} Siege` : `${storyTemplate.title}`,
+      desc: isBoss ? `Defeat the supreme ruler of ${w.name} and its elite guard!` : storyTemplate.desc,
+      eventText: storyTemplate.event,
+      world: worldKey,
+      rank: w.quests[Math.floor(Math.random()*w.quests.length)],
+      energyCost: energyCost,
+      danger: w.danger + (isBoss ? 2 : 0),
+      waves: isBoss ? 3 : 2, // MULTI-WAVE QUEST COMBAT
+      reward: (45 + w.danger * 35) * (isBoss ? 2.2 : 1),
+      xp: (40 + w.danger * 30) * (isBoss ? 2 : 1),
+      boss: isBoss
     });
   }
-  return quests;
+  return list;
 }
 
-function generateLootPool(world, rank, isBoss){
-  const pool = [];
-  const rarities = isBoss ? ["Rare", "Epic", "Epic"] : ["Common", "Magic", "Rare"];
-  const rarity = rarities[Math.floor(Math.random()*rarities.length)];
-  
-  Object.entries(ITEM_DATABASE).forEach(([name, item]) => {
-    if(item.world === world && item.rarity === rarity){
-      pool.push(name);
-    }
-  });
-  
-  return pool.length > 0 ? pool : Object.keys(ITEM_DATABASE).slice(0, 3);
-}
+// ===== COMBAT & QUEST ENGINE =====
+let combatState = {
+  active: false,
+  quest: null,
+  currentWave: 1,
+  totalWaves: 1,
+  player: {},
+  enemy: {},
+  tempAtkBuff: 0,
+  log: []
+};
 
-function selectQuestFromBoard(questId){
-  const quest = globalQuests.find(q => q.id === questId);
-  if(!quest){
-    addLog("<span class='bad'>That contract has expired. Refresh the board.</span>");
-    render();
-    return;
-  }
-  chooseQuest(quest);
-}
+function selectQuestFromBoard(id){
+  const quest = globalQuests.find(q => q.id === id);
+  if(!quest) return;
 
-function chooseQuest(quest){
-  const maxRank = S.rank + 1;
-  const risky = RANKS.indexOf(quest.rank) > maxRank;
-  const lowEnergy = S.energy <= 0;
-  
   modal(`
-    <h2>${quest.name}</h2>
+    <h2>📜 CONTRACT: ${quest.name}</h2>
     <p class="muted">${quest.desc}</p>
     <div class="world-visual">
       <div style="font-size:36px">${WORLDS[quest.world].emoji}</div>
-      <div style="font-size:14px;color:var(--neoblue);margin-top:5px;font-family:'Press Start 2P',monospace">${WORLDS[quest.world].name}</div>
+      <div style="font-size:13px;color:var(--neoblue);margin-top:4px;font-family:'Press Start 2P',monospace">${WORLDS[quest.world].name}</div>
     </div>
+    
     <div class="reward-box">
-      <div style="display:flex;justify-content:space-around">
+      <div style="display:flex;justify-content:space-around;text-align:center">
         <div><span class="muted small">Reward</span><br><b class="gold">${Math.round(quest.reward)}g</b></div>
-        <div><span class="muted small">Experience</span><br><b class="blue">${Math.round(quest.xp)} XP</b></div>
-        <div><span class="muted small">Danger</span><br><b class="danger-stars">${"⭐".repeat(quest.danger)}</b></div>
+        <div><span class="muted small">XP</span><br><b class="blue">${Math.round(quest.xp)} XP</b></div>
+        <div><span class="muted small">Waves</span><br><b class="purple">${quest.waves} Enemy Waves</b></div>
+        <div><span class="muted small">Energy Cost</span><br><b class="${S.energy >= quest.energyCost ? 'good':'bad'}">⚡ ${quest.energyCost}</b></div>
       </div>
     </div>
-    ${risky ? `<p class="bad small">⚠️ This contract is above your current guild rank — expect a tougher fight, but no rule stops you from trying.</p>` : ""}
-    ${lowEnergy ? `<p class="bad small">⚠️ You're out of energy. You can still go, but consider resting at the inn first.</p>` : ""}
-    <button class="primary" onclick="startQuestById('${quest.id}')">Accept Contract</button><br><br>
+    
+    ${S.energy < quest.energyCost 
+      ? `<div style="background:#33000d;border:2px solid var(--neored);padding:10px;margin:10px 0;text-align:center">
+           <b class="bad">⚠️ EXHAUSTED: You do NOT have enough Stamina Energy (${S.energy}/${quest.energyCost})! Rest at the Guild Inn before embarking.</b>
+         </div>
+         <button class="primary" disabled>⚡ NOT ENOUGH ENERGY</button>`
+      : `<button class="primary" onclick="startQuestById('${quest.id}')">⚔️ DEPLOY ON QUEST (Cost: ${quest.energyCost} Energy)</button>`
+    }
+    <br><br>
     <button class="secondary" onclick="closeModal()">Cancel</button>
   `);
 }
 
-let combatState = {
-  active: false,
-  quest: null,
-  player: {},
-  enemy: {},
-  turn: 0,
-  log: [],
-  defenderStance: false,
-  defenderCooldown: 0,
-  eventBonus: {}
-};
-
-function showQuestEvent(quest){
-  if(!quest || !quest.event) {
-    initiateCombat(quest);
-    return;
-  }
-  
-  const event = quest.event;
-  const choices = event.choices || [];
-  
-  if(choices.length === 0) {
-    initiateCombat(quest);
-    return;
-  }
-  
-  modal(`
-    <h2>⚠️ ${event.title}</h2>
-    <p class="story-text">${event.desc}</p>
-    <div style="display:grid;gap:10px;margin-top:15px">
-      ${choices.map((choice, idx) => `
-        <button class="primary" onclick="chooseQuestEvent('${quest.id}', ${idx})">
-          <b>${choice.text}</b>
-          <div class="muted small" style="margin-top:4px">${choice.desc}</div>
-        </button>
-      `).join("")}
-    </div>
-  `);
-}
-
-function chooseQuestEvent(questId, choiceIdx){
+function startQuestById(id){
   closeModal();
-  let quest = globalQuests.find(q => q.id === questId);
-  if(!quest || !quest.event || !quest.event.choices) return addLog("Event data not found.");
-  
-  const choice = quest.event.choices[choiceIdx];
-  if(!choice) return addLog("Choice not found.");
-  
-  quest.eventChoice = choice;
-  
-  combatState.eventBonus = {
-    effect: choice.effect || "none"
-  };
-  
-  addLog(`<span class="blue">You chose: ${choice.text}</span>`);
-  initiateCombat(quest);
-}
+  const quest = globalQuests.find(q => q.id === id);
+  if(!quest) return;
 
-function startQuestById(questId){
-  closeModal();
-  let quest = globalQuests.find(q => q.id === questId);
-  if(!quest) return addLog("Quest not found.");
-  
-  if(quest.event && !quest.eventChoice){
-    showQuestEvent(quest);
-  } else {
-    initiateCombat(quest);
-  }
-}
-
-function initiateCombat(quest){
-  if(!quest){
-    closeModal();
-    addLog("<span class='bad'>Quest data missing. Try again from the board.</span>");
+  // STRICT ENERGY REQUIREMENT CHECK
+  if(S.energy < quest.energyCost){
+    addLog(`<span class="bad">❌ Quest Failed to start: You are out of energy (${S.energy}/${quest.energyCost}). Rest at the Inn!</span>`);
     render();
     return;
   }
-  
-  S.energy = Math.max(0, S.energy - Math.min(20, S.energy));
-  
+
+  // Deduct Energy
+  S.energy -= quest.energyCost;
+  save();
+
+  initiateMultiWaveCombat(quest);
+}
+
+function initiateMultiWaveCombat(quest){
   const c = CLASSES[S.profession];
-  const guildBonus = GUILDS[S.guild].bonus;
+  const gBonus = GUILDS[S.guild].bonus;
   
-  const maxHp = c.hp + S.level*8 + (S.equipment.armor||0)*8 + (guildBonus.maxHp||0);
-  
-  const worldPool = BESTIARY[quest.world] || BESTIARY.forest;
-  const baseEnemy = quest.boss
-    ? (BOSSES[quest.world] || BOSSES.forest)
-    : worldPool[Math.floor(Math.random() * worldPool.length)];
-  
+  // Calculate total stats from Stats + Gear + Guild
+  const wAtk = S.equipment.weapon ? S.equipment.weapon.atk : 0;
+  const aDef = S.equipment.armor ? S.equipment.armor.def : 0;
+  const accCrit = S.equipment.accessory ? S.equipment.accessory.crit : 0;
+  const accAtk = S.equipment.accessory && S.equipment.accessory.atk ? S.equipment.accessory.atk : 0;
+
+  const maxHp = c.hp + S.level * 12 + (gBonus.maxHp || 0) + S.stats.vit * 3;
+  const totalAtk = c.atk + S.level * 2.5 + wAtk + accAtk + (gBonus.atk || 0) + S.stats.str * 0.8;
+  const totalDef = c.def + S.level * 1.5 + aDef + (gBonus.def || 0);
+  const totalCrit = c.crit + accCrit + (gBonus.crit || 0) + S.stats.dex * 0.3;
+
   combatState = {
     active: true,
     quest: quest,
+    currentWave: 1,
+    totalWaves: quest.waves,
+    tempAtkBuff: 0,
     player: {
-      name: S.name,
       hp: maxHp,
       maxHp: maxHp,
-      atk: c.atk + S.level*1.7 + (S.equipment.weapon||0)*2 + (guildBonus.atk||0),
-      def: c.def + (S.equipment.armor||0)*2 + (guildBonus.def||0),
-      spd: c.spd + S.stats.dex/5,
-      mag: c.mag + S.level + (guildBonus.mag||0),
-      crit: c.crit + (S.equipment.accessory||0) + S.stats.luck/10
+      atk: totalAtk,
+      def: totalDef,
+      crit: totalCrit,
+      mag: c.mag + S.level * 2 + (gBonus.mag || 0)
     },
-    enemy: {
-      ...baseEnemy,
-      hp: baseEnemy.hp + S.rank*12 + Math.max(0, quest.danger-1)*4
-    },
-    turn: 0,
-    log: [],
-    defenderStance: false,
-    defenderCooldown: 0,
-    eventBonus: combatState.eventBonus || {}
+    enemy: {},
+    log: []
   };
+
+  combatState.log.push(`<b>📖 ${quest.name}</b>`);
+  combatState.log.push(`<span class="muted">${quest.eventText}</span>`);
   
-  combatState.enemy.maxHp = combatState.enemy.hp;
-  combatState.enemy.atk = combatState.enemy.atk + S.rank * 1.5;
-  
-  combatState.log.push(`<b>⚔️ BATTLE START!</b>`);
-  combatState.log.push(`Target: <b>${combatState.enemy.emoji} ${combatState.enemy.name}</b>`);
-  combatState.log.push(`---`);
-  
-  renderCombatTurn();
+  spawnWaveEnemy();
+  renderCombatUI();
 }
 
-function renderCombatTurn(){
+function spawnWaveEnemy(){
+  const q = combatState.quest;
+  const isFinalBoss = (combatState.currentWave === combatState.totalWaves && q.boss);
+  
+  let baseEnemy;
+  if(isFinalBoss){
+    baseEnemy = BOSSES[q.world] || BOSSES.safe;
+  } else {
+    const pool = BESTIARY[q.world] || BESTIARY.safe;
+    baseEnemy = pool[Math.floor(Math.random() * pool.length)];
+  }
+
+  // REBALANCED ENEMY STATS (HARDER COMBAT)
+  const waveMultiplier = 1 + (combatState.currentWave - 1) * 0.3;
+  combatState.enemy = {
+    name: baseEnemy.name,
+    emoji: baseEnemy.emoji,
+    maxHp: Math.round(baseEnemy.hp * waveMultiplier),
+    hp: Math.round(baseEnemy.hp * waveMultiplier),
+    atk: Math.round(baseEnemy.atk * waveMultiplier),
+    def: Math.round(baseEnemy.def * waveMultiplier)
+  };
+
+  combatState.log.push(`<span class="bad">⚠️ WAVE ${combatState.currentWave}/${combatState.totalWaves}: ${combatState.enemy.emoji} ${combatState.enemy.name} steps forward!</span>`);
+}
+
+function useCombatConsumable(itemKey){
+  const p = combatState.player;
+  if(itemKey === 'pot_hp' || itemKey === 'pot_ghp'){
+    const count = S.consumables[itemKey] || 0;
+    if(count <= 0) return;
+    const item = Object.values(STORE_CONSUMABLES).find(x => x.id === itemKey);
+    S.consumables[itemKey]--;
+    const healVal = item.value;
+    p.hp = Math.min(p.maxHp, p.hp + healVal);
+    combatState.log.push(`<span class="good">🧪 Used ${itemKey}! Restored ${healVal} HP. (${Math.round(p.hp)}/${p.maxHp} HP)</span>`);
+  } else if(itemKey === 'pot_buff'){
+    const count = S.consumables['pot_buff'] || 0;
+    if(count <= 0) return;
+    S.consumables['pot_buff']--;
+    combatState.tempAtkBuff += 10;
+    combatState.log.push(`<span class="gold">🔥 Used War Tonic! Attack increased by +10 for this battle!</span>`);
+  }
+  save();
+  renderCombatUI();
+}
+
+function renderCombatUI(){
   const p = combatState.player;
   const e = combatState.enemy;
-  
-  let actionsHtml = `
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
-      <button class="primary" onclick="playerAction('attack')">⚔️ Attack</button>
-      <button class="primary" onclick="playerAction('defend')">🛡️ Defend</button>
-  `;
-  
-  if(S.profession === "Caster"){
-    actionsHtml += `<button class="primary" onclick="playerAction('spell')">✨ Cast Spell</button>`;
-  } else if(S.profession === "Rogue"){
-    actionsHtml += `<button class="primary" onclick="playerAction('backstab')">🗡️ Backstab</button>`;
-  } else if(S.profession === "Fighter"){
-    actionsHtml += `<button class="primary" onclick="playerAction('power')">💪 Power Attack</button>`;
-  } else if(S.profession === "Defender"){
-    actionsHtml += `<button class="primary" onclick="playerAction('fortify')">🏰 Fortify</button>`;
-  } else {
-    actionsHtml += `<button class="primary" onclick="playerAction('ability')">✨ Ability</button>`;
-  }
-  
-  actionsHtml += `
-      <button class="secondary" onclick="playerAction('flee')" style="grid-column:1/-1">🏃 Attempt Escape</button>
+
+  // Consumables buttons in battle
+  const potHpCount = S.consumables['pot_hp'] || 0;
+  const potGhpCount = S.consumables['pot_ghp'] || 0;
+  const potBuffCount = S.consumables['pot_buff'] || 0;
+
+  const html = `
+    <div style="background:#000;padding:6px 10px;border:2px solid var(--gold);display:flex;justify-content:space-between;margin-bottom:10px;font-family:'Press Start 2P',monospace;font-size:9px">
+      <span>WAVE ${combatState.currentWave} / ${combatState.totalWaves}</span>
+      <span class="gold">${combatState.quest.name}</span>
     </div>
-  `;
-  
-  const combatHtml = `
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:15px">
-      <div style="border:3px solid var(--neoblue);padding:12px;background:#0d1420;box-shadow:3px 3px 0 #000">
-        <div style="color:var(--neoblue);font-weight:bold;margin-bottom:6px;font-family:'Press Start 2P',monospace;font-size:10px">${p.name}</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+      <div style="border:3px solid var(--neoblue);padding:10px;background:#0d1420">
+        <div style="color:var(--neoblue);font-family:'Press Start 2P',monospace;font-size:9px;margin-bottom:4px">${S.name} (${S.profession})</div>
         <div class="bar"><div class="fill" style="width:${Math.max(0, p.hp/p.maxHp*100)}%;background:var(--good)"></div></div>
-        <div class="small muted" style="margin-top:4px">${Math.max(0, Math.round(p.hp))}/${p.maxHp} HP</div>
-        <div style="margin-top:8px;font-size:13px">
-          <div>⚔️ ATK: ${Math.round(p.atk)}</div>
-          <div>🛡️ DEF: ${Math.round(p.def)}</div>
-          <div>⚡ CRIT: ${Math.round(p.crit)}%</div>
-        </div>
+        <div class="small muted" style="margin-top:3px">${Math.max(0, Math.round(p.hp))}/${p.maxHp} HP</div>
+        <div class="small" style="margin-top:4px">⚔️ ATK: ${Math.round(p.atk + combatState.tempAtkBuff)} | 🛡️ DEF: ${Math.round(p.def)}</div>
       </div>
       
-      <div style="border:3px solid var(--neored);padding:12px;background:#200d12;box-shadow:3px 3px 0 #000">
-        <div style="color:var(--neored);font-weight:bold;margin-bottom:6px;font-family:'Press Start 2P',monospace;font-size:10px">${e.name} ${e.emoji}</div>
+      <div style="border:3px solid var(--neored);padding:10px;background:#200d12">
+        <div style="color:var(--neored);font-family:'Press Start 2P',monospace;font-size:9px;margin-bottom:4px">${e.emoji} ${e.name}</div>
         <div class="bar"><div class="fill" style="width:${Math.max(0, e.hp/e.maxHp*100)}%;background:var(--bad)"></div></div>
-        <div class="small muted" style="margin-top:4px">${Math.max(0, Math.round(e.hp))}/${e.maxHp} HP</div>
-        <div style="margin-top:8px;font-size:13px">
-          <div>⚔️ ATK: ${Math.round(e.atk)}</div>
-          <div>🛡️ DEF: ${Math.round(e.def)}</div>
-        </div>
+        <div class="small muted" style="margin-top:3px">${Math.max(0, Math.round(e.hp))}/${e.maxHp} HP</div>
+        <div class="small" style="margin-top:4px">⚔️ ATK: ${Math.round(e.atk)} | 🛡️ DEF: ${Math.round(e.def)}</div>
       </div>
     </div>
-    
-    <div class="log" style="max-height:180px;margin-bottom:12px">
-      ${combatState.log.map(x => `<div>${x}</div>`).join("")}
+
+    <div class="log" style="margin-bottom:10px">${combatState.log.map(x => `<div>${x}</div>`).join("")}</div>
+
+    <!-- COMBAT ACTIONS -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button class="primary" onclick="execCombatTurn('attack')">⚔️ Strike Attack</button>
+      <button class="primary" onclick="execCombatTurn('skill')">✨ Special Skill</button>
+      <button class="secondary" onclick="execCombatTurn('guard')">🛡️ Guard Stance</button>
+      <button class="secondary" onclick="execCombatTurn('flee')">🏃 Flee Quest</button>
     </div>
-    
-    <div style="background:var(--panel2);padding:10px;border:2px solid #3a3a58;margin-bottom:10px">
-      <b>TURN ${combatState.turn} • SELECT ACTION</b>
+
+    <!-- USABLE INVENTORY CONSUMABLES IN QUEST -->
+    <div style="margin-top:10px;padding:8px;background:var(--panel2);border:2px solid #3a3a58">
+      <div class="small muted" style="font-family:'Press Start 2P',monospace;font-size:8px;margin-bottom:6px">🧪 BACTERIA/POTIONS (CLICK TO USE):</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="secondary" onclick="useCombatConsumable('pot_hp')" ${potHpCount>0?'':'disabled'}>🧪 HP Potion (${potHpCount})</button>
+        <button class="secondary" onclick="useCombatConsumable('pot_ghp')" ${potGhpCount>0?'':'disabled'}>🍷 Greater HP (${potGhpCount})</button>
+        <button class="secondary" onclick="useCombatConsumable('pot_buff')" ${potBuffCount>0?'':'disabled'}>🔥 War Tonic (${potBuffCount})</button>
+      </div>
     </div>
-    
-    ${actionsHtml}
   `;
-  
-  modal(`<h2>⚔️ FIGHT!</h2>${combatHtml}`);
+
+  modal(`<h2>⚔️ QUEST ENCOUNTER</h2>${html}`);
 }
 
-function playerAction(action){
+function execCombatTurn(action){
   const p = combatState.player;
   const e = combatState.enemy;
-  combatState.turn++;
-  
+  const effectiveAtk = p.atk + combatState.tempAtkBuff;
+
   let playerDamage = 0;
-  let playerLog = "";
-  
-  let damageMultiplier = 1;
-  let defenseBonus = 0;
-  
-  if(combatState.eventBonus && combatState.eventBonus.effect){
-    if(combatState.eventBonus.effect === 'power') damageMultiplier = 1.15;
-    if(combatState.eventBonus.effect === 'mana') damageMultiplier = 1.20;
-    if(combatState.eventBonus.effect === 'defense') defenseBonus = 0.15;
-  }
-  
-  switch(action){
-    case 'attack':
-      const crit = Math.random() * 100 < p.crit;
-      playerDamage = Math.max(1, Math.round((p.atk - e.def * 0.55) * damageMultiplier));
-      if(crit) playerDamage = Math.round(playerDamage * 1.5);
-      e.hp -= playerDamage;
-      playerLog = crit 
-        ? `<span class="crit-hit">💥 CRITICAL HIT!</span> You strike for <span class="damage-number">${playerDamage}</span>!`
-        : `You attack! <span class="damage-number">${playerDamage}</span> damage!`;
-      break;
-      
-    case 'defend':
-      combatState.defenderStance = true;
-      combatState.defenderCooldown = 1;
-      playerLog = `🛡️ You take a defensive stance! Defense +50% next turn.`;
-      break;
-      
-    case 'spell':
-      if(S.profession !== "Caster"){
-        playerLog = `You cannot cast spells!`;
-        break;
-      }
-      playerDamage = Math.max(1, Math.round((p.mag * 1.8 - e.def * 0.3) * damageMultiplier));
-      e.hp -= playerDamage;
-      playerLog = `✨ You cast a powerful spell! <span class="damage-number">${playerDamage}</span> arcane damage!`;
-      break;
-      
-    case 'backstab':
-      if(S.profession !== "Rogue"){
-        playerLog = `Only rogues can backstab!`;
-        break;
-      }
-      playerDamage = Math.max(1, Math.round((p.atk * 1.8 - e.def * 0.4) * damageMultiplier));
-      const backstabCrit = Math.random() * 100 < (p.crit + 20);
-      if(backstabCrit) playerDamage = Math.round(playerDamage * 1.3);
-      e.hp -= playerDamage;
-      playerLog = backstabCrit
-        ? `<span class="crit-hit">💀 LETHAL STRIKE!</span> <span class="damage-number">${playerDamage}</span> critical damage!`
-        : `🗡️ You backstab for <span class="damage-number">${playerDamage}</span>!`;
-      break;
-      
-    case 'power':
-      if(S.profession !== "Fighter"){
-        playerLog = `That requires Fighter training!`;
-        break;
-      }
-      playerDamage = Math.max(1, Math.round((p.atk * 2.2 - e.def * 0.3) * damageMultiplier));
-      e.hp -= playerDamage;
-      playerLog = `💪 You unleash a devastating power attack! <span class="damage-number">${playerDamage}</span> damage!`;
-      break;
-      
-    case 'fortify':
-      if(S.profession !== "Defender"){
-        playerLog = `That's a Defender ability!`;
-        break;
-      }
-      combatState.defenderStance = true;
-      combatState.defenderCooldown = 2;
-      playerLog = `🏰 You fortify! Defense +75% for 2 turns!`;
-      break;
-      
-    case 'ability':
-      playerDamage = Math.max(1, Math.round((p.atk * 1.4 - e.def * 0.4) * damageMultiplier));
-      e.hp -= playerDamage;
-      playerLog = `⚡ You use your ability! <span class="damage-number">${playerDamage}</span> damage!`;
-      break;
-      
-    case 'flee':
-      const fleeChance = Math.random() * 100 < (S.profession === "Rogue" ? 60 : 30);
-      if(fleeChance){
-        playerLog = `🏃 You successfully escape from battle!`;
-        combatState.log.push(playerLog);
-        S.energy = Math.min(100, S.energy + 10);
-        addLog("You fled from combat and recovered some energy.");
-        save();
-        closeModal();
-        render();
-        return;
-      } else {
-        playerLog = `🏃 Your escape attempt failed!`;
-      }
-      break;
-  }
-  
-  combatState.log.push(playerLog);
-  
-  if(e.hp <= 0){
-    finalizeCombat(true);
-    return;
-  }
-  
-  const enemyFleeChance = Math.random() * 100 < 5;
-  if(enemyFleeChance){
-    combatState.log.push(`${e.name} flees in terror!`);
-    finalizeCombat(true);
-    return;
-  }
-  
-  let defenseReduction = 1 - defenseBonus;
-  let enemyDamage = Math.max(1, Math.round((e.atk - (p.def * 0.45) * (1 + defenseBonus)) * defenseReduction));
-  let dodged = Math.random() * 100 < (S.profession === "Rogue" ? 20 : 8);
-  
-  if(combatState.defenderStance && combatState.defenderCooldown > 0){
-    enemyDamage = Math.round(enemyDamage * 0.25);
-    combatState.defenderCooldown--;
-    combatState.log.push(`🛡️ ${e.name}'s attack is deflected! <span class="damage-number">${enemyDamage}</span> damage`);
-  } else if(dodged){
-    combatState.log.push(`🛡️ You evade ${e.name}'s attack!`);
-  } else {
-    p.hp -= enemyDamage;
-    combatState.log.push(`${e.name} attacks! <span class="damage-number">${enemyDamage}</span> damage to you!`);
-  }
-  
-  combatState.defenderStance = false;
-  
-  if(p.hp <= 0){
-    finalizeCombat(false);
-    return;
-  }
-  
-  renderCombatTurn();
-}
+  let guardActive = false;
 
-function finalizeCombat(won){
-  const quest = combatState.quest;
-  const log = combatState.log;
-  
-  if(won){
-    let bonus = quest.boss ? Math.round(quest.reward*1.8) : quest.reward;
-    S.gold += bonus;
-    gainXP(quest.xp);
-    S.rp += quest.boss ? 28 : 12;
-    S.quests++;
-    S.wins++;
-    S.profXp += Math.round(quest.xp*0.7);
-    S.storyProgress += quest.boss ? 3 : 1;
-    
-    if(S.profXp >= S.profLevel*100 && S.profLevel < 10){
-      S.profXp = 0;
-      S.profLevel++;
-      if(S.profLevel === 10){
-        S.mastery++;
-        addLog(`<span class="gold">🎖️ ${S.profession} MASTERY ACHIEVED!</span>`);
-      } else {
-        addLog(`${S.profession} advanced to profession level ${S.profLevel}.`);
-      }
-    }
-    
-    rankUp();
-    
-    if(quest.loot && quest.loot.length > 0){
-      const lootChance = quest.boss ? 0.95 : 0.50;
-      if(Math.random() < lootChance){
-        const lootItem = quest.loot[Math.floor(Math.random()*quest.loot.length)];
-        S.gear.push({...ITEM_DATABASE[lootItem], name: lootItem});
-        log.push(`<span class="good">💎 LOOT FOUND: ${lootItem}</span>`);
-      }
-    }
-    
-    log.push(`<span class="good">---</span>`);
-    log.push(`<span class="good">✅ VICTORY!</span> Earned <span class="gold">${Math.round(bonus)}g</span>, <span class="blue">${Math.round(quest.xp)} XP</span>`);
-    addLog(`<span class="good">Contract: ${quest.name} completed!</span>`);
-  } else {
-    S.losses++;
-    const defeatXp = Math.round(quest.xp * 0.3);
-    gainXP(defeatXp);
-    log.push(`<span class="bad">---</span>`);
-    log.push(`<span class="bad">❌ YOU WERE DEFEATED</span>`);
-    log.push(`<span class="blue">Earned ${defeatXp} XP from the experience.</span>`);
-    addLog(`<span class="bad">Contract failed... but you learned from it.</span>`);
-  }
-  
-  const idx = globalQuests.findIndex(q => q.id === quest.id);
-  if(idx !== -1) globalQuests.splice(idx, 1);
-  
-  save();
-  combatState.active = false;
-  combatResultModal(quest, log, won);
-}
-
-function combatResultModal(quest, logs, win){
-  modal(`
-    <h2>${win?"⚔️ VICTORY!":"💀 DEFEAT"}</h2>
-    <div class="log" style="max-height:280px">${logs.map(x=>`<div>${x}</div>`).join("")}</div>
-    <br>
-    <button class="primary" onclick="closeModal();render()">Return to Guild</button>
-  `);
-}
-
-function equipGear(i){
-  if(!S.gear[i]) return;
-  let g = S.gear[i];
-  if(g.slot === "weapon") S.equipment.weapon = g.atk;
-  else if(g.slot === "armor") S.equipment.armor = g.def;
-  else if(g.slot === "accessory") S.equipment.accessory = g.crit;
-  
-  S.gear.splice(i, 1);
-  addLog(`Equipped: ${g.name}`);
-  save();
-  render();
-}
-
-function setProf(p){
-  if(S.level < 3){
-    addLog("Professions unlock at Level 3.");
-    return;
-  }
-  S.profession = p;
-  S.profLevel = 1;
-  S.profXp = 0;
-  S.unlockedAbilities = {};
-  checkAbilityUnlocks();
-  addLog(`Profession changed to ${p}.`);
-  save();
-  render();
-}
-
-function checkGuildRequirements(guildName){
-  const req = GUILDS[guildName].req;
-  return S.level >= req.level && S.rp >= req.rp && S.profession === req.class;
-}
-
-function joinGuild(guildName){
-  if(!checkGuildRequirements(guildName)){
-    const req = GUILDS[guildName].req;
-    let unmet = [];
-    if(S.level < req.level) unmet.push(`Level ${req.level}`);
-    if(S.profession !== req.class) unmet.push(`${req.class} class`);
-    if(S.rp < req.rp) unmet.push(`${req.rp} Rank Points`);
-    
-    addLog(`Cannot join ${guildName}. Requires: ${unmet.join(", ")}`);
-    return;
-  }
-  
-  S.guild = guildName;
-  addLog(`<span class="purple">🎖️ Joined the ${guildName} guild!</span>`);
-  save();
-  render();
-}
-
-function modal(x){
-  document.getElementById("modal").innerHTML = `<div class="modal"><div class="modalbox">${x}</div></div>`;
-}
-
-function closeModal(){
-  document.getElementById("modal").innerHTML = "";
-}
-
-function rest(){
-  S.energy = Math.min(100, S.energy + 45);
-  S.gold = Math.max(0, S.gold - 10);
-  addLog("Rested at the guild. Energy restored.");
-  save();
-  render();
-}
-
-function reset(){
-  if(confirm("Reset this save? This cannot be undone.")){
-    S = fresh();
-    save();
+  if(action === 'attack'){
+    const isCrit = Math.random() * 100 < p.crit;
+    const baseDmg = Math.max(4, effectiveAtk - e.def * 0.4);
+    playerDamage = Math.round(isCrit ? baseDmg * 1.6 : baseDmg);
+    e.hp -= playerDamage;
+    combatState.log.push(isCrit 
+      ? `<span class="crit-hit">💥 CRITICAL STRIKE!</span> Dealt <span class="damage-number">${playerDamage}</span> damage!`
+      : `You strike the enemy for <span class="damage-number">${playerDamage}</span> damage.`);
+  } else if(action === 'skill'){
+    playerDamage = Math.round(Math.max(8, effectiveAtk * 1.35 - e.def * 0.25));
+    e.hp -= playerDamage;
+    combatState.log.push(`✨ You channel class technique! Dealt <span class="damage-number">${playerDamage}</span> damage!`);
+  } else if(action === 'guard'){
+    guardActive = true;
+    combatState.log.push(`🛡️ You take up a defensive guard position! (50% damage reduction)`);
+  } else if(action === 'flee'){
+    addLog(`Fled from the quest. Stamina energy spent was lost.`);
+    closeModal();
     render();
+    return;
   }
+
+  // Check if current wave enemy defeated
+  if(e.hp <= 0){
+    combatState.log.push(`<span class="good">🎯 Defeated ${e.name}!</span>`);
+    if(combatState.currentWave < combatState.totalWaves){
+      combatState.currentWave++;
+      spawnWaveEnemy();
+      renderCombatUI();
+      return;
+    } else {
+      // Victory in all waves
+      finishQuestVictory();
+      return;
+    }
+  }
+
+  // Enemy counter-attack (BALANCED - HARDER COMBAT)
+  let enemyDamage = Math.max(3, e.atk - p.def * 0.5);
+  if(guardActive) enemyDamage = Math.round(enemyDamage * 0.5);
+
+  p.hp -= enemyDamage;
+  combatState.log.push(`<span class="bad">💥 ${e.name} attacks back! Took <span class="damage-number">${Math.round(enemyDamage)}</span> damage!</span>`);
+
+  if(p.hp <= 0){
+    finishQuestDefeat();
+    return;
+  }
+
+  renderCombatUI();
 }
 
-function exportSave(){
-  let a = document.createElement("a");
-  a.href = "data:application/json;charset=utf-8," + encodeURIComponent(JSON.stringify(S));
-  a.download = "tag-enhanced-save.json";
-  a.click();
-}
+function finishQuestVictory(){
+  const q = combatState.quest;
+  S.gold += Math.round(q.reward);
+  gainXP(q.xp);
+  S.rp += q.boss ? 30 : 15;
+  S.wins++;
+  rankUp();
 
-function createCharacter(){
-  modal(`
-    <p class="insert-coin arcade-flicker">🔴 NEO-GEO MVS SYSTEM 🔴</p>
-    <h2 style="margin-top:14px;text-align:center">HOW TO PLAY</h2>
-    <p class="muted" style="text-align:center">SELECT YOUR HERO TO START GAME</p>
-    
-    <h4>Select Your Character</h4>
-    <div class="avatar-selector">
-      ${AVATARS.map((a, i) => `
-        <div class="avatar-option" onclick="selectAvatar(${i})">
-          <div class="avatar-emoji">${a.emoji}</div>
-          <div><b>${a.name}</b></div>
-          <div class="muted small">${a.class}</div>
-        </div>
-      `).join("")}
-    </div>
-    
-    <label>Your Hero Name:</label>
-    <input type="text" id="nameInput" placeholder="Enter name" value="${S.name}">
-    
-    <button class="primary" onclick="startGame()">▶ PRESS START BUTTON</button>
-  `);
-  document.querySelector(".avatar-option:first-child").classList.add("selected");
-}
+  // Chance for high tier gear drop
+  if(Math.random() < 0.6){
+    const poolKeys = Object.keys(ITEM_DATABASE);
+    const dropKey = poolKeys[Math.floor(Math.random()*poolKeys.length)];
+    const dropItem = ITEM_DATABASE[dropKey];
+    S.gear.push({ ...dropItem, name: dropKey });
+    addLog(`<span class="purple">🎁 VICTORY DROP: Found ${dropKey}! Added to Inventory.</span>`);
+  }
 
-function selectAvatar(idx){
-  S.avatar = AVATARS[idx];
-  document.querySelectorAll(".avatar-option").forEach((el, i) => {
-    if(i === idx) el.classList.add("selected");
-    else el.classList.remove("selected");
-  });
-}
-
-function startGame(){
-  const name = document.getElementById("nameInput").value || "Rojo";
-  S.name = name;
-  closeModal();
-  addLog(`<span class="good">Welcome, ${S.name}! The Guild awaits.</span>`);
+  addLog(`<span class="good">🏆 QUEST CLEARED: ${q.name}! Won ${Math.round(q.reward)}g & ${Math.round(q.xp)} XP!</span>`);
+  
+  // Remove quest from global board
+  globalQuests = globalQuests.filter(x => x.id !== q.id);
   save();
-  render();
+
+  modal(`
+    <h2>🏆 QUEST VICTORY!</h2>
+    <p>You have successfully survived all <b>${q.waves} enemy waves</b> and fulfilled the guild contract!</p>
+    <div class="reward-box">
+      <div>Gold Earned: <b class="gold">+${Math.round(q.reward)}g</b></div>
+      <div>XP Gained: <b class="blue">+${Math.round(q.xp)} XP</b></div>
+    </div>
+    <button class="primary" onclick="closeModal();render()">Return to Guild Board</button>
+  `);
 }
 
-// ===== RENDER FUNCTIONS =====
+function finishQuestDefeat(){
+  S.losses++;
+  addLog(`<span class="bad">☠️ DEFEATED on Quest: ${combatState.quest.name}. Rest & gear up before trying again.</span>`);
+  save();
 
-function profile(){
-  const maxHp = CLASSES[S.profession].hp + S.level*8;
+  modal(`
+    <h2 class="bad">💀 QUEST FAILED</h2>
+    <p>Your party was overwhelmed by the enemy waves. Strengthen your equipment at the shop or rest at the inn.</p>
+    <button class="primary" onclick="closeModal();render()">Return to Base</button>
+  `);
+}
+
+// ===== INTERFACE RENDERING =====
+
+function renderProfileCard(){
+  const wAtk = S.equipment.weapon ? S.equipment.weapon.atk : 0;
+  const aDef = S.equipment.armor ? S.equipment.armor.def : 0;
+  const accCrit = S.equipment.accessory ? S.equipment.accessory.crit : 0;
+
   return `
     <div class="card hero">
       <div class="row between">
         <div>
-          <div style="font-size:36px;margin-bottom:8px;filter:drop-shadow(3px 3px 0 #000)">${S.avatar.emoji}</div>
+          <div style="font-size:36px;margin-bottom:4px;filter:drop-shadow(3px 3px 0 #000)">${S.avatar.emoji}</div>
           <h2>${S.name}</h2>
           <div class="muted">${RANKS[S.rank]}-Rank • Level ${S.level} • ${S.profession}</div>
-          <div class="location-badge">${WORLDS[S.worldUnlocked[S.worldUnlocked.length-1]].emoji} ${WORLDS[S.worldUnlocked[S.worldUnlocked.length-1]].name}</div>
         </div>
         <div style="text-align:right">
-          <div class="gold" style="font-size:36px">⚔️</div>
-          <div class="muted small">Guild: ${S.guild}</div>
+          <div class="gold" style="font-size:28px">🎖️</div>
+          <div class="muted small">${S.guild} Guild</div>
         </div>
       </div>
     </div>
-    
-    <div class="card">
-      <h3>EXP SCORE</h3>
-      <div class="bar blue"><div class="fill" style="width:${S.xp/xpNeed()*100}%"></div></div>
-      <div class="small muted" style="margin-top:4px">${S.xp}/${xpNeed()} XP</div>
-    </div>
-    
+
+    <!-- STAMINA ENERGY & EXP BARS -->
     <div class="grid">
-      <div class="stat">
-        <span>GOLD</span>
-        <b class="gold">${S.gold}g</b>
+      <div class="card" style="margin:0">
+        <h3>⚡ STAMINA ENERGY</h3>
+        <div class="bar good"><div class="fill" style="width:${S.energy}%"></div></div>
+        <div class="small muted" style="margin-top:4px">${S.energy}/100 Energy (Needed for Quests)</div>
       </div>
-      <div class="stat">
-        <span>RANK PTS</span>
-        <b>${S.rp}/100</b>
-      </div>
-      <div class="stat">
-        <span>ENERGY</span>
-        <b>${S.energy}/100</b>
-      </div>
-      <div class="stat">
-        <span>VICTORIES</span>
-        <b class="good">${S.wins}</b>
+      <div class="card" style="margin:0">
+        <h3>⭐ EXPERIENCE</h3>
+        <div class="bar blue"><div class="fill" style="width:${S.xp/xpNeed()*100}%"></div></div>
+        <div class="small muted" style="margin-top:4px">${S.xp}/${xpNeed()} XP</div>
       </div>
     </div>
-    
+    <br>
+
+    <!-- STATS OVERVIEW -->
+    <div class="grid">
+      <div class="stat"><span>GOLD</span><b class="gold">${S.gold}g</b></div>
+      <div class="stat"><span>RANK PTS</span><b>${S.rp}/100</b></div>
+    </div>
+    <br>
+
+    <!-- EQUIPPED ITEMS DISPLAY WITH UNEQUIP BUTTONS -->
     <div class="card">
-      <h3>⚙️ EQUIPMENT</h3>
+      <h3>🛡️ EQUIPPED GEAR (CLICK TO UNEQUIP)</h3>
       <div class="equipment-grid">
         <div class="equipment-slot">
-          <b>Weapon</b>
-          <div class="item-name">${S.equipment.weapon ? "+"+S.equipment.weapon+" ATK" : "Unarmed"}</div>
-          <div class="muted small">Physical Damage</div>
+          <div>
+            <b>WEAPON SLOT</b>
+            <div class="item-name">${S.equipment.weapon ? S.equipment.weapon.name : "None (Unarmed)"}</div>
+            <div class="muted small">${S.equipment.weapon ? `+${S.equipment.weapon.atk} ATK` : "No bonus"}</div>
+          </div>
+          ${S.equipment.weapon ? `<button class="secondary" onclick="unequipSlot('weapon')">Unequip</button>` : ''}
         </div>
+
         <div class="equipment-slot">
-          <b>Armor</b>
-          <div class="item-name">${S.equipment.armor ? "+"+S.equipment.armor+" DEF" : "No Armor"}</div>
-          <div class="muted small">Physical Defense</div>
+          <div>
+            <b>ARMOR SLOT</b>
+            <div class="item-name">${S.equipment.armor ? S.equipment.armor.name : "None (Cloth)"}</div>
+            <div class="muted small">${S.equipment.armor ? `+${S.equipment.armor.def} DEF` : "No bonus"}</div>
+          </div>
+          ${S.equipment.armor ? `<button class="secondary" onclick="unequipSlot('armor')">Unequip</button>` : ''}
         </div>
+
         <div class="equipment-slot">
-          <b>Accessory</b>
-          <div class="item-name">${S.equipment.accessory ? "+"+S.equipment.accessory+" CRIT" : "None"}</div>
-          <div class="muted small">Critical Chance</div>
+          <div>
+            <b>ACCESSORY SLOT</b>
+            <div class="item-name">${S.equipment.accessory ? S.equipment.accessory.name : "None"}</div>
+            <div class="muted small">${S.equipment.accessory ? `+${S.equipment.accessory.crit}% Crit` : "No bonus"}</div>
+          </div>
+          ${S.equipment.accessory ? `<button class="secondary" onclick="unequipSlot('accessory')">Unequip</button>` : ''}
         </div>
-      </div>
-    </div>
-    
-    <div class="card">
-      <h3>📊 CORE ATTRIBUTES</h3>
-      <div class="grid">
-        <div class="stat"><span>STR (Power)</span><b>${S.stats.str}</b></div>
-        <div class="stat"><span>DEX (Speed)</span><b>${S.stats.dex}</b></div>
-        <div class="stat"><span>VIT (Endurance)</span><b>${S.stats.vit}</b></div>
-        <div class="stat"><span>INT (Magic)</span><b>${S.stats.int}</b></div>
       </div>
     </div>
   `;
 }
 
-function guild(){
-  return profile() + `
+function viewGuild(){
+  return renderProfileCard() + `
     <div class="card featured">
       <div class="row between">
         <div>
-          <h3>Guild Standing</h3>
-          <p class="muted small">Complete contracts to earn Rank Points and advance through the ranks.</p>
+          <h3>Guild Rest & Recovery</h3>
+          <p class="muted small">Resting restores +50 Energy Stamina for 15 Gold.</p>
         </div>
-        <span class="tag gold">${RANKS[S.rank]}-RANK</span>
+        <button class="primary" onclick="restAtInn()" style="width:auto">🛏️ Rest (15g)</button>
       </div>
-      <button class="secondary" onclick="rest()" style="width:100%;margin-top:10px">Rest at Inn (10g)</button>
     </div>
-    
+
     <div class="card">
-      <h3>📜 SYSTEM LOG</h3>
+      <h3>📜 RECENT SYSTEM LOGS</h3>
       <div class="log">${S.log.map(x => `<div>${x}</div>`).join("")}</div>
     </div>
   `;
 }
 
-function refreshQuestBoard(){
-  globalQuests = [];
-  for(let world of S.worldUnlocked){
-    globalQuests = globalQuests.concat(generateQuestsForWorld(world));
+function restAtInn(){
+  if(S.gold < 15){
+    addLog(`<span class="bad">❌ Not enough gold to stay at the Inn!</span>`);
+  } else {
+    S.gold -= 15;
+    S.energy = Math.min(100, S.energy + 50);
+    addLog(`<span class="good">🛏️ Rested at the Inn. Restored +50 Stamina Energy! (${S.energy}/100)</span>`);
+    save();
   }
-  addLog("<span class='blue'>New contracts posted at the board.</span>");
-  save();
   render();
 }
 
-function quests(){
+function viewQuests(){
   if(globalQuests.length === 0){
-    for(let world of S.worldUnlocked){
-      globalQuests = globalQuests.concat(generateQuestsForWorld(world));
+    for(let w of S.worldUnlocked){
+      globalQuests = globalQuests.concat(generateQuestsForWorld(w));
     }
   }
-  
+
   return `
     <div class="card featured">
-      <h2>⚔️ QUEST BOARD</h2>
-      <p class="muted small">Contracts span from Guildtown to the edge of the void. Choose wisely.</p>
+      <h2>⚔️ QUEST CONTRACT BOARD</h2>
+      <p class="muted small">Quests require Stamina Energy. Enemies attack in multi-wave combat!</p>
     </div>
-    
+
     <div class="card">
-      <h3>🗺️ AVAILABLE WORLDS</h3>
-      <div style="display:flex;flex-wrap:wrap;gap:8px">
-        ${S.worldUnlocked.map(w => {
-          const world = WORLDS[w];
-          return `<div class="location-badge">${world.emoji} ${world.name}</div>`;
-        }).join("")}
-      </div>
-      <button class="secondary" onclick="refreshQuestBoard()" style="width:100%;margin-top:10px">🔄 POST NEW CONTRACTS</button>
+      <button class="secondary" onclick="globalQuests=[];render()" style="width:100%">🔄 REFRESH QUEST CONTRACTS</button>
     </div>
-    
-    ${globalQuests.length === 0 ? `<div class="card"><p class="muted">No contracts available. Try posting new ones.</p></div>` : ""}
-    
-    ${globalQuests.map((q, i) => `
-      <div class="quest ${q.boss ? 'boss' : ''}">
+
+    ${globalQuests.map(q => `
+      <div class="quest ${q.boss ? 'boss':''}">
         <div class="row between">
-          <div style="flex:1">
-            <div>
-              <span class="tag">${q.rank}-RANK</span>
-              ${q.boss ? '<span class="tag boss">⭐ BOSS</span>' : ''}
-            </div>
+          <div>
+            <span class="tag">${q.rank}-RANK</span>
+            <span class="tag purple">${q.waves} WAVES</span>
+            ${q.boss ? '<span class="tag boss">⭐ BOSS</span>':''}
             <h3>${q.name}</h3>
           </div>
           <div style="text-align:right">
-            <div class="gold" style="font-weight:bold;font-size:16px">${Math.round(q.reward)}g</div>
-            <div class="muted small">Reward</div>
+            <div class="gold" style="font-size:16px">${Math.round(q.reward)}g</div>
+            <div class="blue small">+${Math.round(q.xp)} XP</div>
           </div>
         </div>
-        <div class="muted small" style="margin:8px 0">${q.desc}</div>
-        <div style="display:flex;gap:15px;margin:10px 0;font-size:13px">
-          <div><span class="danger-stars">${"⭐".repeat(Math.min(5, q.danger))}</span></div>
-          <div><span class="blue">${Math.round(q.xp)} XP</span></div>
+        <p class="muted small" style="margin:6px 0">${q.desc}</p>
+        <div class="row between" style="margin-top:10px">
+          <div class="small ${S.energy >= q.energyCost ? 'good':'bad'}">⚡ Required Energy: ${q.energyCost}</div>
+          <button class="primary" onclick="selectQuestFromBoard('${q.id}')" style="width:auto;padding:8px 14px">View Quest</button>
         </div>
-        <button class="primary" onclick="selectQuestFromBoard('${q.id}')">View Contract</button>
       </div>
     `).join("")}
   `;
 }
 
-function party(){
+function viewShop(){
   return `
     <div class="card featured">
-      <h2>⚗️ PROFESSIONS & ABILITIES</h2>
-      <p class="muted small">Master different classes to unlock unique abilities and combat styles.</p>
+      <h2>🏪 GUILD MARKETPLACE</h2>
+      <p class="muted small">Purchase impactful potions & high-tier weapons. Purchased gear goes directly to your inventory!</p>
     </div>
-    
+
     <div class="card">
-      <h3>Current Profession: ${S.profession}</h3>
-      <div class="bar purple"><div class="fill" style="width:${S.profXp/(S.profLevel*100)*100}%"></div></div>
-      <div class="small muted" style="margin-top:4px">Level ${S.profLevel}/10 • Mastery ${S.mastery}</div>
-      <div class="skill-point-display" style="margin-top:10px">💡 ${S.skillPoints} Skill Points</div>
-    </div>
-    
-    <div class="card">
-      <h3>Available Professions</h3>
-      ${Object.entries(CLASSES).map(([name, cls]) => `
-        <div class="item">
-          <div class="row between">
-            <div style="flex:1">
-              <b>${name}</b>
-              <div class="muted small">${cls.desc}</div>
-            </div>
-            ${S.profession === name 
-              ? '<span class="tag gold">ACTIVE</span>' 
-              : `<button class="secondary" onclick="setProf('${name}')">Choose</button>`}
+      <h3>🧪 POTIONS & CONSUMABLES (USABLE IN QUESTS)</h3>
+      ${Object.entries(STORE_CONSUMABLES).map(([name, item]) => `
+        <div class="item row between">
+          <div>
+            <b>${item.emoji} ${name}</b>
+            <div class="muted small">${item.desc}</div>
+            <div class="gold small">Price: ${item.price}g | Owned: ${S.consumables[item.id] || 0}</div>
           </div>
+          <button class="secondary" onclick="buyStoreItem('${name}', true)">Buy</button>
         </div>
       `).join("")}
     </div>
-    
+
     <div class="card">
-      <h3>✨ Unlocked Abilities</h3>
-      <div class="ability-list">
-        ${ABILITIES[S.profession] ? ABILITIES[S.profession].map(a => {
-          const unlocked = S.unlockedAbilities[a.name];
-          return `
-            <div class="ability-item" style="opacity:${unlocked ? '1' : '0.5'}">
-              <div style="display:flex;justify-content:space-between;align-items:start">
-                <div>
-                  <b>${a.name}</b>
-                  <div class="muted small" style="margin-top:4px">${a.desc}</div>
-                </div>
-                ${unlocked ? '' : `<span class="unlock-badge">Lv ${a.level}</span>`}
-              </div>
-            </div>
-          `;
-        }).join("") : "<div class='muted small'>Choose a profession first.</div>"}
-      </div>
+      <h3>⚔️ WEAPONS & ARMOR SHOP</h3>
+      ${Object.entries(ITEM_DATABASE).map(([name, item]) => `
+        <div class="item row between">
+          <div>
+            <b class="${item.rarity.toLowerCase()}">${name}</b> (${item.rarity} ${item.slot.toUpperCase()})
+            <div class="muted small">${item.desc}</div>
+            <div class="gold small">Price: ${item.price}g | ${item.atk ? '+'+item.atk+' ATK ' : ''}${item.def ? '+'+item.def+' DEF ' : ''}${item.crit ? '+'+item.crit+'% Crit' : ''}</div>
+          </div>
+          <button class="secondary" onclick="buyStoreItem('${name}', false)">Buy</button>
+        </div>
+      `).join("")}
     </div>
   `;
 }
 
-function guilds(){
+function viewGuilds(){
   return `
     <div class="card featured">
-      <h2>🎖️ GUILDS & FACTIONS</h2>
-      <p class="muted small">Join specialized guilds to gain unique bonuses. Meet the requirements to unlock higher tiers.</p>
+      <h2>🎖️ FACTION GUILDS</h2>
+      <p class="muted small">Join any guild once you meet the required Level and Rank Points! (Class restrictions removed)</p>
     </div>
-    
+
     <div class="card">
-      <h3>Your Guild: <span class="purple">${S.guild}</span></h3>
-      <div class="story-text">${GUILDS[S.guild].desc}</div>
-      <div style="background:rgba(208,0,255,.1);padding:10px;border:2px solid var(--neopurple);margin-top:10px">
-        <b style="color:var(--neopurple);font-family:'Press Start 2P',monospace;font-size:9px">Guild Bonuses:</b>
-        <div class="muted small" style="margin-top:6px">
-          ${Object.entries(GUILDS[S.guild].bonus).map(([k,v]) => `+${v} ${k.toUpperCase()}`).join(" • ")}
-        </div>
-      </div>
-    </div>
-    
-    <div class="card">
-      <h3>Available Guilds</h3>
-      ${Object.entries(GUILDS).map(([name, guild]) => {
-        const canJoin = checkGuildRequirements(name);
-        const req = guild.req;
+      ${Object.entries(GUILDS).map(([gName, gData]) => {
+        const canJoin = S.level >= gData.req.level && S.rp >= gData.req.rp;
+        const isCurrent = S.guild === gName;
+
         return `
-          <div class="item" style="border-left:4px solid ${canJoin ? 'var(--gold)' : '#536172'}">
-            <div style="display:flex;justify-content:space-between;align-items:start">
-              <div style="flex:1">
-                <b>${guild.icon} ${name}</b>
-                <div class="muted small">${guild.desc}</div>
-                <div style="margin-top:8px;font-size:12px">
-                  <div class="requirement-check ${S.level >= req.level ? 'met' : 'unmet'}">
-                    ${S.level >= req.level ? '✓' : '✗'} Level ${req.level}
-                  </div>
-                  <div class="requirement-check ${S.profession === req.class ? 'met' : 'unmet'}">
-                    ${S.profession === req.class ? '✓' : '✗'} ${req.class} Class
-                  </div>
-                  <div class="requirement-check ${S.rp >= req.rp ? 'met' : 'unmet'}">
-                    ${S.rp >= req.rp ? '✓' : '✗'} ${req.rp} Rank Points
-                  </div>
-                </div>
+          <div class="item" style="border-left:4px solid ${isCurrent ? 'var(--gold)':'#3a3a58'}">
+            <div class="row between">
+              <div>
+                <b>${gData.icon} ${gName} Guild</b>
+                <div class="muted small">${gData.desc}</div>
+                <div class="small muted" style="margin-top:4px">Requirements: Level ${gData.req.level}, ${gData.req.rp} Rank Points</div>
               </div>
-              ${S.guild === name 
-                ? '<span class="tag gold">MEMBER</span>' 
-                : `<button class="secondary" onclick="joinGuild('${name}')" ${canJoin ? '' : 'disabled'}>Join</button>`}
+              ${isCurrent 
+                ? `<span class="tag gold">CURRENT</span>`
+                : `<button class="secondary" onclick="joinFactionGuild('${gName}')" ${canJoin?'':'disabled'}>Join</button>`
+              }
             </div>
           </div>
         `;
@@ -1516,171 +1002,178 @@ function guilds(){
   `;
 }
 
-function inventory(){
-  return `
-    <div class="card featured">
-      <h2>🎒 INVENTORY & GEAR</h2>
-      <p class="muted small">Items are found during quests. Equip powerful gear to enhance your stats.</p>
-    </div>
-    
-    <div class="grid3">
-      <div class="stat">
-        <span>TOTAL</span>
-        <b>${S.gear.length}</b>
-      </div>
-      <div class="stat">
-        <span>WEAPONS</span>
-        <b>${S.gear.filter(g => g.slot === "weapon").length}</b>
-      </div>
-      <div class="stat">
-        <span>ARMOR</span>
-        <b>${S.gear.filter(g => g.slot === "armor").length}</b>
-      </div>
-    </div>
-    
-    ${S.gear.length === 0 
-      ? `<div class="card"><p class="muted">No items yet. Complete quests to find equipment!</p></div>`
-      : `<div class="card">
-          <h3>📦 Your Gear</h3>
-          ${S.gear.map((g, i) => `
-            <div class="item">
-              <div class="row between">
-                <div style="flex:1">
-                  <b style="color:${
-                    g.rarity === 'Epic' ? 'var(--neopurple)' : 
-                    g.rarity === 'Rare' ? 'var(--neoblue)' : 
-                    g.rarity === 'Magic' ? 'var(--neogreen)' : '#fff'
-                  }">${g.name}</b>
-                  <div class="muted small">${g.rarity} ${g.slot}</div>
-                  <div class="muted small" style="margin-top:4px">
-                    ${g.atk ? '+'+g.atk+' ATK ' : ''}${g.def ? '+'+g.def+' DEF ' : ''}${g.crit ? '+'+g.crit+' CRIT' : ''}
-                  </div>
-                </div>
-                <button class="secondary" onclick="equipGear(${i})">Equip</button>
-              </div>
-            </div>
-          `).join("")}
-        </div>`
-    }
-  `;
+function joinFactionGuild(gName){
+  S.guild = gName;
+  addLog(`<span class="purple">🎖️ Joined the ${gName} Guild!</span>`);
+  save();
+  render();
 }
 
-function story(){
+function viewInventory(){
+  const potHp = S.consumables['pot_hp'] || 0;
+  const potGhp = S.consumables['pot_ghp'] || 0;
+  const potEng = S.consumables['pot_eng'] || 0;
+  const potBuff = S.consumables['pot_buff'] || 0;
+
   return `
     <div class="card featured">
-      <h2>📖 STORY PROGRESS</h2>
-      <p class="muted small">Your actions shape the fate of the realm. Progress through the narrative with each victory.</p>
+      <h2>🎒 CHARACTER INVENTORY</h2>
+      <p class="muted small">All stored equipment and consumables bought from the marketplace or won from quests.</p>
     </div>
-    
+
+    <!-- CONSUMABLES IN INVENTORY -->
     <div class="card">
-      <h3>PROGRESS: ${Math.round(S.storyProgress/10)}%</h3>
-      <div class="bar blue"><div class="fill" style="width:${Math.min(100, S.storyProgress/10)}%"></div></div>
-    </div>
-    
-    <div class="card">
-      <h3>Prologue: ${STORY_CHAPTERS.intro.title}</h3>
-      <div class="story-text">${STORY_CHAPTERS.intro.text}</div>
-    </div>
-    
-    ${S.storyProgress >= 20 ? `
-      <div class="card">
-        <h3>Chapter I: ${STORY_CHAPTERS.chapter1.title}</h3>
-        <div class="story-text">${STORY_CHAPTERS.chapter1.text}</div>
-      </div>
-    ` : `<div class="card"><p class="muted">Locked: ${20 - S.storyProgress} progress points remaining</p></div>`}
-    
-    ${S.storyProgress >= 50 ? `
-      <div class="card">
-        <h3>Chapter II: ${STORY_CHAPTERS.chapter2.title}</h3>
-        <div class="story-text">${STORY_CHAPTERS.chapter2.text}</div>
-      </div>
-    ` : `<div class="card"><p class="muted">Locked: ${Math.max(0, 50 - S.storyProgress)} progress points remaining</p></div>`}
-    
-    ${S.storyProgress >= 80 ? `
-      <div class="card">
-        <h3>Chapter III: ${STORY_CHAPTERS.chapter3.title}</h3>
-        <div class="story-text">${STORY_CHAPTERS.chapter3.text}</div>
-        <div style="text-align:center;margin-top:15px">
-          <div style="font-size:48px;margin:10px 0">🌀</div>
-          <p class="muted">The final battle approaches...</p>
+      <h3>🧪 CONSUMABLES & POTIONS</h3>
+      <div class="grid">
+        <div class="item">
+          <b>🧪 Health Potions</b>: ${potHp}
+          <div class="muted small">Restores 60 HP in battle</div>
+        </div>
+        <div class="item">
+          <b>🍷 Greater Potions</b>: ${potGhp}
+          <div class="muted small">Restores 140 HP in battle</div>
+        </div>
+        <div class="item">
+          <b>⚡ Energy Elixirs</b>: ${potEng}
+          <div class="muted small">Restores +50 Stamina</div>
+          ${potEng > 0 ? `<button class="secondary" onclick="useEnergyElixir()" style="margin-top:4px">Use Now</button>`:''}
+        </div>
+        <div class="item">
+          <b>🔥 War Tonics</b>: ${potBuff}
+          <div class="muted small">+10 ATK in next battle</div>
         </div>
       </div>
-    ` : `<div class="card"><p class="muted">Locked: ${Math.max(0, 80 - S.storyProgress)} progress points remaining</p></div>`}
+    </div>
+
+    <!-- EQUIPMENT STORAGE -->
+    <div class="card">
+      <h3>⚔️ EQUIPMENT STORAGE (${S.gear.length} ITEMS)</h3>
+      ${S.gear.length === 0 
+        ? `<p class="muted">No unequipped items in storage. Buy items at the Shop or earn them in Quests!</p>`
+        : S.gear.map((item, index) => `
+            <div class="item row between">
+              <div>
+                <b>${item.name}</b> (${item.slot.toUpperCase()})
+                <div class="muted small">${item.desc}</div>
+                <div class="gold small">${item.atk ? '+'+item.atk+' ATK ' : ''}${item.def ? '+'+item.def+' DEF ' : ''}${item.crit ? '+'+item.crit+'% Crit' : ''}</div>
+              </div>
+              <button class="primary" onclick="equipItemFromGear(${index})" style="width:auto;padding:6px 12px">Equip</button>
+            </div>
+          `).join("")
+      }
+    </div>
   `;
 }
 
-function settings(){
+function useEnergyElixir(){
+  if((S.consumables['pot_eng']||0) > 0){
+    S.consumables['pot_eng']--;
+    S.energy = Math.min(100, S.energy + 50);
+    addLog(`<span class="good">⚡ Consumed Energy Elixir! Restored +50 Stamina Energy.</span>`);
+    save();
+    render();
+  }
+}
+
+function viewSettings(){
   return `
     <div class="card featured">
       <h2>⚙️ SYSTEM OPTIONS</h2>
-      <p class="muted small">Manage save data and hardware options.</p>
     </div>
-    
     <div class="card">
-      <h3>Save Management</h3>
-      <button class="secondary" onclick="exportSave()" style="width:100%">📥 EXPORT SAVE</button>
-      <p class="muted small" style="margin-top:10px">Your progress is automatically saved to browser memory.</p>
-    </div>
-    
-    <div class="card">
-      <h3>STATISTICS</h3>
-      <div class="grid">
-        <div class="stat"><span>LEVEL</span><b>${S.level}</b></div>
-        <div class="stat"><span>WINS</span><b class="good">${S.wins}</b></div>
-        <div class="stat"><span>LOSSES</span><b class="bad">${S.losses}</b></div>
-        <div class="stat"><span>MASTERIES</span><b>${S.mastery}</b></div>
-      </div>
-    </div>
-    
-    <div class="card">
-      <h3>ABOUT SYSTEM</h3>
-      <p class="muted small">ROJO'S ADVENTURE (NEO-GEO MVS SPEC) is an arcade RPG inspired by SNK NeoGeo classic visuals, rich storyline progression, and tactical combat.</p>
-      <p class="muted small">100% Offline • High performance • Pure arcade action.</p>
-    </div>
-    
-    <div class="card">
-      <button class="secondary" onclick="reset()" style="width:100%;color:var(--neored)">🔄 RESET MEMORY CARD</button>
-      <p class="muted small" style="margin-top:10px">This will clear all game progress permanently.</p>
+      <button class="secondary" onclick="resetGame()" style="width:100%;color:var(--neored)">🔄 RESET MEMORY CARD SAVE DATA</button>
     </div>
   `;
 }
 
+function resetGame(){
+  if(confirm("Reset save data permanently?")){
+    S = freshState();
+    save();
+    render();
+  }
+}
+
+function modal(content){
+  document.getElementById("modal").innerHTML = `<div class="modal"><div class="modalbox">${content}</div></div>`;
+}
+
+function closeModal(){
+  document.getElementById("modal").innerHTML = "";
+}
+
+function createCharacterModal(){
+  modal(`
+    <p class="insert-coin arcade-flicker">🔴 NEO-GEO MVS SYSTEM 🔴</p>
+    <h2 style="text-align:center;margin-top:10px">SELECT YOUR HERO</h2>
+    
+    <div class="avatar-selector">
+      ${AVATARS.map((a, i) => `
+        <div class="avatar-option ${i===0?'selected':''}" onclick="selectAvatar(${i})">
+          <div class="avatar-emoji">${a.emoji}</div>
+          <b>${a.name}</b>
+          <div class="muted small">${a.class}</div>
+        </div>
+      `).join("")}
+    </div>
+    
+    <label>Hero Name:</label>
+    <input type="text" id="nameInput" value="Rojo">
+    
+    <button class="primary" onclick="finishCharacterCreation()">▶ START ADVENTURE</button>
+  `);
+}
+
+function selectAvatar(i){
+  S.avatar = AVATARS[i];
+  S.profession = AVATARS[i].class;
+  document.querySelectorAll(".avatar-option").forEach((el, idx) => {
+    if(i === idx) el.classList.add("selected");
+    else el.classList.remove("selected");
+  });
+}
+
+function finishCharacterCreation(){
+  S.name = document.getElementById("nameInput").value || "Rojo";
+  closeModal();
+  save();
+  render();
+}
+
+// NAVIGATION TAB CONTROLLER
 let tab = "guild";
 
 function render(){
-  const names = {
+  document.getElementById("topSub").textContent = `RANK: ${RANKS[S.rank]} • ${S.gold} GOLD • STAMINA: ${S.energy}/100`;
+
+  const views = {
+    guild: viewGuild,
+    quests: viewQuests,
+    shop: viewShop,
+    guilds: viewGuilds,
+    inventory: viewInventory,
+    settings: viewSettings
+  };
+
+  const navNames = {
     guild: "🏛️ GUILD",
     quests: "⚔️ QUESTS",
-    party: "⚗️ CLASS",
-    guilds: "🎖️ FACTION",
+    shop: "🏪 SHOP",
+    guilds: "🎖️ FACTIONS",
     inventory: "🎒 ITEMS",
-    story: "📖 STORY",
     settings: "⚙️ SYSTEM"
   };
-  
-  document.getElementById("topSub").textContent = `RANK: ${RANKS[S.rank]} • ${S.gold} GOLD • LEVEL ${S.level}`;
-  
-  const views = {
-    guild: guild,
-    quests: quests,
-    party: party,
-    guilds: guilds,
-    inventory: inventory,
-    story: story,
-    settings: settings
-  };
-  
+
   document.getElementById("view").innerHTML = views[tab]();
-  
-  document.getElementById("tabs").innerHTML = Object.keys(names).map(k => 
-    `<button class="${tab===k?"active":""}" onclick="tab='${k}';render()">${names[k]}</button>`
-  ).join("");
+
+  document.getElementById("tabs").innerHTML = Object.keys(navNames).map(k => `
+    <button class="${tab===k?'active':''}" onclick="tab='${k}';render()">${navNames[k]}</button>
+  `).join("");
 }
 
-// Initialize game
-if(!localStorage.getItem("tag-enhanced-started")){
-  createCharacter();
-  localStorage.setItem("tag-enhanced-started", "true");
+// STARTUP
+if(!localStorage.getItem("rojo_mvs_save")){
+  createCharacterModal();
 } else {
   render();
 }
