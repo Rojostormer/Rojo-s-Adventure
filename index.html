@@ -39,7 +39,7 @@ button{cursor:pointer}
 .content{padding:14px}
 
 .tabs{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(0deg,#181824 0%,#09090e 100%);border-top:4px solid var(--gold);display:flex;justify-content:center;z-index:10;box-shadow:0 -6px 20px #000e}
-.tabs button{max-width:95px;flex:1;background:#10101a;border:0;border-right:2px solid #000;color:var(--muted);padding:12px 2px 14px;font-family:'Press Start 2P',monospace;font-size:6.5px;letter-spacing:0;text-transform:uppercase;transition:all .1s}
+.tabs button{max-width:85px;flex:1;background:#10101a;border:0;border-right:2px solid #000;color:var(--muted);padding:12px 2px 14px;font-family:'Press Start 2P',monospace;font-size:6px;letter-spacing:0;text-transform:uppercase;transition:all .1s}
 .tabs button:hover{background:#1a1a2a;color:#fff}
 .tabs button.active{color:var(--gold);background:linear-gradient(180deg,#2a1f0a 0%,#120e05 100%);border-top:3px solid var(--neored);text-shadow:0 0 6px #ffcc00aa}
 
@@ -59,7 +59,6 @@ h2{font-size:13px;color:var(--gold)}h3{font-size:10px;color:var(--neoblue)}h4{fo
 .good{color:var(--neogreen)}
 .bad{color:var(--neored)}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 
 .stat{background:var(--panel2);padding:10px;border:2px solid #3a3a58;box-shadow:3px 3px 0 #000;outline:1px solid #000}
 .stat b{display:block;font-size:22px;font-family:'VT323',monospace;color:var(--text);text-shadow:1px 1px 0 #000}
@@ -68,8 +67,6 @@ h2{font-size:13px;color:var(--gold)}h3{font-size:10px;color:var(--neoblue)}h4{fo
 .bar{height:16px;background:#050508;border:2px solid #000;outline:1px solid var(--panel-border2);position:relative;overflow:hidden;background-image:repeating-linear-gradient(90deg,#000 0,#000 4px,#111 4px,#111 6px)}
 .fill{height:100%;background:linear-gradient(180deg,#ffe680 0%,#ffcc00 50%,#b38f00 100%);box-shadow:inset 0 2px 0 rgba(255,255,255,.5);transition:width 0.2s}
 .bar.blue .fill{background:linear-gradient(180deg,#80ebff 0%,#00d9ff 50%,#0088cc 100%)}
-.bar.purple .fill{background:linear-gradient(180deg,#f080ff 0%,#d000ff 50%,#8800cc 100%)}
-.bar.good .fill{background:linear-gradient(180deg,#80ffaa 0%,#00ff66 50%,#009933 100%)}
 
 button.primary{width:100%;border:3px solid #000;background:linear-gradient(180deg,#ffee66 0%,#ffcc00 50%,#cc9900 100%);color:#000;padding:12px;
   font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:0;text-transform:uppercase;font-weight:bold;
@@ -80,7 +77,9 @@ button.primary:active{transform:translateY(4px);box-shadow:0 0 0 #000}
 button.secondary{border:3px solid #000;background:linear-gradient(180deg,#ff4d4d 0%,#cc0000 100%);color:#fff;padding:8px 10px;
   font-family:'Press Start 2P',monospace;font-size:7.5px;box-shadow:0 3px 0 #660000,0 5px 0 #000;transition:all .05s;text-transform:uppercase;letter-spacing:.03em;text-shadow:1px 1px 0 #000}
 button.secondary:hover{background:linear-gradient(180deg,#ff6666 0%,#e60000 100%)}
-button.secondary:active{transform:translateY(3px);box-shadow:0 0 0 #000}
+button.secondary.sell-btn{background:linear-gradient(180deg,#4dff88 0%,#009933 100%);box-shadow:0 3px 0 #004d1a,0 5px 0 #000;color:#000;text-shadow:none;font-weight:bold}
+button.secondary.sell-btn:hover{background:linear-gradient(180deg,#80ffaa 0%,#00cc44 100%)}
+
 button:disabled{opacity:.4;cursor:not-allowed;filter:grayscale(1)}
 
 .quest{border:3px solid #3d3d5c;padding:12px;margin:10px 0;background:#10101a;cursor:pointer;transition:all .15s;box-shadow:4px 4px 0 #000;outline:1px solid #000}
@@ -88,14 +87,10 @@ button:disabled{opacity:.4;cursor:not-allowed;filter:grayscale(1)}
 .quest.boss{border-color:var(--neored);background:linear-gradient(135deg,#33000d 0%,#150006 100%);box-shadow:0 0 15px #ff003344,4px 4px 0 #000}
 
 .tag{display:inline-block;font-family:'Press Start 2P',monospace;font-size:7px;border:2px solid #536172;padding:4px 6px;color:#c7d0da;margin-right:5px;margin-bottom:5px;text-transform:uppercase;background:#000}
-.tag.epic{border-color:var(--neopurple);color:#f0a0ff;background:#2a0038}
-.tag.rare{border-color:var(--neoblue);color:#a0f0ff;background:#002b38}
-.tag.magic{border-color:var(--neogreen);color:#a0ffa0;background:#003810}
 .tag.boss{border-color:var(--neoorange);color:#ffda00;background:#4a1f00}
 
 .log{max-height:220px;overflow-y:auto;font-size:16px;background:#050508;border:3px solid #000;outline:2px solid #2a2a3d;padding:10px;line-height:1.4}
 .log div{padding:4px 0;border-bottom:1px solid #1a1a28}
-.log div:last-child{border:0}
 
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:60;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(2px)}
 .modalbox{width:min(780px,100%);background:#101018;border-top:5px solid var(--gold);border-left:2px solid #222;border-right:2px solid #222;padding:20px;max-height:88vh;overflow:auto;box-shadow:0 -10px 30px #000e,inset 0 1px 0 rgba(255,255,255,.2)}
@@ -103,17 +98,12 @@ button:disabled{opacity:.4;cursor:not-allowed;filter:grayscale(1)}
 .item{padding:10px;background:#181824;border:2px solid #3a3a58;margin:8px 0;box-shadow:3px 3px 0 #000}
 .item:hover{background:#222234}
 .small{font-size:13px}
-input{width:100%;background:#08080d;border:3px solid #3a3a58;color:#fff;padding:11px;margin:8px 0;font-size:18px;outline:none}
-input:focus{border-color:var(--gold)}
 
-.avatar-selector{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:15px 0}
-.avatar-option{padding:12px;border:3px solid #3a3a58;text-align:center;cursor:pointer;transition:all .15s;background:#0a0a10}
-.avatar-option:hover{border-color:var(--neoblue);background:#121220}
-.avatar-option.selected{border-color:var(--gold);background:#261d08;box-shadow:0 0 15px #ffcc0055,inset 0 0 10px #ffcc0022}
-.avatar-emoji{font-size:40px;margin:6px 0;filter:drop-shadow(3px 3px 0 #000)}
+.world-card{background:#12121e;border:3px solid #3a3a58;padding:12px;margin:10px 0;box-shadow:4px 4px 0 #000;transition:all .15s}
+.world-card.active{border-color:var(--gold);background:linear-gradient(135deg,#241a08 0%,#10101a 100%)}
+.world-card.locked{opacity:.5;filter:grayscale(0.8)}
 
-.world-visual{background:linear-gradient(135deg,#20141a 0%,#0a0a12 100%);border:3px solid var(--panel-border2);padding:15px;margin:10px 0;text-align:center;min-height:110px;display:flex;flex-direction:column;justify-content:center;box-shadow:inset 0 0 15px #000}
-.location-badge{display:inline-block;padding:5px 8px;background:rgba(0,217,255,.1);border:2px solid var(--neoblue);color:var(--neoblue);font-size:9px;margin:4px 4px 4px 0;text-transform:uppercase;letter-spacing:.05em;font-family:'Press Start 2P',monospace}
+.story-box{background:linear-gradient(135deg,#1c102b 0%,#0c0617 100%);border:2px solid var(--neopurple);padding:12px;margin:10px 0;box-shadow:inset 0 0 10px #000}
 
 .equipment-grid{display:grid;grid-template-columns:1fr;gap:10px}
 .equipment-slot{background:var(--panel2);padding:12px;border:2px solid #3a3a58;box-shadow:3px 3px 0 #000;display:flex;justify-content:space-between;align-items:center}
@@ -123,8 +113,6 @@ input:focus{border-color:var(--gold)}
 .damage-number{color:var(--neored);font-weight:bold;text-shadow:2px 2px 0 #000}
 .crit-hit{animation:pulse 0.3s;color:var(--neoorange);font-weight:bold;text-shadow:2px 2px 0 #000}
 @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
-
-.danger-stars{color:var(--neoorange);letter-spacing:2px}
 .reward-box{background:rgba(255,204,0,.08);border:2px solid var(--gold);padding:12px;margin:10px 0;box-shadow:inset 0 0 10px #000}
 .arcade-flicker{animation:flicker 2.4s infinite}
 @keyframes flicker{0%,96%,100%{opacity:1}97%{opacity:.6}98%{opacity:1}99%{opacity:.7}}
@@ -134,7 +122,7 @@ input:focus{border-color:var(--gold)}
 <body>
 <div class="app">
 <div class="top">
-  <div class="neogeo-badge"><span>NEO-GEO MVS</span> <span>PRO-GEAR SPEC • BALANCED 2.0</span></div>
+  <div class="neogeo-badge"><span>NEO-GEO MVS</span> <span>CHAPTER CONTINUUM • EXPANDED</span></div>
   <div class="title arcade-flicker">🔴 ROJO'S ADVENTURE</div>
   <div class="subtitle" id="topSub"></div>
 </div>
@@ -144,13 +132,41 @@ input:focus{border-color:var(--gold)}
 <div id="modal"></div>
 
 <script>
-// ===== GAME DATA =====
+// ===== EXPANDED WORLD DATA & STORYLINE =====
+const STORY_CHAPTERS = {
+  safe: {
+    chapter: "CHAPTER I: THE AWAKENING IN GUILDTOWN",
+    lore: "Dark rumors ripple through Guildtown. Strange void-corrupted beasts threaten the countryside. High Command issues an emergency call to arms.",
+    bossGoal: "Clear Guildtown Outskirts and slay Gorgar the Marauder to receive the Marching Pass."
+  },
+  forest: {
+    chapter: "CHAPTER II: THE CORRUPTED CANOPY",
+    lore: "Beyond the eastern gates, Whisperwood Forest has been poisoned by dark alchemy. Ancient treants rampaging along trade routes must be purged.",
+    bossGoal: "Purify the Ancient Moss-Beast to locate the entrance to the Catacombs."
+  },
+  ruins: {
+    chapter: "CHAPTER III: ECHOS OF THE CATACOMBS",
+    lore: "Beneath the fallen kingdom lie the Forgotten Catacombs. The undead serve Arch-Lich Varek, who gathers necrotic soulstones to shatter the seal.",
+    bossGoal: "Vanquish Arch-Lich Varek to unseal the Volcanic Crater pass."
+  },
+  volcanic: {
+    chapter: "CHAPTER IV: FLAMES OF THE SCORCHED CRATER",
+    lore: "The sky burns red over Scorched Crater. Dragon-kin and magma behemoths forge weapons for the ultimate invasion of the realm.",
+    bossGoal: "Slay Ignis Dragon Lord to breach theVoid Realm."
+  },
+  void: {
+    chapter: "CHAPTER V: AT THE VOID'S EDGE",
+    lore: "Reality collapses at the Void's Edge. The eldritch Sovereign Xal'Kroth threatens to consume all worlds into darkness.",
+    bossGoal: "Destroy Xal'Kroth and claim eternal triumph!"
+  }
+};
+
 const WORLDS = {
-  safe: { name: "Guildtown Outskirts", emoji: "🏛️", danger: 1, quests: ["F", "E"] },
-  forest: { name: "Whisperwood Forest", emoji: "🌲", danger: 2, quests: ["E", "D"] },
-  ruins: { name: "Forgotten Catacombs", emoji: "🏚️", danger: 4, quests: ["D", "C"] },
-  volcanic: { name: "Scorched Crater", emoji: "🌋", danger: 6, quests: ["C", "B"] },
-  void: { name: "The Void's Edge", emoji: "🌀", danger: 8, quests: ["A", "S"] }
+  safe: { name: "Guildtown Outskirts", emoji: "🏛️", danger: 1, reqLevel: 1, waveCount: 2 },
+  forest: { name: "Whisperwood Forest", emoji: "🌲", danger: 2, reqLevel: 4, waveCount: 3 },
+  ruins: { name: "Forgotten Catacombs", emoji: "🏚️", danger: 4, reqLevel: 8, waveCount: 4 },
+  volcanic: { name: "Scorched Crater", emoji: "🌋", danger: 6, reqLevel: 12, waveCount: 5 },
+  void: { name: "The Void's Edge", emoji: "🌀", danger: 9, reqLevel: 16, waveCount: 6 }
 };
 
 const AVATARS = [
@@ -158,136 +174,110 @@ const AVATARS = [
   {emoji: "🧙", name: "Wise Mage", class: "Caster"},
   {emoji: "⚔️", name: "Knight Warrior", class: "Fighter"},
   {emoji: "🛡️", name: "Iron Guardian", class: "Defender"},
-  {emoji: "👹", name: "Fierce Hunter", class: "Rogue"},
-  {emoji: "✨", name: "Mystic Ascetic", class: "Caster"},
-  {emoji: "🐉", name: "Draconic Force", class: "Fighter"},
-  {emoji: "🌙", name: "Shadow Walker", class: "Rogue"}
+  {emoji: "👹", name: "Fierce Hunter", class: "Rogue"}
 ];
 
-// Guilds: Removed strict classification limits
 const GUILDS = {
-  Vanguard: {
-    desc: "Order of the Shield. Focuses on defensive resilience and steady tactics.",
-    icon: "🛡️",
-    req: {level: 4, rp: 30},
-    bonus: {def: 6, maxHp: 35}
-  },
-  Inferno: {
-    desc: "Frontline shock troops. Focuses on raw physical combat impact.",
-    icon: "🔥",
-    req: {level: 6, rp: 60},
-    bonus: {atk: 8, crit: 5}
-  },
-  Arcane: {
-    desc: "Keepers of elemental magic and mystic power.",
-    icon: "✨",
-    req: {level: 6, rp: 60},
-    bonus: {mag: 10, spd: 3}
-  },
-  Shadow: {
-    desc: "Assassins and scouts who strike critical vulnerabilities.",
-    icon: "🌑",
-    req: {level: 8, rp: 100},
-    bonus: {crit: 12, spd: 5}
-  },
-  Balanced: {
-    desc: "Universal guild open to all recruits.",
-    icon: "⚖️",
-    req: {level: 1, rp: 0},
-    bonus: {atk: 2, def: 2, mag: 2}
-  }
+  Vanguard: { desc: "Order of the Shield. Focuses on defense.", icon: "🛡️", req: {level: 4, rp: 30}, bonus: {def: 8, maxHp: 40} },
+  Inferno:  { desc: "Frontline shock troops. Focuses on attack power.", icon: "🔥", req: {level: 6, rp: 60}, bonus: {atk: 10, crit: 6} },
+  Arcane:   { desc: "Keepers of elemental magic.", icon: "✨", req: {level: 6, rp: 60}, bonus: {mag: 12, spd: 4} },
+  Shadow:   { desc: "Assassins and scouts.", icon: "🌑", req: {level: 8, rp: 100}, bonus: {crit: 15, spd: 6} },
+  Balanced: { desc: "Universal guild open to all.", icon: "⚖️", req: {level: 1, rp: 0}, bonus: {atk: 3, def: 3, mag: 3} }
 };
 
 const RANKS = ["F", "E", "D", "C", "B", "A", "S"];
 
 const CLASSES = {
-  Adventurer: { desc: "Versatile rounded combatant.", hp: 110, atk: 12, def: 8, spd: 10, mag: 6, crit: 5 },
-  Caster:     { desc: "High magical attack power.", hp: 85,  atk: 6,  def: 5, spd: 9, mag: 18, crit: 8 },
-  Defender:   { desc: "Heavy armor specialist.",   hp: 160, atk: 10, def: 18, spd: 5, mag: 3, crit: 3 },
-  Fighter:    { desc: "High physical damage.",     hp: 125, atk: 18, def: 9, spd: 8, mag: 3, crit: 7 },
-  Rogue:      { desc: "Speed & critical hits.",    hp: 95,  atk: 15, def: 6, spd: 15, mag: 4, crit: 15 }
+  Adventurer: { desc: "Versatile combatant.", hp: 120, atk: 14, def: 8, spd: 10, mag: 6, crit: 5 },
+  Caster:     { desc: "Magical specialist.", hp: 90,  atk: 8,  def: 5, spd: 9, mag: 20, crit: 8 },
+  Defender:   { desc: "Heavy tank warrior.", hp: 170, atk: 11, def: 20, spd: 5, mag: 3, crit: 3 },
+  Fighter:    { desc: "High damage dealer.", hp: 135, atk: 20, def: 9, spd: 8, mag: 3, crit: 7 },
+  Rogue:      { desc: "Critical strike assassin.", hp: 100, atk: 16, def: 6, spd: 15, mag: 4, crit: 16 }
 };
 
+// ===== EXTENDED ITEM DATABASE =====
 const ITEM_DATABASE = {
   // WEAPONS
-  "Bronze Shortsword": { id: "w1", slot: "weapon", atk: 5, rarity: "Common", price: 60, desc: "A sturdy starter blade." },
-  "Steel Claymore":    { id: "w2", slot: "weapon", atk: 12, rarity: "Magic", price: 180, desc: "Heavy blade that slices through heavy armor." },
-  "Flameburst Edge":   { id: "w3", slot: "weapon", atk: 22, rarity: "Rare", price: 420, desc: "Imbued with searing fire. Deals massive damage." },
-  "Rune Voidbreaker":  { id: "w4", slot: "weapon", atk: 35, rarity: "Epic", price: 900, desc: "Legendary weapon forged from stellar alloy." },
+  "Bronze Shortsword":  { id: "w1", slot: "weapon", atk: 6, rarity: "Common", price: 60, desc: "A reliable standard sword." },
+  "Iron Warhammer":     { id: "w2", slot: "weapon", atk: 11, rarity: "Common", price: 110, desc: "Crushes enemy defenses." },
+  "Steel Claymore":     { id: "w3", slot: "weapon", atk: 18, rarity: "Magic", price: 200, desc: "Double-handed blade forged for war." },
+  "Dagger of Shadows":  { id: "w4", slot: "weapon", atk: 22, crit: 8, rarity: "Magic", price: 300, desc: "Lethal rogue dagger with high critical chance." },
+  "Flameburst Edge":    { id: "w5", slot: "weapon", atk: 32, rarity: "Rare", price: 480, desc: "Imbued with searing flame." },
+  "Frostbite Halberd":  { id: "w6", slot: "weapon", atk: 40, def: 5, rarity: "Rare", price: 650, desc: "Freezing polearm with bonus guard." },
+  "Rune Voidbreaker":   { id: "w7", slot: "weapon", atk: 55, rarity: "Epic", price: 1100, desc: "Forged from abyss alloy. Devastating damage." },
+  "Celestial Greatsword":{ id: "w8", slot: "weapon", atk: 75, crit: 12, rarity: "Legendary", price: 2200, desc: "Mythical divine blade of legend." },
 
   // ARMOR
-  "Padded Leather":    { id: "a1", slot: "armor", def: 4, rarity: "Common", price: 50, desc: "Basic protective gear against simple blows." },
-  "Chainmail Cuirass": { id: "a2", slot: "armor", def: 10, rarity: "Magic", price: 160, desc: "Interlocking steel rings. Solid defense." },
-  "Dragonscale Mail":  { id: "a3", slot: "armor", def: 20, rarity: "Rare", price: 400, desc: "Forged from hardened dragon scales." },
-  "Aegis Plate":       { id: "a4", slot: "armor", def: 32, rarity: "Epic", price: 850, desc: "Impenetrable sacred armor." },
+  "Padded Leather":     { id: "a1", slot: "armor", def: 5, rarity: "Common", price: 50, desc: "Basic leather tunic." },
+  "Reinforced Guardplate":{ id: "a2", slot: "armor", def: 10, rarity: "Common", price: 120, desc: "Solid iron breastplate." },
+  "Chainmail Cuirass":  { id: "a3", slot: "armor", def: 16, rarity: "Magic", price: 220, desc: "Interlocking ring armor." },
+  "Mithril Mesh Mail":  { id: "a4", slot: "armor", def: 24, rarity: "Magic", price: 380, desc: "Lightweight yet resilient dwarven mesh." },
+  "Dragonscale Mail":   { id: "a5", slot: "armor", def: 35, rarity: "Rare", price: 600, desc: "Crafted from impenetrable red dragon scales." },
+  "Titan Wall Mail":    { id: "a6", slot: "armor", def: 48, maxHp: 50, rarity: "Rare", price: 950, desc: "Massive armor granting bonus HP." },
+  "Aegis Plate":        { id: "a7", slot: "armor", def: 65, rarity: "Epic", price: 1400, desc: "Sacred holy armor of legendary knights." },
+  "Nether-Eldritch Armor":{ id: "a8", slot: "armor", def: 85, maxHp: 100, rarity: "Legendary", price: 2500, desc: "Ultimate void armor." },
 
   // ACCESSORIES
-  "Iron Ring":         { id: "acc1", slot: "accessory", crit: 4, rarity: "Common", price: 40, desc: "+4% Critical Chance." },
-  "Amulet of Might":   { id: "acc2", slot: "accessory", crit: 8, atk: 4, rarity: "Magic", price: 150, desc: "+8% Crit & +4 ATK." },
-  "Shadow Cloak":      { id: "acc3", slot: "accessory", crit: 14, def: 5, rarity: "Rare", price: 380, desc: "+14% Crit & +5 DEF." },
-  "Relic of the Void": { id: "acc4", slot: "accessory", crit: 20, atk: 10, rarity: "Epic", price: 800, desc: "+20% Crit & +10 ATK." }
+  "Iron Ring":          { id: "acc1", slot: "accessory", crit: 4, rarity: "Common", price: 40, desc: "+4% Critical chance." },
+  "Silver Band":        { id: "acc2", slot: "accessory", def: 4, crit: 4, rarity: "Common", price: 90, desc: "+4 DEF and +4% Crit." },
+  "Amulet of Might":    { id: "acc3", slot: "accessory", crit: 8, atk: 6, rarity: "Magic", price: 180, desc: "+8% Crit & +6 ATK." },
+  "Ring of the Greed":  { id: "acc4", slot: "accessory", atk: 10, rarity: "Magic", price: 280, desc: "+10 ATK." },
+  "Shadow Cloak":       { id: "acc5", slot: "accessory", crit: 15, def: 8, rarity: "Rare", price: 450, desc: "+15% Crit & +8 DEF." },
+  "Phoenix Feather":    { id: "acc6", slot: "accessory", atk: 14, maxHp: 40, rarity: "Rare", price: 700, desc: "+14 ATK & +40 Max HP." },
+  "Relic of the Void":  { id: "acc7", slot: "accessory", crit: 22, atk: 18, rarity: "Epic", price: 1200, desc: "+22% Crit & +18 ATK." },
+  "Eye of Eternity":    { id: "acc8", slot: "accessory", crit: 30, atk: 25, def: 15, rarity: "Legendary", price: 2400, desc: "Supreme relic of eternity." }
 };
 
 const STORE_CONSUMABLES = {
-  "Health Potion":   { id: "pot_hp", type: "heal", value: 60, price: 35, emoji: "🧪", desc: "Instantly restores 60 HP during quest battles." },
-  "Greater Potion":  { id: "pot_ghp", type: "heal", value: 140, price: 80, emoji: "🍷", desc: "Instantly restores 140 HP in battle." },
-  "Energy Elixir":   { id: "pot_eng", type: "energy", value: 50, price: 40, emoji: "⚡", desc: "Restores 50 Stamina Energy instantly." },
-  "War Tonic":       { id: "pot_buff", type: "buff", value: 10, price: 60, emoji: "🔥", desc: "Increases Attack by +10 for an entire battle." }
+  "Health Potion":   { id: "pot_hp", type: "heal", value: 70, price: 35, emoji: "🧪", desc: "Restores 70 HP in battle." },
+  "Greater Potion":  { id: "pot_ghp", type: "heal", value: 160, price: 85, emoji: "🍷", desc: "Restores 160 HP in battle." },
+  "Elixir of Life":  { id: "pot_elixir", type: "heal", value: 350, price: 180, emoji: "💖", desc: "Restores 350 HP in battle." },
+  "Energy Elixir":   { id: "pot_eng", type: "energy", value: 50, price: 45, emoji: "⚡", desc: "Restores +50 Stamina Energy." },
+  "War Tonic":       { id: "pot_buff", type: "buff", value: 16, price: 70, emoji: "🔥", desc: "+16 ATK buff for current battle." }
 };
 
+// REBALANCED ENEMY BESTIARY (SIGNIFICANTLY STRONGER)
 const BESTIARY = {
   safe: [
-    { name: "Slinking Goblin", hp: 35, atk: 10, def: 3, spd: 8, emoji: "👺" },
-    { name: "Feral Hound", hp: 42, atk: 12, def: 2, spd: 11, emoji: "🐕" },
-    { name: "Outlaw Highwayman", hp: 55, atk: 14, def: 5, spd: 9, emoji: "🗡️" }
+    { name: "Slinking Goblin", hp: 50, atk: 14, def: 4, emoji: "👺" },
+    { name: "Feral Hound", hp: 60, atk: 16, def: 3, emoji: "🐕" },
+    { name: "Outlaw Bandit", hp: 80, atk: 19, def: 6, emoji: "🗡️" }
   ],
   forest: [
-    { name: "Vinesplitter Treant", hp: 75, atk: 18, def: 8, spd: 6, emoji: "🪵" },
-    { name: "Shadow Lurker", hp: 65, atk: 22, def: 5, spd: 14, emoji: "🕷️" },
-    { name: "Dire Timberwolf", hp: 85, atk: 20, def: 9, spd: 11, emoji: "🐺" }
+    { name: "Corrupted Treant", hp: 120, atk: 26, def: 12, emoji: "🪵" },
+    { name: "Shadow Lurker", hp: 100, atk: 32, def: 8, emoji: "🕷️" },
+    { name: "Dire Timberwolf", hp: 135, atk: 29, def: 11, emoji: "🐺" }
   ],
   ruins: [
-    { name: "Rune Guardian", hp: 120, atk: 26, def: 16, spd: 6, emoji: "🗿" },
-    { name: "Crypt Phantom", hp: 100, atk: 30, def: 10, spd: 12, emoji: "👻" },
-    { name: "Skeletal Dreadknight", hp: 140, atk: 28, def: 18, spd: 8, emoji: "💀" }
+    { name: "Rune Guardian", hp: 200, atk: 38, def: 22, emoji: "🗿" },
+    { name: "Crypt Phantom", hp: 170, atk: 44, def: 14, emoji: "👻" },
+    { name: "Skeletal Dreadknight", hp: 230, atk: 42, def: 25, emoji: "💀" }
   ],
   volcanic: [
-    { name: "Magma Drake", hp: 180, atk: 36, def: 18, spd: 10, emoji: "🌋" },
-    { name: "Flame Behemoth", hp: 220, atk: 38, def: 22, spd: 6, emoji: "👹" },
-    { name: "Obsidian Golem", hp: 250, atk: 32, def: 28, spd: 5, emoji: "🧱" }
+    { name: "Magma Drake", hp: 320, atk: 56, def: 28, emoji: "🌋" },
+    { name: "Flame Behemoth", hp: 380, atk: 60, def: 34, emoji: "👹" },
+    { name: "Obsidian Golem", hp: 440, atk: 52, def: 42, emoji: "🧱" }
   ],
   void: [
-    { name: "Void Stalker", hp: 280, atk: 45, def: 22, spd: 15, emoji: "🌀" },
-    { name: "Eldritch Fiend", hp: 320, atk: 50, def: 25, spd: 12, emoji: "👁️" },
-    { name: "Abyssal Horror", hp: 380, atk: 55, def: 30, spd: 10, emoji: "👾" }
+    { name: "Void Stalker", hp: 550, atk: 75, def: 35, emoji: "🌀" },
+    { name: "Eldritch Fiend", hp: 650, atk: 85, def: 40, emoji: "👁️" },
+    { name: "Abyssal Horror", hp: 800, atk: 95, def: 48, emoji: "👾" }
   ]
 };
 
 const BOSSES = {
-  safe: { name: "Gorgar the Marauder", hp: 110, atk: 20, def: 8, emoji: "🧌" },
-  forest: { name: "Ancient Moss-Beast", hp: 180, atk: 28, def: 14, emoji: "🦣" },
-  ruins: { name: "Arch-Lich Varek", hp: 270, atk: 38, def: 20, emoji: "👑" },
-  volcanic: { name: "Ignis Dragon Lord", hp: 380, atk: 48, def: 28, emoji: "🐲" },
-  void: { name: "Xal'Kroth, Void Sovereign", hp: 550, atk: 65, def: 35, emoji: "🌌" }
+  safe: { name: "Gorgar the Marauder", hp: 180, atk: 28, def: 12, emoji: "🧌" },
+  forest: { name: "Ancient Moss-Beast", hp: 320, atk: 42, def: 20, emoji: "🦣" },
+  ruins: { name: "Arch-Lich Varek", hp: 500, atk: 60, def: 30, emoji: "👑" },
+  volcanic: { name: "Ignis Dragon Lord", hp: 800, atk: 82, def: 45, emoji: "🐲" },
+  void: { name: "Xal'Kroth, Void Sovereign", hp: 1300, atk: 115, def: 60, emoji: "🌌" }
 };
 
-// QUEST NARRATIVE EVENTS
-const QUEST_STORIES = [
-  {
-    title: "Ambush at the Broken Bridge",
-    desc: "While marching along the supply road, hostile scouts drop from the tree line! Arrow fire echoes through the ravine.",
-    event: "You hear rustling in the dense foliage. A trap is sprung!"
-  },
-  {
-    title: "Distress Signal from the Outpost",
-    desc: "A wounded scout warns of hostile reinforcements gathering ahead. You must push through enemy lines before they consolidate.",
-    event: "The forward camp is under siege. Multi-wave hostiles spotted!"
-  },
-  {
-    title: "Relic Hunt in the Catacombs",
-    desc: "Ancient inscriptions warn: 'He who enters shall face the gauntlet of guardians.' Steel yourself for continuous combat.",
-    event: "An ominous horn blows! Multiple waves of enemies approach!"
-  }
+// NARRATIVE QUEST TEMPLATES
+const QUEST_TEMPLATES = [
+  { name: "Frontline Defense", desc: "Push back aggressive enemy raiding parties encroaching on the border.", event: "Enemies attack in formation!" },
+  { name: "Scout Rescue", desc: "A forward party was trapped behind hostile lines. Clear a path to rescue them.", event: "Ambush triggered!" },
+  { name: "Stronghold Siege", desc: "Break through heavy defensive barricades and clean out the stronghold.", event: "Continuous waves approach!" }
 ];
 
 // STATE MANAGEMENT
@@ -295,22 +285,23 @@ let S = {
   name: "Rojo",
   level: 1,
   xp: 0,
-  hp: 110,
+  hp: 120,
   energy: 100,
-  gold: 80,
+  gold: 100,
   rp: 0,
   rank: 0,
   profession: "Adventurer",
   guild: "Balanced",
   avatar: AVATARS[0],
+  currentLocation: "safe", // CURRENT PLAYER LOCATION
+  worldUnlocked: ["safe"], // UNLOCKED LOCATIONS
   stats: { str: 10, dex: 10, vit: 10, int: 10 },
   equipment: { weapon: null, armor: null, accessory: null },
-  gear: [], // Storage array for weapons/armor/accessories
-  consumables: { pot_hp: 2, pot_eng: 1 }, // Impactful usable items
+  gear: [],
+  consumables: { pot_hp: 2, pot_eng: 1 },
   log: [],
   wins: 0,
-  losses: 0,
-  worldUnlocked: ["safe"]
+  losses: 0
 };
 
 function freshState(){
@@ -318,40 +309,41 @@ function freshState(){
     name: "Rojo",
     level: 1,
     xp: 0,
-    hp: 110,
+    hp: 120,
     energy: 100,
-    gold: 80,
+    gold: 100,
     rp: 0,
     rank: 0,
     profession: "Adventurer",
     guild: "Balanced",
     avatar: AVATARS[0],
+    currentLocation: "safe",
+    worldUnlocked: ["safe"],
     stats: { str: 10, dex: 10, vit: 10, int: 10 },
     equipment: { weapon: null, armor: null, accessory: null },
     gear: [],
     consumables: { pot_hp: 2, pot_eng: 1 },
     log: [],
     wins: 0,
-    losses: 0,
-    worldUnlocked: ["safe"]
+    losses: 0
   };
 }
 
-function save(){ localStorage.setItem("rojo_mvs_save", JSON.stringify(S)); }
+function save(){ localStorage.setItem("rojo_mvs_save_v2", JSON.stringify(S)); }
 function load(){
-  const x = localStorage.getItem("rojo_mvs_save");
+  const x = localStorage.getItem("rojo_mvs_save_v2");
   if(x){
     try {
       S = JSON.parse(x);
-      if(!S.consumables) S.consumables = { pot_hp: 1 };
-      if(!S.equipment) S.equipment = { weapon: null, armor: null, accessory: null };
+      if(!S.currentLocation) S.currentLocation = "safe";
+      if(!S.worldUnlocked) S.worldUnlocked = ["safe"];
     } catch(e){}
   }
 }
 load();
 
 function addLog(t){ S.log.unshift(t); S.log = S.log.slice(0, 20); }
-function xpNeed(){ return 120 + S.level * 60; }
+function xpNeed(){ return 120 + S.level * 70; }
 
 function gainXP(n){
   S.xp += n;
@@ -375,10 +367,47 @@ function rankUp(){
       const rankWorlds = ["safe", "forest", "ruins", "volcanic", "void"];
       if(S.rank < rankWorlds.length && !S.worldUnlocked.includes(rankWorlds[S.rank])){
         S.worldUnlocked.push(rankWorlds[S.rank]);
-        addLog(`<span class="blue">🗺️ New Map Unlocked: ${WORLDS[rankWorlds[S.rank]].name}</span>`);
+        addLog(`<span class="blue">🗺️ NEW REGION UNLOCKED: ${WORLDS[rankWorlds[S.rank]].name}! Use Travel tab to move there.</span>`);
       }
     } else { break; }
   }
+}
+
+// ===== TRAVEL SYSTEM =====
+function travelToLocation(locKey){
+  if(!S.worldUnlocked.includes(locKey)){
+    addLog(`<span class="bad">❌ Location Locked! Higher rank required to travel to ${WORLDS[locKey].name}.</span>`);
+    return;
+  }
+  S.currentLocation = locKey;
+  addLog(`<span class="blue">🗺️ Traveled to ${WORLDS[locKey].name}.</span>`);
+  globalQuests = []; // Reset quests board for new location
+  save();
+  render();
+}
+
+// ===== SELLING MECHANIC =====
+function sellGearItem(index){
+  const item = S.gear[index];
+  if(!item) return;
+  const sellValue = Math.round((item.price || 50) * 0.55);
+  S.gold += sellValue;
+  S.gear.splice(index, 1);
+  addLog(`<span class="good">💰 Sold ${item.name} for +${sellValue} Gold.</span>`);
+  save();
+  render();
+}
+
+function sellConsumableItem(itemKey){
+  const count = S.consumables[itemKey] || 0;
+  if(count <= 0) return;
+  const item = STORE_CONSUMABLES[Object.keys(STORE_CONSUMABLES).find(k => STORE_CONSUMABLES[k].id === itemKey) || itemKey];
+  const sellVal = Math.round((item ? item.price : 30) * 0.5);
+  S.consumables[itemKey]--;
+  S.gold += sellVal;
+  addLog(`<span class="good">💰 Sold 1x ${itemKey} for +${sellVal} Gold.</span>`);
+  save();
+  render();
 }
 
 // ===== EQUIPMENT MANAGEMENT =====
@@ -387,7 +416,6 @@ function equipItemFromGear(gearIndex){
   if(!item) return;
 
   const slot = item.slot;
-  // If slot is occupied, unequip existing item first
   if(S.equipment[slot]){
     unequipSlot(slot, false);
   }
@@ -410,7 +438,7 @@ function unequipSlot(slot, triggerRender = true){
   if(triggerRender) render();
 }
 
-// ===== STORE & PURCHASING =====
+// ===== STORE PURCHASING =====
 function buyStoreItem(itemKey, isConsumable = false){
   if(isConsumable){
     const item = STORE_CONSUMABLES[itemKey];
@@ -433,44 +461,48 @@ function buyStoreItem(itemKey, isConsumable = false){
     }
     S.gold -= item.price;
     S.gear.push({ ...item, name: itemKey });
-    addLog(`<span class="good">🛒 Purchased ${itemKey}. Saved to Character Sheet!</span>`);
+    addLog(`<span class="good">🛒 Purchased ${itemKey}. Saved to Inventory!</span>`);
   }
   save();
   render();
 }
 
-// ===== QUEST GENERATION =====
+// ===== LOCATION-LOCKED QUEST GENERATION =====
 let globalQuests = [];
 
-function generateQuestsForWorld(worldKey){
-  const w = WORLDS[worldKey];
+function generateQuestsForCurrentLocation(){
+  const wKey = S.currentLocation;
+  const w = WORLDS[wKey];
   const list = [];
   const count = 3;
   
   for(let i = 0; i < count; i++){
     const isBoss = (i === count - 1);
-    const storyTemplate = QUEST_STORIES[Math.floor(Math.random() * QUEST_STORIES.length)];
-    const energyCost = 15 + w.danger * 3;
+    const tmpl = QUEST_TEMPLATES[Math.floor(Math.random() * QUEST_TEMPLATES.length)];
+    const energyCost = 15 + w.danger * 4;
+
+    // QUEST WAVE LENGTH BASED ON LOCATION DANGER
+    const totalWaves = isBoss ? w.waveCount + 1 : w.waveCount;
 
     list.push({
-      id: `q-${worldKey}-${i}-${Date.now()}`,
-      name: isBoss ? `[BOSS] ${w.name} Siege` : `${storyTemplate.title}`,
-      desc: isBoss ? `Defeat the supreme ruler of ${w.name} and its elite guard!` : storyTemplate.desc,
-      eventText: storyTemplate.event,
-      world: worldKey,
-      rank: w.quests[Math.floor(Math.random()*w.quests.length)],
+      id: `q-${wKey}-${i}-${Date.now()}`,
+      name: isBoss ? `[CHAPTER BOSS] ${w.name} Siege` : `${tmpl.name}`,
+      desc: isBoss ? STORY_CHAPTERS[wKey].bossGoal : tmpl.desc,
+      eventText: tmpl.event,
+      world: wKey,
+      rank: RANKS[Math.min(RANKS.length - 1, w.danger - 1)],
       energyCost: energyCost,
       danger: w.danger + (isBoss ? 2 : 0),
-      waves: isBoss ? 3 : 2, // MULTI-WAVE QUEST COMBAT
-      reward: (45 + w.danger * 35) * (isBoss ? 2.2 : 1),
-      xp: (40 + w.danger * 30) * (isBoss ? 2 : 1),
+      waves: totalWaves,
+      reward: Math.round((60 + w.danger * 45) * (isBoss ? 2.5 : 1)),
+      xp: Math.round((50 + w.danger * 40) * (isBoss ? 2.2 : 1)),
       boss: isBoss
     });
   }
   return list;
 }
 
-// ===== COMBAT & QUEST ENGINE =====
+// ===== COMBAT ENGINE =====
 let combatState = {
   active: false,
   quest: null,
@@ -489,23 +521,23 @@ function selectQuestFromBoard(id){
   modal(`
     <h2>📜 CONTRACT: ${quest.name}</h2>
     <p class="muted">${quest.desc}</p>
-    <div class="world-visual">
-      <div style="font-size:36px">${WORLDS[quest.world].emoji}</div>
-      <div style="font-size:13px;color:var(--neoblue);margin-top:4px;font-family:'Press Start 2P',monospace">${WORLDS[quest.world].name}</div>
+    <div style="background:#151522;padding:10px;border:2px solid var(--neoblue);margin:10px 0">
+      <b style="color:var(--neoblue)">📍 LOCATION: ${WORLDS[quest.world].name}</b>
+      <div class="small muted">You are currently at this location.</div>
     </div>
     
     <div class="reward-box">
       <div style="display:flex;justify-content:space-around;text-align:center">
-        <div><span class="muted small">Reward</span><br><b class="gold">${Math.round(quest.reward)}g</b></div>
-        <div><span class="muted small">XP</span><br><b class="blue">${Math.round(quest.xp)} XP</b></div>
-        <div><span class="muted small">Waves</span><br><b class="purple">${quest.waves} Enemy Waves</b></div>
-        <div><span class="muted small">Energy Cost</span><br><b class="${S.energy >= quest.energyCost ? 'good':'bad'}">⚡ ${quest.energyCost}</b></div>
+        <div><span class="muted small">Reward</span><br><b class="gold">${quest.reward}g</b></div>
+        <div><span class="muted small">XP</span><br><b class="blue">${quest.xp} XP</b></div>
+        <div><span class="muted small">Length</span><br><b class="purple">${quest.waves} Waves</b></div>
+        <div><span class="muted small">Energy</span><br><b class="${S.energy >= quest.energyCost ? 'good':'bad'}">⚡ ${quest.energyCost}</b></div>
       </div>
     </div>
     
     ${S.energy < quest.energyCost 
       ? `<div style="background:#33000d;border:2px solid var(--neored);padding:10px;margin:10px 0;text-align:center">
-           <b class="bad">⚠️ EXHAUSTED: You do NOT have enough Stamina Energy (${S.energy}/${quest.energyCost})! Rest at the Guild Inn before embarking.</b>
+           <b class="bad">⚠️ EXHAUSTED: Requires ${quest.energyCost} Stamina Energy! Rest at the Guild Inn.</b>
          </div>
          <button class="primary" disabled>⚡ NOT ENOUGH ENERGY</button>`
       : `<button class="primary" onclick="startQuestById('${quest.id}')">⚔️ DEPLOY ON QUEST (Cost: ${quest.energyCost} Energy)</button>`
@@ -520,17 +552,14 @@ function startQuestById(id){
   const quest = globalQuests.find(q => q.id === id);
   if(!quest) return;
 
-  // STRICT ENERGY REQUIREMENT CHECK
   if(S.energy < quest.energyCost){
-    addLog(`<span class="bad">❌ Quest Failed to start: You are out of energy (${S.energy}/${quest.energyCost}). Rest at the Inn!</span>`);
+    addLog(`<span class="bad">❌ Out of energy (${S.energy}/${quest.energyCost}). Rest at the Inn!</span>`);
     render();
     return;
   }
 
-  // Deduct Energy
   S.energy -= quest.energyCost;
   save();
-
   initiateMultiWaveCombat(quest);
 }
 
@@ -538,16 +567,17 @@ function initiateMultiWaveCombat(quest){
   const c = CLASSES[S.profession];
   const gBonus = GUILDS[S.guild].bonus;
   
-  // Calculate total stats from Stats + Gear + Guild
   const wAtk = S.equipment.weapon ? S.equipment.weapon.atk : 0;
   const aDef = S.equipment.armor ? S.equipment.armor.def : 0;
+  const aMaxHp = S.equipment.armor && S.equipment.armor.maxHp ? S.equipment.armor.maxHp : 0;
   const accCrit = S.equipment.accessory ? S.equipment.accessory.crit : 0;
   const accAtk = S.equipment.accessory && S.equipment.accessory.atk ? S.equipment.accessory.atk : 0;
+  const accMaxHp = S.equipment.accessory && S.equipment.accessory.maxHp ? S.equipment.accessory.maxHp : 0;
 
-  const maxHp = c.hp + S.level * 12 + (gBonus.maxHp || 0) + S.stats.vit * 3;
-  const totalAtk = c.atk + S.level * 2.5 + wAtk + accAtk + (gBonus.atk || 0) + S.stats.str * 0.8;
-  const totalDef = c.def + S.level * 1.5 + aDef + (gBonus.def || 0);
-  const totalCrit = c.crit + accCrit + (gBonus.crit || 0) + S.stats.dex * 0.3;
+  const maxHp = c.hp + S.level * 14 + (gBonus.maxHp || 0) + S.stats.vit * 4 + aMaxHp + accMaxHp;
+  const totalAtk = c.atk + S.level * 3 + wAtk + accAtk + (gBonus.atk || 0) + S.stats.str * 1.1;
+  const totalDef = c.def + S.level * 2 + aDef + (gBonus.def || 0);
+  const totalCrit = c.crit + accCrit + (gBonus.crit || 0) + S.stats.dex * 0.4;
 
   combatState = {
     active: true,
@@ -561,13 +591,13 @@ function initiateMultiWaveCombat(quest){
       atk: totalAtk,
       def: totalDef,
       crit: totalCrit,
-      mag: c.mag + S.level * 2 + (gBonus.mag || 0)
+      mag: c.mag + S.level * 2.5 + (gBonus.mag || 0)
     },
     enemy: {},
     log: []
   };
 
-  combatState.log.push(`<b>📖 ${quest.name}</b>`);
+  combatState.log.push(`<b>📖 ${quest.name}</b> (${quest.waves} Waves Total)`);
   combatState.log.push(`<span class="muted">${quest.eventText}</span>`);
   
   spawnWaveEnemy();
@@ -586,36 +616,35 @@ function spawnWaveEnemy(){
     baseEnemy = pool[Math.floor(Math.random() * pool.length)];
   }
 
-  // REBALANCED ENEMY STATS (HARDER COMBAT)
-  const waveMultiplier = 1 + (combatState.currentWave - 1) * 0.3;
+  // INCREASED COMBAT DIFFICULTY SCALING
+  const waveScale = 1 + (combatState.currentWave - 1) * 0.25;
   combatState.enemy = {
     name: baseEnemy.name,
     emoji: baseEnemy.emoji,
-    maxHp: Math.round(baseEnemy.hp * waveMultiplier),
-    hp: Math.round(baseEnemy.hp * waveMultiplier),
-    atk: Math.round(baseEnemy.atk * waveMultiplier),
-    def: Math.round(baseEnemy.def * waveMultiplier)
+    maxHp: Math.round(baseEnemy.hp * waveScale),
+    hp: Math.round(baseEnemy.hp * waveScale),
+    atk: Math.round(baseEnemy.atk * waveScale),
+    def: Math.round(baseEnemy.def * waveScale)
   };
 
-  combatState.log.push(`<span class="bad">⚠️ WAVE ${combatState.currentWave}/${combatState.totalWaves}: ${combatState.enemy.emoji} ${combatState.enemy.name} steps forward!</span>`);
+  combatState.log.push(`<span class="bad">⚠️ WAVE ${combatState.currentWave}/${combatState.totalWaves}: ${combatState.enemy.emoji} ${combatState.enemy.name} engages!</span>`);
 }
 
 function useCombatConsumable(itemKey){
   const p = combatState.player;
-  if(itemKey === 'pot_hp' || itemKey === 'pot_ghp'){
-    const count = S.consumables[itemKey] || 0;
-    if(count <= 0) return;
-    const item = Object.values(STORE_CONSUMABLES).find(x => x.id === itemKey);
+  const count = S.consumables[itemKey] || 0;
+  if(count <= 0) return;
+
+  if(itemKey === 'pot_hp' || itemKey === 'pot_ghp' || itemKey === 'pot_elixir'){
+    const item = STORE_CONSUMABLES[Object.keys(STORE_CONSUMABLES).find(k => STORE_CONSUMABLES[k].id === itemKey)];
     S.consumables[itemKey]--;
     const healVal = item.value;
     p.hp = Math.min(p.maxHp, p.hp + healVal);
-    combatState.log.push(`<span class="good">🧪 Used ${itemKey}! Restored ${healVal} HP. (${Math.round(p.hp)}/${p.maxHp} HP)</span>`);
+    combatState.log.push(`<span class="good">🧪 Consumed healing potion! Restored ${healVal} HP. (${Math.round(p.hp)}/${p.maxHp} HP)</span>`);
   } else if(itemKey === 'pot_buff'){
-    const count = S.consumables['pot_buff'] || 0;
-    if(count <= 0) return;
     S.consumables['pot_buff']--;
-    combatState.tempAtkBuff += 10;
-    combatState.log.push(`<span class="gold">🔥 Used War Tonic! Attack increased by +10 for this battle!</span>`);
+    combatState.tempAtkBuff += 16;
+    combatState.log.push(`<span class="gold">🔥 Used War Tonic! Attack increased by +16 for this battle!</span>`);
   }
   save();
   renderCombatUI();
@@ -625,13 +654,13 @@ function renderCombatUI(){
   const p = combatState.player;
   const e = combatState.enemy;
 
-  // Consumables buttons in battle
   const potHpCount = S.consumables['pot_hp'] || 0;
   const potGhpCount = S.consumables['pot_ghp'] || 0;
+  const potElixirCount = S.consumables['pot_elixir'] || 0;
   const potBuffCount = S.consumables['pot_buff'] || 0;
 
   const html = `
-    <div style="background:#000;padding:6px 10px;border:2px solid var(--gold);display:flex;justify-content:space-between;margin-bottom:10px;font-family:'Press Start 2P',monospace;font-size:9px">
+    <div style="background:#000;padding:6px 10px;border:2px solid var(--gold);display:flex;justify-content:space-between;margin-bottom:10px;font-family:'Press Start 2P',monospace;font-size:8px">
       <span>WAVE ${combatState.currentWave} / ${combatState.totalWaves}</span>
       <span class="gold">${combatState.quest.name}</span>
     </div>
@@ -657,17 +686,18 @@ function renderCombatUI(){
     <!-- COMBAT ACTIONS -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
       <button class="primary" onclick="execCombatTurn('attack')">⚔️ Strike Attack</button>
-      <button class="primary" onclick="execCombatTurn('skill')">✨ Special Skill</button>
+      <button class="primary" onclick="execCombatTurn('skill')">✨ Special Technique</button>
       <button class="secondary" onclick="execCombatTurn('guard')">🛡️ Guard Stance</button>
-      <button class="secondary" onclick="execCombatTurn('flee')">🏃 Flee Quest</button>
+      <button class="secondary" onclick="execCombatTurn('flee')">🏃 Retreat</button>
     </div>
 
-    <!-- USABLE INVENTORY CONSUMABLES IN QUEST -->
+    <!-- INVENTORY POTIONS IN COMBAT -->
     <div style="margin-top:10px;padding:8px;background:var(--panel2);border:2px solid #3a3a58">
-      <div class="small muted" style="font-family:'Press Start 2P',monospace;font-size:8px;margin-bottom:6px">🧪 BACTERIA/POTIONS (CLICK TO USE):</div>
+      <div class="small muted" style="font-family:'Press Start 2P',monospace;font-size:8px;margin-bottom:6px">🧪 USE INVENTORY POTIONS:</div>
       <div style="display:flex;gap:6px;flex-wrap:wrap">
         <button class="secondary" onclick="useCombatConsumable('pot_hp')" ${potHpCount>0?'':'disabled'}>🧪 HP Potion (${potHpCount})</button>
-        <button class="secondary" onclick="useCombatConsumable('pot_ghp')" ${potGhpCount>0?'':'disabled'}>🍷 Greater HP (${potGhpCount})</button>
+        <button class="secondary" onclick="useCombatConsumable('pot_ghp')" ${potGhpCount>0?'':'disabled'}>🍷 Greater (${potGhpCount})</button>
+        <button class="secondary" onclick="useCombatConsumable('pot_elixir')" ${potElixirCount>0?'':'disabled'}>💖 Elixir (${potElixirCount})</button>
         <button class="secondary" onclick="useCombatConsumable('pot_buff')" ${potBuffCount>0?'':'disabled'}>🔥 War Tonic (${potBuffCount})</button>
       </div>
     </div>
@@ -686,44 +716,43 @@ function execCombatTurn(action){
 
   if(action === 'attack'){
     const isCrit = Math.random() * 100 < p.crit;
-    const baseDmg = Math.max(4, effectiveAtk - e.def * 0.4);
-    playerDamage = Math.round(isCrit ? baseDmg * 1.6 : baseDmg);
+    const baseDmg = Math.max(5, effectiveAtk - e.def * 0.45);
+    playerDamage = Math.round(isCrit ? baseDmg * 1.7 : baseDmg);
     e.hp -= playerDamage;
     combatState.log.push(isCrit 
       ? `<span class="crit-hit">💥 CRITICAL STRIKE!</span> Dealt <span class="damage-number">${playerDamage}</span> damage!`
       : `You strike the enemy for <span class="damage-number">${playerDamage}</span> damage.`);
   } else if(action === 'skill'){
-    playerDamage = Math.round(Math.max(8, effectiveAtk * 1.35 - e.def * 0.25));
+    playerDamage = Math.round(Math.max(10, effectiveAtk * 1.4 - e.def * 0.3));
     e.hp -= playerDamage;
     combatState.log.push(`✨ You channel class technique! Dealt <span class="damage-number">${playerDamage}</span> damage!`);
   } else if(action === 'guard'){
     guardActive = true;
-    combatState.log.push(`🛡️ You take up a defensive guard position! (50% damage reduction)`);
+    combatState.log.push(`🛡️ You take up a defensive guard stance! (60% damage reduction)`);
   } else if(action === 'flee'){
-    addLog(`Fled from the quest. Stamina energy spent was lost.`);
+    addLog(`Fled from quest. Energy was consumed.`);
     closeModal();
     render();
     return;
   }
 
-  // Check if current wave enemy defeated
+  // Check if wave enemy slain
   if(e.hp <= 0){
-    combatState.log.push(`<span class="good">🎯 Defeated ${e.name}!</span>`);
+    combatState.log.push(`<span class="good">🎯 Slain ${e.name}!</span>`);
     if(combatState.currentWave < combatState.totalWaves){
       combatState.currentWave++;
       spawnWaveEnemy();
       renderCombatUI();
       return;
     } else {
-      // Victory in all waves
       finishQuestVictory();
       return;
     }
   }
 
-  // Enemy counter-attack (BALANCED - HARDER COMBAT)
-  let enemyDamage = Math.max(3, e.atk - p.def * 0.5);
-  if(guardActive) enemyDamage = Math.round(enemyDamage * 0.5);
+  // ENEMY ATTACK (INCREASED DIFFICULTY)
+  let enemyDamage = Math.max(4, e.atk - p.def * 0.4);
+  if(guardActive) enemyDamage = Math.round(enemyDamage * 0.4);
 
   p.hp -= enemyDamage;
   combatState.log.push(`<span class="bad">💥 ${e.name} attacks back! Took <span class="damage-number">${Math.round(enemyDamage)}</span> damage!</span>`);
@@ -738,14 +767,14 @@ function execCombatTurn(action){
 
 function finishQuestVictory(){
   const q = combatState.quest;
-  S.gold += Math.round(q.reward);
+  S.gold += q.reward;
   gainXP(q.xp);
-  S.rp += q.boss ? 30 : 15;
+  S.rp += q.boss ? 35 : 18;
   S.wins++;
   rankUp();
 
-  // Chance for high tier gear drop
-  if(Math.random() < 0.6){
+  // Chance for item drop
+  if(Math.random() < 0.65){
     const poolKeys = Object.keys(ITEM_DATABASE);
     const dropKey = poolKeys[Math.floor(Math.random()*poolKeys.length)];
     const dropItem = ITEM_DATABASE[dropKey];
@@ -753,41 +782,38 @@ function finishQuestVictory(){
     addLog(`<span class="purple">🎁 VICTORY DROP: Found ${dropKey}! Added to Inventory.</span>`);
   }
 
-  addLog(`<span class="good">🏆 QUEST CLEARED: ${q.name}! Won ${Math.round(q.reward)}g & ${Math.round(q.xp)} XP!</span>`);
-  
-  // Remove quest from global board
+  addLog(`<span class="good">🏆 QUEST CLEARED: ${q.name}! Won +${q.reward}g & +${q.xp} XP!</span>`);
   globalQuests = globalQuests.filter(x => x.id !== q.id);
   save();
 
   modal(`
     <h2>🏆 QUEST VICTORY!</h2>
-    <p>You have successfully survived all <b>${q.waves} enemy waves</b> and fulfilled the guild contract!</p>
+    <p>You conquered all <b>${q.waves} waves</b> of enemy forces in ${WORLDS[q.world].name}!</p>
     <div class="reward-box">
-      <div>Gold Earned: <b class="gold">+${Math.round(q.reward)}g</b></div>
-      <div>XP Gained: <b class="blue">+${Math.round(q.xp)} XP</b></div>
+      <div>Gold Earned: <b class="gold">+${q.reward}g</b></div>
+      <div>XP Gained: <b class="blue">+${q.xp} XP</b></div>
     </div>
-    <button class="primary" onclick="closeModal();render()">Return to Guild Board</button>
+    <button class="primary" onclick="closeModal();render()">Return to HQ</button>
   `);
 }
 
 function finishQuestDefeat(){
   S.losses++;
-  addLog(`<span class="bad">☠️ DEFEATED on Quest: ${combatState.quest.name}. Rest & gear up before trying again.</span>`);
+  addLog(`<span class="bad">💀 DEFEATED on Quest: ${combatState.quest.name}. Upgrade your gear or use potions!</span>`);
   save();
 
   modal(`
     <h2 class="bad">💀 QUEST FAILED</h2>
-    <p>Your party was overwhelmed by the enemy waves. Strengthen your equipment at the shop or rest at the inn.</p>
+    <p>Your hero fell in combat against enemy waves. Upgrade equipment at the shop or stock up on healing potions!</p>
     <button class="primary" onclick="closeModal();render()">Return to Base</button>
   `);
 }
 
-// ===== INTERFACE RENDERING =====
+// ===== UI RENDERERS =====
 
 function renderProfileCard(){
-  const wAtk = S.equipment.weapon ? S.equipment.weapon.atk : 0;
-  const aDef = S.equipment.armor ? S.equipment.armor.def : 0;
-  const accCrit = S.equipment.accessory ? S.equipment.accessory.crit : 0;
+  const currLoc = WORLDS[S.currentLocation];
+  const currStory = STORY_CHAPTERS[S.currentLocation];
 
   return `
     <div class="card hero">
@@ -798,10 +824,17 @@ function renderProfileCard(){
           <div class="muted">${RANKS[S.rank]}-Rank • Level ${S.level} • ${S.profession}</div>
         </div>
         <div style="text-align:right">
-          <div class="gold" style="font-size:28px">🎖️</div>
+          <div class="gold" style="font-size:20px">📍 ${currLoc.emoji}</div>
+          <div class="blue small">${currLoc.name}</div>
           <div class="muted small">${S.guild} Guild</div>
         </div>
       </div>
+    </div>
+
+    <!-- OVERARCHING STORY BOX -->
+    <div class="story-box">
+      <div style="font-family:'Press Start 2P',monospace;font-size:8px;color:var(--neopurple);margin-bottom:4px">${currStory.chapter}</div>
+      <p style="margin:0;font-size:15px;line-height:1.3;color:#e0d0ff">${currStory.lore}</p>
     </div>
 
     <!-- STAMINA ENERGY & EXP BARS -->
@@ -809,7 +842,7 @@ function renderProfileCard(){
       <div class="card" style="margin:0">
         <h3>⚡ STAMINA ENERGY</h3>
         <div class="bar good"><div class="fill" style="width:${S.energy}%"></div></div>
-        <div class="small muted" style="margin-top:4px">${S.energy}/100 Energy (Needed for Quests)</div>
+        <div class="small muted" style="margin-top:4px">${S.energy}/100 Energy</div>
       </div>
       <div class="card" style="margin:0">
         <h3>⭐ EXPERIENCE</h3>
@@ -819,16 +852,15 @@ function renderProfileCard(){
     </div>
     <br>
 
-    <!-- STATS OVERVIEW -->
     <div class="grid">
       <div class="stat"><span>GOLD</span><b class="gold">${S.gold}g</b></div>
       <div class="stat"><span>RANK PTS</span><b>${S.rp}/100</b></div>
     </div>
     <br>
 
-    <!-- EQUIPPED ITEMS DISPLAY WITH UNEQUIP BUTTONS -->
+    <!-- EQUIPPED ITEMS DISPLAY WITH UNEQUIP -->
     <div class="card">
-      <h3>🛡️ EQUIPPED GEAR (CLICK TO UNEQUIP)</h3>
+      <h3>🛡️ EQUIPPED GEAR</h3>
       <div class="equipment-grid">
         <div class="equipment-slot">
           <div>
@@ -892,21 +924,58 @@ function restAtInn(){
   render();
 }
 
+// ===== WORLD TRAVEL UI =====
+function viewTravel(){
+  return `
+    <div class="card featured">
+      <h2>🗺️ WORLD MAP & TRAVEL</h2>
+      <p class="muted small">Travel between unlocked territories. Quests are locked to your current physical location!</p>
+    </div>
+
+    ${Object.entries(WORLDS).map(([key, w]) => {
+      const isUnlocked = S.worldUnlocked.includes(key);
+      const isCurrent = S.currentLocation === key;
+
+      return `
+        <div class="world-card ${isCurrent ? 'active':''} ${!isUnlocked ? 'locked':''}">
+          <div class="row between">
+            <div>
+              <span style="font-size:28px">${w.emoji}</span>
+              <b style="font-size:18px;margin-left:8px;color:${isCurrent?'var(--gold)':'#fff'}">${w.name}</b>
+              <div class="muted small">Danger Level: ${w.danger} ★ | Wave Length: ${w.waveCount} Enemy Waves</div>
+            </div>
+            <div>
+              ${isCurrent 
+                ? `<span class="tag gold">CURRENT HERE</span>` 
+                : isUnlocked 
+                  ? `<button class="primary" onclick="travelToLocation('${key}')" style="width:auto;padding:6px 12px">Travel Here</button>`
+                  : `<span class="tag bad">LOCKED (Req Rank ${w.danger})</span>`
+              }
+            </div>
+          </div>
+          <div style="font-size:13px;margin-top:6px;color:#b0b0d0">${STORY_CHAPTERS[key].chapter}</div>
+        </div>
+      `;
+    }).join("")}
+  `;
+}
+
+// ===== LOCATION-RESTRICTED QUESTS UI =====
 function viewQuests(){
+  const currLoc = WORLDS[S.currentLocation];
+
   if(globalQuests.length === 0){
-    for(let w of S.worldUnlocked){
-      globalQuests = globalQuests.concat(generateQuestsForWorld(w));
-    }
+    globalQuests = generateQuestsForCurrentLocation();
   }
 
   return `
     <div class="card featured">
-      <h2>⚔️ QUEST CONTRACT BOARD</h2>
-      <p class="muted small">Quests require Stamina Energy. Enemies attack in multi-wave combat!</p>
+      <h2>⚔️ LOCAL CONTRACT BOARD: ${currLoc.name.toUpperCase()}</h2>
+      <p class="muted small">Notice: Only quests for <b>${currLoc.name}</b> are listed here. Multi-wave enemies attack in sequence!</p>
     </div>
 
     <div class="card">
-      <button class="secondary" onclick="globalQuests=[];render()" style="width:100%">🔄 REFRESH QUEST CONTRACTS</button>
+      <button class="secondary" onclick="globalQuests=[];render()" style="width:100%">🔄 REFRESH LOCAL QUEST CONTRACTS</button>
     </div>
 
     ${globalQuests.map(q => `
@@ -915,18 +984,18 @@ function viewQuests(){
           <div>
             <span class="tag">${q.rank}-RANK</span>
             <span class="tag purple">${q.waves} WAVES</span>
-            ${q.boss ? '<span class="tag boss">⭐ BOSS</span>':''}
+            ${q.boss ? '<span class="tag boss">⭐ CHAPTER BOSS</span>':''}
             <h3>${q.name}</h3>
           </div>
           <div style="text-align:right">
-            <div class="gold" style="font-size:16px">${Math.round(q.reward)}g</div>
-            <div class="blue small">+${Math.round(q.xp)} XP</div>
+            <div class="gold" style="font-size:16px">${q.reward}g</div>
+            <div class="blue small">+${q.xp} XP</div>
           </div>
         </div>
         <p class="muted small" style="margin:6px 0">${q.desc}</p>
         <div class="row between" style="margin-top:10px">
           <div class="small ${S.energy >= q.energyCost ? 'good':'bad'}">⚡ Required Energy: ${q.energyCost}</div>
-          <button class="primary" onclick="selectQuestFromBoard('${q.id}')" style="width:auto;padding:8px 14px">View Quest</button>
+          <button class="primary" onclick="selectQuestFromBoard('${q.id}')" style="width:auto;padding:8px 14px">View Contract</button>
         </div>
       </div>
     `).join("")}
@@ -937,11 +1006,11 @@ function viewShop(){
   return `
     <div class="card featured">
       <h2>🏪 GUILD MARKETPLACE</h2>
-      <p class="muted small">Purchase impactful potions & high-tier weapons. Purchased gear goes directly to your inventory!</p>
+      <p class="muted small">Purchase high-tier items and potions to aid your party during long wave-based quests.</p>
     </div>
 
     <div class="card">
-      <h3>🧪 POTIONS & CONSUMABLES (USABLE IN QUESTS)</h3>
+      <h3>🧪 POTIONS & CONSUMABLES</h3>
       ${Object.entries(STORE_CONSUMABLES).map(([name, item]) => `
         <div class="item row between">
           <div>
@@ -959,9 +1028,9 @@ function viewShop(){
       ${Object.entries(ITEM_DATABASE).map(([name, item]) => `
         <div class="item row between">
           <div>
-            <b class="${item.rarity.toLowerCase()}">${name}</b> (${item.rarity} ${item.slot.toUpperCase()})
+            <b>${name}</b> (${item.rarity} ${item.slot.toUpperCase()})
             <div class="muted small">${item.desc}</div>
-            <div class="gold small">Price: ${item.price}g | ${item.atk ? '+'+item.atk+' ATK ' : ''}${item.def ? '+'+item.def+' DEF ' : ''}${item.crit ? '+'+item.crit+'% Crit' : ''}</div>
+            <div class="gold small">Price: ${item.price}g | ${item.atk ? '+'+item.atk+' ATK ' : ''}${item.def ? '+'+item.def+' DEF ' : ''}${item.crit ? '+'+item.crit+'% Crit' : ''}${item.maxHp ? '+'+item.maxHp+' HP' : ''}</div>
           </div>
           <button class="secondary" onclick="buyStoreItem('${name}', false)">Buy</button>
         </div>
@@ -970,11 +1039,93 @@ function viewShop(){
   `;
 }
 
+// ===== INVENTORY & SELLING UI =====
+function viewInventory(){
+  const potHp = S.consumables['pot_hp'] || 0;
+  const potGhp = S.consumables['pot_ghp'] || 0;
+  const potElixir = S.consumables['pot_elixir'] || 0;
+  const potEng = S.consumables['pot_eng'] || 0;
+  const potBuff = S.consumables['pot_buff'] || 0;
+
+  return `
+    <div class="card featured">
+      <h2>🎒 CHARACTER INVENTORY</h2>
+      <p class="muted small">Manage stored gear, equip items, or sell unwanted gear/potions back for Gold!</p>
+    </div>
+
+    <!-- CONSUMABLES IN INVENTORY WITH SELLING OPTIONS -->
+    <div class="card">
+      <h3>🧪 CONSUMABLES & POTIONS</h3>
+      <div class="grid">
+        <div class="item">
+          <b>🧪 HP Potions</b>: ${potHp}
+          <div class="muted small">+70 HP in battle</div>
+          ${potHp > 0 ? `<button class="secondary sell-btn" onclick="sellConsumableItem('pot_hp')" style="margin-top:4px">Sell (+17g)</button>`:''}
+        </div>
+        <div class="item">
+          <b>🍷 Greater Potions</b>: ${potGhp}
+          <div class="muted small">+160 HP in battle</div>
+          ${potGhp > 0 ? `<button class="secondary sell-btn" onclick="sellConsumableItem('pot_ghp')" style="margin-top:4px">Sell (+42g)</button>`:''}
+        </div>
+        <div class="item">
+          <b>💖 Elixirs of Life</b>: ${potElixir}
+          <div class="muted small">+350 HP in battle</div>
+          ${potElixir > 0 ? `<button class="secondary sell-btn" onclick="sellConsumableItem('pot_elixir')" style="margin-top:4px">Sell (+90g)</button>`:''}
+        </div>
+        <div class="item">
+          <b>⚡ Energy Elixirs</b>: ${potEng}
+          <div class="muted small">+50 Stamina Energy</div>
+          ${potEng > 0 ? `
+            <div style="display:flex;gap:4px;margin-top:4px">
+              <button class="secondary" onclick="useEnergyElixir()">Use</button>
+              <button class="secondary sell-btn" onclick="sellConsumableItem('pot_eng')">Sell (+22g)</button>
+            </div>
+          `:''}
+        </div>
+      </div>
+    </div>
+
+    <!-- EQUIPMENT STORAGE WITH EQUIP & SELL BUTTONS -->
+    <div class="card">
+      <h3>⚔️ EQUIPMENT STORAGE (${S.gear.length} ITEMS)</h3>
+      ${S.gear.length === 0 
+        ? `<p class="muted">No unequipped gear in storage.</p>`
+        : S.gear.map((item, index) => {
+            const sellVal = Math.round((item.price || 50) * 0.55);
+            return `
+              <div class="item row between">
+                <div>
+                  <b>${item.name}</b> (${item.slot.toUpperCase()})
+                  <div class="muted small">${item.desc}</div>
+                  <div class="gold small">${item.atk ? '+'+item.atk+' ATK ' : ''}${item.def ? '+'+item.def+' DEF ' : ''}${item.crit ? '+'+item.crit+'% Crit ' : ''}${item.maxHp ? '+'+item.maxHp+' HP' : ''}</div>
+                </div>
+                <div style="display:flex;gap:6px">
+                  <button class="primary" onclick="equipItemFromGear(${index})" style="width:auto;padding:6px 12px">Equip</button>
+                  <button class="secondary sell-btn" onclick="sellGearItem(${index})">Sell (+${sellVal}g)</button>
+                </div>
+              </div>
+            `;
+          }).join("")
+      }
+    </div>
+  `;
+}
+
+function useEnergyElixir(){
+  if((S.consumables['pot_eng']||0) > 0){
+    S.consumables['pot_eng']--;
+    S.energy = Math.min(100, S.energy + 50);
+    addLog(`<span class="good">⚡ Consumed Energy Elixir! Restored +50 Stamina.</span>`);
+    save();
+    render();
+  }
+}
+
 function viewGuilds(){
   return `
     <div class="card featured">
       <h2>🎖️ FACTION GUILDS</h2>
-      <p class="muted small">Join any guild once you meet the required Level and Rank Points! (Class restrictions removed)</p>
+      <p class="muted small">Join any guild once you reach the required Level and Rank Points!</p>
     </div>
 
     <div class="card">
@@ -988,10 +1139,10 @@ function viewGuilds(){
               <div>
                 <b>${gData.icon} ${gName} Guild</b>
                 <div class="muted small">${gData.desc}</div>
-                <div class="small muted" style="margin-top:4px">Requirements: Level ${gData.req.level}, ${gData.req.rp} Rank Points</div>
+                <div class="small muted" style="margin-top:4px">Requires: Level ${gData.req.level}, ${gData.req.rp} RP</div>
               </div>
               ${isCurrent 
-                ? `<span class="tag gold">CURRENT</span>`
+                ? `<span class="tag gold">JOINED</span>`
                 : `<button class="secondary" onclick="joinFactionGuild('${gName}')" ${canJoin?'':'disabled'}>Join</button>`
               }
             </div>
@@ -1007,72 +1158,6 @@ function joinFactionGuild(gName){
   addLog(`<span class="purple">🎖️ Joined the ${gName} Guild!</span>`);
   save();
   render();
-}
-
-function viewInventory(){
-  const potHp = S.consumables['pot_hp'] || 0;
-  const potGhp = S.consumables['pot_ghp'] || 0;
-  const potEng = S.consumables['pot_eng'] || 0;
-  const potBuff = S.consumables['pot_buff'] || 0;
-
-  return `
-    <div class="card featured">
-      <h2>🎒 CHARACTER INVENTORY</h2>
-      <p class="muted small">All stored equipment and consumables bought from the marketplace or won from quests.</p>
-    </div>
-
-    <!-- CONSUMABLES IN INVENTORY -->
-    <div class="card">
-      <h3>🧪 CONSUMABLES & POTIONS</h3>
-      <div class="grid">
-        <div class="item">
-          <b>🧪 Health Potions</b>: ${potHp}
-          <div class="muted small">Restores 60 HP in battle</div>
-        </div>
-        <div class="item">
-          <b>🍷 Greater Potions</b>: ${potGhp}
-          <div class="muted small">Restores 140 HP in battle</div>
-        </div>
-        <div class="item">
-          <b>⚡ Energy Elixirs</b>: ${potEng}
-          <div class="muted small">Restores +50 Stamina</div>
-          ${potEng > 0 ? `<button class="secondary" onclick="useEnergyElixir()" style="margin-top:4px">Use Now</button>`:''}
-        </div>
-        <div class="item">
-          <b>🔥 War Tonics</b>: ${potBuff}
-          <div class="muted small">+10 ATK in next battle</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- EQUIPMENT STORAGE -->
-    <div class="card">
-      <h3>⚔️ EQUIPMENT STORAGE (${S.gear.length} ITEMS)</h3>
-      ${S.gear.length === 0 
-        ? `<p class="muted">No unequipped items in storage. Buy items at the Shop or earn them in Quests!</p>`
-        : S.gear.map((item, index) => `
-            <div class="item row between">
-              <div>
-                <b>${item.name}</b> (${item.slot.toUpperCase()})
-                <div class="muted small">${item.desc}</div>
-                <div class="gold small">${item.atk ? '+'+item.atk+' ATK ' : ''}${item.def ? '+'+item.def+' DEF ' : ''}${item.crit ? '+'+item.crit+'% Crit' : ''}</div>
-              </div>
-              <button class="primary" onclick="equipItemFromGear(${index})" style="width:auto;padding:6px 12px">Equip</button>
-            </div>
-          `).join("")
-      }
-    </div>
-  `;
-}
-
-function useEnergyElixir(){
-  if((S.consumables['pot_eng']||0) > 0){
-    S.consumables['pot_eng']--;
-    S.energy = Math.min(100, S.energy + 50);
-    addLog(`<span class="good">⚡ Consumed Energy Elixir! Restored +50 Stamina Energy.</span>`);
-    save();
-    render();
-  }
 }
 
 function viewSettings(){
@@ -1107,10 +1192,10 @@ function createCharacterModal(){
     <p class="insert-coin arcade-flicker">🔴 NEO-GEO MVS SYSTEM 🔴</p>
     <h2 style="text-align:center;margin-top:10px">SELECT YOUR HERO</h2>
     
-    <div class="avatar-selector">
+    <div class="avatar-selector" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:15px 0">
       ${AVATARS.map((a, i) => `
-        <div class="avatar-option ${i===0?'selected':''}" onclick="selectAvatar(${i})">
-          <div class="avatar-emoji">${a.emoji}</div>
+        <div class="item" onclick="selectAvatar(${i})" style="text-align:center;cursor:pointer">
+          <div style="font-size:36px">${a.emoji}</div>
           <b>${a.name}</b>
           <div class="muted small">${a.class}</div>
         </div>
@@ -1118,7 +1203,7 @@ function createCharacterModal(){
     </div>
     
     <label>Hero Name:</label>
-    <input type="text" id="nameInput" value="Rojo">
+    <input type="text" id="nameInput" value="Rojo" style="width:100%;background:#000;border:2px solid #3a3a58;color:#fff;padding:8px;margin:8px 0">
     
     <button class="primary" onclick="finishCharacterCreation()">▶ START ADVENTURE</button>
   `);
@@ -1127,10 +1212,6 @@ function createCharacterModal(){
 function selectAvatar(i){
   S.avatar = AVATARS[i];
   S.profession = AVATARS[i].class;
-  document.querySelectorAll(".avatar-option").forEach((el, idx) => {
-    if(i === idx) el.classList.add("selected");
-    else el.classList.remove("selected");
-  });
 }
 
 function finishCharacterCreation(){
@@ -1140,28 +1221,30 @@ function finishCharacterCreation(){
   render();
 }
 
-// NAVIGATION TAB CONTROLLER
+// NAVIGATION CONTROLLER
 let tab = "guild";
 
 function render(){
-  document.getElementById("topSub").textContent = `RANK: ${RANKS[S.rank]} • ${S.gold} GOLD • STAMINA: ${S.energy}/100`;
+  document.getElementById("topSub").textContent = `LOC: ${WORLDS[S.currentLocation].name.toUpperCase()} • ${S.gold} GOLD • STAMINA: ${S.energy}/100`;
 
   const views = {
     guild: viewGuild,
+    travel: viewTravel,
     quests: viewQuests,
     shop: viewShop,
-    guilds: viewGuilds,
     inventory: viewInventory,
+    guilds: viewGuilds,
     settings: viewSettings
   };
 
   const navNames = {
-    guild: "🏛️ GUILD",
+    guild: "🏛️ HQ",
+    travel: "🗺️ MAP",
     quests: "⚔️ QUESTS",
     shop: "🏪 SHOP",
-    guilds: "🎖️ FACTIONS",
     inventory: "🎒 ITEMS",
-    settings: "⚙️ SYSTEM"
+    guilds: "🎖️ FACTIONS",
+    settings: "⚙️ SYS"
   };
 
   document.getElementById("view").innerHTML = views[tab]();
@@ -1172,7 +1255,7 @@ function render(){
 }
 
 // STARTUP
-if(!localStorage.getItem("rojo_mvs_save")){
+if(!localStorage.getItem("rojo_mvs_save_v2")){
   createCharacterModal();
 } else {
   render();
