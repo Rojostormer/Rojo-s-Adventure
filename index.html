@@ -178,14 +178,14 @@ const STORY_CHAPTERS = {
 };
 
 const WORLDS = {
-  safe: { name: "Guildtown Outskirts", emoji: "🏛️", danger: 1, reqLevel: 1, waveCount: 2 },
-  forest: { name: "Whisperwood Forest", emoji: "🌲", danger: 2, reqLevel: 4, waveCount: 3 },
-  swamp: { name: "Miasma Marshes", emoji: "☣️", danger: 3, reqLevel: 6, waveCount: 3 },
-  ruins: { name: "Forgotten Catacombs", emoji: "🏚️", danger: 4, reqLevel: 8, waveCount: 4 },
-  glacier: { name: "Frostbite Spires", emoji: "🏔️", danger: 5, reqLevel: 10, waveCount: 4 },
-  volcanic: { name: "Scorched Crater", emoji: "🌋", danger: 6, reqLevel: 12, waveCount: 5 },
-  void: { name: "The Void's Edge", emoji: "🌀", danger: 8, reqLevel: 16, waveCount: 6 },
-  abyss: { name: "The Eternal Abyss", emoji: "🌌", danger: 10, reqLevel: 20, waveCount: 7 }
+  safe: { name: "Guildtown Outskirts", emoji: "🏛️", danger: 1, reqLevel: 1, waveCount: 2, maxRarity: "Common" },
+  forest: { name: "Whisperwood Forest", emoji: "🌲", danger: 2, reqLevel: 4, waveCount: 3, maxRarity: "Magic" },
+  swamp: { name: "Miasma Marshes", emoji: "☣️", danger: 3, reqLevel: 6, waveCount: 3, maxRarity: "Magic" },
+  ruins: { name: "Forgotten Catacombs", emoji: "🏚️", danger: 4, reqLevel: 8, waveCount: 4, maxRarity: "Rare" },
+  glacier: { name: "Frostbite Spires", emoji: "🏔️", danger: 5, reqLevel: 10, waveCount: 4, maxRarity: "Rare" },
+  volcanic: { name: "Scorched Crater", emoji: "🌋", danger: 6, reqLevel: 12, waveCount: 5, maxRarity: "Epic" },
+  void: { name: "The Void's Edge", emoji: "🌀", danger: 8, reqLevel: 16, waveCount: 6, maxRarity: "Epic" },
+  abyss: { name: "The Eternal Abyss", emoji: "🌌", danger: 10, reqLevel: 20, waveCount: 7, maxRarity: "Legendary" }
 };
 
 const AVATARS = [
@@ -360,6 +360,7 @@ let S = {
   avatar: AVATARS[0],
   currentLocation: "safe",
   worldUnlocked: ["safe"],
+  bossesDefeated: [],
   stats: { str: 10, dex: 10, vit: 10, int: 10 },
   equipment: { weapon: null, armor: null, accessory: null, spell_skill: null, spell_spell: null },
   gear: [],
@@ -390,6 +391,7 @@ function freshState(){
     avatar: AVATARS[0],
     currentLocation: "safe",
     worldUnlocked: ["safe"],
+    bossesDefeated: [],
     stats: { str: 10, dex: 10, vit: 10, int: 10 },
     equipment: { weapon: null, armor: null, accessory: null, spell_skill: null, spell_spell: null },
     gear: [],
@@ -413,6 +415,7 @@ function load(){
           Caster: { level: 1, xp: 0 }, Defender: { level: 1, xp: 0 }, Fighter: { level: 1, xp: 0 }, Rogue: { level: 1, xp: 0 }
         };
       }
+      if(!S.bossesDefeated) S.bossesDefeated = [];
       if(!S.equipment.spell_skill) S.equipment.spell_skill = null;
       if(!S.equipment.spell_spell) S.equipment.spell_spell = null;
     } catch(e){}
@@ -469,8 +472,13 @@ function rankUp(){
       addLog(`<span class="gold">🏅 Guild Rank Promotion! Promoted to ${RANKS[S.rank]}-Rank!</span>`);
       const rankWorlds = ["safe", "forest", "swamp", "ruins", "glacier", "volcanic", "void", "abyss"];
       if(S.rank < rankWorlds.length && !S.worldUnlocked.includes(rankWorlds[S.rank])){
-        S.worldUnlocked.push(rankWorlds[S.rank]);
-        addLog(`<span class="blue">🗺️ NEW REGION UNLOCKED: ${WORLDS[rankWorlds[S.rank]].name}! Use Travel tab to move there.</span>`);
+        const prevLocKey = rankWorlds[S.rank - 1];
+        if(S.bossesDefeated.includes(prevLocKey)){
+          S.worldUnlocked.push(rankWorlds[S.rank]);
+          addLog(`<span class="blue">🗺️ NEW REGION UNLOCKED: ${WORLDS[rankWorlds[S.rank]].name}! Use Travel tab to move there.</span>`);
+        } else {
+          addLog(`<span class="bad">🔒 NEW REGION LOCKED: Must defeat boss of ${WORLDS[prevLocKey].name} to progress!</span>`);
+        }
       }
     } else { break; }
   }
@@ -479,7 +487,7 @@ function rankUp(){
 // ===== TRAVEL SYSTEM =====
 function travelToLocation(locKey){
   if(!S.worldUnlocked.includes(locKey)){
-    addLog(`<span class="bad">❌ Location Locked! Higher rank required to travel to ${WORLDS[locKey].name}.</span>`);
+    addLog(`<span class="bad">❌ Location Locked! Beat previous boss & reach rank requirement.</span>`);
     return;
   }
   S.currentLocation = locKey;
@@ -556,6 +564,11 @@ function buyStoreItem(itemKey, isConsumable = false){
   } else {
     const item = ITEM_DATABASE[itemKey];
     if(!item) return;
+    if(item.rarity === "Epic" || item.rarity === "Legendary"){
+      addLog(`<span class="bad">❌ Rare/Powerful item! Drops only from quests.</span>`);
+      render();
+      return;
+    }
     if(S.gold < item.price){
       addLog(`<span class="bad">❌ Not enough Gold! Costs ${item.price}g.</span>`);
       render();
@@ -922,6 +935,12 @@ function execCombatTurn(action){
   let enemyDamage = Math.max(4, e.atk - effectiveDef * 0.4);
   if(guardActive) enemyDamage = Math.round(enemyDamage * 0.4);
 
+  const isCurrentUnbeatenZone = !S.bossesDefeated.includes(combatState.quest.world);
+  if(isCurrentUnbeatenZone){
+    const maxAllowedDamage = p.maxHp * 0.40;
+    enemyDamage = Math.min(enemyDamage, maxAllowedDamage);
+  }
+
   p.hp -= enemyDamage;
   combatState.log.push(`<span class="bad">💥 ${e.name} attacks back! Took <span class="damage-number">${Math.round(enemyDamage)}</span> damage!</span>`);
 
@@ -939,15 +958,29 @@ function finishQuestVictory(){
   gainXP(q.xp);
   S.rp += q.boss ? 35 : 18;
   S.wins++;
+
+  if(q.boss && !S.bossesDefeated.includes(q.world)){
+    S.bossesDefeated.push(q.world);
+    addLog(`<span class="gold">👑 BOSS SLAIN: ${WORLDS[q.world].name} defeated! Next region unlocked!</span>`);
+  }
+
   rankUp();
 
   // CHANCE FOR ITEM & SPELL SCROLL DROPS
-  if(Math.random() < 0.70){
-    const poolKeys = Object.keys(ITEM_DATABASE);
-    const dropKey = poolKeys[Math.floor(Math.random()*poolKeys.length)];
-    const dropItem = ITEM_DATABASE[dropKey];
-    S.gear.push({ ...dropItem, name: dropKey });
-    addLog(`<span class="purple">🎁 VICTORY DROP: Found ${dropKey}! Saved to Inventory.</span>`);
+  if(Math.random() < 0.10){
+    const rarityTiers = { Common: 1, Magic: 2, Rare: 3, Epic: 4, Legendary: 5 };
+    const maxTier = rarityTiers[WORLDS[q.world].maxRarity] || 1;
+    const poolKeys = Object.keys(ITEM_DATABASE).filter(k => {
+      const itemTier = rarityTiers[ITEM_DATABASE[k].rarity] || 1;
+      return itemTier <= maxTier;
+    });
+    
+    if(poolKeys.length > 0){
+      const dropKey = poolKeys[Math.floor(Math.random()*poolKeys.length)];
+      const dropItem = ITEM_DATABASE[dropKey];
+      S.gear.push({ ...dropItem, name: dropKey });
+      addLog(`<span class="purple">🎁 VICTORY DROP: Found ${dropKey}! Saved to Inventory.</span>`);
+    }
   }
 
   addLog(`<span class="good">🏆 QUEST CLEARED: ${q.name}! Won +${q.reward}g & +${q.xp} XP!</span>`);
@@ -1203,6 +1236,8 @@ function viewQuests(){
 }
 
 function viewShop(){
+  const availableItems = Object.entries(ITEM_DATABASE).filter(([_, item]) => item.rarity !== "Epic" && item.rarity !== "Legendary");
+
   return `
     <div class="card featured">
       <h2>🏪 GUILD MARKETPLACE</h2>
@@ -1225,7 +1260,7 @@ function viewShop(){
 
     <div class="card">
       <h3>⚔️ CLASS GEAR & SPELL SCROLLS</h3>
-      ${Object.entries(ITEM_DATABASE).map(([name, item]) => `
+      ${availableItems.map(([name, item]) => `
         <div class="item row between">
           <div>
             <b>${name}</b> (${item.rarity} ${item.slot.toUpperCase()})
