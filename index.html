@@ -145,29 +145,47 @@ const STORY_CHAPTERS = {
     lore: "Beyond the eastern gates, Whisperwood Forest has been poisoned by dark alchemy. Ancient treants rampaging along trade routes must be purged.",
     bossGoal: "Purify the Ancient Moss-Beast to locate the entrance to the Catacombs."
   },
+  swamp: {
+    chapter: "CHAPTER III: THE MIASMA MARSHES",
+    lore: "Thick noxious fumes blanket the sunken marshlands. Venomous abominations ambush travelers on the sunken wooden roads.",
+    bossGoal: "Defeat the Hydra Patriarch to drain the poisonous gate valves."
+  },
   ruins: {
-    chapter: "CHAPTER III: ECHOS OF THE CATACOMBS",
+    chapter: "CHAPTER IV: ECHOS OF THE CATACOMBS",
     lore: "Beneath the fallen kingdom lie the Forgotten Catacombs. The undead serve Arch-Lich Varek, who gathers necrotic soulstones to shatter the seal.",
     bossGoal: "Vanquish Arch-Lich Varek to unseal the Volcanic Crater pass."
   },
+  glacier: {
+    chapter: "CHAPTER V: FROSTBITE SPIRES",
+    lore: "Freezing winds cut through armor at the Frostbite Spires. Ice spectres and frozen giants guard ancient primal runes.",
+    bossGoal: "Slay the Frost Wyrm Rimefang to melt the magma pass pathway."
+  },
   volcanic: {
-    chapter: "CHAPTER IV: FLAMES OF THE SCORCHED CRATER",
+    chapter: "CHAPTER VI: FLAMES OF THE SCORCHED CRATER",
     lore: "The sky burns red over Scorched Crater. Dragon-kin and magma behemoths forge weapons for the ultimate invasion of the realm.",
-    bossGoal: "Slay Ignis Dragon Lord to breach theVoid Realm."
+    bossGoal: "Slay Ignis Dragon Lord to breach the Void Realm."
   },
   void: {
-    chapter: "CHAPTER V: AT THE VOID'S EDGE",
+    chapter: "CHAPTER VII: AT THE VOID'S EDGE",
     lore: "Reality collapses at the Void's Edge. The eldritch Sovereign Xal'Kroth threatens to consume all worlds into darkness.",
     bossGoal: "Destroy Xal'Kroth and claim eternal triumph!"
+  },
+  abyss: {
+    chapter: "CHAPTER VIII: THE ETERNAL ABYSS",
+    lore: "Beyond reality itself lies the Endless Abyss. Absolute zero chaos and ancient primordial horrors test the ultimate hero.",
+    bossGoal: "Vanquish the Primordial Void God to ascend to immortality!"
   }
 };
 
 const WORLDS = {
   safe: { name: "Guildtown Outskirts", emoji: "🏛️", danger: 1, reqLevel: 1, waveCount: 2 },
   forest: { name: "Whisperwood Forest", emoji: "🌲", danger: 2, reqLevel: 4, waveCount: 3 },
+  swamp: { name: "Miasma Marshes", emoji: "☣️", danger: 3, reqLevel: 6, waveCount: 3 },
   ruins: { name: "Forgotten Catacombs", emoji: "🏚️", danger: 4, reqLevel: 8, waveCount: 4 },
+  glacier: { name: "Frostbite Spires", emoji: "🏔️", danger: 5, reqLevel: 10, waveCount: 4 },
   volcanic: { name: "Scorched Crater", emoji: "🌋", danger: 6, reqLevel: 12, waveCount: 5 },
-  void: { name: "The Void's Edge", emoji: "🌀", danger: 9, reqLevel: 16, waveCount: 6 }
+  void: { name: "The Void's Edge", emoji: "🌀", danger: 8, reqLevel: 16, waveCount: 6 },
+  abyss: { name: "The Eternal Abyss", emoji: "🌌", danger: 10, reqLevel: 20, waveCount: 7 }
 };
 
 const AVATARS = [
@@ -189,86 +207,77 @@ const GUILDS = {
 const RANKS = ["F", "E", "D", "C", "B", "A", "S"];
 
 const CLASSES = {
-  Adventurer: { 
-    desc: "Versatile combatant.", hp: 120, mp: 40, atk: 14, def: 8, spd: 10, mag: 6, crit: 5,
-    spells: {
-      skill: { name: "Power Slash", cost: 10, desc: "A heavy melee strike." },
-      spell: { name: "First Aid", cost: 15, desc: "Restores HP in battle." }
-    }
-  },
-  Caster: { 
-    desc: "Magical specialist.", hp: 90, mp: 100, atk: 8, def: 5, spd: 9, mag: 20, crit: 8,
-    spells: {
-      skill: { name: "Arcane Blast", cost: 15, desc: "Concentrated magic beam." },
-      spell: { name: "Fireball", cost: 25, desc: "Devastating elemental burst." }
-    }
-  },
-  Defender: { 
-    desc: "Heavy tank warrior.", hp: 170, mp: 30, atk: 11, def: 20, spd: 5, mag: 3, crit: 3,
-    spells: {
-      skill: { name: "Shield Bash", cost: 8, desc: "Stuns and hits enemy with guard." },
-      spell: { name: "Iron Will", cost: 12, desc: "Restores HP & boosts DEF." }
-    }
-  },
-  Fighter: { 
-    desc: "High damage dealer.", hp: 135, mp: 35, atk: 20, def: 9, spd: 8, mag: 3, crit: 7,
-    spells: {
-      skill: { name: "Berserk Strike", cost: 12, desc: "High critical power slash." },
-      spell: { name: "War Cry", cost: 15, desc: "Empowers ATK for current turn." }
-    }
-  },
-  Rogue: { 
-    desc: "Critical strike assassin.", hp: 100, mp: 50, atk: 16, def: 6, spd: 15, mag: 4, crit: 16,
-    spells: {
-      skill: { name: "Shadow Step", cost: 10, desc: "Swift lethal strike." },
-      spell: { name: "Poison Blade", cost: 20, desc: "Infuses blade with fatal venom." }
-    }
-  }
+  Adventurer: { desc: "Versatile combatant.", hp: 120, mp: 40, atk: 14, def: 8, spd: 10, mag: 6, crit: 5 },
+  Caster: { desc: "Magical specialist.", hp: 90, mp: 100, atk: 8, def: 5, spd: 9, mag: 20, crit: 8 },
+  Defender: { desc: "Heavy tank warrior.", hp: 170, mp: 30, atk: 11, def: 20, spd: 5, mag: 3, crit: 3 },
+  Fighter: { desc: "High damage dealer.", hp: 135, mp: 35, atk: 20, def: 9, spd: 8, mag: 3, crit: 7 },
+  Rogue: { desc: "Critical strike assassin.", hp: 100, mp: 50, atk: 16, def: 6, spd: 15, mag: 4, crit: 16 }
 };
 
-// ===== EXTENDED ITEM DATABASE =====
+// ===== EXPANDED ITEM DATABASE WITH CLASS-SPECIFIC TAGS =====
 const ITEM_DATABASE = {
   // WEAPONS
-  "Bronze Shortsword":  { id: "w1", slot: "weapon", atk: 6, rarity: "Common", price: 60, desc: "A reliable standard sword." },
-  "Iron Warhammer":     { id: "w2", slot: "weapon", atk: 11, rarity: "Common", price: 110, desc: "Crushes enemy defenses." },
-  "Steel Claymore":     { id: "w3", slot: "weapon", atk: 18, rarity: "Magic", price: 200, desc: "Double-handed blade forged for war." },
-  "Dagger of Shadows":  { id: "w4", slot: "weapon", atk: 22, crit: 8, rarity: "Magic", price: 300, desc: "Lethal rogue dagger with high critical chance." },
-  "Flameburst Edge":    { id: "w5", slot: "weapon", atk: 32, rarity: "Rare", price: 480, desc: "Imbued with searing flame." },
-  "Frostbite Halberd":  { id: "w6", slot: "weapon", atk: 40, def: 5, rarity: "Rare", price: 650, desc: "Freezing polearm with bonus guard." },
-  "Rune Voidbreaker":   { id: "w7", slot: "weapon", atk: 55, rarity: "Epic", price: 1100, desc: "Forged from abyss alloy. Devastating damage." },
-  "Celestial Greatsword":{ id: "w8", slot: "weapon", atk: 75, crit: 12, rarity: "Legendary", price: 2200, desc: "Mythical divine blade of legend." },
+  "Bronze Shortsword":   { id: "w1", slot: "weapon", classReq: "Adventurer", atk: 6, rarity: "Common", price: 60, desc: "Standard adventurer sword." },
+  "Iron Warhammer":      { id: "w2", slot: "weapon", classReq: "Defender", atk: 11, def: 4, rarity: "Common", price: 110, desc: "Heavy hammer built for Defenders." },
+  "Steel Claymore":      { id: "w3", slot: "weapon", classReq: "Fighter", atk: 18, rarity: "Magic", price: 200, desc: "Massive blade tailored for Fighters." },
+  "Dagger of Shadows":   { id: "w4", slot: "weapon", classReq: "Rogue", atk: 22, crit: 8, rarity: "Magic", price: 300, desc: "Swift lethal dagger for Rogues." },
+  "Apprentice Wand":     { id: "w5", slot: "weapon", classReq: "Caster", atk: 8, mag: 15, rarity: "Common", price: 120, desc: "Amplifies spellcasting for Casters." },
+  "Flameburst Edge":     { id: "w6", slot: "weapon", classReq: "Fighter", atk: 32, rarity: "Rare", price: 480, desc: "Searing blade favored by Fighters." },
+  "Arcane Oak Staff":    { id: "w7", slot: "weapon", classReq: "Caster", atk: 12, mag: 32, rarity: "Rare", price: 500, desc: "Deeply magical staff for Casters." },
+  "Frostbite Halberd":   { id: "w8", slot: "weapon", classReq: "Defender", atk: 40, def: 10, rarity: "Rare", price: 650, desc: "Freezing defensive halberd." },
+  "Rune Voidbreaker":    { id: "w9", slot: "weapon", classReq: "Adventurer", atk: 55, rarity: "Epic", price: 1100, desc: "Forged from abyss alloy." },
+  "Celestial Greatsword":{ id: "w10", slot: "weapon", classReq: "Fighter", atk: 75, crit: 12, rarity: "Legendary", price: 2200, desc: "Mythical blade of legends." },
+  "Shadow Dagger of Styx":{ id: "w11", slot: "weapon", classReq: "Rogue", atk: 68, crit: 20, rarity: "Epic", price: 1800, desc: "Lethal rogue backstabber." },
 
   // ARMOR
-  "Padded Leather":     { id: "a1", slot: "armor", def: 5, rarity: "Common", price: 50, desc: "Basic leather tunic." },
-  "Reinforced Guardplate":{ id: "a2", slot: "armor", def: 10, rarity: "Common", price: 120, desc: "Solid iron breastplate." },
-  "Chainmail Cuirass":  { id: "a3", slot: "armor", def: 16, rarity: "Magic", price: 220, desc: "Interlocking ring armor." },
-  "Mithril Mesh Mail":  { id: "a4", slot: "armor", def: 24, rarity: "Magic", price: 380, desc: "Lightweight yet resilient dwarven mesh." },
-  "Dragonscale Mail":   { id: "a5", slot: "armor", def: 35, rarity: "Rare", price: 600, desc: "Crafted from impenetrable red dragon scales." },
-  "Titan Wall Mail":    { id: "a6", slot: "armor", def: 48, maxHp: 50, rarity: "Rare", price: 950, desc: "Massive armor granting bonus HP." },
-  "Aegis Plate":        { id: "a7", slot: "armor", def: 65, rarity: "Epic", price: 1400, desc: "Sacred holy armor of legendary knights." },
-  "Nether-Eldritch Armor":{ id: "a8", slot: "armor", def: 85, maxHp: 100, rarity: "Legendary", price: 2500, desc: "Ultimate void armor." },
+  "Padded Leather":      { id: "a1", slot: "armor", classReq: "Adventurer", def: 5, rarity: "Common", price: 50, desc: "Basic adventurer tunic." },
+  "Reinforced Guardplate":{ id: "a2", slot: "armor", classReq: "Defender", def: 12, maxHp: 20, rarity: "Common", price: 120, desc: "Solid iron Defender breastplate." },
+  "Silk Weaver Robes":   { id: "a3", slot: "armor", classReq: "Caster", def: 4, maxMp: 30, rarity: "Common", price: 110, desc: "Lightweight Caster robes." },
+  "Chainmail Cuirass":   { id: "a4", slot: "armor", classReq: "Fighter", def: 16, rarity: "Magic", price: 220, desc: "Interlocking ring armor." },
+  "Mithril Mesh Mail":   { id: "a5", slot: "armor", classReq: "Rogue", def: 20, crit: 5, rarity: "Magic", price: 380, desc: "Resilient yet flexible Rogue mesh." },
+  "Dragonscale Mail":    { id: "a6", slot: "armor", classReq: "Fighter", def: 35, rarity: "Rare", price: 600, desc: "Red dragon scales." },
+  "Titan Wall Mail":     { id: "a7", slot: "armor", classReq: "Defender", def: 52, maxHp: 80, rarity: "Rare", price: 950, desc: "Massive armor granting bonus HP." },
+  "Archmage Robes":      { id: "a8", slot: "armor", classReq: "Caster", def: 22, maxMp: 80, rarity: "Epic", price: 1200, desc: "Embroidered with arcane wards." },
+  "Nether-Eldritch Armor":{ id: "a9", slot: "armor", classReq: "Defender", def: 85, maxHp: 120, rarity: "Legendary", price: 2500, desc: "Ultimate void armor." },
 
   // ACCESSORIES
-  "Iron Ring":          { id: "acc1", slot: "accessory", crit: 4, rarity: "Common", price: 40, desc: "+4% Critical chance." },
-  "Silver Band":        { id: "acc2", slot: "accessory", def: 4, crit: 4, rarity: "Common", price: 90, desc: "+4 DEF and +4% Crit." },
-  "Amulet of Might":    { id: "acc3", slot: "accessory", crit: 8, atk: 6, rarity: "Magic", price: 180, desc: "+8% Crit & +6 ATK." },
-  "Ring of the Greed":  { id: "acc4", slot: "accessory", atk: 10, rarity: "Magic", price: 280, desc: "+10 ATK." },
-  "Shadow Cloak":       { id: "acc5", slot: "accessory", crit: 15, def: 8, rarity: "Rare", price: 450, desc: "+15% Crit & +8 DEF." },
-  "Phoenix Feather":    { id: "acc6", slot: "accessory", atk: 14, maxHp: 40, rarity: "Rare", price: 700, desc: "+14 ATK & +40 Max HP." },
-  "Relic of the Void":  { id: "acc7", slot: "accessory", crit: 22, atk: 18, rarity: "Epic", price: 1200, desc: "+22% Crit & +18 ATK." },
-  "Eye of Eternity":    { id: "acc8", slot: "accessory", crit: 30, atk: 25, def: 15, rarity: "Legendary", price: 2400, desc: "Supreme relic of eternity." }
+  "Iron Ring":           { id: "acc1", slot: "accessory", classReq: "Any", crit: 4, rarity: "Common", price: 40, desc: "+4% Critical chance." },
+  "Silver Band":         { id: "acc2", slot: "accessory", classReq: "Any", def: 4, crit: 4, rarity: "Common", price: 90, desc: "+4 DEF and +4% Crit." },
+  "Amulet of Might":     { id: "acc3", slot: "accessory", classReq: "Any", crit: 8, atk: 6, rarity: "Magic", price: 180, desc: "+8% Crit & +6 ATK." },
+  "Ring of the Greed":   { id: "acc4", slot: "accessory", classReq: "Any", atk: 10, rarity: "Magic", price: 280, desc: "+10 ATK." },
+  "Shadow Cloak":        { id: "acc5", slot: "accessory", classReq: "Rogue", crit: 15, def: 8, rarity: "Rare", price: 450, desc: "+15% Crit & +8 DEF." },
+  "Phoenix Feather":     { id: "acc6", slot: "accessory", classReq: "Any", atk: 14, maxHp: 40, rarity: "Rare", price: 700, desc: "+14 ATK & +40 Max HP." },
+  "Eye of Eternity":     { id: "acc7", slot: "accessory", classReq: "Any", crit: 30, atk: 25, def: 15, rarity: "Legendary", price: 2400, desc: "Supreme relic of eternity." },
+
+  // EQUIPPABLE SPELLS / SKILLS (LOOT DROPS & SHOP PURCHASES)
+  "Scroll: Power Slash":   { id: "sp1", slot: "spell_skill", type: "skill", classReq: "Adventurer", cost: 10, power: 1.3, rarity: "Common", price: 100, desc: "A heavy strike dealing 130% damage." },
+  "Scroll: Arcane Blast":  { id: "sp2", slot: "spell_skill", type: "skill", classReq: "Caster", cost: 15, power: 1.5, rarity: "Common", price: 120, desc: "Beam of energy dealing 150% mag damage." },
+  "Scroll: Shield Bash":   { id: "sp3", slot: "spell_skill", type: "skill", classReq: "Defender", cost: 8, power: 1.2, rarity: "Common", price: 90, desc: "Hits using guard strength." },
+  "Scroll: Berserk Strike":{ id: "sp4", slot: "spell_skill", type: "skill", classReq: "Fighter", cost: 12, power: 1.6, rarity: "Common", price: 140, desc: "High critical power slash." },
+  "Scroll: Shadow Step":   { id: "sp5", slot: "spell_skill", type: "skill", classReq: "Rogue", cost: 10, power: 1.4, rarity: "Common", price: 130, desc: "Swift assassin strike." },
+
+  "Scroll: Fireball":      { id: "sp6", slot: "spell_spell", type: "spell", classReq: "Caster", cost: 25, power: 2.2, rarity: "Rare", price: 300, desc: "Devastating fire magic." },
+  "Scroll: Lightning Chain":{ id: "sp7", slot: "spell_spell", type: "spell", classReq: "Caster", cost: 35, power: 2.8, rarity: "Epic", price: 600, desc: "High voltage spell burst." },
+  "Scroll: First Aid":     { id: "sp8", slot: "spell_spell", type: "spell", classReq: "Adventurer", cost: 15, power: 1.5, rarity: "Common", price: 110, desc: "Heals HP in combat." },
+  "Scroll: Iron Will":     { id: "sp9", slot: "spell_spell", type: "spell", classReq: "Defender", cost: 12, power: 1.2, rarity: "Magic", price: 180, desc: "Restores HP & boosts DEF." },
+  "Scroll: War Cry":       { id: "sp10", slot: "spell_spell", type: "spell", classReq: "Fighter", cost: 15, power: 20, rarity: "Magic", price: 200, desc: "Empowers ATK for combat." },
+  "Scroll: Poison Blade":  { id: "sp11", slot: "spell_spell", type: "spell", classReq: "Rogue", cost: 20, power: 1.8, rarity: "Rare", price: 250, desc: "Venom-infused strikes." }
 };
 
+// ===== EXPANDED CONSUMABLES DATABASE =====
 const STORE_CONSUMABLES = {
   "Health Potion":   { id: "pot_hp", type: "heal", value: 70, price: 35, emoji: "🧪", desc: "Restores 70 HP in battle." },
   "Greater Potion":  { id: "pot_ghp", type: "heal", value: 160, price: 85, emoji: "🍷", desc: "Restores 160 HP in battle." },
   "Elixir of Life":  { id: "pot_elixir", type: "heal", value: 350, price: 180, emoji: "💖", desc: "Restores 350 HP in battle." },
   "Mana Potion":     { id: "pot_mp", type: "mana", value: 50, price: 40, emoji: "🔷", desc: "Restores 50 Mana (MP) in battle." },
+  "Greater Mana":    { id: "pot_gmp", type: "mana", value: 120, price: 90, emoji: "🔮", desc: "Restores 120 Mana (MP) in battle." },
   "Energy Elixir":   { id: "pot_eng", type: "energy", value: 50, price: 45, emoji: "⚡", desc: "Restores +50 Stamina Energy." },
-  "War Tonic":       { id: "pot_buff", type: "buff", value: 16, price: 70, emoji: "🔥", desc: "+16 ATK buff for current battle." }
+  "Max Energy Flask":{ id: "pot_maxeng", type: "energy", value: 100, price: 85, emoji: "🧪", desc: "Fully restores 100 Stamina Energy." },
+  "War Tonic":       { id: "pot_buff", type: "buff", value: 16, price: 70, emoji: "🔥", desc: "+16 ATK buff for current battle." },
+  "Aegis Shield Potion":{ id: "pot_defbuff", type: "buff", value: 20, price: 75, emoji: "🛡️", desc: "+20 DEF buff for current battle." }
 };
 
-// REBALANCED ENEMY BESTIARY (SIGNIFICANTLY STRONGER)
+// EXPANDED BESTIARY
 const BESTIARY = {
   safe: [
     { name: "Slinking Goblin", hp: 50, atk: 14, def: 4, emoji: "👺" },
@@ -280,10 +289,20 @@ const BESTIARY = {
     { name: "Shadow Lurker", hp: 100, atk: 32, def: 8, emoji: "🕷️" },
     { name: "Dire Timberwolf", hp: 135, atk: 29, def: 11, emoji: "🐺" }
   ],
+  swamp: [
+    { name: "Toxic Mire Slime", hp: 160, atk: 34, def: 15, emoji: "🦠" },
+    { name: "Marsh Lurker Serpent", hp: 180, atk: 38, def: 12, emoji: "🐍" },
+    { name: "Plague Bog Abomination", hp: 210, atk: 36, def: 18, emoji: "🧟" }
+  ],
   ruins: [
     { name: "Rune Guardian", hp: 200, atk: 38, def: 22, emoji: "🗿" },
     { name: "Crypt Phantom", hp: 170, atk: 44, def: 14, emoji: "👻" },
     { name: "Skeletal Dreadknight", hp: 230, atk: 42, def: 25, emoji: "💀" }
+  ],
+  glacier: [
+    { name: "Frost Revenant", hp: 270, atk: 48, def: 26, emoji: "🧊" },
+    { name: "Glacial Yeti", hp: 320, atk: 52, def: 30, emoji: "🦍" },
+    { name: "Rime Spectre", hp: 250, atk: 55, def: 20, emoji: "❄️" }
   ],
   volcanic: [
     { name: "Magma Drake", hp: 320, atk: 56, def: 28, emoji: "🌋" },
@@ -294,15 +313,23 @@ const BESTIARY = {
     { name: "Void Stalker", hp: 550, atk: 75, def: 35, emoji: "🌀" },
     { name: "Eldritch Fiend", hp: 650, atk: 85, def: 40, emoji: "👁️" },
     { name: "Abyssal Horror", hp: 800, atk: 95, def: 48, emoji: "👾" }
+  ],
+  abyss: [
+    { name: "Chaos Sovereign", hp: 950, atk: 110, def: 55, emoji: "☄️" },
+    { name: "Cosmic Devourer", hp: 1100, atk: 125, def: 60, emoji: "🌌" },
+    { name: "Primordial Titan", hp: 1300, atk: 135, def: 70, emoji: "⚜️" }
   ]
 };
 
 const BOSSES = {
   safe: { name: "Gorgar the Marauder", hp: 180, atk: 28, def: 12, emoji: "🧌" },
-  forest: { name: "Ancient Moss-Beast", hp: 320, atk: 42, def: 20, emoji: "🦣" },
+  forest: { name: "Ancient Moss-Beast", hp: 320, atk: 42, def: 20, emoji: "𦭁" },
+  swamp: { name: "Hydra Patriarch", hp: 420, atk: 50, def: 24, emoji: "🐉" },
   ruins: { name: "Arch-Lich Varek", hp: 500, atk: 60, def: 30, emoji: "👑" },
+  glacier: { name: "Frost Wyrm Rimefang", hp: 650, atk: 72, def: 38, emoji: "❄️" },
   volcanic: { name: "Ignis Dragon Lord", hp: 800, atk: 82, def: 45, emoji: "🐲" },
-  void: { name: "Xal'Kroth, Void Sovereign", hp: 1300, atk: 115, def: 60, emoji: "🌌" }
+  void: { name: "Xal'Kroth, Void Sovereign", hp: 1300, atk: 115, def: 60, emoji: "🌌" },
+  abyss: { name: "Chronos Primordial", hp: 1800, atk: 145, def: 80, emoji: "⚡" }
 };
 
 // NARRATIVE QUEST TEMPLATES
@@ -312,26 +339,31 @@ const QUEST_TEMPLATES = [
   { name: "Stronghold Siege", desc: "Break through heavy defensive barricades and clean out the stronghold.", event: "Continuous waves approach!" }
 ];
 
-// STATE MANAGEMENT
+// STATE MANAGEMENT WITH PER-CLASS LEVEL PROGRESSION & SPELL SLOTS
 let S = {
   name: "Rojo",
-  level: 1,
-  xp: 0,
+  activeClass: "Adventurer",
+  classProgress: {
+    Adventurer: { level: 1, xp: 0 },
+    Caster: { level: 1, xp: 0 },
+    Defender: { level: 1, xp: 0 },
+    Fighter: { level: 1, xp: 0 },
+    Rogue: { level: 1, xp: 0 }
+  },
   hp: 120,
   mp: 40,
   energy: 100,
   gold: 100,
   rp: 0,
   rank: 0,
-  profession: "Adventurer",
   guild: "Balanced",
   avatar: AVATARS[0],
-  currentLocation: "safe", // CURRENT PLAYER LOCATION
-  worldUnlocked: ["safe"], // UNLOCKED LOCATIONS
+  currentLocation: "safe",
+  worldUnlocked: ["safe"],
   stats: { str: 10, dex: 10, vit: 10, int: 10 },
-  equipment: { weapon: null, armor: null, accessory: null },
+  equipment: { weapon: null, armor: null, accessory: null, spell_skill: null, spell_spell: null },
   gear: [],
-  consumables: { pot_hp: 2, pot_mp: 2, pot_eng: 1 },
+  consumables: { pot_hp: 2, pot_mp: 2, pot_eng: 1, pot_gmp: 0, pot_maxeng: 0, pot_defbuff: 0 },
   log: [],
   wins: 0,
   losses: 0
@@ -340,58 +372,93 @@ let S = {
 function freshState(){
   return {
     name: "Rojo",
-    level: 1,
-    xp: 0,
+    activeClass: "Adventurer",
+    classProgress: {
+      Adventurer: { level: 1, xp: 0 },
+      Caster: { level: 1, xp: 0 },
+      Defender: { level: 1, xp: 0 },
+      Fighter: { level: 1, xp: 0 },
+      Rogue: { level: 1, xp: 0 }
+    },
     hp: 120,
     mp: 40,
     energy: 100,
     gold: 100,
     rp: 0,
     rank: 0,
-    profession: "Adventurer",
     guild: "Balanced",
     avatar: AVATARS[0],
     currentLocation: "safe",
     worldUnlocked: ["safe"],
     stats: { str: 10, dex: 10, vit: 10, int: 10 },
-    equipment: { weapon: null, armor: null, accessory: null },
+    equipment: { weapon: null, armor: null, accessory: null, spell_skill: null, spell_spell: null },
     gear: [],
-    consumables: { pot_hp: 2, pot_mp: 2, pot_eng: 1 },
+    consumables: { pot_hp: 2, pot_mp: 2, pot_eng: 1, pot_gmp: 0, pot_maxeng: 0, pot_defbuff: 0 },
     log: [],
     wins: 0,
     losses: 0
   };
 }
 
-function save(){ localStorage.setItem("rojo_mvs_save_v2", JSON.stringify(S)); }
+function save(){ localStorage.setItem("rojo_mvs_save_v3", JSON.stringify(S)); }
 function load(){
-  const x = localStorage.getItem("rojo_mvs_save_v2");
+  const x = localStorage.getItem("rojo_mvs_save_v3");
   if(x){
     try {
       S = JSON.parse(x);
-      if(!S.currentLocation) S.currentLocation = "safe";
-      if(!S.worldUnlocked) S.worldUnlocked = ["safe"];
-      if(S.mp === undefined) S.mp = CLASSES[S.profession || "Adventurer"].mp;
-      if(!S.consumables.pot_mp) S.consumables.pot_mp = 1;
+      if(!S.activeClass) S.activeClass = "Adventurer";
+      if(!S.classProgress) {
+        S.classProgress = {
+          Adventurer: { level: S.level || 1, xp: S.xp || 0 },
+          Caster: { level: 1, xp: 0 }, Defender: { level: 1, xp: 0 }, Fighter: { level: 1, xp: 0 }, Rogue: { level: 1, xp: 0 }
+        };
+      }
+      if(!S.equipment.spell_skill) S.equipment.spell_skill = null;
+      if(!S.equipment.spell_spell) S.equipment.spell_spell = null;
     } catch(e){}
   }
 }
 load();
 
 function addLog(t){ S.log.unshift(t); S.log = S.log.slice(0, 20); }
-function xpNeed(){ return 120 + S.level * 70; }
+function getCurrentLevel(){ return S.classProgress[S.activeClass].level; }
+function getCurrentXP(){ return S.classProgress[S.activeClass].xp; }
+function xpNeed(){ return 120 + getCurrentLevel() * 70; }
 
 function gainXP(n){
-  S.xp += n;
-  while(S.xp >= xpNeed()){
-    S.xp -= xpNeed();
-    S.level++;
+  let prog = S.classProgress[S.activeClass];
+  prog.xp += n;
+  while(prog.xp >= (120 + prog.level * 70)){
+    prog.xp -= (120 + prog.level * 70);
+    prog.level++;
     S.stats.str += 2;
     S.stats.dex += 2;
     S.stats.vit += 2;
     S.stats.int += 2;
-    addLog(`<span class="good">⭐ LEVEL UP! Reached Level ${S.level}! Attributes increased.</span>`);
+    addLog(`<span class="good">⭐ CLASS LEVEL UP! ${S.activeClass} reached Level ${prog.level}! Attributes increased.</span>`);
   }
+}
+
+// CLASS SWITCHING SYSTEM
+function switchClass(newClass){
+  if(S.activeClass === newClass) return;
+  S.activeClass = newClass;
+  const matchAv = AVATARS.find(a => a.class === newClass);
+  if(matchAv) S.avatar = matchAv;
+
+  addLog(`<span class="purple">🔄 Switched Class to ${newClass}! Active Level: ${S.classProgress[newClass].level}</span>`);
+  
+  // Unequip items that violate class restriction
+  ["weapon", "armor", "accessory", "spell_skill", "spell_spell"].forEach(slot => {
+    const item = S.equipment[slot];
+    if(item && item.classReq && item.classReq !== "Any" && item.classReq !== S.activeClass){
+      unequipSlot(slot, false);
+      addLog(`<span class="bad">⚠️ ${item.name} unequipped automatically (Requires ${item.classReq}).</span>`);
+    }
+  });
+
+  save();
+  render();
 }
 
 function rankUp(){
@@ -400,7 +467,7 @@ function rankUp(){
     if(S.rank < RANKS.length - 1){
       S.rank++;
       addLog(`<span class="gold">🏅 Guild Rank Promotion! Promoted to ${RANKS[S.rank]}-Rank!</span>`);
-      const rankWorlds = ["safe", "forest", "ruins", "volcanic", "void"];
+      const rankWorlds = ["safe", "forest", "swamp", "ruins", "glacier", "volcanic", "void", "abyss"];
       if(S.rank < rankWorlds.length && !S.worldUnlocked.includes(rankWorlds[S.rank])){
         S.worldUnlocked.push(rankWorlds[S.rank]);
         addLog(`<span class="blue">🗺️ NEW REGION UNLOCKED: ${WORLDS[rankWorlds[S.rank]].name}! Use Travel tab to move there.</span>`);
@@ -417,12 +484,12 @@ function travelToLocation(locKey){
   }
   S.currentLocation = locKey;
   addLog(`<span class="blue">🗺️ Traveled to ${WORLDS[locKey].name}.</span>`);
-  globalQuests = []; // Reset quests board for new location
+  globalQuests = [];
   save();
   render();
 }
 
-// ===== SELLING MECHANIC =====
+// ===== SELLING & EQUIPMENT MECHANIC =====
 function sellGearItem(index){
   const item = S.gear[index];
   if(!item) return;
@@ -446,7 +513,6 @@ function sellConsumableItem(itemKey){
   render();
 }
 
-// ===== EQUIPMENT MANAGEMENT =====
 function equipItemFromGear(gearIndex){
   const item = S.gear[gearIndex];
   if(!item) return;
@@ -469,7 +535,7 @@ function unequipSlot(slot, triggerRender = true){
 
   S.gear.push(item);
   S.equipment[slot] = null;
-  addLog(`<span class="muted">Unequipped ${item.name}. Returned to Inventory.</span>`);
+  addLog(`<span class="muted">Unequipped ${item.name}. Returned to Storage.</span>`);
   save();
   if(triggerRender) render();
 }
@@ -503,7 +569,6 @@ function buyStoreItem(itemKey, isConsumable = false){
   render();
 }
 
-// ===== LOCATION-LOCKED QUEST GENERATION =====
 let globalQuests = [];
 
 function generateQuestsForCurrentLocation(){
@@ -517,7 +582,6 @@ function generateQuestsForCurrentLocation(){
     const tmpl = QUEST_TEMPLATES[Math.floor(Math.random() * QUEST_TEMPLATES.length)];
     const energyCost = 15 + w.danger * 4;
 
-    // QUEST WAVE LENGTH BASED ON LOCATION DANGER
     const totalWaves = isBoss ? w.waveCount + 1 : w.waveCount;
 
     list.push({
@@ -547,6 +611,7 @@ let combatState = {
   player: {},
   enemy: {},
   tempAtkBuff: 0,
+  tempDefBuff: 0,
   log: []
 };
 
@@ -559,7 +624,6 @@ function selectQuestFromBoard(id){
     <p class="muted">${quest.desc}</p>
     <div style="background:#151522;padding:10px;border:2px solid var(--neoblue);margin:10px 0">
       <b style="color:var(--neoblue)">📍 LOCATION: ${WORLDS[quest.world].name}</b>
-      <div class="small muted">You are currently at this location.</div>
     </div>
     
     <div class="reward-box">
@@ -600,20 +664,30 @@ function startQuestById(id){
 }
 
 function initiateMultiWaveCombat(quest){
-  const c = CLASSES[S.profession];
+  const c = CLASSES[S.activeClass];
+  const cLevel = getCurrentLevel();
   const gBonus = GUILDS[S.guild].bonus;
   
-  const wAtk = S.equipment.weapon ? S.equipment.weapon.atk : 0;
-  const aDef = S.equipment.armor ? S.equipment.armor.def : 0;
-  const aMaxHp = S.equipment.armor && S.equipment.armor.maxHp ? S.equipment.armor.maxHp : 0;
-  const accCrit = S.equipment.accessory ? S.equipment.accessory.crit : 0;
-  const accAtk = S.equipment.accessory && S.equipment.accessory.atk ? S.equipment.accessory.atk : 0;
-  const accMaxHp = S.equipment.accessory && S.equipment.accessory.maxHp ? S.equipment.accessory.maxHp : 0;
+  // CLASS-SPECIFIC GEAR EFFICIENCY CHECK (100% IF MATCHING CLASS, 50% IF MISMATCHED)
+  const calculateItemBonus = (item, prop) => {
+    if(!item || !item[prop]) return 0;
+    if(item.classReq && item.classReq !== "Any" && item.classReq !== S.activeClass){
+      return item[prop] * 0.5; // 50% reduced efficiency if mismatched
+    }
+    return item[prop];
+  };
 
-  const maxHp = c.hp + S.level * 14 + (gBonus.maxHp || 0) + S.stats.vit * 4 + aMaxHp + accMaxHp;
-  const maxMp = c.mp + S.level * 6 + (gBonus.maxMp || 0) + S.stats.int * 3;
-  const totalAtk = c.atk + S.level * 3 + wAtk + accAtk + (gBonus.atk || 0) + S.stats.str * 1.1;
-  const totalDef = c.def + S.level * 2 + aDef + (gBonus.def || 0);
+  const wAtk = calculateItemBonus(S.equipment.weapon, "atk");
+  const aDef = calculateItemBonus(S.equipment.armor, "def");
+  const aMaxHp = calculateItemBonus(S.equipment.armor, "maxHp");
+  const accCrit = calculateItemBonus(S.equipment.accessory, "crit");
+  const accAtk = calculateItemBonus(S.equipment.accessory, "atk");
+  const accMaxHp = calculateItemBonus(S.equipment.accessory, "maxHp");
+
+  const maxHp = c.hp + cLevel * 14 + (gBonus.maxHp || 0) + S.stats.vit * 4 + aMaxHp + accMaxHp;
+  const maxMp = c.mp + cLevel * 6 + (gBonus.maxMp || 0) + S.stats.int * 3;
+  const totalAtk = c.atk + cLevel * 3 + wAtk + accAtk + (gBonus.atk || 0) + S.stats.str * 1.1;
+  const totalDef = c.def + cLevel * 2 + aDef + (gBonus.def || 0);
   const totalCrit = c.crit + accCrit + (gBonus.crit || 0) + S.stats.dex * 0.4;
 
   combatState = {
@@ -622,6 +696,7 @@ function initiateMultiWaveCombat(quest){
     currentWave: 1,
     totalWaves: quest.waves,
     tempAtkBuff: 0,
+    tempDefBuff: 0,
     player: {
       hp: maxHp,
       maxHp: maxHp,
@@ -630,7 +705,7 @@ function initiateMultiWaveCombat(quest){
       atk: totalAtk,
       def: totalDef,
       crit: totalCrit,
-      mag: c.mag + S.level * 2.5 + (gBonus.mag || 0)
+      mag: c.mag + cLevel * 2.5 + (gBonus.mag || 0)
     },
     enemy: {},
     log: []
@@ -655,7 +730,6 @@ function spawnWaveEnemy(){
     baseEnemy = pool[Math.floor(Math.random() * pool.length)];
   }
 
-  // INCREASED COMBAT DIFFICULTY SCALING
   const waveScale = 1 + (combatState.currentWave - 1) * 0.25;
   combatState.enemy = {
     name: baseEnemy.name,
@@ -680,15 +754,19 @@ function useCombatConsumable(itemKey){
     const healVal = item.value;
     p.hp = Math.min(p.maxHp, p.hp + healVal);
     combatState.log.push(`<span class="good">🧪 Consumed healing potion! Restored ${healVal} HP. (${Math.round(p.hp)}/${p.maxHp} HP)</span>`);
-  } else if(itemKey === 'pot_mp'){
-    const item = STORE_CONSUMABLES['Mana Potion'];
-    S.consumables['pot_mp']--;
+  } else if(itemKey === 'pot_mp' || itemKey === 'pot_gmp'){
+    const item = STORE_CONSUMABLES[Object.keys(STORE_CONSUMABLES).find(k => STORE_CONSUMABLES[k].id === itemKey)];
+    S.consumables[itemKey]--;
     p.mp = Math.min(p.maxMp, p.mp + item.value);
-    combatState.log.push(`<span class="blue">🔷 Used Mana Potion! Restored ${item.value} MP. (${Math.round(p.mp)}/${p.maxMp} MP)</span>`);
+    combatState.log.push(`<span class="blue">🔷 Used ${itemKey}! Restored ${item.value} MP. (${Math.round(p.mp)}/${p.maxMp} MP)</span>`);
   } else if(itemKey === 'pot_buff'){
     S.consumables['pot_buff']--;
     combatState.tempAtkBuff += 16;
-    combatState.log.push(`<span class="gold">🔥 Used War Tonic! Attack increased by +16 for this battle!</span>`);
+    combatState.log.push(`<span class="gold">🔥 Used War Tonic! Attack increased +16!</span>`);
+  } else if(itemKey === 'pot_defbuff'){
+    S.consumables['pot_defbuff']--;
+    combatState.tempDefBuff += 20;
+    combatState.log.push(`<span class="good">🛡️ Used Aegis Shield Potion! Defense increased +20!</span>`);
   }
   save();
   renderCombatUI();
@@ -702,9 +780,12 @@ function renderCombatUI(){
   const potGhpCount = S.consumables['pot_ghp'] || 0;
   const potElixirCount = S.consumables['pot_elixir'] || 0;
   const potMpCount = S.consumables['pot_mp'] || 0;
+  const potGmpCount = S.consumables['pot_gmp'] || 0;
   const potBuffCount = S.consumables['pot_buff'] || 0;
+  const potDefCount = S.consumables['pot_defbuff'] || 0;
 
-  const spells = CLASSES[S.profession].spells;
+  const skillItem = S.equipment.spell_skill;
+  const spellItem = S.equipment.spell_spell;
 
   const html = `
     <div style="background:#000;padding:6px 10px;border:2px solid var(--gold);display:flex;justify-content:space-between;margin-bottom:10px;font-family:'Press Start 2P',monospace;font-size:8px">
@@ -714,12 +795,12 @@ function renderCombatUI(){
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
       <div style="border:3px solid var(--neoblue);padding:10px;background:#0d1420">
-        <div style="color:var(--neoblue);font-family:'Press Start 2P',monospace;font-size:9px;margin-bottom:4px">${S.name} (${S.profession})</div>
+        <div style="color:var(--neoblue);font-family:'Press Start 2P',monospace;font-size:9px;margin-bottom:4px">${S.name} (${S.activeClass})</div>
         <div class="bar"><div class="fill" style="width:${Math.max(0, p.hp/p.maxHp*100)}%;background:var(--good)"></div></div>
         <div class="small muted" style="margin-top:3px">${Math.max(0, Math.round(p.hp))}/${p.maxHp} HP</div>
         <div class="bar purple" style="margin-top:4px"><div class="fill" style="width:${Math.max(0, p.mp/p.maxMp*100)}%"></div></div>
         <div class="small muted" style="margin-top:2px;color:var(--neopurple)">${Math.max(0, Math.round(p.mp))}/${p.maxMp} MP</div>
-        <div class="small" style="margin-top:4px">⚔️ ATK: ${Math.round(p.atk + combatState.tempAtkBuff)} | 🛡️ DEF: ${Math.round(p.def)}</div>
+        <div class="small" style="margin-top:4px">⚔️ ATK: ${Math.round(p.atk + combatState.tempAtkBuff)} | 🛡️ DEF: ${Math.round(p.def + combatState.tempDefBuff)}</div>
       </div>
       
       <div style="border:3px solid var(--neored);padding:10px;background:#200d12">
@@ -732,24 +813,33 @@ function renderCombatUI(){
 
     <div class="log" style="margin-bottom:10px">${combatState.log.map(x => `<div>${x}</div>`).join("")}</div>
 
-    <!-- COMBAT ACTIONS -->
+    <!-- COMBAT ACTIONS USING EQUIPPED SPELLS & SKILLS -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
       <button class="primary" onclick="execCombatTurn('attack')">⚔️ Strike Attack</button>
-      <button class="primary" onclick="execCombatTurn('skill')">💥 ${spells.skill.name} (${spells.skill.cost} MP)</button>
-      <button class="primary" onclick="execCombatTurn('spell')">✨ ${spells.spell.name} (${spells.spell.cost} MP)</button>
+      
+      ${skillItem 
+        ? `<button class="primary" onclick="execCombatTurn('skill')">💥 ${skillItem.name.replace("Scroll: ","")} (${skillItem.cost} MP)</button>` 
+        : `<button class="primary" disabled>💥 Skill (Unequipped)</button>`}
+
+      ${spellItem 
+        ? `<button class="primary" onclick="execCombatTurn('spell')">✨ ${spellItem.name.replace("Scroll: ","")} (${spellItem.cost} MP)</button>` 
+        : `<button class="primary" disabled>✨ Spell (Unequipped)</button>`}
+
       <button class="secondary" onclick="execCombatTurn('guard')">🛡️ Guard Stance</button>
       <button class="secondary" onclick="execCombatTurn('flee')" style="grid-column: span 2">🏃 Retreat</button>
     </div>
 
     <!-- INVENTORY POTIONS IN COMBAT -->
     <div style="margin-top:10px;padding:8px;background:var(--panel2);border:2px solid #3a3a58">
-      <div class="small muted" style="font-family:'Press Start 2P',monospace;font-size:8px;margin-bottom:6px">🧪 USE INVENTORY POTIONS:</div>
+      <div class="small muted" style="font-family:'Press Start 2P',monospace;font-size:8px;margin-bottom:6px">🧪 USE POTIONS:</div>
       <div style="display:flex;gap:6px;flex-wrap:wrap">
         <button class="secondary" onclick="useCombatConsumable('pot_hp')" ${potHpCount>0?'':'disabled'}>🧪 HP (${potHpCount})</button>
         <button class="secondary" onclick="useCombatConsumable('pot_ghp')" ${potGhpCount>0?'':'disabled'}>🍷 Greater (${potGhpCount})</button>
         <button class="secondary" onclick="useCombatConsumable('pot_elixir')" ${potElixirCount>0?'':'disabled'}>💖 Elixir (${potElixirCount})</button>
         <button class="secondary" onclick="useCombatConsumable('pot_mp')" ${potMpCount>0?'':'disabled'}>🔷 Mana (${potMpCount})</button>
+        <button class="secondary" onclick="useCombatConsumable('pot_gmp')" ${potGmpCount>0?'':'disabled'}>🔮 Grtr Mana (${potGmpCount})</button>
         <button class="secondary" onclick="useCombatConsumable('pot_buff')" ${potBuffCount>0?'':'disabled'}>🔥 War Tonic (${potBuffCount})</button>
+        <button class="secondary" onclick="useCombatConsumable('pot_defbuff')" ${potDefCount>0?'':'disabled'}>🛡️ Aegis (${potDefCount})</button>
       </div>
     </div>
   `;
@@ -761,7 +851,10 @@ function execCombatTurn(action){
   const p = combatState.player;
   const e = combatState.enemy;
   const effectiveAtk = p.atk + combatState.tempAtkBuff;
-  const spells = CLASSES[S.profession].spells;
+  const effectiveDef = p.def + combatState.tempDefBuff;
+
+  const skillItem = S.equipment.spell_skill;
+  const spellItem = S.equipment.spell_spell;
 
   let playerDamage = 0;
   let guardActive = false;
@@ -775,34 +868,33 @@ function execCombatTurn(action){
       ? `<span class="crit-hit">💥 CRITICAL STRIKE!</span> Dealt <span class="damage-number">${playerDamage}</span> damage!`
       : `You strike the enemy for <span class="damage-number">${playerDamage}</span> damage.`);
   } else if(action === 'skill'){
-    if(p.mp < spells.skill.cost){
-      combatState.log.push(`<span class="bad">❌ Not enough Mana! Requires ${spells.skill.cost} MP.</span>`);
+    if(!skillItem || p.mp < skillItem.cost){
+      combatState.log.push(`<span class="bad">❌ Not enough Mana for ${skillItem?skillItem.name:'Skill'}!</span>`);
       renderCombatUI();
       return;
     }
-    p.mp -= spells.skill.cost;
-    playerDamage = Math.round(Math.max(10, effectiveAtk * 1.4 - e.def * 0.3));
+    p.mp -= skillItem.cost;
+    const pwr = skillItem.power || 1.3;
+    playerDamage = Math.round(Math.max(10, effectiveAtk * pwr - e.def * 0.3));
     e.hp -= playerDamage;
-    combatState.log.push(`💥 Used <b>${spells.skill.name}</b>! Dealt <span class="damage-number">${playerDamage}</span> damage! (-${spells.skill.cost} MP)`);
+    combatState.log.push(`💥 Used <b>${skillItem.name.replace("Scroll: ","")}</b>! Dealt <span class="damage-number">${playerDamage}</span> damage! (-${skillItem.cost} MP)`);
   } else if(action === 'spell'){
-    if(p.mp < spells.spell.cost){
-      combatState.log.push(`<span class="bad">❌ Not enough Mana! Requires ${spells.spell.cost} MP.</span>`);
+    if(!spellItem || p.mp < spellItem.cost){
+      combatState.log.push(`<span class="bad">❌ Not enough Mana for ${spellItem?spellItem.name:'Spell'}!</span>`);
       renderCombatUI();
       return;
     }
-    p.mp -= spells.spell.cost;
+    p.mp -= spellItem.cost;
 
-    if(S.profession === "Adventurer" || S.profession === "Defender"){
-      const healAmt = Math.round(p.mag * 2.5 + 20);
+    if(spellItem.name.includes("First Aid") || spellItem.name.includes("Iron Will")){
+      const healAmt = Math.round(p.mag * 2.2 + 30);
       p.hp = Math.min(p.maxHp, p.hp + healAmt);
-      combatState.log.push(`<span class="good">✨ Cast <b>${spells.spell.name}</b>! Restored ${healAmt} HP! (-${spells.spell.cost} MP)</span>`);
-    } else if(S.profession === "Fighter"){
-      combatState.tempAtkBuff += 20;
-      combatState.log.push(`<span class="gold">🔥 Used <b>${spells.spell.name}</b>! Attack dramatically increased for battle! (-${spells.spell.cost} MP)</span>`);
+      combatState.log.push(`<span class="good">✨ Cast <b>${spellItem.name.replace("Scroll: ","")}</b>! Restored ${healAmt} HP! (-${spellItem.cost} MP)</span>`);
     } else {
-      playerDamage = Math.round(Math.max(15, p.mag * 2.2 + effectiveAtk * 0.8 - e.def * 0.2));
+      const pwr = spellItem.power || 2.0;
+      playerDamage = Math.round(Math.max(15, p.mag * pwr + effectiveAtk * 0.6 - e.def * 0.2));
       e.hp -= playerDamage;
-      combatState.log.push(`<span class="purple">✨ Cast <b>${spells.spell.name}</b>! Unleashed magic dealing <span class="damage-number">${playerDamage}</span> damage! (-${spells.spell.cost} MP)</span>`);
+      combatState.log.push(`<span class="purple">✨ Cast <b>${spellItem.name.replace("Scroll: ","")}</b>! Dealt <span class="damage-number">${playerDamage}</span> magic damage! (-${spellItem.cost} MP)</span>`);
     }
   } else if(action === 'guard'){
     guardActive = true;
@@ -814,7 +906,6 @@ function execCombatTurn(action){
     return;
   }
 
-  // Check if wave enemy slain
   if(e.hp <= 0){
     combatState.log.push(`<span class="good">🎯 Slain ${e.name}!</span>`);
     if(combatState.currentWave < combatState.totalWaves){
@@ -828,8 +919,7 @@ function execCombatTurn(action){
     }
   }
 
-  // ENEMY ATTACK (INCREASED DIFFICULTY)
-  let enemyDamage = Math.max(4, e.atk - p.def * 0.4);
+  let enemyDamage = Math.max(4, e.atk - effectiveDef * 0.4);
   if(guardActive) enemyDamage = Math.round(enemyDamage * 0.4);
 
   p.hp -= enemyDamage;
@@ -851,13 +941,13 @@ function finishQuestVictory(){
   S.wins++;
   rankUp();
 
-  // Chance for item drop
-  if(Math.random() < 0.65){
+  // CHANCE FOR ITEM & SPELL SCROLL DROPS
+  if(Math.random() < 0.70){
     const poolKeys = Object.keys(ITEM_DATABASE);
     const dropKey = poolKeys[Math.floor(Math.random()*poolKeys.length)];
     const dropItem = ITEM_DATABASE[dropKey];
     S.gear.push({ ...dropItem, name: dropKey });
-    addLog(`<span class="purple">🎁 VICTORY DROP: Found ${dropKey}! Added to Inventory.</span>`);
+    addLog(`<span class="purple">🎁 VICTORY DROP: Found ${dropKey}! Saved to Inventory.</span>`);
   }
 
   addLog(`<span class="good">🏆 QUEST CLEARED: ${q.name}! Won +${q.reward}g & +${q.xp} XP!</span>`);
@@ -877,12 +967,12 @@ function finishQuestVictory(){
 
 function finishQuestDefeat(){
   S.losses++;
-  addLog(`<span class="bad">💀 DEFEATED on Quest: ${combatState.quest.name}. Upgrade your gear or use potions!</span>`);
+  addLog(`<span class="bad">💀 DEFEATED on Quest: ${combatState.quest.name}. Upgrade gear, equip spells, or use potions!</span>`);
   save();
 
   modal(`
     <h2 class="bad">💀 QUEST FAILED</h2>
-    <p>Your hero fell in combat against enemy waves. Upgrade equipment at the shop or stock up on healing potions!</p>
+    <p>Your hero fell in combat against enemy waves. Equip class-specific gear or stock up on potions!</p>
     <button class="primary" onclick="closeModal();render()">Return to Base</button>
   `);
 }
@@ -892,9 +982,11 @@ function finishQuestDefeat(){
 function renderProfileCard(){
   const currLoc = WORLDS[S.currentLocation];
   const currStory = STORY_CHAPTERS[S.currentLocation];
-  const c = CLASSES[S.profession];
+  const c = CLASSES[S.activeClass];
+  const cLevel = getCurrentLevel();
+  const cXp = getCurrentXP();
   const gBonus = GUILDS[S.guild].bonus;
-  const maxMp = c.mp + S.level * 6 + (gBonus.maxMp || 0) + S.stats.int * 3;
+  const maxMp = c.mp + cLevel * 6 + (gBonus.maxMp || 0) + S.stats.int * 3;
 
   return `
     <div class="card hero">
@@ -902,7 +994,7 @@ function renderProfileCard(){
         <div>
           <div style="font-size:36px;margin-bottom:4px;filter:drop-shadow(3px 3px 0 #000)">${S.avatar.emoji}</div>
           <h2>${S.name}</h2>
-          <div class="muted">${RANKS[S.rank]}-Rank • Level ${S.level} • ${S.profession}</div>
+          <div class="muted">${RANKS[S.rank]}-Rank • Level ${cLevel} ${S.activeClass}</div>
         </div>
         <div style="text-align:right">
           <div class="gold" style="font-size:20px">📍 ${currLoc.emoji}</div>
@@ -912,13 +1004,23 @@ function renderProfileCard(){
       </div>
     </div>
 
-    <!-- OVERARCHING STORY BOX -->
+    <!-- DYNAMIC CLASS SELECTOR -->
+    <div class="card">
+      <h3>🔄 ACTIVE CLASS SELECTOR</h3>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        ${Object.keys(CLASSES).map(cls => `
+          <button class="secondary" onclick="switchClass('${cls}')" style="${S.activeClass===cls?'border-color:var(--gold);background:#332200':''}">
+            ${cls} (Lv.${S.classProgress[cls].level})
+          </button>
+        `).join("")}
+      </div>
+    </div>
+
     <div class="story-box">
       <div style="font-family:'Press Start 2P',monospace;font-size:8px;color:var(--neopurple);margin-bottom:4px">${currStory.chapter}</div>
       <p style="margin:0;font-size:15px;line-height:1.3;color:#e0d0ff">${currStory.lore}</p>
     </div>
 
-    <!-- STAMINA ENERGY & EXP BARS -->
     <div class="grid">
       <div class="card" style="margin:0">
         <h3>⚡ STAMINA ENERGY</h3>
@@ -926,9 +1028,9 @@ function renderProfileCard(){
         <div class="small muted" style="margin-top:4px">${S.energy}/100 Energy</div>
       </div>
       <div class="card" style="margin:0">
-        <h3>⭐ EXPERIENCE</h3>
-        <div class="bar blue"><div class="fill" style="width:${S.xp/xpNeed()*100}%"></div></div>
-        <div class="small muted" style="margin-top:4px">${S.xp}/${xpNeed()} XP</div>
+        <h3>⭐ CLASS EXP (${S.activeClass})</h3>
+        <div class="bar blue"><div class="fill" style="width:${cXp/xpNeed()*100}%"></div></div>
+        <div class="small muted" style="margin-top:4px">${cXp}/${xpNeed()} XP</div>
       </div>
     </div>
     <br>
@@ -939,15 +1041,15 @@ function renderProfileCard(){
     </div>
     <br>
 
-    <!-- EQUIPPED ITEMS DISPLAY WITH UNEQUIP -->
+    <!-- EQUIPPED ITEMS & SPELL SLOTS DISPLAY -->
     <div class="card">
-      <h3>🛡️ EQUIPPED GEAR</h3>
+      <h3>🛡️ EQUIPPED GEAR & SPELL SLOTS</h3>
       <div class="equipment-grid">
         <div class="equipment-slot">
           <div>
             <b>WEAPON SLOT</b>
             <div class="item-name">${S.equipment.weapon ? S.equipment.weapon.name : "None (Unarmed)"}</div>
-            <div class="muted small">${S.equipment.weapon ? `+${S.equipment.weapon.atk} ATK` : "No bonus"}</div>
+            <div class="muted small">${S.equipment.weapon ? `+${S.equipment.weapon.atk} ATK (${S.equipment.weapon.classReq || 'Any'})` : "No bonus"}</div>
           </div>
           ${S.equipment.weapon ? `<button class="secondary" onclick="unequipSlot('weapon')">Unequip</button>` : ''}
         </div>
@@ -955,8 +1057,8 @@ function renderProfileCard(){
         <div class="equipment-slot">
           <div>
             <b>ARMOR SLOT</b>
-            <div class="item-name">${S.equipment.armor ? S.equipment.armor.name : "None (Cloth)"}</div>
-            <div class="muted small">${S.equipment.armor ? `+${S.equipment.armor.def} DEF` : "No bonus"}</div>
+            <div class="item-name">${S.equipment.armor ? S.equipment.armor.name : "None"}</div>
+            <div class="muted small">${S.equipment.armor ? `+${S.equipment.armor.def} DEF (${S.equipment.armor.classReq || 'Any'})` : "No bonus"}</div>
           </div>
           ${S.equipment.armor ? `<button class="secondary" onclick="unequipSlot('armor')">Unequip</button>` : ''}
         </div>
@@ -965,9 +1067,27 @@ function renderProfileCard(){
           <div>
             <b>ACCESSORY SLOT</b>
             <div class="item-name">${S.equipment.accessory ? S.equipment.accessory.name : "None"}</div>
-            <div class="muted small">${S.equipment.accessory ? `+${S.equipment.accessory.crit}% Crit` : "No bonus"}</div>
+            <div class="muted small">${S.equipment.accessory ? `+${S.equipment.accessory.crit||0}% Crit` : "No bonus"}</div>
           </div>
           ${S.equipment.accessory ? `<button class="secondary" onclick="unequipSlot('accessory')">Unequip</button>` : ''}
+        </div>
+
+        <div class="equipment-slot" style="border-color:var(--neoorange)">
+          <div>
+            <b style="color:var(--neoorange)">EQUIPPED SKILL SLOT</b>
+            <div class="item-name">${S.equipment.spell_skill ? S.equipment.spell_skill.name : "None"}</div>
+            <div class="muted small">${S.equipment.spell_skill ? `${S.equipment.spell_skill.desc}` : "No skill equipped"}</div>
+          </div>
+          ${S.equipment.spell_skill ? `<button class="secondary" onclick="unequipSlot('spell_skill')">Unequip</button>` : ''}
+        </div>
+
+        <div class="equipment-slot" style="border-color:var(--neopurple)">
+          <div>
+            <b style="color:var(--neopurple)">EQUIPPED SPELL SLOT</b>
+            <div class="item-name">${S.equipment.spell_spell ? S.equipment.spell_spell.name : "None"}</div>
+            <div class="muted small">${S.equipment.spell_spell ? `${S.equipment.spell_spell.desc}` : "No spell equipped"}</div>
+          </div>
+          ${S.equipment.spell_spell ? `<button class="secondary" onclick="unequipSlot('spell_spell')">Unequip</button>` : ''}
         </div>
       </div>
     </div>
@@ -1010,7 +1130,7 @@ function viewTravel(){
   return `
     <div class="card featured">
       <h2>🗺️ WORLD MAP & TRAVEL</h2>
-      <p class="muted small">Travel between unlocked territories. Quests are locked to your current physical location!</p>
+      <p class="muted small">Travel between unlocked territories. Quests are locked to your physical location!</p>
     </div>
 
     ${Object.entries(WORLDS).map(([key, w]) => {
@@ -1041,7 +1161,6 @@ function viewTravel(){
   `;
 }
 
-// ===== LOCATION-RESTRICTED QUESTS UI =====
 function viewQuests(){
   const currLoc = WORLDS[S.currentLocation];
 
@@ -1052,7 +1171,7 @@ function viewQuests(){
   return `
     <div class="card featured">
       <h2>⚔️ LOCAL CONTRACT BOARD: ${currLoc.name.toUpperCase()}</h2>
-      <p class="muted small">Notice: Only quests for <b>${currLoc.name}</b> are listed here. Multi-wave enemies attack in sequence!</p>
+      <p class="muted small">Notice: Only quests for <b>${currLoc.name}</b> are listed here!</p>
     </div>
 
     <div class="card">
@@ -1087,7 +1206,7 @@ function viewShop(){
   return `
     <div class="card featured">
       <h2>🏪 GUILD MARKETPLACE</h2>
-      <p class="muted small">Purchase high-tier items and potions to aid your party during long wave-based quests.</p>
+      <p class="muted small">Purchase gear, spell scrolls, and potions for your journey!</p>
     </div>
 
     <div class="card">
@@ -1105,13 +1224,14 @@ function viewShop(){
     </div>
 
     <div class="card">
-      <h3>⚔️ WEAPONS & ARMOR SHOP</h3>
+      <h3>⚔️ CLASS GEAR & SPELL SCROLLS</h3>
       ${Object.entries(ITEM_DATABASE).map(([name, item]) => `
         <div class="item row between">
           <div>
             <b>${name}</b> (${item.rarity} ${item.slot.toUpperCase()})
+            <div class="purple small">Class Req: ${item.classReq || 'Any'}</div>
             <div class="muted small">${item.desc}</div>
-            <div class="gold small">Price: ${item.price}g | ${item.atk ? '+'+item.atk+' ATK ' : ''}${item.def ? '+'+item.def+' DEF ' : ''}${item.crit ? '+'+item.crit+'% Crit' : ''}${item.maxHp ? '+'+item.maxHp+' HP' : ''}</div>
+            <div class="gold small">Price: ${item.price}g</div>
           </div>
           <button class="secondary" onclick="buyStoreItem('${name}', false)">Buy</button>
         </div>
@@ -1120,71 +1240,48 @@ function viewShop(){
   `;
 }
 
-// ===== INVENTORY & SELLING UI =====
 function viewInventory(){
-  const potHp = S.consumables['pot_hp'] || 0;
-  const potGhp = S.consumables['pot_ghp'] || 0;
-  const potElixir = S.consumables['pot_elixir'] || 0;
-  const potMp = S.consumables['pot_mp'] || 0;
-  const potEng = S.consumables['pot_eng'] || 0;
-  const potBuff = S.consumables['pot_buff'] || 0;
-
   return `
     <div class="card featured">
-      <h2>🎒 CHARACTER INVENTORY</h2>
-      <p class="muted small">Manage stored gear, equip items, or sell unwanted gear/potions back for Gold!</p>
+      <h2>🎒 INVENTORY & SPELL MANAGEMENT</h2>
+      <p class="muted small">Equip class-matched weapons/armor and equip spell scrolls into active combat slots!</p>
     </div>
 
-    <!-- CONSUMABLES IN INVENTORY WITH SELLING OPTIONS -->
     <div class="card">
-      <h3>🧪 CONSUMABLES & POTIONS</h3>
+      <h3>🧪 POTIONS & ELIXIRS</h3>
       <div class="grid">
-        <div class="item">
-          <b>🧪 HP Potions</b>: ${potHp}
-          <div class="muted small">+70 HP in battle</div>
-          ${potHp > 0 ? `<button class="secondary sell-btn" onclick="sellConsumableItem('pot_hp')" style="margin-top:4px">Sell (+17g)</button>`:''}
-        </div>
-        <div class="item">
-          <b>🍷 Greater Potions</b>: ${potGhp}
-          <div class="muted small">+160 HP in battle</div>
-          ${potGhp > 0 ? `<button class="secondary sell-btn" onclick="sellConsumableItem('pot_ghp')" style="margin-top:4px">Sell (+42g)</button>`:''}
-        </div>
-        <div class="item">
-          <b>💖 Elixirs of Life</b>: ${potElixir}
-          <div class="muted small">+350 HP in battle</div>
-          ${potElixir > 0 ? `<button class="secondary sell-btn" onclick="sellConsumableItem('pot_elixir')" style="margin-top:4px">Sell (+90g)</button>`:''}
-        </div>
-        <div class="item">
-          <b>🔷 Mana Potions</b>: ${potMp}
-          <div class="muted small">+50 MP in battle</div>
-          ${potMp > 0 ? `<button class="secondary sell-btn" onclick="sellConsumableItem('pot_mp')" style="margin-top:4px">Sell (+20g)</button>`:''}
-        </div>
-        <div class="item">
-          <b>⚡ Energy Elixirs</b>: ${potEng}
-          <div class="muted small">+50 Stamina Energy</div>
-          ${potEng > 0 ? `
-            <div style="display:flex;gap:4px;margin-top:4px">
-              <button class="secondary" onclick="useEnergyElixir()">Use</button>
-              <button class="secondary sell-btn" onclick="sellConsumableItem('pot_eng')">Sell (+22g)</button>
+        ${Object.entries(STORE_CONSUMABLES).map(([name, item]) => {
+          const count = S.consumables[item.id] || 0;
+          const sellVal = Math.round(item.price * 0.5);
+          return `
+            <div class="item">
+              <b>${item.emoji} ${name}</b>: ${count}
+              <div class="muted small">${item.desc}</div>
+              ${count > 0 ? `
+                <div style="display:flex;gap:4px;margin-top:4px">
+                  ${item.type === 'energy' ? `<button class="secondary" onclick="useEnergyElixir('${item.id}')">Use</button>` : ''}
+                  <button class="secondary sell-btn" onclick="sellConsumableItem('${item.id}')">Sell (+${sellVal}g)</button>
+                </div>
+              `:''}
             </div>
-          `:''}
-        </div>
+          `;
+        }).join("")}
       </div>
     </div>
 
-    <!-- EQUIPMENT STORAGE WITH EQUIP & SELL BUTTONS -->
     <div class="card">
-      <h3>⚔️ EQUIPMENT STORAGE (${S.gear.length} ITEMS)</h3>
+      <h3>⚔️ GEAR & SPELL SCROLL STORAGE (${S.gear.length} ITEMS)</h3>
       ${S.gear.length === 0 
-        ? `<p class="muted">No unequipped gear in storage.</p>`
+        ? `<p class="muted">No items in storage.</p>`
         : S.gear.map((item, index) => {
             const sellVal = Math.round((item.price || 50) * 0.55);
+            const isMatchingClass = !item.classReq || item.classReq === "Any" || item.classReq === S.activeClass;
             return `
               <div class="item row between">
                 <div>
                   <b>${item.name}</b> (${item.slot.toUpperCase()})
+                  <div class="${isMatchingClass ? 'good':'bad'} small">Class: ${item.classReq || 'Any'} ${!isMatchingClass?'(Mismatched: 50% penalty)':''}</div>
                   <div class="muted small">${item.desc}</div>
-                  <div class="gold small">${item.atk ? '+'+item.atk+' ATK ' : ''}${item.def ? '+'+item.def+' DEF ' : ''}${item.crit ? '+'+item.crit+'% Crit ' : ''}${item.maxHp ? '+'+item.maxHp+' HP' : ''}</div>
                 </div>
                 <div style="display:flex;gap:6px">
                   <button class="primary" onclick="equipItemFromGear(${index})" style="width:auto;padding:6px 12px">Equip</button>
@@ -1198,11 +1295,12 @@ function viewInventory(){
   `;
 }
 
-function useEnergyElixir(){
-  if((S.consumables['pot_eng']||0) > 0){
-    S.consumables['pot_eng']--;
-    S.energy = Math.min(100, S.energy + 50);
-    addLog(`<span class="good">⚡ Consumed Energy Elixir! Restored +50 Stamina.</span>`);
+function useEnergyElixir(id){
+  if((S.consumables[id]||0) > 0){
+    S.consumables[id]--;
+    const boost = id === 'pot_maxeng' ? 100 : 50;
+    S.energy = Math.min(100, S.energy + boost);
+    addLog(`<span class="good">⚡ Restored +${boost} Stamina Energy!</span>`);
     save();
     render();
   }
@@ -1217,7 +1315,7 @@ function viewGuilds(){
 
     <div class="card">
       ${Object.entries(GUILDS).map(([gName, gData]) => {
-        const canJoin = S.level >= gData.req.level && S.rp >= gData.req.rp;
+        const canJoin = getCurrentLevel() >= gData.req.level && S.rp >= gData.req.rp;
         const isCurrent = S.guild === gName;
 
         return `
@@ -1277,7 +1375,7 @@ function closeModal(){
 function createCharacterModal(){
   modal(`
     <p class="insert-coin arcade-flicker">🔴 NEO-GEO MVS SYSTEM 🔴</p>
-    <h2 style="text-align:center;margin-top:10px">SELECT YOUR HERO</h2>
+    <h2 style="text-align:center;margin-top:10px">SELECT YOUR HERO CLASS</h2>
     
     <div class="avatar-selector" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:15px 0">
       ${AVATARS.map((a, i) => `
@@ -1298,7 +1396,7 @@ function createCharacterModal(){
 
 function selectAvatar(i){
   S.avatar = AVATARS[i];
-  S.profession = AVATARS[i].class;
+  S.activeClass = AVATARS[i].class;
 }
 
 function finishCharacterCreation(){
@@ -1308,7 +1406,6 @@ function finishCharacterCreation(){
   render();
 }
 
-// NAVIGATION CONTROLLER
 let tab = "guild";
 
 function render(){
@@ -1341,8 +1438,7 @@ function render(){
   `).join("");
 }
 
-// STARTUP
-if(!localStorage.getItem("rojo_mvs_save_v2")){
+if(!localStorage.getItem("rojo_mvs_save_v3")){
   createCharacterModal();
 } else {
   render();
