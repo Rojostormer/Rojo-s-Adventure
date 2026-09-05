@@ -2,829 +2,384 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Realm of Ember & Echoes - Pro Edition</title>
+  <title>RPG Quest Game</title>
   <style>
-    :root {
-      --bg: #0d0f14;
-      --panel: #161922;
-      --panel-alt: #1f2430;
-      --accent: #e2b714;
-      --accent-hover: #f5cc27;
-      --text: #cbd5e1;
-      --text-bright: #ffffff;
-      --border: #2d3345;
-      --danger: #ef4444;
-      --success: #10b981;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 10px;
-    }
-
-    #game-layout {
-      width: 1000px;
-      height: 720px;
-      background: var(--panel);
-      border: 2px solid var(--border);
-      border-radius: 8px;
-      display: grid;
-      grid-template-rows: 50px 1fr 140px;
-      box-shadow: 0 12px 36px rgba(0,0,0,0.6);
-      overflow: hidden;
-    }
-
-    nav {
-      display: flex;
-      background: #0d0e12;
-      border-bottom: 2px solid var(--border);
-    }
-    nav button {
-      flex: 1;
-      background: transparent;
-      border: none;
-      color: var(--text);
-      font-weight: bold;
-      cursor: pointer;
-      border-right: 1px solid var(--border);
-      transition: 0.2s;
-    }
-    nav button:hover, nav button.active {
-      background: var(--border);
-      color: var(--accent);
-    }
-
-    .tab-content { display: none; padding: 16px; height: 100%; overflow-y: auto; }
-    .tab-content.active { display: block; }
-
-    /* Quests Tab */
-    .quest-layout { display: grid; grid-template-columns: 290px 1fr; gap: 16px; height: 100%; }
-    .quest-list { border-right: 1px solid var(--border); padding-right: 12px; overflow-y: auto; }
-    .quest-card {
-      background: var(--panel-alt);
-      padding: 12px;
-      border-radius: 6px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      border-left: 4px solid transparent;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .quest-card:hover { background: #262c3d; }
-    .quest-card.selected { border-left-color: var(--accent); background: #262c3d; }
-    .quest-card.completed { opacity: 0.45; }
-
-    .story-panel {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background: #10121a;
-      padding: 16px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-    }
-    .story-text { font-size: 0.95rem; line-height: 1.6; color: var(--text-bright); overflow-y: auto; margin-bottom: 12px; }
-    .choice-container { display: flex; flex-direction: column; gap: 8px; }
-
-    /* Standard Buttons */
-    .btn {
-      background: var(--accent);
-      color: #000;
-      font-weight: bold;
-      padding: 8px 12px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: 0.15s;
-    }
-    .btn:hover { background: var(--accent-hover); }
-    .btn:disabled { opacity: 0.35; cursor: not-allowed; }
-    .btn-option {
-      background: var(--panel-alt);
-      color: var(--text-bright);
-      text-align: left;
-      border: 1px solid var(--border);
-      padding: 10px 12px;
-    }
-    .btn-option:hover:not(:disabled) { background: #2d3448; border-color: var(--accent); }
-
-    /* Item & Shop Grids */
-    .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 12px; }
-    .item-card {
-      background: var(--panel-alt);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .item-title { font-weight: bold; color: var(--text-bright); }
-    .item-stats { font-size: 0.8rem; color: #94a3b8; margin: 4px 0; }
-
-    .sheet-grid { display: grid; grid-template-columns: 320px 1fr; gap: 16px; }
-    .gear-slot-box { background: var(--panel-alt); border: 1px solid var(--border); padding: 12px; border-radius: 6px; margin-bottom: 10px; }
-
-    /* Map Cards */
-    .map-nodes { display: flex; gap: 16px; height: 100%; align-items: center; justify-content: center; }
-    .location-card {
-      width: 250px;
-      height: 340px;
-      background: var(--panel-alt);
-      border: 2px solid var(--border);
-      border-radius: 8px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      text-align: center;
-    }
-    .location-card.current { border-color: var(--accent); background: #262c3d; }
-
-    /* HUD */
-    #hud {
-      background: #0d0e12;
-      border-top: 2px solid var(--border);
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      padding: 10px 16px;
-      gap: 12px;
-    }
-    .stats-box { font-size: 0.82rem; display: flex; flex-direction: column; justify-content: center; gap: 3px; }
-    .console-box {
-      background: #060709;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 10px;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.8rem;
-      color: #34d399;
-      overflow-y: auto;
-    }
-    .badge { display: inline-block; padding: 2px 6px; font-size: 0.7rem; border-radius: 3px; font-weight: bold; }
-    .badge-loc { background: #3b82f6; color: white; }
-    .badge-guild { background: #8b5cf6; color: white; }
-    .meter-bg { width: 100%; background: #1e293b; height: 8px; border-radius: 4px; overflow: hidden; margin-top: 2px; }
-    .meter-fill-hp { background: #ef4444; height: 100%; width: 100%; transition: width 0.2s; }
-    .meter-fill-energy { background: #f59e0b; height: 100%; width: 100%; transition: width 0.2s; }
+    body { font-family: sans-serif; margin: 20px; background: #f4f4f9; color: #333; }
+    .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 20px; border: 1px solid #ccc; border-radius: 6px; }
+    nav { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
+    nav button { padding: 8px 16px; cursor: pointer; }
+    .tab { display: none; }
+    .tab.active { display: block; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .card { border: 1px solid #ddd; padding: 12px; margin-bottom: 10px; border-radius: 4px; background: #fafafa; }
+    .btn { background: #0066cc; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
+    .btn:disabled { background: #ccc; cursor: not-allowed; }
+    .btn-danger { background: #cc0000; }
+    #console { background: #222; color: #00ff66; padding: 10px; font-family: monospace; height: 100px; overflow-y: auto; margin-top: 20px; border-radius: 4px; }
+    .stat-bar { background: #e0e0e0; border-radius: 4px; height: 12px; width: 100%; margin-top: 4px; overflow: hidden; }
+    .stat-fill { height: 100%; background: #0066cc; width: 100%; }
+    .energy-fill { background: #e6a100; }
   </style>
 </head>
 <body>
 
-<div id="game-layout">
+<div class="container">
+  <h2>Quest Adventurer</h2>
+  <div id="hud-summary"></div>
+
   <nav>
-    <button class="nav-btn active" onclick="switchTab('quests', this)">Quests</button>
-    <button class="nav-btn" onclick="switchTab('character', this)">Character Sheet</button>
-    <button class="nav-btn" onclick="switchTab('shop', this)">Adventurer Shop</button>
-    <button class="nav-btn" onclick="switchTab('guilds', this)">Guild Hall</button>
-    <button class="nav-btn" onclick="switchTab('world', this)">World Map</button>
+    <button onclick="showTab('quests')">Quests</button>
+    <button onclick="showTab('character')">Character Sheet</button>
+    <button onclick="showTab('shop')">Store</button>
+    <button onclick="showTab('guilds')">Guilds</button>
   </nav>
 
-  <div id="tab-quests" class="tab-content active">
-    <div class="quest-layout">
-      <div class="quest-list" id="quest-list-container"></div>
-      <div class="story-panel">
-        <div id="story-display">
-          <h3 id="quest-title" style="color: var(--accent); margin-bottom: 8px;">Select a Quest</h3>
-          <div id="quest-body" class="story-text">Select an active quest in your current region from the left menu to begin deployment.</div>
-        </div>
-        <div id="choice-box" class="choice-container"></div>
-      </div>
-    </div>
-  </div>
-
-  <div id="tab-character" class="tab-content">
-    <div class="sheet-grid">
+  <div id="tab-quests" class="tab active">
+    <div class="grid">
       <div>
-        <h3 style="margin-bottom: 12px; color:var(--text-bright);">Equipped Slots</h3>
-        <div id="equipped-slots"></div>
-        <div style="background:var(--panel-alt); padding:12px; border-radius:6px; border:1px solid var(--border); margin-top:10px;">
-          <h4 style="color:var(--accent);">Combat Overview</h4>
-          <div id="total-stats-display" style="font-size:0.85rem; color:#94a3b8; margin-top:6px; line-height:1.5;"></div>
-        </div>
+        <h3>Available Quests</h3>
+        <div id="quest-list"></div>
       </div>
       <div>
-        <h3 style="margin-bottom: 12px; color:var(--text-bright);">Backpack Inventory</h3>
-        <div id="inventory-grid" class="item-grid"></div>
+        <h3>Quest Progress</h3>
+        <div id="quest-display" class="card">
+          <p>Select a quest to begin.</p>
+        </div>
       </div>
     </div>
   </div>
 
-  <div id="tab-shop" class="tab-content">
-    <h3 style="margin-bottom: 12px; color:var(--text-bright);">Adventurer Supply Merchant</h3>
-    <div id="shop-grid" class="item-grid"></div>
-  </div>
-
-  <div id="tab-guilds" class="tab-content">
-    <h3 style="margin-bottom: 12px; color:var(--text-bright);">Open Adventurer Guild Rosters</h3>
-    <div id="guild-container" class="item-grid"></div>
-  </div>
-
-  <div id="tab-world" class="tab-content">
-    <h3 style="margin-bottom: 15px; text-align: center; color:var(--text-bright);">Known World Regions</h3>
-    <div class="map-nodes" id="world-map-container"></div>
-  </div>
-
-  <div id="hud">
-    <div class="stats-box">
-      <div><strong>Hero Level:</strong> <span id="stat-level">Lv. 1</span> | <strong>Gold:</strong> <span id="stat-gold" style="color:var(--accent);">50g</span></div>
-      <div><strong>HP:</strong> <span id="stat-hp">100/100</span> | <strong>ATK:</strong> <span id="stat-atk">10</span> | <strong>DEF:</strong> <span id="stat-def">2</span></div>
-      <div class="meter-bg"><div id="hp-fill" class="meter-fill-hp"></div></div>
-      <div style="margin-top:2px;">
-        <strong>Energy:</strong> <span id="stat-energy">10/10</span>
-        <button onclick="restAtInn()" class="btn" style="padding:2px 8px; font-size:0.7rem; margin-left:6px;">Inn Rest (20g)</button>
+  <div id="tab-character" class="tab">
+    <div class="grid">
+      <div>
+        <h3>Equipped Items</h3>
+        <div id="equipped-list"></div>
       </div>
-      <div class="meter-bg"><div id="energy-fill" class="meter-fill-energy"></div></div>
-      <div style="margin-top:4px;">
-        <span id="stat-region" class="badge badge-loc">Oakhaven</span>
-        <span id="stat-guild" class="badge badge-guild">None</span>
+      <div>
+        <h3>Backpack Inventory</h3>
+        <div id="inventory-list"></div>
       </div>
     </div>
-    <div class="console-box" id="console-log">> System initialized. Select a quest or manage gear.</div>
   </div>
+
+  <div id="tab-shop" class="tab">
+    <h3>Item Shop</h3>
+    <div id="shop-list" class="grid"></div>
+  </div>
+
+  <div id="tab-guilds" class="tab">
+    <h3>Guild Hall</h3>
+    <p>Guilds are open to all adventurers regardless of classification.</p>
+    <div id="guild-list" class="grid"></div>
+  </div>
+
+  <div id="console">> Game loaded. Ready for questing.</div>
 </div>
 
 <script>
-  // GAME STATE
   const state = {
-    player: {
-      level: 1,
-      baseHp: 100,
-      baseAtk: 10,
-      baseDef: 2,
-      hp: 100,
-      energy: 10,
-      maxEnergy: 10,
-      gold: 50,
-      region: 'Oakhaven',
-      guild: 'None'
-    },
-    equipment: { weapon: null, armor: null, accessory: null },
+    hp: 100,
+    maxHp: 100,
+    energy: 10,
+    maxEnergy: 10,
+    gold: 50,
+    baseAtk: 10,
+    baseDef: 2,
+    guild: 'None',
+    equipment: { weapon: null, armor: null },
     inventory: [
-      { id: 'p_hp1', name: 'Minor Health Potion', type: 'usable', heal: 35, price: 20, desc: 'Restores 35 HP on demand.' }
+      { id: 'pot_1', name: 'Health Potion', type: 'usable', heal: 30, price: 15, desc: 'Restores 30 HP.' }
     ],
-    completedQuests: [],
-    activeQuestId: null,
+    activeQuest: null,
     questStep: 0
   };
 
-  const regions = [
-    { id: 'Oakhaven', name: 'Oakhaven Village', desc: 'A peaceful border town threatened by timberland horrors.', reqLevel: 1 },
-    { id: 'Ironmine', name: 'Ironmine Ridge', desc: 'Rugged mountains controlled by disciplined renegade squads.', reqLevel: 2 },
-    { id: 'SunkenRuins', name: 'Sunken Citadel', desc: 'Submerged ancient ruins dripping with ancient magic and construct sentinels.', reqLevel: 3 }
-  ];
-
-  // BRANCHING MULTI-CHOICE QUEST DATABASE
-  const questDatabase = {
-    Oakhaven: [
-      {
-        id: 'oak_1',
-        title: 'The Timberland Raids',
-        desc: 'Investigate livestock slaughters along the woodland border.',
-        energyCost: 3,
-        nodes: [
-          {
-            text: "Stage 1: You enter the misty forest. Fresh blood leads into a clearing where three mutated Dire Wolves devour a prize bull. They spot you immediately!",
-            choices: [
-              { text: "Draw blade and fight the pack directly", outcome: 1, damage: 30 },
-              { text: "Toss a Fire Bomb to scatter the pack instantly", outcome: 2, reqItem: 'item_firebomb', consumed: true, damage: 5 }
-            ]
-          },
-          {
-            // Path A
-            text: "Stage 2: You slash down two wolves, but the surviving Alpha leaps onto your shoulder, snapping viciously before you drive your dagger home.",
-            choices: [
-              { text: "Bandage your wounds and track the pack master to its lair", outcome: 3, damage: 20 },
-              { text: "Drink a Health Potion from your backpack to restore vitality", outcome: 3, reqItem: 'p_hp1', consumed: true, heal: 35, damage: 0 }
-            ]
-          },
-          {
-            // Path B
-            text: "Stage 2: The Fire Bomb detonates in a flash of heat, scorching the beast pack! You walk cleanly toward the old watchtower at the forest heart.",
-            choices: [
-              { text: "Breach the ruined watchtower front gates", outcome: 3, damage: 10 }
-            ]
-          },
-          {
-            // Finale
-            text: "Stage 3: Inside the watchtower, you defeat the corrupting Beastmaster! The woods grow silent and local villagers safe again.",
-            choices: [
-              { text: "Claim the watchtower chest and return", finish: true, gold: 65, loot: { id: 'w_dagger', name: 'Fang Dagger', type: 'weapon', atk: 7, value: 35 } }
-            ]
-          }
-        ]
-      },
-      {
-        id: 'oak_2',
-        title: 'Shadows over Oakhaven Mill',
-        desc: 'Uncover the void cultist ritual corrupting the local water wheel.',
-        energyCost: 4,
-        nodes: [
-          {
-            text: "Stage 1: Dark incantations echo inside the watermill. Two Void Cultists circle a shimmering obsidian crystal.",
-            choices: [
-              { text: "Break the door down and confront both cultists", outcome: 1, damage: 35 },
-              { text: "Snipe the ritual leader using Precision Arrows", outcome: 1, reqItem: 'item_arrows', consumed: true, damage: 10 }
-            ]
-          },
-          {
-            text: "Stage 2: The cultists fall, but the crystal bursts into an ethereal Void Fiend with razor claws!",
-            choices: [
-              { text: "Engage in a desperate duel of blade vs shadow", outcome: 2, damage: 45 },
-              { text: "Raise heavy armor/shield to absorb its dark burst", outcome: 2, damage: 20 }
-            ]
-          },
-          {
-            text: "Stage 3: The entity dissolves into harmless mist. The mill streams clear once more.",
-            choices: [
-              { text: "Purify the mill chest and collect reward", finish: true, gold: 95, loot: { id: 'a_leather', name: 'Studded Leather Vest', type: 'armor', def: 9, value: 65 } }
-            ]
-          }
-        ]
-      }
-    ],
-    Ironmine: [
-      {
-        id: 'iron_1',
-        title: 'Siege of the Deep Shafts',
-        desc: 'Liberate the iron mines from heavily armored Orc Renegades.',
-        energyCost: 5,
-        nodes: [
-          {
-            text: "Stage 1: A barricade of iron spikes blocks the cavern shaft. Orc Shield-Bearers form a phalanx behind it.",
-            choices: [
-              { text: "Charge the iron shield line head-on", outcome: 1, damage: 50 },
-              { text: "Blow up the wooden barricade supports with a Fire Bomb", outcome: 1, reqItem: 'item_firebomb', consumed: true, damage: 15 }
-            ]
-          },
-          {
-            text: "Stage 2: You breach the cavern heart where Orc Executioner swings a massive battleaxe!",
-            choices: [
-              { text: "Parry his crushing blows in a test of endurance", outcome: 2, damage: 55 },
-              { text: "Use high tier weapons to breach his heavy guard", outcome: 2, damage: 25 }
-            ]
-          },
-          {
-            text: "Stage 3: The Executioner collapses onto the cavern floor! Miners emerge from hiding to offer thanks.",
-            choices: [
-              { text: "Accept mine guild payment", finish: true, gold: 160, loot: { id: 'w_mace', name: 'Iron-Breaker Mace', type: 'weapon', atk: 18, value: 130 } }
-            ]
-          }
-        ]
-      }
-    ],
-    SunkenRuins: [
-      {
-        id: 'sunken_1',
-        title: 'The Sunken Titan',
-        desc: 'Enter the flooded sanctuary to destroy the ancient construct guardian.',
-        energyCost: 6,
-        nodes: [
-          {
-            text: "Stage 1: Lightning arcs through the knee-deep flooded sanctuary as Submerged Sentinel constructs awaken!",
-            choices: [
-              { text: "Wade through the charged water and strike their power cores", outcome: 1, damage: 65 },
-              { text: "Chug a Greater HP Potion mid-water combat to stay standing", outcome: 1, reqItem: 'p_hp2', consumed: true, heal: 60, damage: 25 }
-            ]
-          },
-          {
-            text: "Stage 2: The primary Sunken Titan rises, channeling ancient magic into a colossal broadsword!",
-            choices: [
-              { text: "Fight the Titan through its ruthless spell cycles", outcome: 2, damage: 75 },
-              { text: "Target its glowing energy heart directly", outcome: 2, damage: 40 }
-            ]
-          },
-          {
-            text: "Stage 3: The stone titan shatters into ancient relics!",
-            choices: [
-              { text: "Extract ancient armor and exit", finish: true, gold: 260, loot: { id: 'a_plate', name: 'Runic Titan Armor', type: 'armor', def: 22, value: 260 } }
-            ]
-          }
-        ]
-      }
-    ]
-  };
-
-  // MERCHANT ITEMS WITH DIRECT GAMEPLAY UTILITY
   const shopItems = [
-    { id: 'p_hp1', name: 'Minor Health Potion', type: 'usable', heal: 35, price: 20, desc: 'Restores 35 HP on demand.' },
-    { id: 'p_hp2', name: 'Greater HP Potion', type: 'usable', heal: 60, price: 45, desc: 'Restores 60 HP. Key for surviving lethal encounters.' },
-    { id: 'item_firebomb', name: 'Fire Bomb', type: 'usable', price: 40, desc: 'Consumable: Unlocks quest choices to bypass enemy swarms.' },
-    { id: 'item_arrows', name: 'Precision Arrows', type: 'usable', price: 30, desc: 'Consumable: Unlocks quest choices to snipe ritual casters.' },
-    { id: 'w_sword', name: 'Steel Knight Sword', type: 'weapon', atk: 12, price: 95, desc: '+12 Attack Weapon' },
-    { id: 'a_chain', name: 'Heavy Chainmail Vest', type: 'armor', def: 11, price: 115, desc: '+11 Defense Armor' },
-    { id: 'acc_ring', name: 'Ring of Might', type: 'accessory', atk: 6, def: 5, price: 155, desc: '+6 ATK / +5 DEF Accessory' }
+    { id: 'pot_1', name: 'Health Potion', type: 'usable', heal: 30, price: 15, desc: 'Restores 30 HP instantly.' },
+    { id: 'bomb_1', name: 'Fire Bomb', type: 'usable', damage: 40, price: 25, desc: 'Can be thrown in quests to deal 40 splash damage.' },
+    { id: 'wpn_1', name: 'Iron Sword', type: 'weapon', atk: 8, price: 40, desc: '+8 Attack Power' },
+    { id: 'arm_1', name: 'Chainmail Vest', type: 'armor', def: 6, price: 50, desc: '+6 Defense Power' }
   ];
 
-  // GUILD ROSTERS
   const guilds = [
-    { id: 'Fighters', name: 'Iron Vanguard', reqGold: 40, desc: 'Martial guild open to all fighters.' },
-    { id: 'Shadows', name: 'Whisper Syndicate', reqGold: 80, desc: 'Covert syndicate open to agile adventurers.' },
-    { id: 'Mages', name: 'Arcane Order', reqGold: 120, desc: 'Scholarly guild researching ancient magic.' }
+    { name: 'Warriors Guild', fee: 30, desc: 'Open to everyone seeking martial strength.' },
+    { name: 'Mages Circle', fee: 30, desc: 'Open to everyone interested in the arcane.' },
+    { name: 'Shadow League', fee: 30, desc: 'Open to all stealth and speed enthusiasts.' }
   ];
 
-  // TAB SWITCHING
-  function switchTab(tabId, btnEl) {
-    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('nav .nav-btn').forEach(el => el.classList.remove('active'));
-    document.getElementById(`tab-${tabId}`).classList.add('active');
-    if (btnEl) btnEl.classList.add('active');
-    renderAll();
-  }
+  const quests = [
+    {
+      id: 'q1',
+      title: 'Clear the Goblin Cave',
+      energyCost: 3,
+      nodes: [
+        {
+          text: 'Stage 1: You enter a dark cave and encounter 3 Goblin Scouts blocking the passage.',
+          options: [
+            { text: 'Attack with weapon', dmg: 15, next: 1 },
+            { text: 'Throw Fire Bomb from inventory', reqItem: 'bomb_1', consume: true, dmg: 0, next: 1 }
+          ]
+        },
+        {
+          text: 'Stage 2: Pushing deeper, a heavy Goblin Brute charges at you with a heavy club!',
+          options: [
+            { text: 'Block and counter-attack', dmg: 25, next: 2 },
+            { text: 'Use Health Potion before fighting', reqItem: 'pot_1', consume: true, heal: 30, dmg: 10, next: 2 }
+          ]
+        },
+        {
+          text: 'Stage 3: You reach the Goblin Shaman performing a dark spell over a treasure chest.',
+          options: [
+            { text: 'Interrupt shaman and finish the fight', dmg: 30, finish: true, gold: 50 }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'q2',
+      title: 'Bandit Camp Ambush',
+      energyCost: 4,
+      nodes: [
+        {
+          text: 'Stage 1: You locate the bandit perimeter guards near the treeline.',
+          options: [
+            { text: 'Fight through the guard post', dmg: 20, next: 1 }
+          ]
+        },
+        {
+          text: 'Stage 2: The Bandit Leader emerges with two armored lieutenants.',
+          options: [
+            { text: 'Engage the leader in a direct duel', dmg: 35, finish: true, gold: 80 }
+          ]
+        }
+      ]
+    }
+  ];
 
   function log(msg) {
-    const box = document.getElementById('console-log');
-    box.innerHTML += `<div>> ${msg}</div>`;
-    box.scrollTop = box.scrollHeight;
+    const c = document.getElementById('console');
+    c.innerHTML += `<div>> ${msg}</div>`;
+    c.scrollTop = c.scrollHeight;
   }
 
-  function getTotalAtk() {
-    let atk = state.player.baseAtk;
-    Object.values(state.equipment).forEach(i => { if (i && i.atk) atk += i.atk; });
-    return atk;
+  function getAtk() {
+    return state.baseAtk + (state.equipment.weapon ? state.equipment.weapon.atk : 0);
   }
 
-  function getTotalDef() {
-    let def = state.player.baseDef;
-    Object.values(state.equipment).forEach(i => { if (i && i.def) def += i.def; });
-    return def;
+  function getDef() {
+    return state.baseDef + (state.equipment.armor ? state.equipment.armor.def : 0);
   }
 
-  function restAtInn() {
-    if (state.player.gold < 20) {
-      log("Not enough gold! Inn rest costs 20g.");
-      return;
-    }
-    state.player.gold -= 20;
-    state.player.energy = state.player.maxEnergy;
-    state.player.hp = state.player.baseHp;
-    log("Rested at the Inn. HP and Energy fully restored!");
-    renderAll();
+  function showTab(id) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(`tab-${id}`).classList.add('active');
+    render();
   }
 
-  // CORE RENDER ROUTINE
-  function renderAll() {
-    renderHUD();
-    renderQuests();
-    renderCharacterSheet();
-    renderShop();
-    renderGuilds();
-    renderWorldMap();
+  function rest() {
+    if (state.gold < 10) return log('Not enough gold to rest at the inn (10g required).');
+    state.gold -= 10;
+    state.hp = state.maxHp;
+    state.energy = state.maxEnergy;
+    log('Rested at the inn. HP and Energy restored.');
+    render();
   }
 
-  function renderHUD() {
-    document.getElementById('stat-level').innerText = `Lv. ${state.player.level}`;
-    document.getElementById('stat-hp').innerText = `${state.player.hp}/${state.player.baseHp}`;
-    document.getElementById('stat-atk').innerText = getTotalAtk();
-    document.getElementById('stat-def').innerText = getTotalDef();
-    document.getElementById('stat-gold').innerText = `${state.player.gold}g`;
-    document.getElementById('stat-energy').innerText = `${state.player.energy}/${state.player.maxEnergy}`;
-
-    document.getElementById('hp-fill').style.width = `${(state.player.hp / state.player.baseHp) * 100}%`;
-    document.getElementById('energy-fill').style.width = `${(state.player.energy / state.player.maxEnergy) * 100}%`;
-
-    document.getElementById('stat-region').innerText = state.player.region;
-    document.getElementById('stat-guild').innerText = state.player.guild;
-  }
-
-  function renderQuests() {
-    const list = document.getElementById('quest-list-container');
-    list.innerHTML = '';
-
-    const available = questDatabase[state.player.region] || [];
-
-    available.forEach(q => {
-      const isDone = state.completedQuests.includes(q.id);
-      const card = document.createElement('div');
-      card.className = `quest-card ${isDone ? 'completed' : ''} ${state.activeQuestId === q.id ? 'selected' : ''}`;
-      card.innerHTML = `
-        <strong>${q.title}</strong><br>
-        <small>${q.desc}</small><br>
-        <small style="color:var(--accent);">Energy Cost: ${q.energyCost}</small>
-      `;
-      card.onclick = () => selectQuest(q.id);
-      list.appendChild(card);
-    });
-  }
-
-  function selectQuest(qId) {
-    if (state.completedQuests.includes(qId)) {
-      document.getElementById('quest-title').innerText = "Quest Completed";
-      document.getElementById('quest-body').innerText = "You have already resolved this story path.";
-      document.getElementById('choice-box').innerHTML = "";
+  function startQuest(qId) {
+    const q = quests.find(x => x.id === qId);
+    
+    // FIX: ENERGY STRICTLY REQUIRED TO PLAY QUEST
+    if (state.energy < q.energyCost) {
+      log(`Cannot start quest! Requires ${q.energyCost} Energy (You have ${state.energy}).`);
       return;
     }
 
-    const quest = (questDatabase[state.player.region] || []).find(q => q.id === qId);
-
-    // ENERGY CHECK LOCKOUT
-    if (state.player.energy < quest.energyCost) {
-      document.getElementById('quest-title').innerText = "Exhausted!";
-      document.getElementById('quest-body').innerText = `You require ${quest.energyCost} Energy to attempt this quest. Current Energy: ${state.player.energy}. Use 'Inn Rest' in the HUD to recover.`;
-      document.getElementById('choice-box').innerHTML = "";
-      return;
-    }
-
-    state.activeQuestId = qId;
+    state.energy -= q.energyCost;
+    state.activeQuest = q;
     state.questStep = 0;
-    renderQuestStory();
-    renderQuests();
+    log(`Started quest: ${q.title}. Spent ${q.energyCost} Energy.`);
+    render();
   }
 
-  function renderQuestStory() {
-    const quest = (questDatabase[state.player.region] || []).find(q => q.id === state.activeQuestId);
-    if (!quest) return;
-
-    const node = quest.nodes[state.questStep];
-    document.getElementById('quest-title').innerText = quest.title;
-    document.getElementById('quest-body').innerText = node.text;
-
-    const choiceBox = document.getElementById('choice-box');
-    choiceBox.innerHTML = '';
-
-    node.choices.forEach(c => {
-      const hasReq = !c.reqItem || state.inventory.some(i => i.id === c.reqItem);
-      const btn = document.createElement('button');
-      btn.className = 'btn btn-option';
-      btn.innerText = c.reqItem ? `${c.text} [Requires ${c.reqItem}]` : c.text;
-      btn.disabled = !hasReq;
-      btn.onclick = () => handleChoice(c, quest.energyCost);
-      choiceBox.appendChild(btn);
-    });
-  }
-
-  function handleChoice(choice, energyCost) {
-    // Deduct energy on quest commencement
-    if (state.questStep === 0) {
-      state.player.energy -= energyCost;
-      log(`Quest initiated. Deducted ${energyCost} Energy. Remaining: ${state.player.energy}`);
-    }
-
-    // Consume required inventory item
-    if (choice.reqItem && choice.consumed) {
-      const idx = state.inventory.findIndex(i => i.id === choice.reqItem);
-      if (idx !== -1) {
-        log(`Consumed item: ${state.inventory[idx].name}`);
-        state.inventory.splice(idx, 1);
+  function answerQuest(opt) {
+    const q = state.activeQuest;
+    
+    // Check item requirement
+    if (opt.reqItem) {
+      const idx = state.inventory.findIndex(i => i.id === opt.reqItem);
+      if (idx === -1) {
+        log(`Missing required item to choose this option.`);
+        return;
       }
+      if (opt.consume) state.inventory.splice(idx, 1);
     }
 
-    // Apply item healing during choice
-    if (choice.heal) {
-      state.player.hp = Math.min(state.player.baseHp, state.player.hp + choice.heal);
-      log(`Healed ${choice.heal} HP during encounter.`);
+    if (opt.heal) {
+      state.hp = Math.min(state.maxHp, state.hp + opt.heal);
+      log(`Healed for ${opt.heal} HP.`);
     }
 
-    // Apply defensive damage formula
-    if (choice.damage) {
-      const def = getTotalDef();
-      const finalDmg = Math.max(5, choice.damage - Math.floor(def / 2));
-      state.player.hp = Math.max(0, state.player.hp - finalDmg);
-      log(`Took ${finalDmg} damage (Mitigated by ${Math.floor(def / 2)} DEF).`);
+    // Dynamic damage calculation using Defense
+    if (opt.dmg > 0) {
+      const taken = Math.max(2, opt.dmg - getDef());
+      state.hp = Math.max(0, state.hp - taken);
+      log(`Took ${taken} damage in combat (Mitigated by ${getDef()} DEF).`);
     }
 
-    if (state.player.hp <= 0) {
-      log("You were defeated in combat! Pay for an Inn Rest to recover.");
-      state.activeQuestId = null;
-      document.getElementById('quest-title').innerText = "Defeated in Combat";
-      document.getElementById('quest-body').innerText = "You collapsed from severe wounds. Pay 20g for an Inn Rest in the HUD console to regain health and energy.";
-      document.getElementById('choice-box').innerHTML = "";
-      renderAll();
+    if (state.hp <= 0) {
+      log('You were defeated in quest combat! Rest at the inn to heal.');
+      state.activeQuest = null;
+      render();
       return;
     }
 
-    if (choice.finish) {
-      state.player.gold += choice.gold;
-      log(`Quest completed! Rewarded ${choice.gold}g.`);
-
-      if (choice.loot) {
-        state.inventory.push(choice.loot);
-        log(`Obtained loot: ${choice.loot.name}`);
-      }
-
-      state.completedQuests.push(state.activeQuestId);
-
-      // Level progression check
-      if (state.completedQuests.length >= 2 && state.player.level === 1) {
-        state.player.level = 2;
-        state.player.baseHp += 30;
-        state.player.hp = state.player.baseHp;
-        state.player.baseAtk += 5;
-        log('LEVEL UP! Reached Level 2 (+30 HP, +5 ATK)');
-      } else if (state.completedQuests.length >= 3 && state.player.level === 2) {
-        state.player.level = 3;
-        state.player.baseHp += 40;
-        state.player.hp = state.player.baseHp;
-        state.player.baseAtk += 8;
-        log('LEVEL UP! Reached Level 3 (+40 HP, +8 ATK)');
-      }
-
-      state.activeQuestId = null;
-      document.getElementById('quest-title').innerText = "Quest Complete";
-      document.getElementById('quest-body').innerText = "Area secured. Check your character sheet for gear or head to the World Map to travel.";
-      document.getElementById('choice-box').innerHTML = "";
-      renderAll();
+    if (opt.finish) {
+      state.gold += opt.gold;
+      log(`Quest Complete! Rewarded ${opt.gold} Gold.`);
+      state.activeQuest = null;
     } else {
-      state.questStep = choice.outcome;
-      renderQuestStory();
-      renderHUD();
+      state.questStep = opt.next;
     }
+
+    render();
   }
 
-  function renderCharacterSheet() {
-    const slotsContainer = document.getElementById('equipped-slots');
-    slotsContainer.innerHTML = '';
-
-    ['weapon', 'armor', 'accessory'].forEach(slot => {
-      const item = state.equipment[slot];
-      const box = document.createElement('div');
-      box.className = 'gear-slot-box';
-      box.innerHTML = `
-        <div class="item-title">${slot.toUpperCase()}: ${item ? item.name : 'Empty'}</div>
-        <div class="item-stats">${item ? (item.atk ? `+${item.atk} ATK ` : '') + (item.def ? `+${item.def} DEF` : '') : 'No equipment stats'}</div>
-      `;
-      if (item) {
-        const btn = document.createElement('button');
-        btn.className = 'btn';
-        btn.innerText = 'Unequip';
-        btn.onclick = () => unequipItem(slot);
-        box.appendChild(btn);
-      }
-      slotsContainer.appendChild(box);
-    });
-
-    document.getElementById('total-stats-display').innerHTML = `
-      Max Health: <strong>${state.player.baseHp}</strong><br>
-      Total Attack: <strong>${getTotalAtk()}</strong><br>
-      Total Defense: <strong>${getTotalDef()}</strong>
-    `;
-
-    const invGrid = document.getElementById('inventory-grid');
-    invGrid.innerHTML = '';
-    state.inventory.forEach((item, idx) => {
-      const card = document.createElement('div');
-      card.className = 'item-card';
-      card.innerHTML = `
-        <div>
-          <div class="item-title">${item.name}</div>
-          <div class="item-stats">${item.desc || (item.atk ? `+${item.atk} ATK` : item.def ? `+${item.def} DEF` : 'Consumable')}</div>
-        </div>
-        <div style="display:flex; gap:6px; margin-top:8px;">
-          ${item.type === 'usable' ? `<button class="btn" onclick="useItem(${idx})">Use</button>` : `<button class="btn" onclick="equipItem(${idx})">Equip</button>`}
-          <button class="btn" style="background:#475569; color:white;" onclick="sellItem(${idx})">Sell (${Math.floor(item.price ? item.price/2 : item.value || 10)}g)</button>
-        </div>
-      `;
-      invGrid.appendChild(card);
-    });
-  }
-
-  function equipItem(index) {
-    const item = state.inventory[index];
-    if (!['weapon', 'armor', 'accessory'].includes(item.type)) return;
+  // FIX: SHOW EQUIPPED ITEMS & UNEQUIP WITHOUT LOSING
+  function equip(invIndex) {
+    const item = state.inventory[invIndex];
+    if (!['weapon', 'armor'].includes(item.type)) return;
 
     if (state.equipment[item.type]) {
       state.inventory.push(state.equipment[item.type]);
     }
 
     state.equipment[item.type] = item;
-    state.inventory.splice(index, 1);
-    log(`Equipped ${item.name}. Combat stats updated.`);
-    renderAll();
+    state.inventory.splice(invIndex, 1);
+    log(`Equipped ${item.name}.`);
+    render();
   }
 
-  function unequipItem(slot) {
-    if (!state.equipment[slot]) return;
-    const item = state.equipment[slot];
+  function unequip(type) {
+    if (!state.equipment[type]) return;
+    const item = state.equipment[type];
     state.inventory.push(item);
-    state.equipment[slot] = null;
-    log(`Unequipped ${item.name}. Returned to backpack.`);
-    renderAll();
+    state.equipment[type] = null;
+    log(`Unequipped ${item.name} and placed back into inventory.`);
+    render();
   }
 
-  function useItem(index) {
-    const item = state.inventory[index];
-    if (item.heal) {
-      state.player.hp = Math.min(state.player.baseHp, state.player.hp + item.heal);
-      log(`Drank ${item.name}. Restored ${item.heal} HP.`);
-      state.inventory.splice(index, 1);
-      renderAll();
-    }
-  }
-
-  function sellItem(index) {
-    const item = state.inventory[index];
-    const val = Math.floor(item.price ? item.price / 2 : item.value || 10);
-    state.player.gold += val;
-    log(`Sold ${item.name} for ${val}g.`);
-    state.inventory.splice(index, 1);
-    renderAll();
-  }
-
-  function renderShop() {
-    const grid = document.getElementById('shop-grid');
-    grid.innerHTML = '';
-    shopItems.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'item-card';
-      card.innerHTML = `
-        <div>
-          <div class="item-title">${item.name}</div>
-          <div class="item-stats">${item.desc}</div>
-        </div>
-        <button class="btn" onclick="buyItem('${item.id}')">Buy (${item.price}g)</button>
-      `;
-      grid.appendChild(card);
-    });
-  }
-
-  function buyItem(itemId) {
+  function buy(itemId) {
     const item = shopItems.find(i => i.id === itemId);
-    if (!item) return;
-
-    if (state.player.gold < item.price) {
-      log("Not enough gold to purchase this item!");
-      return;
-    }
-
-    state.player.gold -= item.price;
-    state.inventory.push({...item});
-    log(`Purchased ${item.name}. Added to backpack.`);
-    renderAll();
+    if (state.gold < item.price) return log('Not enough gold!');
+    
+    state.gold -= item.price;
+    state.inventory.push({ ...item });
+    log(`Purchased ${item.name}. Added to Character Sheet inventory.`);
+    render();
   }
 
-  function renderGuilds() {
-    const container = document.getElementById('guild-container');
-    container.innerHTML = '';
-
-    guilds.forEach(g => {
-      const canJoin = state.player.gold >= g.reqGold;
-      const isCurrent = state.player.guild === g.name;
-
-      const card = document.createElement('div');
-      card.className = 'item-card';
-      card.innerHTML = `
-        <div>
-          <div class="item-title">${g.name}</div>
-          <div class="item-stats">${g.desc}</div>
-          <div class="item-stats" style="color:var(--accent);">Requirement: ${g.reqGold}g Entrance Fee</div>
-        </div>
-        <button class="btn" ${(!canJoin || isCurrent) ? 'disabled' : ''} onclick="joinGuild('${g.name}', ${g.reqGold})">
-          ${isCurrent ? 'Current Guild' : 'Join Guild'}
-        </button>
-      `;
-      container.appendChild(card);
-    });
+  // FIX: GUILDS UNRESTRICTED BY CLASSIFICATION
+  function joinGuild(name, fee) {
+    if (state.gold < fee) return log('Not enough gold to join guild.');
+    state.gold -= fee;
+    state.guild = name;
+    log(`Joined ${name}!`);
+    render();
   }
 
-  function joinGuild(guildName, fee) {
-    state.player.gold -= fee;
-    state.player.guild = guildName;
-    log(`Joined the ${guildName}!`);
-    renderAll();
-  }
+  function render() {
+    // HUD
+    document.getElementById('hud-summary').innerHTML = `
+      <div style="margin-bottom:15px;">
+        <strong>HP:</strong> ${state.hp}/${state.maxHp} | 
+        <strong>Energy:</strong> ${state.energy}/${state.maxEnergy} | 
+        <strong>ATK:</strong> ${getAtk()} | 
+        <strong>DEF:</strong> ${getDef()} | 
+        <strong>Gold:</strong> ${state.gold}g | 
+        <strong>Guild:</strong> ${state.guild}
+        <button class="btn" style="margin-left:10px;" onclick="rest()">Rest at Inn (10g)</button>
+        <div class="stat-bar"><div class="stat-fill" style="width:${(state.hp/state.maxHp)*100}%"></div></div>
+        <div class="stat-bar"><div class="stat-fill energy-fill" style="width:${(state.energy/state.maxEnergy)*100}%"></div></div>
+      </div>
+    `;
 
-  function renderWorldMap() {
-    const container = document.getElementById('world-map-container');
-    container.innerHTML = '';
-
-    regions.forEach(r => {
-      const isCurrent = state.player.region === r.id;
-      const unlocked = state.player.level >= r.reqLevel;
-
-      const card = document.createElement('div');
-      card.className = `location-card ${isCurrent ? 'current' : ''}`;
-      card.innerHTML = `
-        <div>
-          <h3 style="color:var(--text-bright);">${r.name}</h3>
-          <p style="font-size:0.8rem; margin-top:8px; color:#94a3b8; line-height:1.4;">${r.desc}</p>
-        </div>
-        <div>
-          <div style="font-size:0.75rem; margin-bottom:8px;">Required Level: ${r.reqLevel}</div>
-          <button class="btn" style="width:100%;" ${(!unlocked || isCurrent) ? 'disabled' : ''} onclick="travelTo('${r.id}')">
-            ${isCurrent ? 'Current Location' : unlocked ? 'Travel Area' : 'Locked'}
+    // Quests
+    const qList = document.getElementById('quest-list');
+    qList.innerHTML = '';
+    quests.forEach(q => {
+      qList.innerHTML += `
+        <div class="card">
+          <strong>${q.title}</strong> (Cost: ${q.energyCost} Energy)<br>
+          <button class="btn" onclick="startQuest('${q.id}')" ${state.energy < q.energyCost ? 'disabled' : ''}>
+            ${state.energy < q.energyCost ? 'Low Energy' : 'Start Quest'}
           </button>
         </div>
       `;
-      container.appendChild(card);
+    });
+
+    const qDisplay = document.getElementById('quest-display');
+    if (state.activeQuest) {
+      const node = state.activeQuest.nodes[state.questStep];
+      let opts = '';
+      node.options.forEach((o) => {
+        const hasItem = !o.reqItem || state.inventory.some(i => i.id === o.reqItem);
+        opts += `<button class="btn" style="display:block; margin-top:8px;" onclick='answerQuest(${JSON.stringify(o)})' ${!hasItem ? 'disabled' : ''}>${o.text} ${o.reqItem ? '(Requires Item)' : ''}</button>`;
+      });
+      qDisplay.innerHTML = `<h4>${state.activeQuest.title}</h4><p>${node.text}</p>${opts}`;
+    } else {
+      qDisplay.innerHTML = '<p>Select a quest to begin.</p>';
+    }
+
+    // Equipment & Inventory
+    const eqList = document.getElementById('equipped-list');
+    eqList.innerHTML = `
+      <div class="card">Weapon: ${state.equipment.weapon ? state.equipment.weapon.name + ' (+' + state.equipment.weapon.atk + ' ATK)' : 'None'} 
+        ${state.equipment.weapon ? `<button class="btn" onclick="unequip('weapon')">Unequip</button>` : ''}</div>
+      <div class="card">Armor: ${state.equipment.armor ? state.equipment.armor.name + ' (+' + state.equipment.armor.def + ' DEF)' : 'None'} 
+        ${state.equipment.armor ? `<button class="btn" onclick="unequip('armor')">Unequip</button>` : ''}</div>
+    `;
+
+    const invList = document.getElementById('inventory-list');
+    invList.innerHTML = '';
+    state.inventory.forEach((item, idx) => {
+      invList.innerHTML += `
+        <div class="card">
+          <strong>${item.name}</strong> - ${item.desc}<br>
+          ${['weapon', 'armor'].includes(item.type) ? `<button class="btn" onclick="equip(${idx})">Equip</button>` : ''}
+        </div>
+      `;
+    });
+
+    // Shop
+    const sList = document.getElementById('shop-list');
+    sList.innerHTML = '';
+    shopItems.forEach(i => {
+      sList.innerHTML += `
+        <div class="card">
+          <strong>${i.name}</strong> (${i.price}g)<br>
+          <small>${i.desc}</small><br>
+          <button class="btn" onclick="buy('${i.id}')" style="margin-top:5px;">Buy</button>
+        </div>
+      `;
+    });
+
+    // Guilds
+    const gList = document.getElementById('guild-list');
+    gList.innerHTML = '';
+    guilds.forEach(g => {
+      gList.innerHTML += `
+        <div class="card">
+          <strong>${g.name}</strong> (Fee: ${g.fee}g)<br>
+          <small>${g.desc}</small><br>
+          <button class="btn" onclick="joinGuild('${g.name}', ${g.fee})" ${state.guild === g.name ? 'disabled' : ''}>
+            ${state.guild === g.name ? 'Member' : 'Join Guild'}
+          </button>
+        </div>
+      `;
     });
   }
 
-  function travelTo(regionId) {
-    state.player.region = regionId;
-    state.activeQuestId = null;
-    log(`Traveled to ${regionId}. Local quests loaded.`);
-    renderAll();
-  }
-
-  // INITIALIZE GAME
-  renderAll();
+  render();
 </script>
 </body>
 </html>
