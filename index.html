@@ -857,7 +857,7 @@ function renderCombatUI(){
     </div>
   `;
 
-  modal(`2⚔️ QUEST ENCOUNTER</h2>${html}`);
+  modal(`⚔️ QUEST ENCOUNTER</h2>${html}`);
 }
 
 function execCombatTurn(action){
@@ -1278,93 +1278,45 @@ function viewShop(){
 function viewInventory(){
   return `
     <div class="card featured">
-      <h2>🎒 INVENTORY & SPELL MANAGEMENT</h2>
-      <p class="muted small">Equip class-matched weapons/armor and equip spell scrolls into active combat slots!</p>
+      <h2>🎒 HERO INVENTORY</h2>
+      <p class="muted small">Equip or sell gear, skill scrolls, and potion supplies.</p>
     </div>
 
     <div class="card">
-      <h3>🧪 POTIONS & ELIXIRS</h3>
-      <div class="grid">
-        ${Object.entries(STORE_CONSUMABLES).map(([name, item]) => {
-          const count = S.consumables[item.id] || 0;
-          const sellVal = Math.round(item.price * 0.5);
-          return `
-            <div class="item">
-              <b>${item.emoji} ${name}</b>: ${count}
-              <div class="muted small">${item.desc}</div>
-              ${count > 0 ? `
-                <div style="display:flex;gap:4px;margin-top:4px">
-                  ${item.type === 'energy' ? `<button class="secondary" onclick="useEnergyElixir('${item.id}')">Use</button>` : ''}
-                  <button class="secondary sell-btn" onclick="sellConsumableItem('${item.id}')">Sell (+${sellVal}g)</button>
-                </div>
-              `:''}
-            </div>
-          `;
-        }).join("")}
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>⚔️ GEAR & SPELL SCROLL STORAGE (${S.gear.length} ITEMS)</h3>
-      ${S.gear.length === 0 
-        ? `<p class="muted">No items in storage.</p>`
-        : S.gear.map((item, index) => {
-            const sellVal = Math.round((item.price || 50) * 0.55);
-            const isMatchingClass = !item.classReq || item.classReq === "Any" || item.classReq === S.activeClass;
-            return `
-              <div class="item row between">
-                <div>
-                  <b>${item.name}</b> (${item.slot.toUpperCase()})
-                  <div class="${isMatchingClass ? 'good':'bad'} small">Class: ${item.classReq || 'Any'} ${!isMatchingClass?'(Mismatched: 50% penalty)':''}</div>
-                  <div class="muted small">${item.desc}</div>
-                </div>
-                <div style="display:flex;gap:6px">
-                  <button class="primary" onclick="equipItemFromGear(${index})" style="width:auto;padding:6px 12px">Equip</button>
-                  <button class="secondary sell-btn" onclick="sellGearItem(${index})">Sell (+${sellVal}g)</button>
-                </div>
-              </div>
-            `;
-          }).join("")
-      }
-    </div>
-  `;
-}
-
-function useEnergyElixir(id){
-  if((S.consumables[id]||0) > 0){
-    S.consumables[id]--;
-    const boost = id === 'pot_maxeng' ? 100 : 50;
-    S.energy = Math.min(100, S.energy + boost);
-    addLog(`<span class="good">⚡ Restored +${boost} Stamina Energy!</span>`);
-    save();
-    render();
-  }
-}
-
-function viewGuilds(){
-  return `
-    <div class="card featured">
-      <h2>🎖️ FACTION GUILDS</h2>
-      <p class="muted small">Join any guild once you reach the required Level and Rank Points!</p>
-    </div>
-
-    <div class="card">
-      ${Object.entries(GUILDS).map(([gName, gData]) => {
-        const canJoin = getCurrentLevel() >= gData.req.level && S.rp >= gData.req.rp;
-        const isCurrent = S.guild === gName;
-
+      <h3>🧪 CONSUMABLES & SUPPLIES</h3>
+      ${Object.entries(S.consumables).map(([key, count]) => {
+        if(count <= 0) return '';
+        const itemObj = STORE_CONSUMABLES[Object.keys(STORE_CONSUMABLES).find(k => STORE_CONSUMABLES[k].id === key) || key];
+        const name = itemObj ? Object.keys(STORE_CONSUMABLES).find(k => STORE_CONSUMABLES[k].id === key) : key;
+        const sellVal = Math.round((itemObj ? itemObj.price : 30) * 0.5);
         return `
-          <div class="item" style="border-left:4px solid ${isCurrent ? 'var(--gold)':'#3a3a58'}">
-            <div class="row between">
-              <div>
-                <b>${gData.icon} ${gName} Guild</b>
-                <div class="muted small">${gData.desc}</div>
-                <div class="small muted" style="margin-top:4px">Requires: Level ${gData.req.level}, ${gData.req.rp} RP</div>
-              </div>
-              ${isCurrent 
-                ? `<span class="tag gold">JOINED</span>`
-                : `<button class="secondary" onclick="joinFactionGuild('${gName}')" ${canJoin?'':'disabled'}>Join</button>`
-              }
+          <div class="item row between">
+            <div>
+              <b>${itemObj ? itemObj.emoji : '🧪'} ${name}</b> (x${count})
+              <div class="muted small">${itemObj ? itemObj.desc : 'Consumable item'}</div>
+            </div>
+            <button class="secondary sell-btn" onclick="sellConsumableItem('${key}')">Sell (+${sellVal}g)</button>
+          </div>
+        `;
+      }).join("")}
+    </div>
+
+    <div class="card">
+      <h3>📦 EQUIPMENT & SCROLL STORAGE</h3>
+      ${S.gear.length === 0 ? '<p class="muted small">Storage is empty.</p>' : ''}
+      ${S.gear.map((item, idx) => {
+        const sellVal = Math.round((item.price || 50) * 0.55);
+        const canEquip = !item.classReq || item.classReq === 'Any' || item.classReq === S.activeClass;
+        return `
+          <div class="item row between">
+            <div>
+              <b>${item.name}</b> (${item.rarity} ${item.slot.toUpperCase()})
+              <div class="purple small">Class Req: ${item.classReq || 'Any'} ${!canEquip ? '(Mismatched)' : ''}</div>
+              <div class="muted small">${item.desc}</div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <button class="primary" onclick="equipItemFromGear(${idx})" style="padding:6px 10px;width:auto">Equip</button>
+              <button class="secondary sell-btn" onclick="sellGearItem(${idx})">Sell (+${sellVal}g)</button>
             </div>
           </div>
         `;
@@ -1373,111 +1325,53 @@ function viewGuilds(){
   `;
 }
 
-function joinFactionGuild(gName){
-  S.guild = gName;
-  addLog(`<span class="purple">🎖️ Joined the ${gName} Guild!</span>`);
-  save();
+// ===== TAB NAVIGATION SYSTEM =====
+let currentTab = "guild";
+
+function setTab(t){
+  currentTab = t;
   render();
 }
 
-function viewSettings(){
-  return `
-    <div class="card featured">
-      <h2>⚙️ SYSTEM OPTIONS</h2>
-    </div>
-    <div class="card">
-      <button class="secondary" onclick="resetGame()" style="width:100%;color:var(--neored)">🔄 RESET MEMORY CARD SAVE DATA</button>
-    </div>
+function renderTabs(){
+  const tabsEl = document.getElementById("tabs");
+  tabsEl.innerHTML = `
+    <button class="${currentTab==='guild'?'active':''}" onclick="setTab('guild')">HQ</button>
+    <button class="${currentTab==='quests'?'active':''}" onclick="setTab('quests')">Quests</button>
+    <button class="${currentTab==='travel'?'active':''}" onclick="setTab('travel')">Travel</button>
+    <button class="${currentTab==='shop'?'active':''}" onclick="setTab('shop')">Shop</button>
+    <button class="${currentTab==='inventory'?'active':''}" onclick="setTab('inventory')">Items</button>
   `;
 }
 
-function resetGame(){
-  if(confirm("Reset save data permanently?")){
-    S = freshState();
-    save();
-    render();
-  }
+function render(){
+  document.getElementById("topSub").innerText = `LVL ${getCurrentLevel()} ${S.activeClass} • ${S.gold}G • ⚡ ${S.energy}/100`;
+
+  const view = document.getElementById("view");
+  if(currentTab === "guild") view.innerHTML = viewGuild();
+  else if(currentTab === "quests") view.innerHTML = viewQuests();
+  else if(currentTab === "travel") view.innerHTML = viewTravel();
+  else if(currentTab === "shop") view.innerHTML = viewShop();
+  else if(currentTab === "inventory") view.innerHTML = viewInventory();
+
+  renderTabs();
 }
 
+// ===== MODAL SYSTEM =====
 function modal(content){
-  document.getElementById("modal").innerHTML = `<div class="modal"><div class="modalbox">${content}</div></div>`;
+  document.getElementById("modal").innerHTML = `
+    <div class="modal">
+      <div class="modalbox">${content}</div>
+    </div>
+  `;
 }
 
 function closeModal(){
   document.getElementById("modal").innerHTML = "";
 }
 
-function createCharacterModal(){
-  modal(`
-    <p class="insert-coin arcade-flicker">🔴 NEO-GEO MVS SYSTEM 🔴</p>
-    <h2 style="text-align:center;margin-top:10px">SELECT YOUR HERO CLASS</h2>
-    
-    <div class="avatar-selector" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:15px 0">
-      ${AVATARS.map((a, i) => `
-        <div class="item" onclick="selectAvatar(${i})" style="text-align:center;cursor:pointer">
-          <div style="font-size:36px">${a.emoji}</div>
-          <b>${a.name}</b>
-          <div class="muted small">${a.class}</div>
-        </div>
-      `).join("")}
-    </div>
-    
-    <label>Hero Name:</label>
-    <input type="text" id="nameInput" value="Rojo" style="width:100%;background:#000;border:2px solid #3a3a58;color:#fff;padding:8px;margin:8px 0">
-    
-    <button class="primary" onclick="finishCharacterCreation()">▶ START ADVENTURE</button>
-  `);
-}
-
-function selectAvatar(i){
-  S.avatar = AVATARS[i];
-  S.activeClass = AVATARS[i].class;
-}
-
-function finishCharacterCreation(){
-  S.name = document.getElementById("nameInput").value || "Rojo";
-  closeModal();
-  save();
-  render();
-}
-
-let tab = "guild";
-
-function render(){
-  document.getElementById("topSub").textContent = `LOC: ${WORLDS[S.currentLocation].name.toUpperCase()} • ${S.gold} GOLD • STAMINA: ${S.energy}/100`;
-
-  const views = {
-    guild: viewGuild,
-    travel: viewTravel,
-    quests: viewQuests,
-    shop: viewShop,
-    inventory: viewInventory,
-    guilds: viewGuilds,
-    settings: viewSettings
-  };
-
-  const navNames = {
-    guild: "🏛️ HQ",
-    travel: "🗺️ MAP",
-    quests: "⚔️ QUESTS",
-    shop: "🏪 SHOP",
-    inventory: "🎒 ITEMS",
-    guilds: "🎖️ FACTIONS",
-    settings: "⚙️ SYS"
-  };
-
-  document.getElementById("view").innerHTML = views[tab]();
-
-  document.getElementById("tabs").innerHTML = Object.keys(navNames).map(k => `
-    <button class="${tab===k?'active':''}" onclick="tab='${k}';render()">${navNames[k]}</button>
-  `).join("");
-}
-
-if(!localStorage.getItem("rojo_mvs_save_v3")){
-  createCharacterModal();
-} else {
-  render();
-}
+// INITIAL STARTUP
+render();
 </script>
 </body>
 </html>
